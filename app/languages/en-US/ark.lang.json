@@ -326,5 +326,13 @@
     "Confirm_closing_without_joined_unit": "Unit has not been joined to another unit. Do you want to continue?",
     "Inventory": "Inventory",
     "Inventory_research": "Inventory research",
-    "Conservation_report": "Conservation report"
+    "Conservation_report": "Conservation report",
+    "Condition_report": "Condition report",
+    "Condition_reports": "Condition reports",
+    "Target_additional_description": "Additional description",
+    "Discovery_condition": "Condition",
+    "Handling_instructions": "Handling instructions",
+    "Storage_conditions": "Storage conditions",
+    "Packing_instructions": "Packing instructions",
+    "Condition_report_deleted": "Condition report deleted"
 }

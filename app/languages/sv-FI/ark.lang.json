@@ -326,5 +326,13 @@
     "Confirm_closing_without_joined_unit": "Yksikköä ei ole liitetty mihinkään toiseen yksikköön. Haluatko jatkaa?",
     "Inventory": "Inventointi",
     "Inventory_research": "Inventointi-tutkimus",
-    "Conservation_report": "Konservointiraportti"
+    "Conservation_report": "Konservointiraportti",
+    "Condition_report": "Kuntoraportti",
+    "Condition_reports": "Kuntoraportit",
+    "Target_additional_description": "Kohteen lisäkuvaus",
+    "Discovery_condition": "Löydön kunto",
+    "Handling_instructions": "Käsittelyohjeet",
+    "Storage_conditions": "Olosuhdesuositukset",
+    "Packing_instructions": "Pakkausohjeet",
+    "Condition_report_deleted": "Kuntoraportti poistettu"
 }

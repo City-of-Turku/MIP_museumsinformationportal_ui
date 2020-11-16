@@ -1547,6 +1547,40 @@ angular.module('mip.general').factory(
                                     });
                                 }, 10);
                         },
+                        /*
+                        * Löydön kuntokartoitusraportin luontisivu
+                        */
+                       arkKuntoraporttiModal : function(kuntoraportti, loyto, tutkimus) {
+                           // Modaalin tunniste
+                           var modalNameId = locale.getString('ark.Condition_report') + ': ' + loyto.luettelointinumero + nextModalNameIdIndex(); // TODO Muuta nimi
+
+                               $timeout(function() {
+                                   $modal({
+                                       id : modalNameId,
+                                       controller : 'ArkKuntoraporttiController',
+                                       controllerAs : 'vm',
+                                       templateUrl : 'ark/konservointi/partials/kuntoraportti_tayttosivu.html',
+                                       show : true,
+                                       backdrop : false,
+                                       container : '#main_mip_app',
+                                       keyboard : false,
+                                       resolve : {
+                                          kuntoraportti : function() {
+                                            return kuntoraportti;
+                                          },
+                                          loyto : function() {
+                                            return loyto;
+                                          },
+                                          tutkimus : function() {
+                                              return tutkimus;
+                                          },
+                                          selectedModalNameId : function() {
+                                            return modalNameId;
+                                          }
+                                       }
+                                   });
+                               }, 10);
+                       },
 
                 }
                 return modalFunctions;

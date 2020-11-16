@@ -9,16 +9,16 @@
 	    <div class="panel-body" ng-if="vm.edit">
             <div class="form-group">
 	            <label for="kunto" class="col-sm-4 control-label">
-	                <span i18n="ark.Condition"></span> 
+	                <span i18n="ark.Condition"></span>
 	            </label>
 	            <div class="col-sm-8">
 		            <textarea rows="3" class="form-control" name="kunto"
 		                ng-model="vm.loyto.properties.kunto" ng-change="vm.setUserAndDate()">
-		            </textarea>	                    
+		            </textarea>
 	            </div>
 	        </div>
 	        <div class="form-group">
-				<label class="col-sm-4 control-label"> 
+				<label class="col-sm-4 control-label">
 					<span i18n="common.Date"></span>
 				</label>
                 <div class="col-sm-8">
@@ -26,22 +26,22 @@
                         model-date-format="yyyy-MM-dd" data-autoclose="1" date-type="string"
                         start-week="1"
                         class="form-control" name="kuntopaivamaara"
-                        ng-model="vm.loyto.properties.kunto_paivamaara">                 
-                </div>				
+                        ng-model="vm.loyto.properties.kunto_paivamaara">
+                </div>
 			</div>
             <div class="form-group">
                 <label for="selectedUser" class="col-sm-4 control-label">
                     <span i18n="ark.Author"></span>
                 </label>
                 <div class="col-sm-8">
-                    <ui-select class="ng-animate-disabled" name="tekija" theme="bootstrap" 
-                    	ng-model="vm.loyto.properties.tekija"> 
+                    <ui-select class="ng-animate-disabled" name="tekija" theme="bootstrap"
+                    	ng-model="vm.loyto.properties.tekija">
                     <ui-select-match
                         data-i18n-attr="{placeholder: 'common.Select'}">
                         {{$select.selected.etunimi}}
                         {{$select.selected.sukunimi}}
-                        {{$select.selected.sahkoposti}} 
-                    </ui-select-match> 
+                        {{$select.selected.sahkoposti}}
+                    </ui-select-match>
                     <ui-select-choices repeat="k in vm.kayttajat | filter: $select.search track by k.id">
                     <span ng-bind-html="k.etunimi | highlight: $select.search"></span>
                     <span ng-bind-html="k.sukunimi | highlight: $select.search"></span>
@@ -49,12 +49,12 @@
                     </ui-select-choices>
                     </ui-select>
                 </div>
-            </div>	                      
+            </div>
 	    </div>
 	    <!-- Katselutila -->
 	    <div class="panel-body" ng-if="!vm.edit">
 	        <div class="form-group" ng-if="vm.loyto.properties.kunto">
-				<label class="col-sm-4 control-label"> 
+				<label class="col-sm-4 control-label">
 					<span i18n="ark.Condition"></span>
 				</label>
 				<div class="col-sm-8">
@@ -62,7 +62,7 @@
 				</div>
 			</div>
 	        <div class="form-group" ng-if="vm.loyto.properties.kunto_paivamaara">
-				<label class="col-sm-4 control-label"> 
+				<label class="col-sm-4 control-label">
 					<span i18n="common.Date"></span>
 				</label>
 				<div class="col-sm-8">
@@ -70,13 +70,13 @@
 				</div>
 			</div>
 	        <div class="form-group" ng-if="vm.loyto.properties.tekija">
-				<label class="col-sm-4 control-label"> 
+				<label class="col-sm-4 control-label">
 					<span i18n="ark.Author"></span>
 				</label>
 				<div class="col-sm-8">
 					<p class="form-control-static">{{vm.loyto.properties.tekija.etunimi}} {{vm.loyto.properties.tekija.sukunimi}}</p>
 				</div>
-			</div>			 			             
+			</div>
 	    </div>
-    </div>    
+    </div>
 </div>

@@ -433,7 +433,6 @@ angular.module('mip.konservointi').controller(
 				vm.getRontgenkuvat();
 			});
 
-
 			/*
 			 * Kunto field is modified - set the date and user automatically
 			 */
@@ -459,5 +458,30 @@ angular.module('mip.konservointi').controller(
 			vm.konservointiraportti = function() {
 				ModalService.arkLoytoKonservointiraporttiModal(vm.loyto);
 			}
+
+			vm.kuntoraportti = function(kuntoraportti) {
+				if(kuntoraportti) {
+					ModalService.arkKuntoraporttiModal({properties:kuntoraportti}, vm.loyto.properties, vm.tutkimus);
+				} else {
+					ModalService.arkKuntoraporttiModal({properties: {}}, vm.loyto.properties, vm.tutkimus);
+				}
+			}
+
+			/*
+			 * Kuntoraportit were modified, fetch them again
+			 */
+			$scope.$on('Kuntoraportti_update', function (event, data) {
+				if(data.loytoId && vm.loyto && vm.loyto.properties.id == data.loytoId) {
+					LoytoService.haeKuntoraportit(vm.loyto.properties.id).then(function success(data) {
+						vm.loyto.properties.kuntoraportit.length = 0;
+						for(var i = 0; i<data.features.length; i++) {
+							vm.loyto.properties.kuntoraportit.push(data.features[i].properties);
+						}
+					}, function error(data) {
+						AlertService.showError(locale.getString('common.Error'));
+					});
+				}
+			});
+
 		}
 	]);

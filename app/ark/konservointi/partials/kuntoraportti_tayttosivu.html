@@ -1,0 +1,242 @@
+<div class="modal-dialog mip-modal-dialog" mip-dialog tabindex="-1" role="dialog" id="myModalDialog{{vm.modalId}}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div ng-include="'pages/templates/modal/modal_header_painikkeet.html'"></div>
+      <h4 class="modal-title">
+        <span i18n="ark.Condition_report"></span>
+        <span> : {{vm.loyto.luettelointinumero}}</span>
+      </h4>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal" name="form" novalidate>
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Kuvaus ja luokittelu -->
+            <div class="panel panel-default panel-collapsible">
+              <div class="panel-heading" data-toggle="collapse" data-target="#tiedotPanel{{vm.modalId}}">
+                <h4 class="panel-title">
+                  <span i18n="ark.Description_classification"></span>
+                  <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
+                </h4>
+              </div>
+              <div id="tiedotPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in">
+                <div class="col-md-6">
+                  <!-- Tutkimus -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Research_name"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.tutkimus.nimi}}</p>
+                    </div>
+                  </div>
+                  <!-- Luettelointinumero -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Listing_number"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">
+                        {{vm.loyto.luettelointinumero}}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Esineen nimi -->
+                  <div class="form-group" ng-if="vm.loyto.loytotyyppi_tarkenteet.length > 0">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Artifact_name"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <span ng-repeat="tarkenne in vm.loyto.loytotyyppi_tarkenteet">
+                        {{tarkenne | namei18n}} <span ng-show="!$last">,</span>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- Tyyppi -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="common.Type"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static mip-multiline">{{vm.loyto.loytotyyppi | namei18n}}</p>
+                    </div>
+                  </div>
+                  <!-- Kuvaus -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="common.Description"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static mip-multiline">{{vm.loyto.kuvaus}}</p>
+                    </div>
+                  </div>
+                  <!-- Ensisijainen materiaali -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Primary_material"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static mip-multiline">{{vm.loyto.ensisijainen_materiaali | namei18n}}</p>
+                    </div>
+                  </div>
+                  <!-- Muut materiaalit -->
+                  <div class="form-group" ng-if="vm.loyto.materiaalit.length > 0">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Other_material"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <span ng-repeat="materiaali in vm.loyto.materiaalit">
+                        {{materiaali | namei18n}} <span ng-show="!$last">,</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Kappalemäärä -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Pieces"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.kappalemaara}} <span
+                          ng-show="vm.loyto.kappalemaara_arvio === true"> (arvio)</span></p>
+                    </div>
+                  </div>
+                  <!-- Mitat -->
+                  <div class="form-group" ng-if="vm.loyto.paino">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Weight"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.paino}} {{vm.loyto.painoyksikko}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.pituus">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Length"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.pituus}} {{vm.loyto.pituusyksikko}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.leveys">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Width"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.leveys}} {{vm.loyto.leveysyksikko}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.korkeus">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Height"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.korkeus}}
+                        {{vm.loyto.korkeusyksikko}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.halkaisija">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Diameter"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.halkaisija}}
+                        {{vm.loyto.halkaisijayksikko}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.paksuus">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Thickness"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static">{{vm.loyto.paksuus}}
+                        {{vm.loyto.paksuusyksikko}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-if="vm.loyto.muut_mitat">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="ark.Other_measures"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <p class="form-control-static mip-multiline">{{vm.loyto.muut_mitat}}</p>
+                    </div>
+                  </div>
+                  <!-- Merkintä -->
+                  <div class="form-group" ng-if="vm.loyto.merkinnat.length > 0">
+                    <label class="col-sm-4 control-label">
+                      <span i18n="common.Mark"></span>
+                    </label>
+                    <div class="col-sm-8">
+                      <span ng-repeat="merkinta in vm.loyto.merkinnat">
+                        {{merkinta | namei18n}} <span ng-show="!$last">,</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" ng-include="'ark/konservointi/partials/kuntoraportti_kentat.html'"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer" ng-show="vm.edit">
+      <!-- <div class="pull-left" mip-entiteettiselain etype="'nayte'" eid="vm.nayte.properties.id" close="vm.close()" ng-show="!vm.edit && !vm.disableButtons"></div> -->
+      <div class="mip-footer-btn-group">
+        <button type="button" class="btn btn-success" ng-class="{ disabled: vm.disableButtons}"
+          ng-click="(vm.disableButtons || vm.save())">
+          <span i18n="common.Save"></span>
+        </button>
+        <div class="dropup">
+          <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span i18n="common.Actions"></span> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li ng-class="{ 'disabled' : vm.disableButtons }"><a href="" ng-click="vm.disableButtons || vm.cancelEdit()"
+                i18n="common.Cancel_edit"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" ng-show="!vm.edit">
+      <div class="mip-footer-btn-group">
+        <button type="button" class="btn btn-success" ng-click="vm.createReport('WORD', 'loyto_konservointiraportti')"
+          ng-show="!vm.create">
+          <span i18n="common.Create_report"></span>
+        </button>
+        <button type="button" class="btn btn-default" ng-class="{ disabled:vm.disableButtons}"
+          ng-click="(vm.disableButtons || vm.editMode())">
+          <span i18n="common.Edit"></span>
+        </button>
+        <div class="dropup">
+          <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span i18n="common.Actions"></span> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="" ng-click="vm.deleteKuntoraportti()" class="bg-danger" i18n="common.Delete"
+                ng-show="!vm.create"></a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li ng-if="!vm.create">
+              <a href="" ng-click="vm.addImage()" i18n="common.Add_image"></a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="" ng-click="vm.close()" i18n="common.Close" ng-show="!vm.create"></a>
+            </li>
+            <li>
+              <a href="" ng-click="vm.close()" i18n="common.Cancel" ng-show="vm.create"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

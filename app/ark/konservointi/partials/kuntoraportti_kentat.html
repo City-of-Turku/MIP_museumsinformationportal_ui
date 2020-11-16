@@ -1,0 +1,99 @@
+<div class="panel panel-default panel-collapsible">
+  <div class="panel-heading" data-toggle="collapse" data-target="#kentatPanel{{vm.modalId}}">
+    <h4 class="panel-title">
+      <span i18n="ark.Description_classification"></span>
+      <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
+    </h4>
+  </div>
+  <!-- Muokkaustila -->
+  <div id="kentatPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="vm.edit">
+    <div class="form-group">
+      <label for="kunto" class="col-sm-3 control-label">
+        <span i18n="ark.Target_additional_description"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="kunto" ng-model="vm.kuntoraportti.properties.kohteen_lisakuvaus">
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="kunto" class="col-sm-3 control-label">
+        <span i18n="ark.Discovery_condition"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="kunto" ng-model="vm.kuntoraportti.properties.loydon_kunto">
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="kunto" class="col-sm-3 control-label">
+        <span i18n="ark.Handling_instructions"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="kunto" ng-model="vm.kuntoraportti.properties.kasittelyohjeet">
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="kunto" class="col-sm-3 control-label">
+        <span i18n="ark.Storage_conditions"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="kunto" ng-model="vm.kuntoraportti.properties.olosuhdesuositukset">
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="kunto" class="col-sm-3 control-label">
+        <span i18n="ark.Packing_instructions"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="kunto" ng-model="vm.kuntoraportti.properties.pakkausohjeet">
+        </textarea>
+      </div>
+    </div>
+  </div>
+  <!-- Katselutila -->
+  <div id="kentatPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="!vm.edit">
+    <div class="form-group" ng-if="vm.kuntoraportti.properties.kohteen_lisakuvaus">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Target_additional_description"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.kuntoraportti.properties.kohteen_lisakuvaus}}</p>
+      </div>
+    </div>
+    <div class="form-group" ng-if="vm.kuntoraportti.properties.loydon_kunto">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Discovery_condition"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.kuntoraportti.properties.loydon_kunto}}</p>
+      </div>
+    </div>
+    <div class="form-group" ng-if="vm.kuntoraportti.properties.kasittelyohjeet">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Handling_instructions"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.kuntoraportti.properties.kasittelyohjeet}}</p>
+      </div>
+    </div>
+    <div class="form-group" ng-if="vm.kuntoraportti.properties.olosuhdesuositukset">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Storage_conditions"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.kuntoraportti.properties.olosuhdesuositukset}}</p>
+      </div>
+    </div>
+    <div class="form-group" ng-if="vm.kuntoraportti.properties.pakkausohjeet">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Packing_instructions"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.kuntoraportti.properties.pakkausohjeet}}</p>
+      </div>
+    </div>
+  </div>
+</div>
