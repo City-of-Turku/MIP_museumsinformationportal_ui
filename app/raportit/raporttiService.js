@@ -165,6 +165,9 @@ angular.module('mip.raportti').factory(
                                 case 'Loyto_konservointiraportti':
                                     reportParameters = this.generateLoytoKonservointiraporttiParameters(raportti);
                                     break;
+                                case 'Kuntoraportti':
+                                    reportParameters = this.generateKuntoraporttiParameters(raportti);
+                                    break;
                                 default:
                                     /*
                                      * Jos raportin parametreja ei ole, raporttia ei voida tehdä
@@ -550,6 +553,14 @@ angular.module('mip.raportti').factory(
                                 'reportDisplayName': raportti.reportDisplayName,
                                 'kons_toimenpiteet': raportti.valitutToimenpiteet
                             };
+                        },
+                        generateKuntoraporttiParameters: function(raportti) {
+                            return {
+                                'kuntoraporttiId': raportti.kuntoraporttiId,
+                                'requestedOutputType': raportti.requestedOutputType,
+                                'reportDisplayName': raportti.reportDisplayName,
+                                'konservaattori': raportti.konservaattori
+                            }
                         },
                         /*
                          * Raportin poistaminen

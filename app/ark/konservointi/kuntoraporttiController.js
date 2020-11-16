@@ -4,10 +4,10 @@
 angular.module('mip.konservointi').controller(
   'ArkKuntoraporttiController',
   [
-    '$scope', '$rootScope', 'AlertService', 'ListService', 'locale', 'NgTableParams', 'LoytoService', 'loyto',
-    'selectedModalNameId', 'ModalControllerService', 'kuntoraportti', 'RaporttiService', 'tutkimus',
-    function ($scope, $rootScope, AlertService, ListService, locale, NgTableParams, LoytoService, loyto,
-      selectedModalNameId, ModalControllerService, kuntoraportti, RaporttiService, tutkimus) {
+    '$scope', '$rootScope', 'AlertService', 'locale', 'LoytoService', 'loyto', 'FileService', 'permissions', 'UserService',
+    'selectedModalNameId', 'ModalControllerService', 'kuntoraportti', 'RaporttiService', 'tutkimus', 'ModalService',
+    function ($scope, $rootScope, AlertService, locale, LoytoService, loyto, FileService, permissions, UserService,
+      selectedModalNameId, ModalControllerService, kuntoraportti, RaporttiService, tutkimus, ModalService) {
 
       var vm = this;
 
@@ -28,6 +28,8 @@ angular.module('mip.konservointi').controller(
 
         vm.create = vm.kuntoraportti.properties.id == null ? true : false;
         vm.edit = vm.create == true ? true : false;
+
+        vm.permissions = permissions;
 
       };
       vm.setUp();
@@ -113,6 +115,66 @@ angular.module('mip.konservointi').controller(
         var report = { 'requestedOutputType': type, 'reportDisplayName': reportDisplayName, 'kuntoraporttiId': vm.kuntoraportti.properties.id };
 
         RaporttiService.createRaportti('Loyto_kuntoraportti', report).then(function success(data) {
+          AlertService.showInfo(locale.getString('common.Report_request_created'));
+          vm.close();
+        }, function error(data) {
+          AlertService.showError(locale.getString('common.Error'), AlertService.message(data));
+        });
+      };
+
+      vm.lisaaKuva = function () {
+        ModalService.arkImageUploadModal("kuntoraportti", vm.kuntoraportti, false, null);
+      }
+
+      vm.images = [];
+      vm.getImages = function () {
+        if (vm.kuntoraportti.properties.id) {
+          FileService.getArkImages({
+            'jarjestys': 'ark_kuva.id',
+            'jarjestys_suunta': 'nouseva',
+            'rivit': 1000,
+            'ark_tutkimus_id': vm.tutkimus.id,
+            'ark_kuntoraportti_id': vm.kuntoraportti.properties.id,
+            'luetteloitu': false
+          }).then(function success(images) {
+            vm.images = images.features;
+            // Kuvien määrä (directives.js)
+            $scope.kuvia_kpl = vm.images.length;
+          }, function error(data) {
+            locale.ready('error').then(function () {
+              AlertService.showError(locale.getString("error.Getting_images_failed"), AlertService.message(data));
+            });
+          });
+        }
+      };
+      vm.getImages();
+
+      vm.openImage = function (image) {
+        ModalService.arkImageModal(image, 'kuntoraportti', vm.kuntoraportti, vm.permissions, vm.images, null);
+      };
+      /*
+			 * Images were modified, fetch them again
+			 */
+			$scope.$on('arkKuva_modified', function (event, data) {
+				vm.getImages();
+      });
+
+      /*
+       * Create a report
+       * type: PDF / WORD / EXCEL ...
+       */
+      vm.createReport = function (type) {
+        //Asetetaan raportin "nimi" joka näkyy mm. raportit-välilehdellä
+        //Raportin nimi + löydön luettelointinumero
+        var reportDisplayName = locale.getString('ark.Condition_report') + " " + vm.loyto.luettelointinumero;
+
+        var report = {
+          'requestedOutputType': type,
+          'reportDisplayName': reportDisplayName,
+          'kuntoraporttiId': vm.kuntoraportti.properties.id,
+          'konservaattori': $scope.userRole = UserService.getProperties().user.etunimi + " " + UserService.getProperties().user.sukunimi};
+
+        RaporttiService.createRaportti('Kuntoraportti', report).then(function success(data) {
           AlertService.showInfo(locale.getString('common.Report_request_created'));
           vm.close();
         }, function error(data) {

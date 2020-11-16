@@ -1550,7 +1550,7 @@ angular.module('mip.general').factory(
                         /*
                         * Löydön kuntokartoitusraportin luontisivu
                         */
-                       arkKuntoraporttiModal : function(kuntoraportti, loyto, tutkimus) {
+                       arkKuntoraporttiModal : function(kuntoraportti, loyto, tutkimus, permissions) {
                            // Modaalin tunniste
                            var modalNameId = locale.getString('ark.Condition_report') + ': ' + loyto.luettelointinumero + nextModalNameIdIndex(); // TODO Muuta nimi
 
@@ -1573,6 +1573,9 @@ angular.module('mip.general').factory(
                                           },
                                           tutkimus : function() {
                                               return tutkimus;
+                                          },
+                                          permissions : function() {
+                                              return permissions;
                                           },
                                           selectedModalNameId : function() {
                                             return modalNameId;

@@ -67,7 +67,8 @@ var mip = angular.module(
         'nayte': 18,
         'rontgenkuva': 19,
         'toimenpide': 20,
-        'kasittely': 21
+        'kasittely': 21,
+        'kuntoraportti': 22
     },
     /** Ladattavan kuvan maksimikoko */
     'MAX_IMAGE_SIZE' : '120MB',

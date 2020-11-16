@@ -461,9 +461,9 @@ angular.module('mip.konservointi').controller(
 
 			vm.kuntoraportti = function(kuntoraportti) {
 				if(kuntoraportti) {
-					ModalService.arkKuntoraporttiModal({properties:kuntoraportti}, vm.loyto.properties, vm.tutkimus);
+					ModalService.arkKuntoraporttiModal({properties:kuntoraportti}, vm.loyto.properties, vm.tutkimus, vm.permissions);
 				} else {
-					ModalService.arkKuntoraporttiModal({properties: {}}, vm.loyto.properties, vm.tutkimus);
+					ModalService.arkKuntoraporttiModal({properties: {}}, vm.loyto.properties, vm.tutkimus, vm.permissions);
 				}
 			}
 

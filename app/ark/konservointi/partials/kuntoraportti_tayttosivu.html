@@ -180,6 +180,7 @@
               </div>
             </div>
             <div class="col-md-12" ng-include="'ark/konservointi/partials/kuntoraportti_kentat.html'"></div>
+            <div class="col-md-12" ng-include="'ark/konservointi/partials/kuvat.html'" ng-show="!vm.edit"></div>
           </div>
         </div>
       </form>
@@ -225,7 +226,7 @@
             </li>
             <li role="separator" class="divider"></li>
             <li ng-if="!vm.create">
-              <a href="" ng-click="vm.addImage()" i18n="common.Add_image"></a>
+              <a href="" ng-click="vm.lisaaKuva()" i18n="common.Add_image"></a>
             </li>
             <li role="separator" class="divider"></li>
             <li>

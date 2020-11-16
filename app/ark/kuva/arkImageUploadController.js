@@ -161,7 +161,11 @@ angular.module('mip.file').controller(
                         if($scope.objectType !== 'kohde' && $scope.objectType !== 'tutkimus' && $scope.objectType !== 'tutkimusalue') {
 	                    	// Jos kaikki listat puuttuvat ei kuvaa ole linkattu
                     		for(var i = 0; i<$scope.files.length; i++) {
-	                    		if(!$scope.files[i].properties.loydot && !$scope.files[i].properties.yksikot && !$scope.files[i].properties.naytteet && !$scope.files[i].properties.rontgenkuvat) {
+                                if(!$scope.files[i].properties.loydot
+                                    && !$scope.files[i].properties.yksikot
+                                    && !$scope.files[i].properties.naytteet
+                                    && !$scope.files[i].properties.rontgenkuvat
+                                    && !$scope.files[i].properties.kuntoraportit) {
 	                    			return false;
 	                    		}
 	                    	}
@@ -337,6 +341,9 @@ angular.module('mip.file').controller(
                                     }
                                     if($scope.objectType == 'rontgenkuva') {
                                     	$scope.files[i].properties.rontgenkuvat = [$scope.relatedObject.properties];
+                                    }
+                                    if($scope.objectType == 'kuntoraportti') {
+                                    	$scope.files[i].properties.kuntoraportit = [$scope.relatedObject.properties];
                                     }
 
                                     if(luetteloi === false) {
