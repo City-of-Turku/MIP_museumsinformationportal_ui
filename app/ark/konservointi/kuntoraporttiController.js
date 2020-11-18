@@ -123,7 +123,7 @@ angular.module('mip.konservointi').controller(
       };
 
       vm.lisaaKuva = function () {
-        ModalService.arkImageUploadModal("kuntoraportti", vm.kuntoraportti, false, null);
+        ModalService.arkImageUploadModal("kuntoraportti", vm.kuntoraportti, false, vm.tutkimus.id);
       }
 
       vm.images = [];
