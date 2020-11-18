@@ -126,8 +126,8 @@ angular.module('mip.konservointi').controller(
         ModalService.arkImageUploadModal("kuntoraportti", vm.kuntoraportti, false, vm.tutkimus.id);
       }
 
-      vm.images = [];
-      vm.getImages = function () {
+      vm.otherImages = [];
+      vm.getOtherImages = function () {
         if (vm.kuntoraportti.properties.id) {
           FileService.getArkImages({
             'jarjestys': 'ark_kuva.id',
@@ -137,7 +137,7 @@ angular.module('mip.konservointi').controller(
             'ark_kuntoraportti_id': vm.kuntoraportti.properties.id,
             'luetteloitu': false
           }).then(function success(images) {
-            vm.images = images.features;
+            vm.otherImages = images.features;
             // Kuvien määrä (directives.js)
             $scope.kuvia_kpl = vm.images.length;
           }, function error(data) {
@@ -147,7 +147,7 @@ angular.module('mip.konservointi').controller(
           });
         }
       };
-      vm.getImages();
+      vm.getOtherImages();
 
       vm.openImage = function (image) {
         ModalService.arkImageModal(image, 'kuntoraportti', vm.kuntoraportti, vm.permissions, vm.images, null);

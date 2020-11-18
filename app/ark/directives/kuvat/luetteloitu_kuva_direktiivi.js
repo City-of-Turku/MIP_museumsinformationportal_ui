@@ -28,27 +28,27 @@ angular.module('mip.directives').directive('mipLuetteloidutKuvat', [
 
                 // Löydön kuvat
                 if(scope.vm.loyto != undefined){
-                    if(scope.vm.loyto.properties.id) { 
+                    if(scope.vm.loyto.properties.id) {
                         loytoId = scope.vm.loyto.properties.id;
                     } else if(scope.vm.loyto.id) {
                         loytoId = scope.vm.loyto.id;
-                    }   
+                    }
                 }
                 // Näytteen kuvat
                 else if(scope.vm.nayte != undefined){
-                    if(scope.vm.nayte.properties.id) {   
+                    if(scope.vm.nayte.properties.id) {
                         nayteId = scope.vm.nayte.properties.id;
                     } else if(scope.vm.nayte.id) {
                         nayteId = scope.vm.nayte.id;
-                    }  
+                    }
                 }
                 // Yksikön kuvat
                 else if(scope.vm.yksikko != undefined){
-                    if(scope.vm.yksikko.properties.id) {  
+                    if(scope.vm.yksikko.properties.id) {
                         yksikkoId = scope.vm.yksikko.properties.id;
                     } else if(scope.vm.yksikko.id) {
                         yksikkoId = scope.vm.yksikko.id;
-                    }    
+                    }
                 }
                 // Tutkimusalueen kuvat
                 else if(scope.vm.tutkimusalue != undefined && loytoId == null && nayteId == null && yksikkoId == null){
@@ -57,7 +57,7 @@ angular.module('mip.directives').directive('mipLuetteloidutKuvat', [
 
                 scope.vm.getImages = function(){
                     if (tutkimusId != null) {
-                        FileService.getArkImages({
+                        var searchObj = {
                             'jarjestys_suunta' : 'nouseva',
                             'rivit' : 1000,
                             'ark_tutkimus_id' : tutkimusId,
@@ -66,7 +66,13 @@ angular.module('mip.directives').directive('mipLuetteloidutKuvat', [
                             'ark_yksikko_id' : yksikkoId,
                             'ark_tutkimusalue_id' : tutkimusalueId,
                             'luetteloitu': true
-                        }).then(function success(images) {
+                        };
+                        // Jos ollaan tutkimuksen näkymässä, haetaan ainoastan
+                        // löytöihin, näytteisiin, tutkimusalueisiin ja yksiköihin liitetyt kuvat (sekä tutkimukseen liitetyt)
+                        if(scope.vm.tutkimus_view) {
+                            searchObj['tutkimus_view'] = true;
+                        }
+                        FileService.getArkImages(searchObj).then(function success(images) {
                         	var features = images.features;
 
                         	for (var i = 0; i < features.length; i++) {

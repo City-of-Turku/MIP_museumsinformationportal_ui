@@ -192,6 +192,10 @@ angular.module('mip.tutkimus').controller(
 					});
 				}
 
+				// Käytetään kuvien hakemisessa - jos arvo on asetettu, ei haeta kaikkien tutkimukseen liittyvien
+				// entiteettien kuvia, ainoastaan näytteiden, löytöjen, yksiköiden ja tutkimusalueiden.
+				vm.tutkimus_view = true;
+
 			};
 			vm.setUp();
 

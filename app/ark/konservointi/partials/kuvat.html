@@ -10,7 +10,7 @@
 	    <div class="row">
             <div class="col-md-12">
                 <ul class="list-group" data-ng-model="vm.images">
-                    <li class="list-group-item col-md-3 mip-image-item" data-ng-repeat="image in vm.images">
+                    <li class="list-group-item col-md-3 mip-image-item" data-ng-repeat="image in vm.otherImages">
                         <div class="col-md-12">
                             <img ng-if="image.properties.url_small" class="img-responsive mip-image-thumbnail"
                                 ng-src="{{image.properties.url_tiny}}" alt="{{image.properties.otsikko}}"

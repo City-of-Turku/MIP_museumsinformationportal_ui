@@ -27,9 +27,9 @@
                      <li><a ng-click="vm.createReport('PDF', 'tarkastusraportti')"><span i18n="ark.Inspection_report"></span> (pdf)</a></li>
                  </ul>
         </li>
-        <li><a href="" ng-click="vm.tutkimusRaportti()" i18n="ark.Create_research_report"
+        <!--<li><a href="" ng-click="vm.tutkimusRaportti()" i18n="ark.Create_research_report"
           data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && (vm.tutkimus.properties.tutkimuslaji.id == 7 || vm.tutkimus.properties.tutkimuslaji.id == 10 || vm.tutkimus.properties.tutkimuslaji.id == 12)"></a>
-        </li>
+        </li>-->
         <li><a href="" ng-click="vm.lisaaNayte()"
                i18n="sample.Add_sample"
                ng-show="!vm.create" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></a>
