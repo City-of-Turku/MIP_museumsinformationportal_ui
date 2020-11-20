@@ -146,12 +146,24 @@ module.exports = function (grunt) {
       }
     },
     replace: {
-      dist: {
+      prod: {
         options: {
           patterns: [
             {
               match: '<%= yeoman.local_url %>',
               replacement: '<%= yeoman.prod_url %>'
+            },
+            {
+              match: /'ORGANISATION'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'ORGANISATION': 'Example Organisation'";
+              }
+            },
+            {
+              match: /'PROVINCE_NAME'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'PROVINCE_NAME': 'Example Province'";
+              }
             }
           ],
           usePrefix : false
@@ -170,6 +182,18 @@ module.exports = function (grunt) {
             {
               match: '<%= yeoman.local_url %>',
               replacement: '<%= yeoman.qa_url %>'
+            },
+            {
+              match: /'ORGANISATION'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'ORGANISATION': 'Example Organisation'";
+              }
+            },
+            {
+              match: /'PROVINCE_NAME'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'PROVINCE_NAME': 'Example Province'";
+              }
             }
           ],
           usePrefix : false
@@ -184,12 +208,117 @@ module.exports = function (grunt) {
             {
               match: '<%= yeoman.local_url %>',
               replacement: '<%= yeoman.kehitys_url %>'
+            },
+            {
+              match: /'ORGANISATION'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'ORGANISATION': 'Example Organisation'";
+              }
+            },
+            {
+              match: /'PROVINCE_NAME'[:]\s(\'.*\')/g,
+              replacement: function () {
+                return "'PROVINCE_NAME': 'Example Province'";
+              }
             }
           ],
           usePrefix : false
         },
         files: [
           {expand: true, flatten: true, src: ['<%= yeoman.dist %>/app.js'], dest: '<%= yeoman.dist %>'}
+        ]
+      },
+      translationsFi: {
+        options: {
+          patterns: [
+            {
+              match: /"Guest_user_info_content"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content\": \"Finnish: Guest info view (the view that opens for viewer after login) common text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content1"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content1\": \"Finnish: Guest info view (the view that opens for viewer after login) building inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content2"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content2\": \"Finnish: Guest info view (the view that opens for viewer after login) archaeologic inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content3"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content3\": \"Finnish: Guest info view (the view that opens for viewer after login) archaeologic collections text.\"";
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          { expand: true, flatten: true, src: ['<%= yeoman.app %>/languages/fi-FI/common.lang.json'], dest: '<%= yeoman.dist %>/languages/fi-FI/' }
+        ]
+      },
+      translationsSv: {
+        options: {
+          patterns: [
+            {
+              match: /"Guest_user_info_content"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content\": \"Swedish: Guest info view (the view that opens for viewer after login) common text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content1"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content1\": \"Swedish: Guest info view (the view that opens for viewer after login) building inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content2"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content2\": \"Swedish: Guest info view (the view that opens for viewer after login) archaeologic inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content3"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content3\": \"Swedish: Guest info view (the view that opens for viewer after login) archaeologic collections text.\"";
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          { expand: true, flatten: true, src: ['<%= yeoman.app %>/languages/sv-FI/common.lang.json'], dest: '<%= yeoman.dist %>/languages/sv-FI/' }
+        ]
+      },
+      translationsEn: {
+        options: {
+          patterns: [
+            {
+              match: /"Guest_user_info_content"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content\": \"English: Guest info view (the view that opens for viewer after login) common text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content1"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content1\": \"English: Guest info view (the view that opens for viewer after login) building inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content2"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content2\": \"English: Guest info view (the view that opens for viewer after login) archaeologic inventory text.\"";
+              }
+            }, {
+              match: /"Guest_user_info_content3"[:]\s(\".*\")/g,
+              replacement: function () {
+                return "\"Guest_user_info_content3\": \"English: Guest info view (the view that opens for viewer after login) archaeologic collections text.\"";
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          { expand: true, flatten: true, src: ['<%= yeoman.app %>/languages/en-US/common.lang.json'], dest: '<%= yeoman.dist %>/languages/en-US/' }
         ]
       }
     },
@@ -236,7 +365,10 @@ module.exports = function (grunt) {
     'concat', //concatenate the angular templates to the app.js
     'clean:removetemplate', //remove the created template file (it's already concatenated)
     'clean:removehtml', //remove the html files that were turned into angular templates
-    'replace', //replace the API_URL with the production url
+    'replace:prod', // replace the API_URL and other variables in app.js with the production url
+    'replace:translationsFi', // replace the info texts shown to katselija after login
+    'replace:translationsSv', // replace the info texts shown to katselija after login
+    'replace:translationsEn', // replace the info texts shown to katselija after login
     //'uglify:js', //uglify the files, each separately
     'rev', //modify the .js file names
     'usemin' //change the index.html to use the revved .js files
@@ -255,6 +387,9 @@ module.exports = function (grunt) {
     'clean:removetemplate',
     'clean:removehtml',
     'replace:qa',
+    'replace:translationsFi',
+    'replace:translationsSv',
+    'replace:translationsEn',
     //'uglify:js',
     'rev',
     'usemin'
@@ -273,6 +408,9 @@ module.exports = function (grunt) {
       'clean:removetemplate',
       'clean:removehtml',
       'replace:kehitys',
+      'replace:translationsFi',
+      'replace:translationsSv',
+      'replace:translationsEn',
       //'uglify:js',
       'rev',
       'usemin'

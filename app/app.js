@@ -19,7 +19,7 @@ var mip = angular.module(
                 'mip.toimenpide', 'mip.kasittely', 'mip.konservointi.hallinta', 'mip.konservointi'
         ]).constant('CONFIG', {
     /** (backendin) osoitteen asetus */
-    'API_URL' : 'http://localhost:8000/api/',
+    'API_URL' : 'http://localhost:8000/api/', // The value will be replaced in the build process
     /** API version asetus */
     'API_VERSION' : 'v1', // API version
     'APP_VERSION': 'v1.2',
@@ -29,6 +29,8 @@ var mip = angular.module(
     'ACCEPT_LANGUAGE' : [
             'fi', 'se', 'en'
     ],
+    'ORGANISATION': 'Test organisation', // The value can be changed in dev env and will be replaced in the build process
+    'PROVINCE_NAME': 'Province name', // The value can be changed in dev env and will be replaced in the build process
     /** Solr hakutulosten oletusmäärä hakupalkista haettaessa */
     'SEARCH_LIMIT' : 10,
     /** Jos koordinaatteja ei ole saatavilla, keskitetään näihin (Turun linna) */

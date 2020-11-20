@@ -1165,7 +1165,8 @@ angular.module('mip.tutkimus').controller(
 						'rivit': 1000,
 						'ark_tutkimus_id': vm.tutkimus.properties.id,
 						'ark_tutkimusalue_id': null,
-						'luetteloitu': false
+						'luetteloitu': false,
+						'tutkimus_view': true
 					}).then(function success(images) {
 						vm.otherImages = images.features;
 						// Muiden kuvien määrä
