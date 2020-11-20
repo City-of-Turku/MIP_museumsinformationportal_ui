@@ -5,7 +5,8 @@ module.exports = function (grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   /*
-   *  CONFIGURABLE PATHS
+   *  CONFIGURABLE PATHS AND VARIABLES
+   *  NOTE: Also some values are defined directly in the grunt-replace tasks.
    */
   var yeomanConfig = {
     app: 'app',
@@ -164,6 +165,24 @@ module.exports = function (grunt) {
               replacement: function () {
                 return "'PROVINCE_NAME': 'Example Province'";
               }
+            },
+            {
+              match: /'KYPPI_ADMIN_ORGANISATION_CODE'\s*[:]\s*(\d*)/g,
+              replacement: function () {
+                return "'KYPPI_ADMIN_ORGANISATION_CODE': 17";
+              }
+            },
+            {
+              match: /'DEFAULT_COORDINATES'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_COORDINATES': [60.46, 22.68]";
+              }
+            },
+            {
+              match: /'DEFAULT_MAP_CENTER'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_MAP_CENTER': [6709459.248768231831491, 237488.841283306537662]";
+              }
             }
           ],
           usePrefix : false
@@ -194,6 +213,24 @@ module.exports = function (grunt) {
               replacement: function () {
                 return "'PROVINCE_NAME': 'Example Province'";
               }
+            },
+            {
+              match: /'KYPPI_ADMIN_ORGANISATION_CODE'\s*[:]\s*(\d*)/g,
+              replacement: function () {
+                return "'KYPPI_ADMIN_ORGANISATION_CODE': 17";
+              }
+            },
+            {
+              match: /'DEFAULT_COORDINATES'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_COORDINATES': [60.46, 22.68]";
+              }
+            },
+            {
+              match: /'DEFAULT_MAP_CENTER'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_MAP_CENTER': [6709459.248768231831491, 237488.841283306537662]";
+              }
             }
           ],
           usePrefix : false
@@ -219,6 +256,24 @@ module.exports = function (grunt) {
               match: /'PROVINCE_NAME'[:]\s(\'.*\')/g,
               replacement: function () {
                 return "'PROVINCE_NAME': 'Example Province'";
+              }
+            },
+            {
+              match: /'KYPPI_ADMIN_ORGANISATION_CODE'\s*[:]\s*(\d*)/g,
+              replacement: function () {
+                return "'KYPPI_ADMIN_ORGANISATION_CODE': 17";
+              }
+            },
+            {
+              match: /'DEFAULT_COORDINATES'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_COORDINATES': [60.46, 22.68]";
+              }
+            },
+            {
+              match: /'DEFAULT_MAP_CENTER'\s*[:]\s*\[.*\]/g,
+              replacement: function () {
+                return "'DEFAULT_MAP_CENTER': [6709459.248768231831491, 237488.841283306537662]";
               }
             }
           ],

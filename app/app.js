@@ -31,12 +31,12 @@ var mip = angular.module(
     ],
     'ORGANISATION': 'Test organisation', // The value can be changed in dev env and will be replaced in the build process
     'PROVINCE_NAME': 'Province name', // The value can be changed in dev env and will be replaced in the build process
+    'KYPPI_ADMIN_ORGANISATION_CODE': 1, // The value can be changed in dev env and will be replaced in the build process
     /** Solr hakutulosten oletusmäärä hakupalkista haettaessa */
     'SEARCH_LIMIT' : 10,
-    /** Jos koordinaatteja ei ole saatavilla, keskitetään näihin (Turun linna) */
-    'DEFAULT_COORDINATES' : [
-            60.46, 22.68
-    ],
+    /** Jos koordinaatteja ei ole saatavilla, keskitetään näihin  */
+    'DEFAULT_COORDINATES': [65.46, 25.68], // LAT LON  // The value can be changed in dev env and will be replaced in the build process
+    'DEFAULT_MAP_CENTER': [6740448, 272462], // LAT LON  // The value can be changed in dev env and will be replaced in the build process
     'ROLES' : {
         'PROJECT' : {
             'OWNER' : 1,

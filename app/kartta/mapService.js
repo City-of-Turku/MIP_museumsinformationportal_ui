@@ -129,8 +129,8 @@ angular.module('mip.map').factory('MapService', [
 			map: function (mapLayers, center, zoom) {
 				if (typeof center === "undefined") {
 					center = {
-						lon: 237488.841283306537662,
-						lat: 6709459.248768231831491,
+						lon: CONFIG.DEFAULT_MAP_CENTER[1],
+						lat: CONFIG.DEFAULT_MAP_CENTER[0],
 						bounds: []
 					}
 				}

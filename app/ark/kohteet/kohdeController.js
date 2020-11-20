@@ -67,7 +67,7 @@ angular.module('mip.kohde').controller(
                             'vanhat_kunnat': [],
                             'vedenalainen': false,
                             'kunto': { id: 1 }, //Oletuksena "Ei määritelty"
-                            'yllapitoorganisaatiotunnus': 17,
+                            'yllapitoorganisaatiotunnus': CONFIG.KYPPI_ADMIN_ORGANISATION_CODE,
                             'yllapitoorganisaatio': CONFIG.ORGANISATION,
                             'inventointitutkimukset': []
                         },
