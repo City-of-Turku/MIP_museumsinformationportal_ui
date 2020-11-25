@@ -156,7 +156,7 @@ angular.module('mip.konservointi').controller(
 			 * Images were modified, fetch them again
 			 */
 			$scope.$on('arkKuva_modified', function (event, data) {
-				vm.getImages();
+				vm.getOtherImages();
       });
 
       /*

@@ -5,7 +5,7 @@
                 <div ng-include="'pages/templates/modal/modal_header_painikkeet.html'"></div>
                 <h4 class="modal-title">
 					<span i18n="ark.Discovery"></span> : {{vm.loyto.properties.luettelointinumero}}
-                </h4>                
+                </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" name="form"
@@ -37,15 +37,15 @@
             <div class="modal-footer">
                 <div class="pull-left" mip-entiteettiselain etype="'loyto'" eid="vm.loyto.properties.id" close="vm.close()" ng-show="!vm.edit && !vm.disableButtons"></div>
                 <div class="mip-footer-btn-group">
-					<button 
-						type="button" 
-						class="btn btn-small mip-transparent" 
-						data-placement="top" 
-						bs-popover 
+					<button
+						type="button"
+						class="btn btn-small mip-transparent"
+						data-placement="top"
+						bs-popover
                         data-template-url="ark/loydot/partials/popover-migraatiodata.html"
                         ng-show="vm.loyto.properties.migraatiodata">
 						<span class="fa fa-archive" aria-hidden="true"></span>
-    				</button>                                	
+    				</button>
 					<button type="button"
 					    class="btn btn-default"
 					    ng-click="vm.avaaKonservointi()"
@@ -54,14 +54,14 @@
 					</button>
 					<button type="button"
 					    class="btn btn-default"
-					    ng-if="vm.aktivoiLisaaPainike()" 
+					    ng-if="vm.aktivoiLisaaPainike()"
 					    ng-click="vm.uusiLoytoYksikolleJaMateriaalille()"
                         ng-if="vm.permissions.luonti">
 					    <span i18n="unit.Add_discovery" data-i18n-attr="{title: 'ark.Same_unit_and_material_code'}"></span> ({{vm.yksikko.yksikkotunnus}} | {{vm.loyto.properties.materiaalikoodi.koodi}})
-					</button>                           	
+					</button>
 					<button type="button"
 					    class="btn btn-default"
-					    ng-if="vm.aktivoiLisaaPainike()" 
+					    ng-if="vm.aktivoiLisaaPainike()"
 					    ng-click="vm.uusiLoytoYksikolle()"
                         ng-if="vm.permissions.luonti">
 					    <span i18n="unit.Add_discovery" data-i18n-attr="{title: 'ark.Same_unit'}" ></span> ({{vm.yksikko.yksikkotunnus}})
@@ -69,52 +69,52 @@
 					<button type="button"
 						class="btn btn-default"
 					    ng-class="{ disabled: form.$invalid || vm.disableButtons}"
-					    ng-if="vm.permissions.muokkaus && !vm.edit" 
+					    ng-if="vm.permissions.muokkaus && !vm.edit"
 					    ng-click="(form.$invalid || vm.disableButtons || vm.editMode())">
 					    <span i18n="common.Edit"></span>
-					</button>	                
+					</button>
 					<button type="button"
 						class="btn btn-success"
 					    ng-class="{ disabled: form.$invalid || vm.disableButtons}"
-					    ng-if="vm.permissions.muokkaus && vm.edit" 
+					    ng-if="vm.permissions.muokkaus && vm.edit"
 					    ng-click="(form.$invalid || vm.disableButtons || vm.save())">
 					    <span i18n="common.Save"></span>
 					</button>
 	                <div class="dropup">
-	                    <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                      
+	                    <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                        <span i18n="common.Actions"></span> <span class="caret"></span>
 	                    </button>
 	                    <ul class="dropdown-menu dropdown-menu-right">
-	                        <li><a href="" ng-click="vm.vaihdaLuettelointinumero()" 
+	                        <li><a href="" ng-click="vm.vaihdaLuettelointinumero()"
 	                               i18n="ark.Change_list_number" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons && vm.tutkimus.ark_loyto_kokoelmalaji_id == '2'"></a>
 	                        </li>
-	                        <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons && vm.tutkimus.ark_loyto_kokoelmalaji_id == '2'"></li>                    
-	                        <li><a href="" ng-click="vm.avaaRontgenkuva()" 
+	                        <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons && vm.tutkimus.ark_loyto_kokoelmalaji_id == '2'"></li>
+	                        <li><a href="" ng-click="vm.avaaRontgenkuva()"
                                    i18n="ark.Add_XRay_image" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons"></a>
                             </li>
-                            <li><a href="" ng-click="vm.addImage(false)" 
+                            <li><a href="" ng-click="vm.addImage(false)"
                                    i18n="common.Add_image" data-ng-if="vm.permissions.muokkaus && !vm.edit"></a>
                             </li>
-                            <li><a href="" ng-click="vm.lisaaTiedosto()" 
+                            <li><a href="" ng-click="vm.lisaaTiedosto()"
                                    i18n="common.Add_file" ng-show="!vm.create" data-ng-if="vm.permissions.muokkaus"></a>
                             </li>
-	                        <li><a href="" ng-click="vm.addImage(true)" 
+	                        <li><a href="" ng-click="vm.addImage(true)"
 	                               i18n="ark.Add_image_to_list" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons && vm.tutkimus.ark_loyto_kokoelmalaji_id == '2'"></a>
 	                        </li>
-	                        <li><a href="" ng-click="vm.addKartta()" 
+	                        <li><a href="" ng-click="vm.addKartta()"
                                    i18n="ark.Add_map_to_list" data-ng-if="vm.permissions.muokkaus && !vm.edit && !vm.disableButtons && vm.tutkimus.ark_loyto_kokoelmalaji_id == '2'"></a>
                             </li>
 	                         <li role="separator" class="divider"></li>
 	                        <li><a href="" ng-click="vm.close()"
-	                               i18n="common.Close" 
+	                               i18n="common.Close"
 	                               ng-show="!vm.edit"></a>
 	                        </li>
 	                        <li ng-class="{ 'disabled' : vm.disableButtons }"><a href="" ng-click="vm.disableButtons || vm.cancelEdit()"
-	                               i18n="common.Cancel_edit" 
+	                               i18n="common.Cancel_edit"
 	                               ng-show="vm.edit && !vm.create"></a>
 	                        </li>
-	                    </ul>                                       
-	                </div>					
+	                    </ul>
+	                </div>
 				</div>
             </div>
         </div>

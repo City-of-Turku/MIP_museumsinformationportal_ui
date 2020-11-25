@@ -561,5 +561,6 @@
 	"Location_tracking": "Sijainnin paikannus",
 	"Start_tracking": "Aloita reitin tallennus",
 	"Stop_tracking": "Lopeta reitin tallennus",
-	"Delete_marker": "Poista merkki"
+	"Delete_marker": "Poista merkki",
+	"Internal_additional_info": "Sisäiset lisätiedot"
 }
