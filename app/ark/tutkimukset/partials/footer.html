@@ -1,93 +1,126 @@
-
 <div class="dropup">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span i18n="common.Actions"></span> <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-right">
-        <li><a href="" ng-click="vm.poistaTutkimus()" class="bg-danger"
-               i18n="common.Delete"
-               ng-show="!vm.create" data-ng-if="vm.permissions.poisto"></a>
-        </li>
-        <li role="separator" class="divider" data-ng-if="vm.permissions.poisto && !vm.create"></li>
-        <li><a href="" ng-click="vm.showMuutoshistoria()"
-               i18n="common.Show_history"
-               ng-show="!vm.create" data-ng-if="vm.editRelatedPermissions.katselu"></a>
-        </li>
-        <li role="separator" class="divider" data-ng-if="vm.editRelatedPermissions.katselu && !vm.create"></li>
-        <li class="dropdown-submenu pull-left">
-            <a href="" style="padding-right:65px;" i18n="common.Create_report"
-               ng-show="!vm.create && !vm.edit"></a>
-                <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id != 11" ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id != 11} " >
-                    <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span> (word)</a></li>
-                    <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
-                </ul>
-                <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 11" ng-class="{submenuHeightFix3Elements: vm.tutkimus.properties.tutkimuslaji.id == 11} " >
-                     <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span> (word)</a></li>
-                     <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
-                     <li><a ng-click="vm.createReport('PDF', 'tarkastusraportti')"><span i18n="ark.Inspection_report"></span> (pdf)</a></li>
-                 </ul>
-        </li>
-        <!--<li><a href="" ng-click="vm.tutkimusRaportti()" i18n="ark.Create_research_report"
-          data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && (vm.tutkimus.properties.tutkimuslaji.id == 7 || vm.tutkimus.properties.tutkimuslaji.id == 10 || vm.tutkimus.properties.tutkimuslaji.id == 12)"></a>
-        </li>-->
-        <li><a href="" ng-click="vm.lisaaNayte()"
-               i18n="sample.Add_sample"
-               ng-show="!vm.create" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></a>
-        </li>
-        <li><a href="" ng-click="vm.lisaaTutkimusalue(true)"
-               ng-if="vm.editRelatedPermissions.luonti && !vm.create" i18n="ark.Add_research_areas_from_file"></a>
-        </li>
-        <li><a href="" ng-click="vm.lisaaTutkimusalue(false)"
-               ng-if="vm.editRelatedPermissions.luonti && !vm.create" i18n="ark.Add_research_area"></a>
-        </li>
-       <li><a href="" ng-click="vm.addCoordinates('loyto')"
-              i18n="ark.Add_discovery_coordinates_from_file" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
-       </li>
-        <li><a href="" ng-click="vm.addCoordinates('nayte')"
-              i18n="ark.Add_sample_coordinates_for_from_file" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
-       </li>
-        <li><a href="" ng-click="vm.lisaaTiedosto()"
-               ng-if="vm.editRelatedPermissions.luonti && !vm.create" i18n="common.Add_file"></a>
-        </li>
-        <li><a href="" ng-click="vm.addImage(false)"
-               i18n="common.Add_image"
-               data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons"></a>
-        </li>
-        <li><a href="" ng-click="vm.addImage(true)"
-                i18n="ark.Add_image_to_list"
-                data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2'"></a>
-        </li>
-        <li><a href="" ng-click="vm.addKartta()"
-                i18n="ark.Add_map_to_list"
-                data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_kartta_kokoelmalaji_id == '2'"></a>
-        </li>
-        <li role="separator" class="divider" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></li>
-        <li><a href="" ng-click="vm.manageUsers()"
-               i18n="common.Manage_users"
-               ng-show="!vm.edit && vm.tutkimus.properties.id && vm.permissions.muokkaus"></a>
-        </li>
-        <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus && !vm.create"></li>
-        <li><a href="" ng-click="vm.close()"
-               i18n="common.Close"
-               ng-show="!vm.edit"></a>
-        </li>
-        <li><a href="" ng-click="vm.close()"
-               i18n="common.Cancel"
-               ng-show="vm.create"></a>
-        </li>
-        <li ng-class="{ 'disabled' : vm.disableButtons }"><a href="" ng-click="vm.disableButtons || vm._cancelEdit()"
-               i18n="common.Cancel_edit"
-               ng-show="vm.edit && !vm.create"></a>
-        </li>
-        <li><a href="" ng-click="vm.editMode()"
-               i18n="common.Edit"
-               ng-show="!vm.edit" ng-if="vm.permissions.muokkaus"></a>
-        </li>
-        <li ng-class="{ disabled: form.$invalid || vm.disableButtons }"><a href="" ng-click="(form.$invalid || vm.disableButtons) || vm.save()" class="bg-success"
-               i18n="common.Save"
-               ng-show="vm.edit" ng-if="vm.permissions.muokkaus"></a>
-        </li>
-    </ul>
+       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <span i18n="common.Actions"></span> <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="" ng-click="vm.poistaTutkimus()" class="bg-danger" i18n="common.Delete" ng-show="!vm.create"
+                            data-ng-if="vm.permissions.poisto"></a>
+              </li>
+              <li role="separator" class="divider" data-ng-if="vm.permissions.poisto && !vm.create"></li>
+              <li><a href="" ng-click="vm.showMuutoshistoria()" i18n="common.Show_history" ng-show="!vm.create"
+                            data-ng-if="vm.editRelatedPermissions.katselu"></a>
+              </li>
+              <li role="separator" class="divider" data-ng-if="vm.editRelatedPermissions.katselu && !vm.create"></li>
+              <li class="dropdown-submenu pull-left">
+                     <a href="" style="padding-right:65px;" i18n="common.Create_report"
+                            ng-show="!vm.create && !vm.edit"></a>
+                     <!-- Arkeologinen inventointi - id 5 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 5"
+                     ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id == 5}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                     </ul>
+                     <!-- Irtolöytö / Vanha tutkimus - id 6 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 6"
+                            ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id == 6}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                     </ul>
+                     <!-- Kaivaus - id 7 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 7"
+                            ng-class="{submenuHeightFix3Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix2Elements: vm.editRelatedPermissions.luonti == false}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li ng-if="vm.editRelatedPermissions.luonti"><a ng-click="vm.tutkimusRaportti()"><span
+                                                 i18n="ark.Research_report"></span> (word)</a></li>
+                     </ul>
+                     <!-- Koekaivaus - id 10 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 10"
+                            ng-class="{submenuHeightFix3Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix2Elements: vm.editRelatedPermissions.luonti == false}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li ng-if="vm.editRelatedPermissions.luonti"><a ng-click="vm.tutkimusRaportti()"><span
+                                                 i18n="ark.Research_report"></span> (word)</a></li>
+                     </ul>
+                     <!-- Konekaivuun valvonta - id 12 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 12"
+                            ng-class="{submenuHeightFix3Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix2Elements: vm.editRelatedPermissions.luonti == false}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li ng-if="vm.editRelatedPermissions.luonti"><a ng-click="vm.tutkimusRaportti()"><span
+                                                 i18n="ark.Research_report"></span> (word)</a></li>
+                     </ul>
+                     <!-- Tarkastus - id 11 -->
+                     <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 11"
+                            ng-class="{submenuHeightFix3Elements: vm.tutkimus.properties.tutkimuslaji.id == 11}">
+                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                          (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
+                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('PDF', 'tarkastusraportti')"><span
+                                                 i18n="ark.Inspection_report"></span> (pdf)</a></li>
+                     </ul>
+              </li>
+              <li><a href="" ng-click="vm.lisaaNayte()" i18n="sample.Add_sample" ng-show="!vm.create"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></a>
+              </li>
+              <li><a href="" ng-click="vm.lisaaTutkimusalue(true)"
+                            ng-if="vm.editRelatedPermissions.luonti && !vm.create"
+                            i18n="ark.Add_research_areas_from_file"></a>
+              </li>
+              <li><a href="" ng-click="vm.lisaaTutkimusalue(false)"
+                            ng-if="vm.editRelatedPermissions.luonti && !vm.create" i18n="ark.Add_research_area"></a>
+              </li>
+              <li><a href="" ng-click="vm.addCoordinates('loyto')" i18n="ark.Add_discovery_coordinates_from_file"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
+              </li>
+              <li><a href="" ng-click="vm.addCoordinates('nayte')" i18n="ark.Add_sample_coordinates_for_from_file"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
+              </li>
+              <li><a href="" ng-click="vm.lisaaTiedosto()" ng-if="vm.editRelatedPermissions.luonti && !vm.create"
+                            i18n="common.Add_file"></a>
+              </li>
+              <li><a href="" ng-click="vm.addImage(false)" i18n="common.Add_image"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons"></a>
+              </li>
+              <li><a href="" ng-click="vm.addImage(true)" i18n="ark.Add_image_to_list"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2'"></a>
+              </li>
+              <li><a href="" ng-click="vm.addKartta()" i18n="ark.Add_map_to_list"
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_kartta_kokoelmalaji_id == '2'"></a>
+              </li>
+              <li role="separator" class="divider" data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></li>
+              <li><a href="" ng-click="vm.manageUsers()" i18n="common.Manage_users"
+                            ng-show="!vm.edit && vm.tutkimus.properties.id && vm.permissions.muokkaus"></a>
+              </li>
+              <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus && !vm.create"></li>
+              <li><a href="" ng-click="vm.close()" i18n="common.Close" ng-show="!vm.edit"></a>
+              </li>
+              <li><a href="" ng-click="vm.close()" i18n="common.Cancel" ng-show="vm.create"></a>
+              </li>
+              <li ng-class="{ 'disabled' : vm.disableButtons }"><a href=""
+                            ng-click="vm.disableButtons || vm._cancelEdit()" i18n="common.Cancel_edit"
+                            ng-show="vm.edit && !vm.create"></a>
+              </li>
+              <li><a href="" ng-click="vm.editMode()" i18n="common.Edit" ng-show="!vm.edit"
+                            ng-if="vm.permissions.muokkaus"></a>
+              </li>
+              <li ng-class="{ disabled: form.$invalid || vm.disableButtons }"><a href=""
+                            ng-click="(form.$invalid || vm.disableButtons) || vm.save()" class="bg-success"
+                            i18n="common.Save" ng-show="vm.edit" ng-if="vm.permissions.muokkaus"></a>
+              </li>
+       </ul>
 </div>
 
 <!--

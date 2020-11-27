@@ -30,6 +30,7 @@ angular.module('mip.konservointi').controller(
         vm.edit = vm.create == true ? true : false;
 
         vm.permissions = permissions;
+				vm.entity = 'kuntoraportti';
 
       };
       vm.setUp();
@@ -110,7 +111,7 @@ angular.module('mip.konservointi').controller(
 
         //Asetetaan raportin "nimi" joka näkyy mm. raportit-välilehdellä
         //Raportin nimi + löydön luettelointinumero
-        var reportDisplayName = locale.getString('ark.Research') + " " + vm.kuntoraportti.loyto.properties.luettelointinumero; // TODO: Muuta nimi
+        var reportDisplayName = locale.getString('ark.Condition_report') + " " + vm.kuntoraportti.loyto.properties.luettelointinumero;
 
         var report = { 'requestedOutputType': type, 'reportDisplayName': reportDisplayName, 'kuntoraporttiId': vm.kuntoraportti.properties.id };
 

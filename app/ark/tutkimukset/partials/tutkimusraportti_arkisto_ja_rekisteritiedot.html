@@ -1,0 +1,32 @@
+<div class="panel panel-default panel-collapsible">
+  <div class="panel-heading" data-toggle="collapse" data-target="#arkistoPanel{{vm.modalId}}">
+    <h4 class="panel-title">
+      <span i18n="ark.Archive_and_register_info"></span>
+      <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
+    </h4>
+  </div>
+  <!-- Muokkaustila -->
+  <div id="arkistoPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="vm.edit">
+    <div class="form-group">
+      <label for="arkisto_ja_rekisteritiedot" class="col-sm-3 control-label">
+        <span i18n="ark.Archive_and_register_info"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="arkisto_ja_rekisteritiedot"
+          ng-model="vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot">
+        </textarea>
+      </div>
+    </div>
+  </div>
+  <!-- Katselutila -->
+  <div id="arkistoPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="!vm.edit">
+    <div class="form-group" ng-if="vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Archive_and_register_info"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot}}</p>
+      </div>
+    </div>
+  </div>
+</div>

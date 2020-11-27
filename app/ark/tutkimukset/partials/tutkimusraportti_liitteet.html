@@ -1,0 +1,32 @@
+<div class="panel panel-default panel-collapsible">
+  <div class="panel-heading" data-toggle="collapse" data-target="#liitteetPanel{{vm.modalId}}">
+    <h4 class="panel-title">
+      <span i18n="ark.Appendices"></span>
+      <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
+    </h4>
+  </div>
+  <!-- Muokkaustila -->
+  <div id="liitteetPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="vm.edit">
+    <div class="form-group">
+      <label for="lahteet" class="col-sm-3 control-label">
+        <span i18n="ark.Appendices"></span>
+      </label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="lahteet"
+          ng-model="vm.tutkimusraportti.properties.liitteet">
+        </textarea>
+      </div>
+    </div>
+  </div>
+  <!-- Katselutila -->
+  <div id="liitteetPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="!vm.edit">
+    <div class="form-group" ng-if="vm.tutkimusraportti.properties.liitteet">
+      <label class="col-sm-3 control-label">
+        <span i18n="ark.Appendices"></span>
+      </label>
+      <div class="col-sm-9">
+        <p class="form-control-static mip-multiline">{{vm.tutkimusraportti.properties.liitteet}}</p>
+      </div>
+    </div>
+  </div>
+</div>

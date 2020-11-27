@@ -1522,9 +1522,9 @@ angular.module('mip.general').factory(
                         /*
                          * Tutkimusraportin tekosivu
                          */
-                        arkTutkimusraporttiModal : function(tutkimus) {
+                        arkTutkimusraporttiModal : function(tutkimusraportti, tutkimus, permissions) {
                             // Modaalin tunniste
-                            var modalNameId = locale.getString('ark.Research_report') + ': ' + tutkimus.properties.nimi + nextModalNameIdIndex();
+                            var modalNameId = locale.getString('ark.Research_report') + ': ' + tutkimus.nimi + nextModalNameIdIndex();
 
                                 $timeout(function() {
                                     $modal({
@@ -1537,8 +1537,14 @@ angular.module('mip.general').factory(
                                         container : '#main_mip_app',
                                         keyboard : false,
                                         resolve : {
+                                            tutkimusraportti : function() {
+                                                return tutkimusraportti;
+                                            },
                                             tutkimus : function() {
                                                 return tutkimus;
+                                            },
+                                            permissions : function() {
+                                                return permissions;
                                             },
                                             selectedModalNameId : function() {
                                                 return modalNameId;

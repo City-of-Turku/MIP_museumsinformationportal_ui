@@ -256,6 +256,74 @@ angular.module('mip.tutkimus').factory('TutkimusService', [
 
 					return deferred.promise;
 				},
+				luoTallennaTutkimusraportti: function (tutkimusraportti) {
+					var deferred = $q.defer();
+					tutkimusraportti = angular.copy(tutkimusraportti);
+					// Päivitys
+					if (tutkimusraportti.properties.id) {
+						delete tutkimusraportti['properties']['luoja'];
+						$http({
+							method: 'PUT',
+							url: CONFIG.API_URL + 'tutkimusraportti/' + tutkimusraportti.properties.id,
+							data: tutkimusraportti
+						}).then(function success(response) {
+							$rootScope.$broadcast('Update_data', {
+								'type': 'tutkimusraportti'
+							});
+
+							deferred.resolve(response.data.data);
+						}, function error(response) {
+							deferred.reject(response.data);
+						});
+					}
+					// Luonti, palautetaan luotu id
+					else {
+						$http({
+							method: 'POST',
+							url: CONFIG.API_URL + 'tutkimusraportti/',
+							data: tutkimusraportti
+						}).then(function success(response) {
+							$rootScope.$broadcast('Update_data', {
+								'type': 'tutkimusraportti'
+							});
+
+							deferred.resolve(response.data.data);
+						}, function error(response) {
+							deferred.reject(response);
+						});
+					}
+					return deferred.promise;
+				},
+				poistaTutkimusraportti: function (id) {
+					var deferred = $q.defer();
+					$http({
+						method: 'DELETE',
+						url: CONFIG.API_URL + "tutkimusraportti/" + id
+					}).then(function success(response) {
+						deferred.resolve(response);
+					}, function error(response) {
+						deferred.reject(response);
+					});
+					return deferred.promise;
+				},
+				haeTutkimusraportti : function($id) {
+					var deferred = $q.defer();
+					var url = CONFIG.API_URL + 'tutkimusraportti/'+$id;
+					$http({
+						method : 'GET',
+						url : url
+					}).then(function successCallback (response) {
+						deferred.resolve(response.data.data);
+					}, function errorCallback (response) {
+						deferred.reject(response);
+					});
+
+					deferred.promise.cancel = function () {
+							deferred.resolve('Cancelled');
+					};
+
+					return deferred.promise;
+				}
 			}
 		}
 ]);

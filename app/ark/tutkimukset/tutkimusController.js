@@ -1151,10 +1151,6 @@ angular.module('mip.tutkimus').controller(
 				});
 			};
 
-			vm.tutkimusRaportti = function() {
-				ModalService.arkTutkimusraporttiModal(vm.tutkimus);
-			}
-
 			//Luetteloimattomat kuvat
 			vm.otherImages = [];
 			vm.getOtherImages = function () {
@@ -1407,7 +1403,15 @@ angular.module('mip.tutkimus').controller(
 				if(vm.tutkimus.properties.id == data.tutkimusId) {
 					AlertService.showInfo("Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.");
 				}
-		});
+			});
+
+			vm.tutkimusRaportti = function() {
+				if(tutkimus.properties.tutkimusraportti) {
+					ModalService.arkTutkimusraporttiModal({properties:tutkimus.properties.tutkimusraportti}, vm.tutkimus.properties, vm.editRelatedPermissions);
+				} else {
+					ModalService.arkTutkimusraporttiModal({properties: {kuvat_kansilehti: [], kuvat_johdanto: [], kuvat_tutkimus_ja_dokumentointimenetelmat: [], kuvat_yhteenveto: [], kuvat_havainnot: []}}, vm.tutkimus.properties, vm.editRelatedPermissions);
+				}
+			}
 
 			// DEBUG!
 			if (CONFIG.DEBUG) {

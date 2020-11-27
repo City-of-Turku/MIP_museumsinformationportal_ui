@@ -1,22 +1,76 @@
-<!-- Kaivauksen, koekaivauksen ja konekaivuun valvonnasta tehtävän raportin tayttosivu -->
 <div class="modal-dialog mip-modal-dialog" mip-dialog tabindex="-1" role="dialog" id="myModalDialog{{vm.modalId}}">
+  <!-- Kaivauksen, koekaivauksen ja konekaivuun valvonnasta tehtävän raportin tayttosivu -->
   <div class="modal-content">
     <div class="modal-header">
       <div ng-include="'pages/templates/modal/modal_header_painikkeet.html'"></div>
       <h4 class="modal-title">
         <span i18n="ark.Research_report"></span>
-        <span> : {{vm.tutkimus.properties.nimi}}</span>
+        <span> : {{vm.tutkimus.nimi}}</span>
       </h4>
     </div>
     <div class="modal-body">
-
+      <form class="form-horizontal" name="form" novalidate>
+        <div class="row">
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_kansilehti.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_arkisto_ja_rekisteritiedot.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_tiivistelma.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_johdanto.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_tutkimus_ja_dokumentointi.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_havainnot.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_yhteenveto.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_lahdeluettelo.html'"></div>
+          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_liitteet.html'"></div>
+        </div>
+      </form>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" ng-show="vm.edit">
+      <!-- <div class="pull-left" mip-entiteettiselain etype="'nayte'" eid="vm.nayte.properties.id" close="vm.close()" ng-show="!vm.edit && !vm.disableButtons"></div> -->
       <div class="mip-footer-btn-group">
-        <button type="button" class="btn btn-success" ng-click="vm.createReport('WORD', 'tutkimusraportti')">
+        <button type="button" class="btn btn-success" ng-class="{ disabled: vm.disableButtons}"
+          ng-click="(vm.disableButtons || vm.save())">
+          <span i18n="common.Save"></span>
+        </button>
+        <div class="dropup">
+          <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span i18n="common.Actions"></span> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li ng-class="{ 'disabled' : vm.disableButtons }"><a href="" ng-click="vm.disableButtons || vm.cancelEdit()"
+                i18n="common.Cancel_edit"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" ng-show="!vm.edit">
+      <div class="mip-footer-btn-group">
+        <button type="button" class="btn btn-success" ng-click="vm.createReport('WORD', 'tutkimusraportti')"
+          ng-show="!vm.create">
           <span i18n="common.Create_report"></span>
         </button>
-        <button type="button" class="btn btn-default" ng-click="vm.close()" i18n="common.Close"></button>
+        <button type="button" class="btn btn-default" ng-class="{ disabled:vm.disableButtons}"
+          ng-click="(vm.disableButtons || vm.editMode())">
+          <span i18n="common.Edit"></span>
+        </button>
+        <div class="dropup">
+          <button class="btn btn-default dropdown-toggle" ng-class="{ 'disabled' : vm.disableButtons }" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span i18n="common.Actions"></span> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="" ng-click="vm.deleteTutkimusraportti()" class="bg-danger" i18n="common.Delete"
+                ng-show="!vm.create"></a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="" ng-click="vm.close()" i18n="common.Close" ng-show="!vm.create"></a>
+            </li>
+            <li>
+              <a href="" ng-click="vm.close()" i18n="common.Cancel" ng-show="vm.create"></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

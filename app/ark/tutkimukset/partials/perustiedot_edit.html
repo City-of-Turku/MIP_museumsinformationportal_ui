@@ -1,199 +1,171 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <span i18n="ark.Basic_information"></span>
-        </h4>
-    </div>
-    <div class="panel-body">
-    	<div class="col-md-6 column-left">
-	        <mip-tutkimuslaji laji="vm.tutkimus.properties" lajirequired="!vm.tutkimus.properties.tyhja" vm="vm" haku="false" focus-input="focusInput"></mip-tutkimuslaji>
-	        <div ng-if="vm.tutkimus.properties.tutkimuslaji">
-		        <div class="form-group" ng-class="{ 'has-error': form.nimi.$invalid && form.nimi.$touched || !vm.uniikkiNimi}">
-		            <label class="col-sm-3 control-label">
-		            	<span i18n="common.Name"></span> *
-		            </label>
-		            <div class="col-sm-9">
-		                <input type="text" class="form-control"
-		                	name="nimi"
-		                    ng-model="vm.tutkimus.properties.nimi"
-		                    ng-change="vm.tarkistaNimi(form)"
-		                    ng-model-options='{debounce: 500}'
-		                    ng-required="true">
-		                <span class="help-block" ng-show="form.nimi.$invalid && form.nimi.$touched && vm.uniikkiNimi">
-		                    <span data-i18n="common.mandatory_value" data-field="{{ 'common.Name' | i18n }}"></span>
-		                </span>
-		                <span class="help-block" ng-show="!vm.uniikkiNimi">
-		                    <span data-i18n="common.already_in_use" data-field="{{ 'common.Name' | i18n }}"></span>
-		                </span>
-		            </div>
-		        </div>
-				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5" ng-class="{ 'has-error': form.tutkimuksen_lyhenne.$invalid && form.tutkimuksen_lyhenne.$touched || !vm.uniikkiTutkimuksenLyhenne}">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<span i18n="ark.Basic_information"></span>
+		</h4>
+	</div>
+	<div class="panel-body">
+		<div class="col-md-6 column-left">
+			<mip-tutkimuslaji laji="vm.tutkimus.properties" lajirequired="!vm.tutkimus.properties.tyhja" vm="vm" haku="false"
+				focus-input="focusInput"></mip-tutkimuslaji>
+			<div ng-if="vm.tutkimus.properties.tutkimuslaji">
+				<div class="form-group" ng-class="{ 'has-error': form.nimi.$invalid && form.nimi.$touched || !vm.uniikkiNimi}">
+					<label class="col-sm-3 control-label">
+						<span i18n="common.Name"></span> *
+					</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="nimi" ng-model="vm.tutkimus.properties.nimi"
+							ng-change="vm.tarkistaNimi(form)" ng-model-options='{debounce: 500}' ng-required="true">
+						<span class="help-block" ng-show="form.nimi.$invalid && form.nimi.$touched && vm.uniikkiNimi">
+							<span data-i18n="common.mandatory_value" data-field="{{ 'common.Name' | i18n }}"></span>
+						</span>
+						<span class="help-block" ng-show="!vm.uniikkiNimi">
+							<span data-i18n="common.already_in_use" data-field="{{ 'common.Name' | i18n }}"></span>
+						</span>
+					</div>
+				</div>
+				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5"
+					ng-class="{ 'has-error': form.tutkimuksen_lyhenne.$invalid && form.tutkimuksen_lyhenne.$touched || !vm.uniikkiTutkimuksenLyhenne}">
 					<label class="col-sm-3 control-label">
 						<span i18n="ark.Research_abbreviation"></span>
 					</label>
 					<div class="col-sm-9">
-						<input class="form-control"
-						name="tutkimuksen_lyhenne"
-						ng-model="vm.tutkimus.properties.tutkimuksen_lyhenne"
-						ng-change="vm.tarkistaTutkimuksenLyhenne(form)"
-		                ng-model-options='{debounce: 500}'
-		                ng-required="false">
-		                <span class="help-block" ng-show="!vm.uniikkiTutkimuksenLyhenne">
-		                    <span data-i18n="common.already_in_use" data-field="{{ 'ark.Research_abbreviation' | i18n }}"></span>
-		                </span>
+						<input class="form-control" name="tutkimuksen_lyhenne" ng-model="vm.tutkimus.properties.tutkimuksen_lyhenne"
+							ng-change="vm.tarkistaTutkimuksenLyhenne(form)" ng-model-options='{debounce: 500}' ng-required="false">
+						<span class="help-block" ng-show="!vm.uniikkiTutkimuksenLyhenne">
+							<span data-i18n="common.already_in_use" data-field="{{ 'ark.Research_abbreviation' | i18n }}"></span>
+						</span>
 					</div>
 				</div>
-		        <div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
-		            <label for="kl_koodi" class="col-sm-3 control-label" i18n="ark.KL_code"> </label>
-		            <div class="col-sm-9">
-		                <input type="number" min="1" class="form-control" name="kl_koodi" ng-model="vm.tutkimus.properties.kl_koodi">
-		            </div>
-		        </div>
-		        <div class="form-group" ng-if="vm.tutkimusKohde == undefined && vm.tutkimus.properties.tutkimuslaji.id !== 5">
-		            <label class="col-sm-3 control-label">
-		                <span i18n="ark.Target"></span>
-		            </label>
-		            <div class="col-sm-9">
-                        <ui-select theme="bootstrap"
-                            ng-model="vm.tutkimus.properties.kohde"
-                            name="kohde"
-                            spellcheck="false">
-                            <ui-select-match
-                                data-i18n-attr="{placeholder: 'common.Name'}"
-                                allow-clear="true">{{$select.selected.nimi}} {{$select.selected.properties.nimi}}
-                            </ui-select-match>
-                            <ui-select-choices
-                                repeat="kohde in vm.kohteet track by kohde.properties.id"
-                                refresh="vm.haeKohteet($select.search)"
-                                refresh-delay="300">
-                                <span
-                                    ng-bind-html="kohde.properties.nimi | highlight: $select.search">
-                                </span>
-                            </ui-select-choices>
-                        </ui-select>
-		            </div>
-		        </div>
-		        <div class="form-group" ng-if="vm.tutkimus.properties.kohde_nimi && vm.tutkimus.properties.tutkimuslaji.id !== 5">
-		            <label class="col-sm-3 control-label">
-		                <span i18n="ark.Target"></span>
-		            </label>
-		            <div class="col-sm-9">
-		                <p class="form-control-static">{{vm.tutkimus.properties.kohde_nimi}}</p>
-		            </div>
-		        </div>
+				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label for="kl_koodi" class="col-sm-3 control-label" i18n="ark.KL_code"> </label>
+					<div class="col-sm-9">
+						<input type="number" min="1" class="form-control" name="kl_koodi"
+							ng-model="vm.tutkimus.properties.kl_koodi">
+					</div>
+				</div>
+				<div class="form-group" ng-if="vm.tutkimusKohde == undefined && vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label class="col-sm-3 control-label">
+						<span i18n="ark.Target"></span>
+					</label>
+					<div class="col-sm-9">
+						<ui-select theme="bootstrap" ng-model="vm.tutkimus.properties.kohde" name="kohde" spellcheck="false">
+							<ui-select-match data-i18n-attr="{placeholder: 'common.Name'}" allow-clear="true">
+								{{$select.selected.nimi}} {{$select.selected.properties.nimi}}
+							</ui-select-match>
+							<ui-select-choices repeat="kohde in vm.kohteet track by kohde.properties.id"
+								refresh="vm.haeKohteet($select.search)" refresh-delay="300">
+								<span ng-bind-html="kohde.properties.nimi | highlight: $select.search">
+								</span>
+							</ui-select-choices>
+						</ui-select>
+					</div>
+				</div>
+				<div class="form-group"
+					ng-if="vm.tutkimus.properties.kohde_nimi && vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label class="col-sm-3 control-label">
+						<span i18n="ark.Target"></span>
+					</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{vm.tutkimus.properties.kohde_nimi}}</p>
+					</div>
+				</div>
 				<div class="form-group" ng-if="vm.tutkimus.properties.kohde_kunta">
-					<label
-						for="kunta"
-						class="col-sm-3 control-label">
+					<label for="kunta" class="col-sm-3 control-label">
 						<span i18n="common.County"></span>
 					</label>
 					<div class="col-sm-9">
-		                <p class="form-control-static">
-		                    {{vm.tutkimus.properties.kohde_kunta | kuntaKylaNamei18n}}
-		                </p>
-		            </div>
+						<p class="form-control-static">
+							{{vm.tutkimus.properties.kohde_kunta | kuntaKylaNamei18n}}
+						</p>
+					</div>
 				</div>
-				<div class="form-group" ng-if="vm.tutkimus.properties.kohde_kyla && vm.tutkimus.properties.tutkimuslaji.id !== 5">
-					<label
-						for="kyla"
-						class="col-sm-3 control-label">
+				<div class="form-group"
+					ng-if="vm.tutkimus.properties.kohde_kyla && vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label for="kyla" class="col-sm-3 control-label">
 						<span i18n="common.Village"></span>
 					</label>
 					<div class="col-sm-9">
 						<p class="form-control-static">
-		                    {{vm.tutkimus.properties.kohde_kyla | kuntaKylaNamei18n}}
-		                </p>
+							{{vm.tutkimus.properties.kohde_kyla | kuntaKylaNamei18n}}
+						</p>
 					</div>
 				</div>
 				<div class="row">&nbsp;</div>
-		        <div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
-		            <label for="rahoittaja" class="col-sm-3 control-label" i18n="ark.Financier"> </label>
-		            <div class="col-sm-9">
-		                <textarea rows="3" class="form-control" name="rahoittaja" ng-maxlength="1000"
-	    	                ng-model="vm.tutkimus.properties.rahoittaja"></textarea>
-		            </div>
+				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label for="rahoittaja" class="col-sm-3 control-label" i18n="ark.Financier"> </label>
+					<div class="col-sm-9">
+						<textarea rows="3" class="form-control" name="rahoittaja" ng-maxlength="1000"
+							ng-model="vm.tutkimus.properties.rahoittaja"></textarea>
+					</div>
 				</div>
-		        <div class="form-group" ng-if="vm.naytaKenttaJohtaja()">
-		            <label for="kenttatyojohtaja" class="col-sm-3 control-label" i18n="ark.Field_work_manager"> </label>
-		            <div class="col-sm-9">
-		                <input type="text" class="form-control" name="kenttatyojohtaja" ng-model="vm.tutkimus.properties.kenttatyojohtaja">
-		            </div>
-		        </div>
-		        <div class="row" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">&nbsp;</div>
-	            <div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
-	                <label class="col-sm-3 control-label">
-	                    <span i18n="ark.Field_work"></span>
-	                </label>
-	                <div class="col-md-9">
-	                    <div class="input-group">
-	                        <input bs-datepicker data-date-format="dd.MM.yyyy"
-	                            model-date-format="yyyy-MM-dd" data-autoclose="1" date-type="string"
-	                            start-week="1"
-	                            class="form-control" name="kenttatyo_alkupvm"
-	                            ng-model="vm.tutkimus.properties.kenttatyo_alkupvm"
-	                            data-i18n-attr="{placeholder: 'common.Start_date'}">
-	                            <span class="input-group-addon">-</span>
-	                        <input bs-datepicker data-date-format="dd.MM.yyyy"
-	                            model-date-format="yyyy-MM-dd" data-autoclose="1" date-type="string"
-	                            start-week="1"
-	                            class="form-control" name="kenttatyo_loppupvm"
-	                            ng-model="vm.tutkimus.properties.kenttatyo_loppupvm"
-	                            data-i18n-attr="{placeholder: 'common.End_date'}">
-	                    </div>
-	                </div>
-	            </div>
-				<div class="form-group"
-					ng-class="{'has-error':
+				<div class="form-group" ng-if="vm.naytaKenttaJohtaja()">
+					<label for="kenttatyojohtaja" class="col-sm-3 control-label" i18n="ark.Field_work_manager"> </label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="kenttatyojohtaja"
+							ng-model="vm.tutkimus.properties.kenttatyojohtaja">
+					</div>
+				</div>
+				<div class="row" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">&nbsp;</div>
+				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
+					<label class="col-sm-3 control-label">
+						<span i18n="ark.Field_work"></span>
+					</label>
+					<div class="col-md-9">
+						<div class="input-group">
+							<input bs-datepicker data-date-format="dd.MM.yyyy" model-date-format="yyyy-MM-dd" data-autoclose="1"
+								date-type="string" start-week="1" class="form-control" name="kenttatyo_alkupvm"
+								ng-model="vm.tutkimus.properties.kenttatyo_alkupvm" data-i18n-attr="{placeholder: 'common.Start_date'}">
+							<span class="input-group-addon">-</span>
+							<input bs-datepicker data-date-format="dd.MM.yyyy" model-date-format="yyyy-MM-dd" data-autoclose="1"
+								date-type="string" start-week="1" class="form-control" name="kenttatyo_loppupvm"
+								ng-model="vm.tutkimus.properties.kenttatyo_loppupvm" data-i18n-attr="{placeholder: 'common.End_date'}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{'has-error':
 						form.alkupvm.$invalid && form.alkupvm.$touched ||
 						form.loppupvm.$invalid && form.loppupvm.$touched && vm.tutkimus.properties.tutkimuslaji.id === 5}">
-	                <label class="col-sm-3 control-label">
+					<label class="col-sm-3 control-label">
 						<span ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5">
 							<span i18n="common.Research"></span>
 						</span>
 						<span ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5">
 							<span i18n="common.Inventory_period"></span> *
 						</span>
-	                </label>
-	                <div class="col-md-9">
-	                    <div class="input-group">
-	                        <input bs-datepicker data-date-format="dd.MM.yyyy"
-	                            model-date-format="yyyy-MM-dd" data-autoclose="1" date-type="string"
-	                            start-week="1"
-								class="form-control" name="alkupvm"
-								ng-required="vm.tutkimus.properties.tutkimuslaji.id === 5"
-	                            ng-model="vm.tutkimus.properties.alkupvm"
-								data-i18n-attr="{placeholder: 'common.Start_date'}"
-								spellcheck="false" autocomplete="off">
-	                            <span class="input-group-addon">-</span>
-	                        <input bs-datepicker data-date-format="dd.MM.yyyy"
-	                            model-date-format="yyyy-MM-dd" data-autoclose="1" date-type="string"
-	                            start-week="1"
-								class="form-control" name="loppupvm"
-								ng-required="vm.tutkimus.properties.tutkimuslaji.id === 5"
-	                            ng-model="vm.tutkimus.properties.loppupvm"
-								data-i18n-attr="{placeholder: 'common.End_date'}"
-								spellcheck="false" autocomplete="off">
+					</label>
+					<div class="col-md-9">
+						<div class="input-group">
+							<input bs-datepicker data-date-format="dd.MM.yyyy" model-date-format="yyyy-MM-dd" data-autoclose="1"
+								date-type="string" start-week="1" class="form-control" name="alkupvm"
+								ng-required="vm.tutkimus.properties.tutkimuslaji.id === 5" ng-model="vm.tutkimus.properties.alkupvm"
+								data-i18n-attr="{placeholder: 'common.Start_date'}" spellcheck="false" autocomplete="off">
+							<span class="input-group-addon">-</span>
+							<input bs-datepicker data-date-format="dd.MM.yyyy" model-date-format="yyyy-MM-dd" data-autoclose="1"
+								date-type="string" start-week="1" class="form-control" name="loppupvm"
+								ng-required="vm.tutkimus.properties.tutkimuslaji.id === 5" ng-model="vm.tutkimus.properties.loppupvm"
+								data-i18n-attr="{placeholder: 'common.End_date'}" spellcheck="false" autocomplete="off">
 						</div>
 						<div>
-							<span class="help-block" ng-show="vm.tutkimus.properties.tutkimuslaji.id === 5 && form.alkupvm.$invalid && form.alkupvm.$touched">
-								<span data-i18n="common.mandatory_value"
-								data-field="{{ 'common.Start_date' | i18n }}"></span>
+							<span class="help-block"
+								ng-show="vm.tutkimus.properties.tutkimuslaji.id === 5 && form.alkupvm.$invalid && form.alkupvm.$touched">
+								<span data-i18n="common.mandatory_value" data-field="{{ 'common.Start_date' | i18n }}"></span>
 							</span>
-							<span class="help-block" ng-show="vm.tutkimus.properties.tutkimuslaji.id === 5 && form.loppupvm.$invalid && form.loppupvm.$touched">
-								<span data-i18n="common.mandatory_value"
-								data-field="{{ 'common.End_date' | i18n }}"></span>
+							<span class="help-block"
+								ng-show="vm.tutkimus.properties.tutkimuslaji.id === 5 && form.loppupvm.$invalid && form.loppupvm.$touched">
+								<span data-i18n="common.mandatory_value" data-field="{{ 'common.End_date' | i18n }}"></span>
 							</span>
 						</div>
-	                </div>
+					</div>
 				</div>
-		        <div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5">
-		            <label for="toimeksiantaja" class="col-sm-3 control-label" i18n="common.Mandator"> </label>
-		            <div class="col-sm-9">
-		                <textarea rows="3" class="form-control" name="toimeksiantaja" ng-maxlength="1000"
-	    	                ng-model="vm.tutkimus.properties.toimeksiantaja"></textarea>
-		            </div>
-		        </div>
-	            <div class="row">&nbsp;</div>
+				<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5">
+					<label for="toimeksiantaja" class="col-sm-3 control-label" i18n="common.Mandator"> </label>
+					<div class="col-sm-9">
+						<textarea rows="3" class="form-control" name="toimeksiantaja" ng-maxlength="1000"
+							ng-model="vm.tutkimus.properties.toimeksiantaja"></textarea>
+					</div>
+				</div>
+				<div class="row">&nbsp;</div>
 				<div class="form-group">
 					<label for="julkinen" class="col-sm-3 control-label">
 						<span i18n="common.Public"></span>
@@ -201,9 +173,8 @@
 					<div class="col-sm-9">
 						<select ng-model="vm.tutkimus.properties.julkinen"
 							ng-init="vm.tutkimus.properties.julkinen = vm.tutkimus.properties.julkinen || vm.noYes[0].value"
-							ng-options="option.value as option.label for option in vm.noYes"
-							ng-required="true"
-							name="julkinen" class="form-control">
+							ng-options="option.value as option.label for option in vm.noYes" ng-required="true" name="julkinen"
+							class="form-control">
 						</select>
 					</div>
 				</div>
@@ -214,48 +185,68 @@
 					<div class="col-sm-9">
 						<select ng-model="vm.tutkimus.properties.valmis"
 							ng-init="vm.tutkimus.properties.valmis = vm.tutkimus.properties.valmis || vm.noYes[0].value"
-							ng-options="option.value as option.label for option in vm.noYes"
-							ng-required="true"
-							name="valmis" class="form-control">
+							ng-options="option.value as option.label for option in vm.noYes" ng-required="true" name="valmis"
+							class="form-control">
 						</select>
 					</div>
 				</div>
 				<mip-kylakuntavalitsin
 					ng-show="vm.tutkimus.properties.tutkimuslaji.id === 6 || vm.tutkimus.properties.tutkimuslaji.id === 5"
 					kylakuntaselections="vm.tutkimus.properties.kunnatkylat" multiple="true"></mip-kylakuntavalitsin>
-                <div ng-if="vm.tutkimus.properties.tutkimuslaji !== undefined">
-                <div class="form-group">
-                    <label for="lisatiedot" class="col-sm-3 control-label" i18n="common.Additional_information"> </label>
-                    <div class="col-sm-9">
-                        <textarea rows="3" class="form-control" name="lisatiedot"
-                            ng-model="vm.tutkimus.properties.lisatiedot"></textarea>
-                    </div>
-                </div>
-            </div>
+				<div ng-if="vm.tutkimus.properties.tutkimuslaji !== undefined">
+					<div class="form-group">
+						<label for="lisatiedot" class="col-sm-3 control-label" i18n="common.Additional_information"> </label>
+						<div class="col-sm-9">
+							<textarea rows="3" class="form-control" name="lisatiedot"
+								ng-model="vm.tutkimus.properties.lisatiedot"></textarea>
+						</div>
+					</div>
+				</div>
 			</div>
-        </div>
+		</div>
 		<!-- Right column -->
-        <div class="col-md-6 column-right">
-            <div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 7 || vm.tutkimus.properties.tutkimuslaji.id === 12 || vm.tutkimus.properties.tutkimuslaji.id === 10" ng-include="'ark/tutkimukset/partials/kaivaustutkimus_kokoelmat_edit.html'"></div>
-            <div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 6" ng-include="'ark/tutkimukset/partials/irtoloyto_kokoelmat_edit.html'"></div>
-        	<div ng-if="vm.tutkimus.properties.tutkimuslaji !== undefined && vm.tutkimus.properties.tutkimuslaji.id !== 5">
-		        <div class="form-group">
-		            <label for="tiivistelma" class="col-sm-3 control-label" i18n="ark.Summary"> </label>
-		            <div class="col-sm-9">
-		                <textarea rows="3" class="form-control" name="tiivistelma" ng-maxlength="1000"
-	    	                ng-model="vm.tutkimus.properties.tiivistelma"></textarea>
-		            </div>
-		        </div>
+		<div class="col-md-6 column-right">
+			<div
+				ng-if="vm.tutkimus.properties.tutkimuslaji.id === 7 || vm.tutkimus.properties.tutkimuslaji.id === 12 || vm.tutkimus.properties.tutkimuslaji.id === 10"
+				ng-include="'ark/tutkimukset/partials/kaivaustutkimus_kokoelmat_edit.html'"></div>
+			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 6"
+				ng-include="'ark/tutkimukset/partials/irtoloyto_kokoelmat_edit.html'"></div>
+			<div ng-if="vm.tutkimus.properties.tutkimuslaji !== undefined && vm.tutkimus.properties.tutkimuslaji.id !== 5">
+				<div class="form-group">
+					<label for="tiivistelma" class="col-sm-3 control-label" i18n="ark.Summary"> </label>
+					<div class="col-sm-9">
+						<textarea rows="3" class="form-control" name="tiivistelma" ng-maxlength="1000"
+							ng-model="vm.tutkimus.properties.tiivistelma"></textarea>
+					</div>
+				</div>
 			</div>
 			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5">
-		        <div class="form-group">
-		            <label for="kuvaus" class="col-sm-3 control-label" i18n="common.Description"> </label>
-		            <div class="col-sm-9">
-		                <textarea rows="3" class="form-control" name="kuvaus" ng-maxlength="1000"
-	    	                ng-model="vm.tutkimus.properties.kuvaus"></textarea>
-		            </div>
-		        </div>
-	        </div>
-        </div>
-    </div>
+				<div class="form-group">
+					<label for="kuvaus" class="col-sm-3 control-label" i18n="common.Description"> </label>
+					<div class="col-sm-9">
+						<textarea rows="3" class="form-control" name="kuvaus" ng-maxlength="1000"
+							ng-model="vm.tutkimus.properties.kuvaus"></textarea>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<label for="km_paanumero" class="col-sm-3 control-label" i18n="ark.KM_main_number"> </label>
+					<div class="col-sm-9">
+						<input class="form-control" name="km_paanumero" ng-model="vm.tutkimus.properties.km_paanumero" placeholder="KM">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<label for="loytojen_diariointipvm" class="col-sm-3 control-label" i18n="ark.Findings_diary_date"> </label>
+					<div class="col-sm-9">
+						<input bs-datepicker data-date-format="dd.MM.yyyy" model-date-format="yyyy-MM-dd" data-autoclose="1"
+							date-type="string" start-week="1" class="form-control" name="loytojen_diariointipvm" ng-disabled="vm.tutkimus.properties.km_paanumero == null || vm.tutkimus.properties.km_paanumero.length == 0"
+							ng-model="vm.tutkimus.properties.loytojen_diariointipvm" data-i18n-attr="{placeholder: 'ark.Findings_diary_date'}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

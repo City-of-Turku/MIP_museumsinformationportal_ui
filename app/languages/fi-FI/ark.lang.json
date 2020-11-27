@@ -333,5 +333,17 @@
     "Handling_instructions": "Käsittelyohjeet",
     "Storage_conditions": "Olosuhdesuositukset",
     "Packing_instructions": "Pakkausohjeet",
-    "Condition_report_deleted": "Kuntoraportti poistettu"
+    "Condition_report_deleted": "Kuntoraportti poistettu",
+    "Research_report": "Tutkimusraportti",
+    "Create_research_report": "Luo tutkimusraportti",
+    "Research_report_deleted": "Tutkimusraportti poistettu",
+    "Titlepage_image": "Kansilehden kuva",
+    "Archive_and_register_info": "Arkisto- ja rekisteritiedot",
+    "Introduction": "Johdanto",
+    "Research_and_documentation_methods": "Tutkimus- ja dokumentointimenetelmät",
+    "Reference_list": "Lähdeluettelo",
+    "Appendices": "Liitteet",
+    "Titlepage_may_contain_only_one_image": "Kansilehdelle voi valita ainoastaan yhden kuvan",
+    "KM_main_number": "KM päänumero",
+    "Findings_diary_date": "Löytöjen diariointipäivämäärä"
 }

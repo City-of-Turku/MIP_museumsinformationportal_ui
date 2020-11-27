@@ -1,0 +1,34 @@
+<div class="col-md-12">
+  <div class="form-group">
+    <label i18n="common.Images" class="control-label"></label>
+    <ui-select multiple ng-model="valitutKuvat" theme="bootstrap" name="yksikot" on-select="addImage($item, valitutKuvat)"
+      on-remove="deleteImage($item, valitutKuvat); addItemBackToList($item, khakutulos);">
+      <ui-select-match data-i18n-attr="{placeholder: 'common.Select'}">{{$item.luettelointinumero}}{{$item.otsikko}}</ui-select-match>
+      <ui-select-choices repeat="kuva in khakutulos track by $index" refresh="kuvaHaku($select.search)"
+        refresh-delay="0">
+        <div>
+          <span ng-bind-html="kuva.luettelointinumero | highlight: $select.search"></span>
+          <span ng-bind-html="kuva.otsikko | highlight: $select.search"></span>
+        </div>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-group" data-ng-model="valitutKuvat">
+        <li class="list-group-item col-md-3 mip-image-item" data-ng-repeat="image in valitutKuvat">
+          <div class="col-md-12">
+            <img ng-if="image.url_small" class="img-responsive mip-image-thumbnail"
+              ng-src="{{image.url_tiny}}">
+            <img ng-if="image.url_small==''" class="img-responsive mip-image-thumbnail"
+              ng-src="/resources/images/kuva_placeholder.png" alt="...">
+          </div>
+          <div class="col-md-12 text-center mip-image-caption">
+            <span ng-if="image.luettelointinumero">{{image.luettelointinumero}}</span>
+            <span ng-if="image.otsikko">{{image.otsikko}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

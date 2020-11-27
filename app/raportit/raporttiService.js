@@ -168,6 +168,9 @@ angular.module('mip.raportti').factory(
                                 case 'Kuntoraportti':
                                     reportParameters = this.generateKuntoraporttiParameters(raportti);
                                     break;
+                                case 'Tutkimusraportti':
+                                    reportParameters = this.generateTutkimusraporttiParameters(raportti);
+                                    break;
                                 default:
                                     /*
                                      * Jos raportin parametreja ei ole, raporttia ei voida tehdä
@@ -560,6 +563,14 @@ angular.module('mip.raportti').factory(
                                 'requestedOutputType': raportti.requestedOutputType,
                                 'reportDisplayName': raportti.reportDisplayName,
                                 'konservaattori': raportti.konservaattori
+                            }
+                        },
+                        generateTutkimusraporttiParameters: function(raportti) {
+                            return {
+                                'tutkimusraporttiId': raportti.tutkimusraporttiId,
+                                'requestedOutputType': raportti.requestedOutputType,
+                                'reportDisplayName': raportti.reportDisplayName,
+                                'laji': raportti.laji
                             }
                         },
                         /*

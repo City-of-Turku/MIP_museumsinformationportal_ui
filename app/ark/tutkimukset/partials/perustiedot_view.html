@@ -1,29 +1,29 @@
 <!-- Perustiedot -->
 <div class="panel panel-default panel-collapsible">
-    <div class="panel-heading" data-toggle="collapse" data-target="#perusTiedotPanel{{vm.modalId}}">
-        <h4 class="panel-title">
-            <span data-i18n="ark.Basic_information"></span>
-            <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-        </h4>
-    </div>
-    <div id="perusTiedotPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in">
-    	<div class="col-md-6 column-left">
-		    <div class="form-group">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="common.Type"></span>
-			    </label>
-			    <div class="col-sm-7">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.tutkimuslaji | namei18n}}</p>
-	        	</div>
-	        </div>
-	        <div class="form-group">
-	            <label class="col-sm-5 control-label">
-	            	<span i18n="common.Name"></span>
-	            </label>
-	            <div class="col-sm-7">
-	                <p class="form-control-static">{{vm.tutkimus.properties.nimi}}</p>
-	            </div>
-	        </div>
+	<div class="panel-heading" data-toggle="collapse" data-target="#perusTiedotPanel{{vm.modalId}}">
+		<h4 class="panel-title">
+			<span data-i18n="ark.Basic_information"></span>
+			<span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
+		</h4>
+	</div>
+	<div id="perusTiedotPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in">
+		<div class="col-md-6 column-left">
+			<div class="form-group">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.Type"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.tutkimuslaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.Name"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.nimi}}</p>
+				</div>
+			</div>
 			<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuksen_lyhenne">
 				<label class="col-sm-5 control-label">
 					<span i18n="ark.Research_abbreviation"></span>
@@ -32,105 +32,104 @@
 					<p class="form-control-static">{{vm.tutkimus.properties.tutkimuksen_lyhenne}}</p>
 				</div>
 			</div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.kl_koodi">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="ark.KL_code"></span>
-			    </label>
-	            <div class="col-sm-7">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.kl_koodi}}</p>
-	            </div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.kohde.nimi">
-	            <label class="col-sm-5 control-label">
-	                <span i18n="ark.Target"></span>
-	            </label>
-	            <div class="col-sm-7">
-	                <p class="form-control-static">
+			<div class="form-group" ng-if="vm.tutkimus.properties.kl_koodi">
+				<label class="col-sm-5 control-label">
+					<span i18n="ark.KL_code"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.kl_koodi}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.kohde.nimi">
+				<label class="col-sm-5 control-label">
+					<span i18n="ark.Target"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">
 						<a class="link" ng-click="vm.avaaKohde()">{{vm.tutkimus.properties.kohde.nimi}}</a>
-	                </p>
-	            </div>
-	        </div>
+					</p>
+				</div>
+			</div>
 			<div class="form-group" ng-if="vm.tutkimus.properties.kohde_kunta">
-				<label
-					for="kunta"
-					class="col-sm-5 control-label">
+				<label for="kunta" class="col-sm-5 control-label">
 					<span i18n="common.County"></span>
 				</label>
 				<div class="col-sm-7">
-	                <p class="form-control-static">
-	                    {{vm.tutkimus.properties.kohde_kunta | kuntaKylaNamei18n}}
-	                </p>
-	            </div>
+					<p class="form-control-static">
+						{{vm.tutkimus.properties.kohde_kunta | kuntaKylaNamei18n}}
+					</p>
+				</div>
 			</div>
 			<div class="form-group" ng-if="vm.tutkimus.properties.kohde_kyla">
-				<label
-					for="kyla"
-					class="col-sm-5 control-label">
+				<label for="kyla" class="col-sm-5 control-label">
 					<span i18n="common.Village"></span>
 				</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-	                    {{vm.tutkimus.properties.kohde_kyla | kuntaKylaNamei18n}}
-	                </p>
+						{{vm.tutkimus.properties.kohde_kyla | kuntaKylaNamei18n}}
+					</p>
 				</div>
 			</div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.rahoittaja">
-	            <label for="rahoittaja" class="col-sm-5 control-label" i18n="ark.Financier"> </label>
-	            <div class="col-sm-7">
-    	            <p class="form-control-static mip-multiline">{{vm.tutkimus.properties.rahoittaja}}</p>
-	            </div>
-	        </div>
-		    <div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 11">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="ark.Inspector"></span>
-			    </label>
-			    <div class="col-sm-7">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.tarkastus.tarkastaja.etunimi}} {{vm.tutkimus.properties.tarkastus.tarkastaja.sukunimi}}</p>
-	        	</div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.kenttatyojohtaja">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="ark.Field_work_manager"></span>
-			    </label>
-	            <div class="col-sm-7">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.kenttatyojohtaja}}</p>
-	            </div>
-	        </div>
-	        <div class="row">&nbsp;</div>
-            <div class="form-group" ng-if="vm.tutkimus.properties.kenttatyo_alkupvm">
-                <label class="col-sm-5 control-label">
-                    <span i18n="ark.Field_work"></span>
-                </label>
-                <div class="col-sm-7">
-                   	<p class="form-control-static">{{vm.tutkimus.properties.kenttatyo_alkupvm | date:'dd.MM.yyyy'}} - {{vm.tutkimus.properties.kenttatyo_loppupvm | date:'dd.MM.yyyy'}}</p>
-                </div>
-            </div>
-            <div class="form-group" ng-if="vm.tutkimus.properties.alkupvm">
-                <label class="col-sm-5 control-label">
+			<div class="form-group" ng-if="vm.tutkimus.properties.rahoittaja">
+				<label for="rahoittaja" class="col-sm-5 control-label" i18n="ark.Financier"> </label>
+				<div class="col-sm-7">
+					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.rahoittaja}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 11">
+				<label class="col-sm-5 control-label">
+					<span i18n="ark.Inspector"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.tarkastus.tarkastaja.etunimi}}
+						{{vm.tutkimus.properties.tarkastus.tarkastaja.sukunimi}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.kenttatyojohtaja">
+				<label class="col-sm-5 control-label">
+					<span i18n="ark.Field_work_manager"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.kenttatyojohtaja}}</p>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.kenttatyo_alkupvm">
+				<label class="col-sm-5 control-label">
+					<span i18n="ark.Field_work"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.kenttatyo_alkupvm | date:'dd.MM.yyyy'}} -
+						{{vm.tutkimus.properties.kenttatyo_loppupvm | date:'dd.MM.yyyy'}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.alkupvm">
+				<label class="col-sm-5 control-label">
 					<span i18n="common.Research" ng-if="vm.tutkimus.properties.tutkimuslaji.id !== 5"></span>
 					<span i18n="common.Inventory_period" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5"></span>
-                </label>
-                <div class="col-sm-7">
-                   	<p class="form-control-static">{{vm.tutkimus.properties.alkupvm | date:'dd.MM.yyyy'}} - {{vm.tutkimus.properties.loppupvm | date:'dd.MM.yyyy'}}</p>
-                </div>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static">{{vm.tutkimus.properties.alkupvm | date:'dd.MM.yyyy'}} -
+						{{vm.tutkimus.properties.loppupvm | date:'dd.MM.yyyy'}}</p>
+				</div>
 			</div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.toimeksiantaja">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="common.Mandator"></span>
-			    </label>
-	            <div class="col-sm-7">
+			<div class="form-group" ng-if="vm.tutkimus.properties.toimeksiantaja">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.Mandator"></span>
+				</label>
+				<div class="col-sm-7">
 					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.toimeksiantaja}}</p>
-	            </div>
+				</div>
 			</div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.kuvaus">
-			    <label class="col-sm-5 control-label">
-			        <span i18n="common.Description"></span>
-			    </label>
-	            <div class="col-sm-7">
+			<div class="form-group" ng-if="vm.tutkimus.properties.kuvaus">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.Description"></span>
+				</label>
+				<div class="col-sm-7">
 					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.kuvaus}}</p>
-	            </div>
-	        </div>
-            <div class="row">&nbsp;</div>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
 			<div class="form-group">
 				<label for="julkinen" class="col-sm-5 control-label">
 					<span i18n="common.Public"></span>
@@ -147,117 +146,136 @@
 					<p class="form-control-static">{{vm.tutkimus.properties.valmis | trueFalseToText}}</p>
 				</div>
 			</div>
-			<div class="form-group" ng-if="vm.tutkimus.properties.tutkimuslaji.id === 6 || vm.tutkimus.properties.tutkimuslaji.id === 5">
-	            <label class="col-sm-5 control-label">
-	                <span i18n="common.County"></span> / <span i18n="common.Village"></span>
-	            </label>
-	            <div class="col-sm-7">
-	                <ul class="list-group">
-	                    <li class="list-group-item"
-	                        ng-repeat="kk in vm.tutkimus.properties.kunnatkylat">
+			<div class="form-group"
+				ng-if="vm.tutkimus.properties.tutkimuslaji.id === 6 || vm.tutkimus.properties.tutkimuslaji.id === 5">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.County"></span> / <span i18n="common.Village"></span>
+				</label>
+				<div class="col-sm-7">
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat="kk in vm.tutkimus.properties.kunnatkylat">
 
-	                        <h5 class="list-group-item-heading">
-	                            <a class="link"
-	                                ng-click="showKuntaModal(kk.kunta);">{{kk.kunta | kuntaKylaNamei18n}} ({{kk.kunta.kuntanumero}})</a> -
-	                                <span ng-if="kk.kyla"><a class="link"
-	                                ng-click="showKylaModal(kk);">{{kk.kyla | kuntaKylaNamei18n}} ({{kk.kyla.kylanumero}})</a></span>
-	                        </h5>
-	                    </li>
-	                </ul>
-	            </div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.lisatiedot">
-                <label class="col-sm-5 control-label">
-                    <span i18n="common.Additional_information"></span>
-                </label>
-                <div class="col-sm-7">
-                    <p class="form-control-static mip-multiline">{{vm.tutkimus.properties.lisatiedot}}</p>
-                </div>
-            </div>
-        </div>
-		<!-- Right column -->
-        <div class="col-md-6 column-right">
-		    <div class="form-group" ng-show="vm.tutkimus.properties.loyto_kokoelmalaji">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="ark.Discoveries"></span>
-			    </label>
-			    <div class="col-sm-8">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.loyto_kokoelmalaji | namei18n}}</p>
-	        	</div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.loyto_paanumero">
-	            <label for="loyto_paanumero" class="col-sm-4 control-label" i18n="common.Main_number"> </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.loyto_paanumero}}</p>
-	            </div>
-	        </div>
-   		    <div class="form-group" ng-if="vm.tutkimus.properties.nayte_kokoelmalaji">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="ark.Samples"></span>
-			    </label>
-			    <div class="col-sm-8">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.nayte_kokoelmalaji | namei18n}}</p>
-	        	</div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.nayte_paanumero">
-	            <label for="nayte_paanumero" class="col-sm-4 control-label" i18n="common.Main_number"> </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.nayte_paanumero}}</p>
-	            </div>
-	        </div>
-			<div class="row">&nbsp;</div>
-   		    <div class="form-group" ng-if="vm.tutkimus.properties.valokuva_kokoelmalaji">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="ark.Pictures"></span>
-			    </label>
-			    <div class="col-sm-8">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.valokuva_kokoelmalaji | namei18n}}</p>
-	        	</div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.digikuva_paanumero">
-	            <label for="digikuva_paanumero" class="col-sm-4 control-label" i18n="ark.Digital_pictures"> </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.digikuva_paanumero}}</p>
-	            </div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.mustavalko_paanumero">
-	            <label for="mustavalko_paanumero" class="col-sm-4 control-label" i18n="ark.Black_white_negatives_hyphen"> </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.mustavalko_paanumero}}</p>
-	            </div>
-	        </div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.dia_paanumero">
-	            <label for="dia_paanumero" class="col-sm-4 control-label" i18n="ark.Slide_positives"> </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static">{{vm.tutkimus.properties.dia_paanumero}}</p>
-	            </div>
-	        </div>
-			<div class="row">&nbsp;</div>
-   		    <div class="form-group" ng-if="vm.tutkimus.properties.raportti_kokoelmalaji">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="common.Reports"></span>
-			    </label>
-			    <div class="col-sm-8">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.raportti_kokoelmalaji | namei18n}}</p>
-	        	</div>
-	        </div>
-   		    <div class="form-group" ng-if="vm.tutkimus.properties.kartta_kokoelmalaji">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="ark.Maps"></span>
-			    </label>
-			    <div class="col-sm-8">
-	        		<p class="form-control-static">{{vm.tutkimus.properties.kartta_kokoelmalaji | namei18n}}</p>
-	        	</div>
-	        </div>
-	        <div class="row">&nbsp;</div>
-	        <div class="form-group" ng-if="vm.tutkimus.properties.tiivistelma">
-			    <label class="col-sm-4 control-label">
-			        <span i18n="ark.Summary"></span>
-			    </label>
-	            <div class="col-sm-8">
-	            	<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.tiivistelma}}</p>
-	            </div>
-	        </div>
+							<h5 class="list-group-item-heading">
+								<a class="link" ng-click="showKuntaModal(kk.kunta);">{{kk.kunta | kuntaKylaNamei18n}}
+									({{kk.kunta.kuntanumero}})</a> -
+								<span ng-if="kk.kyla"><a class="link" ng-click="showKylaModal(kk);">{{kk.kyla | kuntaKylaNamei18n}}
+										({{kk.kyla.kylanumero}})</a></span>
+							</h5>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.lisatiedot">
+				<label class="col-sm-5 control-label">
+					<span i18n="common.Additional_information"></span>
+				</label>
+				<div class="col-sm-7">
+					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.lisatiedot}}</p>
+				</div>
+			</div>
 		</div>
-    </div>
+		<!-- Right column -->
+		<div class="col-md-6 column-right">
+			<div class="form-group" ng-show="vm.tutkimus.properties.loyto_kokoelmalaji">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Discoveries"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.loyto_kokoelmalaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.loyto_paanumero">
+				<label for="loyto_paanumero" class="col-sm-4 control-label" i18n="common.Main_number"> </label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.loyto_paanumero}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.nayte_kokoelmalaji">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Samples"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.nayte_kokoelmalaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.nayte_paanumero">
+				<label for="nayte_paanumero" class="col-sm-4 control-label" i18n="common.Main_number"> </label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.nayte_paanumero}}</p>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.valokuva_kokoelmalaji">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Pictures"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.valokuva_kokoelmalaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.digikuva_paanumero">
+				<label for="digikuva_paanumero" class="col-sm-4 control-label" i18n="ark.Digital_pictures"> </label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.digikuva_paanumero}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.mustavalko_paanumero">
+				<label for="mustavalko_paanumero" class="col-sm-4 control-label" i18n="ark.Black_white_negatives_hyphen">
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.mustavalko_paanumero}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.dia_paanumero">
+				<label for="dia_paanumero" class="col-sm-4 control-label" i18n="ark.Slide_positives"> </label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.dia_paanumero}}</p>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.raportti_kokoelmalaji">
+				<label class="col-sm-4 control-label">
+					<span i18n="common.Reports"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.raportti_kokoelmalaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.kartta_kokoelmalaji">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Maps"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{vm.tutkimus.properties.kartta_kokoelmalaji | namei18n}}</p>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.tiivistelma">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Summary"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.tiivistelma}}</p>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.km_paanumero">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.KM_main_number"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.km_paanumero}}</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="vm.tutkimus.properties.loytojen_diariointipvm">
+				<label class="col-sm-4 control-label">
+					<span i18n="ark.Findings_diary_date"></span>
+				</label>
+				<div class="col-sm-8">
+					<p class="form-control-static mip-multiline">
+						{{vm.tutkimus.properties.loytojen_diariointipvm | date:'dd.MM.yyyy'}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

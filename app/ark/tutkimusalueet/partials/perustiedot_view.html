@@ -38,6 +38,14 @@
             <div class="col-sm-9">
                 <p class="form-control-static mip-multiline">{{vm.tutkimusalue.properties.havainnot}}</p>
             </div>
-        </div>                
+        </div>
+        <div class="form-group" ng-if="vm.tutkimusalue.properties.yhteenveto">
+            <label class="col-sm-3 control-label">
+                <span i18n="common.Summary"></span>
+            </label>
+            <div class="col-sm-9">
+                <p class="form-control-static mip-multiline">{{vm.tutkimusalue.properties.yhteenveto}}</p>
+            </div>
+        </div>
     </div>
 </div>
