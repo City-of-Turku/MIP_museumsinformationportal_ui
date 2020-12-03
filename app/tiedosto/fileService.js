@@ -39,8 +39,13 @@ angular.module('mip.file').factory('FileService', [
                         deferred.reject(response);
                     });
 
+                    deferred.promise.cancel = function () {
+                        deferred.resolve('Cancelled');
+                    };
+
                     return deferred.promise;
                 },
+
                 searchArkImages : function(params) {
                     var queryString = ListService.parseQueryString(params);
                     var deferred = $q.defer();
@@ -86,19 +91,6 @@ angular.module('mip.file').factory('FileService', [
                         deferred.reject(response);
                     });
 
-                    return deferred.promise;
-                },
-                getImage : function(id) {
-                    var deferred = $q.defer();
-                    var url = CONFIG.API_URL + "kuva/" + id;
-                    $http({
-                        method : 'GET',
-                        url : url
-                    }).then(function successCallback(response) {
-                        deferred.resolve(response.data.data);
-                    }, function errorCallback(response) {
-                        deferred.reject(response);
-                    });
                     return deferred.promise;
                 },
                 getArkImage : function(id) {
@@ -414,22 +406,6 @@ angular.module('mip.file').factory('FileService', [
                     }).then(function success(response) {
                         deferred.resolve(response);
                     }, function error(response) {
-                        deferred.reject(response);
-                    });
-
-                    return deferred.promise;
-                },
-                getArkImages : function(params) {
-                    var queryString = ListService.parseQueryString(params);
-                    var deferred = $q.defer();
-                    var url = CONFIG.API_URL + 'ark_kuva/' + queryString;
-
-                    $http({
-                        method : 'GET',
-                        url : url
-                    }).then(function successCallback(response) {
-                        deferred.resolve(response.data.data);
-                    }, function errorCallback(response) {
                         deferred.reject(response);
                     });
 

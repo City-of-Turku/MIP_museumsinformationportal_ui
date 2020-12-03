@@ -259,21 +259,12 @@
 				</div>
 			</div>
 			<div class="row">&nbsp;</div>
-			<div class="form-group" ng-if="vm.tutkimus.properties.km_paanumero">
+			<div class="form-group" ng-if="vm.tutkimus.properties.km_paanumerot_ja_diaarnum">
 				<label class="col-sm-4 control-label">
-					<span i18n="ark.KM_main_number"></span>
+					<span i18n="ark.KM_main_number_and_diaar_num"></span>
 				</label>
 				<div class="col-sm-8">
-					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.km_paanumero}}</p>
-				</div>
-			</div>
-			<div class="form-group" ng-if="vm.tutkimus.properties.loytojen_diariointipvm">
-				<label class="col-sm-4 control-label">
-					<span i18n="ark.Findings_diary_date"></span>
-				</label>
-				<div class="col-sm-8">
-					<p class="form-control-static mip-multiline">
-						{{vm.tutkimus.properties.loytojen_diariointipvm | date:'dd.MM.yyyy'}}</p>
+					<p class="form-control-static mip-multiline">{{vm.tutkimus.properties.km_paanumerot_ja_diaarnum}}</p>
 				</div>
 			</div>
 		</div>

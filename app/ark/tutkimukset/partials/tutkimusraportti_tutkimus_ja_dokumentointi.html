@@ -41,7 +41,7 @@
         <ul class="list-group" data-ng-model="vm.tutkimusraportti.properties.kuvat_tutkimus_ja_dokumentointimenetelmat">
           <li class="list-group-item col-md-3 mip-image-item"
             data-ng-repeat="image in vm.tutkimusraportti.properties.kuvat_tutkimus_ja_dokumentointimenetelmat">
-            <div class="col-md-12">
+            <div class="col-md-12" ng-click="vm.openImage(image)">
               <img ng-if="image.url_small" class="img-responsive mip-image-thumbnail" ng-src="{{image.url_tiny}}">
               <img ng-if="image.url_small==''" class="img-responsive mip-image-thumbnail"
                 ng-src="/resources/images/kuva_placeholder.png" alt="...">

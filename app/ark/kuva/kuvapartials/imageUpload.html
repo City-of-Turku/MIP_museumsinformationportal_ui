@@ -149,7 +149,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="objectType === 'loyto' && luetteloi ===  false">
+                                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="(objectType === 'loyto' && luetteloi ===  false">
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">
+                                            <span i18n="ark.Identification_image" class="pull-left"></span>
+                                        </label>
+                                        <div class="col-md-12">
+                                            <select name="tunnistekuva_{{$index}}"
+                                                ng-model="file.properties.tunnistekuva"
+                                                class="form-control"
+                                                ng-change="updateTunnistekuva(file)"
+                                                ng-disabled="file.status == 'loading'"
+                                                ng-options="option.value as option.label for option in noYes">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="objectType === 'yksikko'">
                                     <div class="form-group">
                                         <label class="col-md-12 control-label">
                                             <span i18n="ark.Identification_image" class="pull-left"></span>

@@ -25,7 +25,7 @@
                                     data-i18n-attr="{placeholder: 'ark.Listing_number'}">
                                 <span class="help-block"
                                     ng-show="imageForm.luettelointinumero.$invalid">
-                                    <span data-i18n="common.mandatory_value" 
+                                    <span data-i18n="common.mandatory_value"
                                         ng-show="!image.properties.luettelointinumero"
                                         data-field="{{ 'ark.Listing_number' | i18n }}"> </span>
                                     <span
@@ -50,7 +50,7 @@
                                     ng-disabled="uploading == true || disableButtons" spellcheck="false" autocomplete="off">
                                 <span class="help-block"
                                     ng-show="imageForm.otsikko.$invalid">
-                                    <span data-i18n="common.mandatory_value" 
+                                    <span data-i18n="common.mandatory_value"
                                         ng-show="!image.properties.otsikko"
                                         data-field="{{ 'common.Caption' | i18n }}"> </span>
                                 </span>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="col-md-12 control-label">
@@ -92,8 +92,8 @@
 	                            <span i18n="ark.Shot_from_edit" class="pull-left"></span>
 	                        </label>
 	                        <div class="col-md-12">
-	                            <select name="kuvaussuunta" 
-	                                ng-model="image.properties.kuvaussuunta" 
+	                            <select name="kuvaussuunta"
+	                                ng-model="image.properties.kuvaussuunta"
 	                                class="form-control">
 	                               <option ng-repeat="suunta in kuvaussuunnat track by $index" value="{{suunta}}">{{suunta}}</option>
 	                            </select>
@@ -106,9 +106,9 @@
                                 <span i18n="ark.Conservation_phase" class="pull-left"></span>
                             </label>
                             <div class="col-md-12">
-                                <select name="konservointivaihe" 
-                                    ng-model="image.properties.konservointivaihe_id" 
-                                    class="form-control" 
+                                <select name="konservointivaihe"
+                                    ng-model="image.properties.konservointivaihe_id"
+                                    class="form-control"
                                     ng-change="updateOtsikko()">
                                     <option value=""></option>
                                     <option ng-repeat="opt in konservointivaiheet track by $index" value="{{opt.id}}">{{opt | namei18n}}</option>
@@ -122,9 +122,23 @@
                                 <span i18n="ark.Identification_image" class="pull-left"></span>
                             </label>
                             <div class="col-md-12">
-                                <select name="tunnistekuva" 
-                                    ng-model="image.properties.tunnistekuva" 
-                                    class="form-control"                                              
+                                <select name="tunnistekuva"
+                                    ng-model="image.properties.tunnistekuva"
+                                    class="form-control"
+                                    ng-options="option.value as option.label for option in noYes">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12" ng-if="entiteetti_tyyppi === 'yksikko'">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">
+                                <span i18n="ark.Identification_image" class="pull-left"></span>
+                            </label>
+                            <div class="col-md-12">
+                                <select name="tunnistekuva"
+                                    ng-model="image.properties.tunnistekuva"
+                                    class="form-control"
                                     ng-options="option.value as option.label for option in noYes">
                                 </select>
                             </div>
@@ -148,19 +162,19 @@
                             </div>
                         </div>
                     </div>
-                </div>                
-                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">    
-                    <div class="col-md-12 col-sm-12 col-xs-12">                                
+                </div>
+                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <mip-yksikko-valitsin valitut-yksikot="image.properties.yksikot" entity-id="image.properties.id" mode="'kuva'" tutkimus-id="tutkimusId" dis="false"></mip-yksikko-valitsin>
                     </div>
-                </div>  
-                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">    
-                    <div class="col-md-12 col-sm-12 col-xs-12">                                
+                </div>
+                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <mip-loyto-valitsin valitut-loydot="image.properties.loydot" entity-id="image.properties.id" mode="'kuva'" tutkimus-id="tutkimusId" dis="false"></mip-loyto-valitsin>
                     </div>
                 </div>
-                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">    
-                    <div class="col-md-12 col-sm-12 col-xs-12">                                
+                <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <mip-nayte-valitsin valitut-naytteet="image.properties.naytteet" entity-id="image.properties.id" mode="'kuva'" tutkimus-id="tutkimusId" dis="false"></mip-nayte-valitsin>
                     </div>
                 </div>
@@ -168,7 +182,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <mip-asiasanavalitsin asiasanat="image.properties.asiasanat" dis="false"></mip-asiasanavalitsin>
                     </div>
-                </div> 
+                </div>
                 <div class="row" ng-if="luetteloitu === false">
                    <div class="col-md-12 col-sm-12 col-xs-12">
                        <div class="form-group">
@@ -186,7 +200,7 @@
                </div>
             </div>
             <div class="col-md-6">
-	           <div class="row">                                
+	           <div class="row">
 	               <div class="col-md-12">
 		                <div class="form-group">
 		                    <label class="col-md-12 control-label">

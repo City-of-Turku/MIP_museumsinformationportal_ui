@@ -1,0 +1,50 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "globals": {
+    "Insert Global Here": true,
+    "angular": true
+  },
+  "extends": [
+    "standard",
+    "plugin:angular/johnpapa"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "rules": {
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": "off",
+    "no-debugger": "warn",
+    "no-var": "off",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "never"
+      }
+    ],
+    "no-unused-vars": 2,
+    /* ANGULARJS SPECIFIC */
+    /*"angular/di": [
+      "error",
+      "$inject"
+    ],*/
+    "angular/file-name": "off",
+    "angular/function-type": [
+      1,
+      "named"
+    ],
+    "angular/no-service-method": 2
+  }
+}

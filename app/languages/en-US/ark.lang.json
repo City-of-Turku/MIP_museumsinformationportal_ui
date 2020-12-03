@@ -346,5 +346,6 @@
     "Appendices": "Appendices",
     "Titlepage_may_contain_only_one_image": "The titlepage can contain only one image",
     "KM_main_number": "KM päänumero",
-    "Findings_diary_date": "Löytöjen diariointipäivämäärä"
+    "Findings_diary_date": "Löytöjen diariointipäivämäärä",
+    "KM_main_number_and_diaar_num": "KM päänumerot ja löytöjen diariointipäivämäärät"
 }

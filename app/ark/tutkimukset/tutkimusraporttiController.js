@@ -42,6 +42,7 @@ angular.module('mip.tutkimus').controller(
           });
         } else {
           vm.tutkimusraportti = tutkimusraportti;
+          vm.setUp();
         }
       }
       vm.haeTutkimusraportti();
@@ -144,6 +145,13 @@ angular.module('mip.tutkimus').controller(
         }, function error(data) {
           AlertService.showError(locale.getString('common.Error'), AlertService.message(data));
         });
+      };
+
+      /*
+       * Avaa valittu kuva, välitetään kuvien lista.
+       */
+      vm.openImage = function (image) {
+        ModalService.arkImageModal({properties: image}, 'tutkimusraportti', vm.tutkimusraportti, vm.permissions, [], vm.tutkimus.id);
       };
 
       /**
