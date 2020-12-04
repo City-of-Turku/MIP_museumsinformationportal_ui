@@ -217,7 +217,7 @@
 					<div class="col-sm-9">
 						<textarea rows="3" class="form-control" name="tiivistelma" ng-maxlength="1000"
 							ng-model="vm.tutkimus.properties.tiivistelma"></textarea>
-					</div>
+	  		</div>
 				</div>
 			</div>
 			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5">
@@ -229,7 +229,8 @@
 					</div>
 				</div>
 			</div>
-			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 7 || vm.tutkimus.properties.tutkimuslaji.id === 12 || vm.tutkimus.properties.tutkimuslaji.id === 10">
+			<!-- Kaivaus: 7, Konekaivuun valvonta: 12, Koekaivaus: 10, Arkeologinen inventointi: 5 -->
+			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 7 || vm.tutkimus.properties.tutkimuslaji.id === 12 || vm.tutkimus.properties.tutkimuslaji.id === 10 || vm.tutkimus.properties.tutkimuslaji.id === 5">
 				<div class="form-group">
 					<label for="km_paanumero" class="col-sm-3 control-label" i18n="ark.KM_main_number_and_diaar_num"> </label>
 					<div class="col-sm-9">
