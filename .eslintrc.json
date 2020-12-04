@@ -34,7 +34,7 @@
         "asyncArrow": "never"
       }
     ],
-    "no-unused-vars": 2,
+    "no-unused-vars": 1, // There may be vars that are used in the html template
     /* ANGULARJS SPECIFIC */
     /*"angular/di": [
       "error",

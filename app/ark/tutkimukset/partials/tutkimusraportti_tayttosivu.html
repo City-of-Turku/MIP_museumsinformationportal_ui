@@ -11,15 +11,45 @@
     <div class="modal-body">
       <form class="form-horizontal" name="form" novalidate>
         <div class="row">
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_kansilehti.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_arkisto_ja_rekisteritiedot.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_tiivistelma.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_johdanto.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_tutkimus_ja_dokumentointi.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_havainnot.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_yhteenveto.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_lahdeluettelo.html'"></div>
-          <div class="col-md-12" ng-include="'ark/tutkimukset/partials/tutkimusraportti_liitteet.html'"></div>
+          <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a data-toggle="tab" href="!#kansilehti{{vm.modalId}}" data-i18n="ark.Titlepage"></a>
+              </li>
+              <li><a data-toggle="tab" href="!#arkisto_ja_rekisteritiedot{{vm.modalId}}"
+                  data-i18n="ark.Archive_and_register_info"></a>
+              </li>
+              <li><a data-toggle="tab" href="!#tiivistelma{{vm.modalId}}" data-i18n="ark.Summary"></a></li>
+              <li><a data-toggle="tab" href="!#johdanto{{vm.modalId}}" data-i18n="ark.Introduction"></a></li>
+              <li><a data-toggle="tab" href="!#tutkimus_ja_dokumentointi{{vm.modalId}}"
+                  data-i18n="ark.Research_and_documentation_methods2"></a></li>
+              <li><a data-toggle="tab" href="!#havainnot{{vm.modalId}}" data-i18n="ark.Findings"></a></li>
+              <li><a data-toggle="tab" href="!#yhteenveto{{vm.modalId}}" data-i18n="common.Summary"></a></li>
+              <li><a data-toggle="tab" href="!#lahdeluettelo{{vm.modalId}}" data-i18n="ark.Reference_list"></a></li>
+              <li><a data-toggle="tab" href="!#liitteet{{vm.modalId}}" data-i18n="ark.Appendices"></a></li>
+            </ul>
+          </div>
+          <div class="col-md-10">
+            <div class="tab-content">
+              <div id="kansilehti{{vm.modalId}}" class="tab-pane fade in active"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_kansilehti.html'"></div>
+              <div id="arkisto_ja_rekisteritiedot{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_arkisto_ja_rekisteritiedot.html'"></div>
+              <div id="tiivistelma{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_tiivistelma.html'"></div>
+              <div id="johdanto{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_johdanto.html'"></div>
+              <div id="tutkimus_ja_dokumentointi{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_tutkimus_ja_dokumentointi.html'"></div>
+              <div id="havainnot{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_havainnot.html'"></div>
+              <div id="yhteenveto{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_yhteenveto.html'"></div>
+              <div id="lahdeluettelo{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_lahdeluettelo.html'"></div>
+              <div id="liitteet{{vm.modalId}}" class="tab-pane fade in"
+                ng-include="'ark/tutkimukset/partials/tutkimusraportti_liitteet.html'"></div>
+            </div>
+          </div>
         </div>
       </form>
     </div>

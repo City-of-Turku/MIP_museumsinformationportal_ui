@@ -1,37 +1,27 @@
-<div class="panel panel-default panel-collapsible">
-  <div class="panel-heading" data-toggle="collapse" data-target="#dokumentointiPanel{{vm.modalId}}">
+<div class="panel panel-default">
+  <div class="panel-heading">
     <h4 class="panel-title">
       <span i18n="ark.Research_and_documentation_methods"></span>
-      <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
     </h4>
   </div>
   <!-- Muokkaustila -->
-  <div id="dokumentointiPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="vm.edit">
+  <div class="panel-body" ng-if="vm.edit">
     <div class="form-group">
-      <label for="dokumentointi" class="col-sm-3 control-label">
-        <span i18n="ark.Research_and_documentation_methods"></span>
-      </label>
-      <div class="col-sm-9">
-        <textarea rows="3" class="form-control" name="dokumentointi"
+      <div class="col-sm-12">
+        <textarea rows="5" style="min-height:400px;" class="form-control" name="dokumentointi"
           ng-model="vm.tutkimusraportti.properties.tutkimus_ja_dokumentointimenetelmat">
         </textarea>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-sm-8">
-        <mip-ark-kuva-valitsin tutkimus-id="vm.tutkimus.id" valitut-kuvat="vm.tutkimusraportti.properties.kuvat_tutkimus_ja_dokumentointimenetelmat"
-          kappale="'tutkimus_ja_dokumentointimenetelmat'">
-        </mip-ark-kuva-valitsin>
-      </div>
-    </div>
+    <mip-ark-kuva-valitsin tutkimus-id="vm.tutkimus.id"
+      valitut-kuvat="vm.tutkimusraportti.properties.kuvat_tutkimus_ja_dokumentointimenetelmat"
+      kappale="'tutkimus_ja_dokumentointimenetelmat'">
+    </mip-ark-kuva-valitsin>
   </div>
   <!-- Katselutila -->
-  <div id="dokumentointiPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="!vm.edit">
+  <div class="panel-body" ng-if="!vm.edit">
     <div class="form-group" ng-if="vm.tutkimusraportti.properties.tutkimus_ja_dokumentointimenetelmat">
-      <label class="col-sm-3 control-label">
-        <span i18n="ark.Research_and_documentation_methods"></span>
-      </label>
-      <div class="col-sm-9">
+      <div class="col-sm-12">
         <p class="form-control-static mip-multiline">
           {{vm.tutkimusraportti.properties.tutkimus_ja_dokumentointimenetelmat}}</p>
       </div>

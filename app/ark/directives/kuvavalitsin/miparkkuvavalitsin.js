@@ -1,7 +1,7 @@
+// eslint-disable-next-line angular/function-type
 angular.module('mip.directives').directive('mipArkKuvaValitsin', [
   'locale', 'ListService', 'FileService', '$filter', 'AlertService', function (locale, ListService, FileService, $filter, AlertService) {
     function link(scope, elem, attrs) {
-
       scope.cancelRequest = function (promise) {
         promise.cancel();
       };

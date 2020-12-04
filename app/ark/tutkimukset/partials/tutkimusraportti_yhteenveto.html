@@ -1,42 +1,34 @@
-<div class="panel panel-default panel-collapsible">
-  <div class="panel-heading" data-toggle="collapse" data-target="#yhteenvetoPanel{{vm.modalId}}">
+<div class="panel panel-default">
+  <div class="panel-heading">
     <h4 class="panel-title">
       <span i18n="common.Summary"></span>
-      <span class=" pull-right glyphicon clickable_space collapsed-indicator"></span>
     </h4>
   </div>
   <!-- Muokkaustila -->
-  <div id="yhteenvetoPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="vm.edit">
+  <div class="panel-body" ng-if="vm.edit">
     <div class="form-group">
-      <label for="yhteenveto" class="col-sm-3 control-label">
-        <span i18n="common.Summary"></span>
-      </label>
-      <div class="col-sm-9">
-        <textarea rows="3" class="form-control" name="yhteenveto" ng-model="vm.tutkimusraportti.properties.yhteenveto">
+      <div class="col-sm-12">
+        <textarea rows="5" style="min-height:400px;" class="form-control" name="yhteenveto"
+          ng-model="vm.tutkimusraportti.properties.yhteenveto">
         </textarea>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-sm-8">
-        <mip-ark-kuva-valitsin tutkimus-id="vm.tutkimus.id" valitut-kuvat="vm.tutkimusraportti.properties.kuvat_yhteenveto" kappale="'yhteenveto'">
-        </mip-ark-kuva-valitsin>
-      </div>
-    </div>
+    <mip-ark-kuva-valitsin tutkimus-id="vm.tutkimus.id" valitut-kuvat="vm.tutkimusraportti.properties.kuvat_yhteenveto"
+      kappale="'yhteenveto'">
+    </mip-ark-kuva-valitsin>
   </div>
   <!-- Katselutila -->
-  <div id="yhteenvetoPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in" ng-if="!vm.edit">
+  <div class="panel-body" ng-if="!vm.edit">
     <div class="form-group" ng-if="vm.tutkimusraportti.properties.yhteenveto">
-      <label class="col-sm-3 control-label">
-        <span i18n="common.Summary"></span>
-      </label>
-      <div class="col-sm-9">
+      <div class="col-sm-12">
         <p class="form-control-static mip-multiline">{{vm.tutkimusraportti.properties.yhteenveto}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <ul class="list-group" data-ng-model="vm.tutkimusraportti.properties.kuvat_yhteenveto">
-          <li class="list-group-item col-md-3 mip-image-item" data-ng-repeat="image in vm.tutkimusraportti.properties.kuvat_yhteenveto">
+          <li class="list-group-item col-md-3 mip-image-item"
+            data-ng-repeat="image in vm.tutkimusraportti.properties.kuvat_yhteenveto">
             <div class="col-md-12" ng-click="vm.openImage(image)">
               <img ng-if="image.url_small" class="img-responsive mip-image-thumbnail" ng-src="{{image.url_tiny}}">
               <img ng-if="image.url_small==''" class="img-responsive mip-image-thumbnail"
