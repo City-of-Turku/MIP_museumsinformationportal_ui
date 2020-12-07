@@ -76,7 +76,7 @@
                             data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></a>
               </li>
               <li><a href="" ng-click="vm.lisaaTutkimusalue(true)"
-                            ng-if="vm.editRelatedPermissions.luonti && !vm.create"
+                            ng-if="vm.editRelatedPermissions.luonti && !vm.create && vm.tutkimus.properties.tutkimuslaji.id != 5"
                             i18n="ark.Add_research_areas_from_file"></a>
               </li>
               <li><a href="" ng-click="vm.lisaaTutkimusalue(false)"
@@ -95,7 +95,7 @@
                             data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons"></a>
               </li>
               <li><a href="" ng-click="vm.addImage(true)" i18n="ark.Add_image_to_list"
-                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2'"></a>
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2' && vm.tutkimus.properties.ark_digikuva_paanumero != null"></a>
               </li>
               <li><a href="" ng-click="vm.addKartta()" i18n="ark.Add_map_to_list"
                             data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_kartta_kokoelmalaji_id == '2'"></a>

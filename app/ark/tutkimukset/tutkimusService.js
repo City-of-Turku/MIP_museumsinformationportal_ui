@@ -237,8 +237,7 @@ angular.module('mip.tutkimus').factory('TutkimusService', [
         var url = CONFIG.API_URL + 'tutkimus/aktiiviset_inventointitutkimukset';
         $http({
           method: 'GET',
-          url: url,
-          cache: CacheFactory.get('tutkimusCache')
+          url: url
         }).then(function successCallback(response) {
           deferred.resolve(response.data.data);
         }, function errorCallback(response) {
