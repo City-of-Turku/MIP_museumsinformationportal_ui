@@ -60,7 +60,7 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
     var konekaivuunValvontaImg = new Image();
     var inventointiImg = new Image();
     var tarkastusImg = new Image();
-    var irtoloytoImg = new Image();
+    var irtoloytoImg = new Image()
 
     kaivausImg.src = 'resources/images/map/kaivaus50x50.png';
     koekaivausImg.src = 'resources/images/map/koekaivaus50x50.png';
@@ -94,6 +94,55 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
         irtoloytoPattern = ctx.createPattern(irtoloytoImg, 'repeat');
     }
     //aseta filliksi pattern.
+
+    var patterns = [];
+
+    var kohdeStyles =[
+        {id: 1, source: 'resources/images/map/ei_maaritelty50x50.png',
+            colors:{alueStroke: 'rgba(252, 86, 153, 1)', pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 153, 1)'}},
+        {id: 2, source: 'resources/images/map/kiintea_mj50x50.png',
+            colors:{alueStroke: 'rgba(228, 0, 0, 1)', pisteFill: 'rgba(230, 0, 0, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 3, source: 'resources/images/map/luonnonmuodostuma50x50.png',
+            colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(1, 198, 255, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 4, source: 'resources/images/map/loytopaikka50x50.png',
+            colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(255, 127, 1, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 5, source: 'resources/images/map/mahdollinen_mj50x50.png',
+            colors:{alueStroke: 'rgba(255, 0, 255, 1)', pisteFill: 'rgba(255, 0, 255, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 6, source: 'resources/images/map/muu_kohde50x50.png',
+            colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(255, 255, 255, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 7, source: 'resources/images/map/muu_kpkohde50x50.png',
+            colors:{alueStroke: 'rgba(182, 127, 74, 1)', pisteFill: 'rgba(182, 127, 74, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 8, source: 'resources/images/map/poistettava50x50.png',
+            colors:{alueStroke: 'rgba(252, 86, 153, 1)', pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 153, 1)'}},
+        {id: 9, source: 'resources/images/map/poistettu_kiinteamj50x50.png',
+            colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(130, 130, 130, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+    ];
+
+    var alakohdeStyles = {
+        "1": {pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 200, 1)'},
+        "2": {pisteFill: 'rgba(230, 0, 0, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "3": {pisteFill: 'rgba(1, 198, 255, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "4": {pisteFill: 'rgba(255, 127, 1, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "5": {pisteFill: 'rgba(255, 0, 255, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "6": {pisteFill: 'rgba(255, 255, 255, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "7": {pisteFill: 'rgba(182, 127, 74, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "8": {pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 200, 1)'},
+        "9": {pisteFill: 'rgba(130, 130, 130, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'}
+    };
+
+    kohdeStyles.forEach(function(item){
+        console.log(item);
+        createImagePattern(item);
+    });
+
+    function createImagePattern(item){
+        var img = new Image();
+        img.src = item.source;
+        img.onload = function(){
+            var pattern = ctx.createPattern(img, 'repeat');
+            patterns[item.id] = {pattern: pattern, colors: item.colors};
+        }
+    }
 
     var fss = {
             getZIndex : function(nimi) {
@@ -859,22 +908,22 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
                     var img = new ol.style.Circle({
                         radius : 8,
                         stroke : new ol.style.Stroke({
-                            color : karttaVarit.stroke.kohde,
+                            color : patterns[props.ark_kohdelaji_id].colors.pisteStroke,
                             width : 2
                         }),
                         fill : new ol.style.Fill({
-                            color : props.tuhoutunut ? karttaVarit.fillOpaque.kohdeTuhoutunut : karttaVarit.fillOpaque.valkoinen
+                            color : props.tuhoutunut ? karttaVarit.fillOpaque.kohdeTuhoutunut : patterns[props.ark_kohdelaji_id].colors.pisteFill
                         })
                     });
                     var pointStyle = new ol.style.Style({image: img, zIndex: zIndexit.kohde});
 
                     var polygonStyle = new ol.style.Style({
                         stroke: new ol.style.Stroke({
-                            color: karttaVarit.stroke.kohde,
+                            color: patterns[props.ark_kohdelaji_id].colors.alueStroke,
                             width: 2
                         }),
                         fill: new ol.style.Fill({
-                            color: props.tuhoutunut ? karttaVarit.fillOpaque.kohdeTuhoutunut : karttaVarit.fillOpaque.valkoinen
+                            color: props.tuhoutunut ? karttaVarit.fillOpaque.kohdeTuhoutunut : patterns[props.ark_kohdelaji_id].pattern
                         })
                     });
 
@@ -984,25 +1033,28 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
 
                 //TODO: Jos karttaväreillä on jotain asetuksia, niin otetaan tästä käyttöön
                 //if(userProps.vanhatKarttavarit == true){
-                    var img = new ol.style.Circle({
-                        radius : 8,
+                    var img = new ol.style.RegularShape({
+                        fill : new ol.style.Fill({
+                            color: alakohdeStyles[props.ark_kohdelaji_id].pisteFill
+                        }),
                         stroke : new ol.style.Stroke({
-                            color : karttaVarit.stroke.alakohde,
+                            color: alakohdeStyles[props.ark_kohdelaji_id].pisteStroke,
                             width : 2
                         }),
-                        fill : new ol.style.Fill({
-                            color : karttaVarit.fillOpaque.valkoinen
-                        })
+                        points: 5,
+                        radius: 10,
+                        radius2: 4,
+                        angle: 0
                     });
                     var pointStyle = new ol.style.Style({image: img, zIndex: zIndexit.alakohde});
 
                     var polygonStyle = new ol.style.Style({
                         stroke: new ol.style.Stroke({
-                            color: karttaVarit.stroke.alakohde,
+                            color: alakohdeStyles[props.ark_kohdelaji_id].pisteStroke,
                             width: 2
                         }),
                         fill: new ol.style.Fill({
-                            color: karttaVarit.fillOpaque.valkoinen
+                            color: patterns[props.ark_kohdelaji_id].pattern
                         })
                     });
 

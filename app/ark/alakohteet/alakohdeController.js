@@ -7,11 +7,11 @@ angular.module('mip.kohde').controller(
                 '$scope', 'CONFIG', 'ModalService', 'AlertService', 'MapService','$timeout', '$rootScope', 'olData',
                 'hotkeys', 'ListService', 'locale', 'MuutoshistoriaService', '$filter',
                 'SessionService', 'selectedModalNameId', 'existing', 'alakohde', 'ModalControllerService',
-                '$q', 'parentModalId',
+                '$q', 'parentModalId', "kohde",
                 function($scope,  CONFIG, ModalService, AlertService, MapService, $timeout, $rootScope, olData,
                         hotkeys, ListService, locale, MuutoshistoriaService, $filter,
                         SessionService, selectedModalNameId, existing, alakohde, ModalControllerService,
-                        $q, parentModalId) {
+                        $q, parentModalId, kohde) {
                     var vm = this;
 
                     /**
@@ -28,6 +28,7 @@ angular.module('mip.kohde').controller(
                         vm.setMapPopupId('alakohde');
                         // Valitun modalin nimi ja järjestysnumero
                         vm.modalNameId = selectedModalNameId;
+                        vm.kohde = kohde;
 
 
                         vm.center = {
@@ -74,7 +75,8 @@ angular.module('mip.kohde').controller(
                                     'ajoitukset': [],
                                     'tyypit': [], //Ainoastaan yksi tyyppi mahdollinen, mutta direktiivin toteutuksen takia array
                                 geometry : null,
-                                type: 'Feature'
+                                type: 'Feature',
+                                ark_kohdelaji_id: vm.kohde.properties.laji.id
                             }
                         }
 
@@ -193,7 +195,10 @@ angular.module('mip.kohde').controller(
                                     // create the feature for the map layer
                                     var feature = {
                                         type : "Feature",
-                                        geometry : geometry
+                                        geometry : geometry,
+                                        properties:{
+                                            ark_kohdelaji_id: vm.kohde.properties.laji.id
+                                        }
                                     };
 
                                     if (CONFIG.DEBUG) {
@@ -481,6 +486,9 @@ angular.module('mip.kohde').controller(
                                                     'type': 'Point',
                                                     'coordinates': [lon, lat],
                                                     'id': vm.alakohde.sijainnit.length*-1
+                                                },
+                                                'properties':{
+                                                    'ark_kohdelaji_id': vm.kohde.properties.laji.id
                                                 }
                                         };
 

@@ -227,7 +227,7 @@ angular.module('mip.kohde').controller(
                                 type: "Feature",
                                 geometry: geometry,
                                 id: vm.kohde.properties.sijainnit.length * -1,
-                                properties: { 'tuhoutunut': vm.setFeatureAsDestroyed }
+                                properties: { 'tuhoutunut': vm.setFeatureAsDestroyed, 'ark_kohdelaji_id': vm.kohde.properties.laji.id}
                             };
 
                             /*
@@ -630,7 +630,7 @@ angular.module('mip.kohde').controller(
              * Avaa alakohteen muokkausnäkymä
              */
             vm.editAlakohde = function (alakohde) {
-                ModalService.alakohdeModal(alakohde, vm.modalId);
+               ModalService.alakohdeModal(alakohde, vm.modalId, vm.kohde);
             };
             /**
              * Alakohteen poisto - päivitetään myös tason source
@@ -1013,7 +1013,7 @@ angular.module('mip.kohde').controller(
                                         'coordinates': [lon, lat],
                                         'id': vm.kohde.properties.sijainnit.length * -1
                                     },
-                                    'properties': { 'tuhoutunut': vm.setFeatureAsDestroyed, 'nimi': vm.kohde.properties.nimi },
+                                    'properties': { 'tuhoutunut': vm.setFeatureAsDestroyed, 'nimi': vm.kohde.properties.nimi, 'ark_kohdelaji_id': vm.kohde.properties.laji.id},
                                     'id': vm.kohde.properties.sijainnit.length * -1
                                 };
 

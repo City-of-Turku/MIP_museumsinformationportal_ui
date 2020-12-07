@@ -390,7 +390,7 @@ angular.module('mip.general').factory(
                                 });
                             }, 10);
                         },
-                        alakohdeModal : function(alakohde, parentModalId) {
+                        alakohdeModal : function(alakohde, parentModalId, kohde) {
                             var existing = false;
                             var teksti = locale.getString('common.Add');
                             if(alakohde) {
@@ -420,6 +420,9 @@ angular.module('mip.general').factory(
                                         },
                                         parentModalId : function() {
                                             return parentModalId;
+                                        },
+                                        kohde : function() {
+                                            return kohde;
                                         }
                                     }
                                 });
