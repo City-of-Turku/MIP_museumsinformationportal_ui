@@ -211,6 +211,7 @@
 				ng-include="'ark/tutkimukset/partials/kaivaustutkimus_kokoelmat_edit.html'"></div>
 			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 6"
 				ng-include="'ark/tutkimukset/partials/irtoloyto_kokoelmat_edit.html'"></div>
+			<div ng-if="vm.tutkimus.properties.tutkimuslaji.id === 5" ng-include="'ark/tutkimukset/partials/ark_inventointi_kokoelmat_edit.html'"></div>
 			<div ng-if="vm.tutkimus.properties.tutkimuslaji !== undefined && vm.tutkimus.properties.tutkimuslaji.id !== 5">
 				<div class="form-group">
 					<label for="tiivistelma" class="col-sm-3 control-label" i18n="ark.Summary"> </label>

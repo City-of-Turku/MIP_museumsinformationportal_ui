@@ -73,7 +73,7 @@
                      </ul>
               </li>
               <li><a href="" ng-click="vm.lisaaNayte()" i18n="sample.Add_sample" ng-show="!vm.create"
-                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create"></a>
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && vm.tutkimus.properties.ark_nayte_kokoelmalaji_id != null && vm.tutkimus.properties.nayte_paanumero != null"></a>
               </li>
               <li><a href="" ng-click="vm.lisaaTutkimusalue(true)"
                             ng-if="vm.editRelatedPermissions.luonti && !vm.create && vm.tutkimus.properties.tutkimuslaji.id != 5"
@@ -95,7 +95,7 @@
                             data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons"></a>
               </li>
               <li><a href="" ng-click="vm.addImage(true)" i18n="ark.Add_image_to_list"
-                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2' && vm.tutkimus.properties.ark_digikuva_paanumero != null"></a>
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_valokuva_kokoelmalaji_id == '2' && vm.tutkimus.properties.digikuva_paanumero != null"></a>
               </li>
               <li><a href="" ng-click="vm.addKartta()" i18n="ark.Add_map_to_list"
                             data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && !vm.disableButtons && vm.tutkimus.properties.ark_kartta_kokoelmalaji_id == '2'"></a>

@@ -36,6 +36,8 @@ angular.module('mip.tutkimus').controller(
 
         vm.invKohteet = [];
 
+        vm.kayttajaArkRooli = UserService.getProperties().user.ark_rooli;
+
         // Valittu tutkimus
         if (tutkimus) {
           vm.tutkimus = tutkimus;
@@ -100,19 +102,7 @@ angular.module('mip.tutkimus').controller(
         // 2) Tutkija
         // 3) Katselija JA tutkimusta ei ole merkitty valmiiksi JA kyseessä ei ole inventointitutkimus
         // Alla olevia oikeuksia käytetään hallinnoimaan käyttöliittymässä näytettäviä painikkeita
-        // HUOM: Inventointitutkimuksen osalta inventoijat (=tutkimukseen liitetyt katselijat) eivät saa tässä näkymässä muokkausoikeuksia
-        // ark_tutkimuslaji_id 5 => arkeologinen inventointi
-        if (vm.tutkimus.properties.ark_tutkimuslaji_id == 5) {
-          if (UserService.getProperties().user.ark_rooli == 'katselija') {
-            subPermissions['luonti'] = false;
-            subPermissions['muokkaus'] = false;
-            subPermissions['poisto'] = false;
-          } else {
-            vm.editRelatedPermissions = subPermissions;
-          }
-        } else {
-          vm.editRelatedPermissions = subPermissions;//!vm.tutkimus.properties.valmis && vm.permissions.katselu || (UserService.getProperties().user.ark_rooli == 'pääkäyttäjä' || UserService.getProperties().user.ark_rooli == 'tutkija');
-        }
+        vm.editRelatedPermissions = subPermissions;
 
         // Tutkimuksen kohde. Uusi tutkimus liitetty kohteeseen.
         if (kohde) {
@@ -424,7 +414,9 @@ angular.module('mip.tutkimus').controller(
             form.loyto_paanumero.$setValidity('loytoNayteSamat', false);
           } else {
             vm.loytoNayteSamat = true;
-            form.loyto_paanumero.$setValidity('loytoNayteSamat', true);
+            if (form.loyto_paanumero) { // Kaikilla tutkimuslajeilla ei tätä kenttää edes ole formilla.
+              form.loyto_paanumero.$setValidity('loytoNayteSamat', true);
+            }
           }
 
           if (tyyppi === 'loyto' && vm.tutkimus.properties.loyto_paanumero && vm.tutkimus.properties.loyto_kokoelmalaji) {
@@ -433,12 +425,14 @@ angular.module('mip.tutkimus').controller(
 
             if (paanumero && kokoelmalaji) {
               var available = TutkimusService.tarkistaPaanumero(tyyppi, paanumero, kokoelmalaji.id).then(function success(data) {
-                if (data) {
-                  form.loyto_paanumero.$setValidity('kaytossa', true);
-                  vm.uniikkiLoytoPaanumero = true;
-                } else {
-                  form.loyto_paanumero.$setValidity('kaytossa', false);
-                  vm.uniikkiLoytoPaanumero = false;
+                if (form.loyto_paanumero) {
+                  if (data) {
+                    form.loyto_paanumero.$setValidity('kaytossa', true);
+                    vm.uniikkiLoytoPaanumero = true;
+                  } else {
+                    form.loyto_paanumero.$setValidity('kaytossa', false);
+                    vm.uniikkiLoytoPaanumero = false;
+                  }
                 }
               });
               return available;
@@ -454,12 +448,14 @@ angular.module('mip.tutkimus').controller(
 
             if (paanumero && kokoelmalaji) {
               var available = TutkimusService.tarkistaPaanumero(tyyppi, paanumero, kokoelmalaji.id).then(function success(data) {
-                if (data) {
-                  form.nayte_paanumero.$setValidity('kaytossa', true);
-                  vm.uniikkiNaytePaanumero = true;
-                } else {
-                  form.nayte_paanumero.$setValidity('kaytossa', false);
-                  vm.uniikkiNaytePaanumero = false;
+                if (form.nayte_paanumero) {
+                  if (data) {
+                    form.nayte_paanumero.$setValidity('kaytossa', true);
+                    vm.uniikkiNaytePaanumero = true;
+                  } else {
+                    form.nayte_paanumero.$setValidity('kaytossa', false);
+                    vm.uniikkiNaytePaanumero = false;
+                  }
                 }
               });
               return available;
@@ -659,6 +655,9 @@ angular.module('mip.tutkimus').controller(
         if (vm.tutkimus.properties.tutkimuslaji.id === 5 && vm.tutkimus.properties.tutkimusalueet.length > 0) {
           AlertService.showWarning(locale.getString('ark.Arc_inventory_only_one_area'));
           return;
+        }
+        if (vm.kayttajaArkRooli !== 'pääkäyttäjä' && vm.tutkimus.properties.tutkimuslaji.id === 5) {
+          AlertService.showWarning(locale.getString('ark.Arc_inventory_only_admin_can_create_areas'));
         }
         if (lueTiedostosta === true) {
           // Avataan fileUploadController

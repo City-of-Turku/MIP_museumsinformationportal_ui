@@ -98,7 +98,7 @@ angular.module('mip.tutkimus').controller(
                         vm.permissions = permissions;
 
                         // Jos kyseessä on inventointitutkimus, ei inventoijalla ole oikeutta muokata tutkimusaluetta
-                        if(UserService.getProperties().user.ark_rooli == 'katselija' && vm.tutkimusalue.properties.tutkimus && vm.tutkimusalue.properties.tutkimus.ark_tutkimuslaji_id == 5) {
+                        if(UserService.getProperties().user.ark_rooli === 'katselija' && vm.tutkimusalue.properties.tutkimus && vm.tutkimusalue.properties.tutkimus.ark_tutkimuslaji_id === 5) {
                             vm.permissions['muokkaus'] = false;
                             vm.permissions['poisto'] = false;
                             vm.permissions['luonti'] = false;
@@ -1115,6 +1115,43 @@ angular.module('mip.tutkimus').controller(
                             }
                             vm.updateLayerData('Tutkimusalueet');
                             vm.updateLayerData('Kohteet');
+/*
+                            * Inventointi-tutkimus.
+                            * Haetaan aluerajauksella löytyvät kohteet.
+                            */
+                            if(vm.tutkimus.properties.tutkimuslaji.id === 5) {
+                                var featureCoordArray = [], propsCoords = "";
+
+                                // get the coordinates of the new feature,
+                                // convert and store them
+                                for (var i = 0; i < vm.tutkimusalue.geometry.coordinates[0].length; i++) {
+                                    var lonlat = [vm.tutkimusalue.geometry.coordinates[0][i][0], vm.tutkimusalue.geometry.coordinates[0][i][1]];
+                                    featureCoordArray.push(lonlat);
+
+                                    if (i > 0) {
+                                        propsCoords += ","
+                                    }
+                                    propsCoords += lonlat[0];
+                                    propsCoords += " " + lonlat[1];
+                                }
+                                KohdeService.haePolygoninKohteet(propsCoords).then(function(kohde) {
+
+                                    if(kohde.features.length === 0){
+                                        AlertService.showInfo(locale.getString('ark.Targets_not_found_with_area'));
+                                    }
+
+                                    if(kohde.features.length > 0){
+                                        vm.invKohteet = kohde.features;
+                                        AlertService.showInfo(locale.getString('ark.Targets_selected_for_inventory', {
+                                            count : kohde.features.length
+                                        }));
+                                    }
+                                    vm.updateLayerData('Kohteet');
+
+                                }, function error () {
+                                    AlertService.showError(locale.getString('common.Error'), locale.getString('ark.Targets_not_found_with_area'));
+                                });
+                            }
                         }
                     });
 

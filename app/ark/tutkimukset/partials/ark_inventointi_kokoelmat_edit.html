@@ -1,0 +1,44 @@
+<mip-kokoelmalaji kokoelmatyyppi="valokuvat" laji="vm.tutkimus.properties.valokuva_kokoelmalaji" vm="vm" lomake="form" haku="false"></mip-kokoelmalaji>
+<div class="form-group" ng-class="{ 'has-error': form.digikuva_paanumero.$invalid && form.digikuva_paanumero.$touched || !vm.uniikkiDigiPaanumero || !vm.validiDigiPaanumero}">
+    <label for="digikuva_paanumero" class="col-sm-3 control-label" i18n="ark.Digital_pictures"> </label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" name="digikuva_paanumero"
+            ng-model="vm.tutkimus.properties.digikuva_paanumero"
+            ng-change="vm.tarkistaPaanumero(form, 'digi')"
+            ng-model-options='{debounce: 500}'
+            data-i18n-attr="{placeholder: 'ark.Picture_main_number'}">
+        <span class="help-block" ng-show="!vm.validiDigiPaanumero">
+            <span data-i18n="ark.Digital_picture_main_number_invalid"></span>
+        </span>
+        <span class="help-block" ng-show="!vm.uniikkiDigiPaanumero">
+            <span data-i18n="common.already_in_use" data-field="{{ 'common.Main_number' | i18n }}"></span>
+        </span>
+    </div>
+</div>
+<div class="form-group" ng-class="{ 'has-error': form.mustavalko_paanumero.$invalid && form.mustavalko_paanumero.$touched || !vm.uniikkiMustavalkoPaanumero}">
+    <label for="mustavalko_paanumero" class="col-sm-3 control-label" i18n="ark.Black_white_negatives"> </label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" name="mustavalko_paanumero"
+            ng-model="vm.tutkimus.properties.mustavalko_paanumero"
+            ng-change="vm.tarkistaPaanumero(form, 'mustavalko')"
+            ng-model-options='{debounce: 500}'
+            data-i18n-attr="{placeholder: 'ark.Picture_main_number'}">
+        <span class="help-block" ng-show="!vm.uniikkiMustavalkoPaanumero">
+            <span data-i18n="common.already_in_use" data-field="{{ 'common.Main_number' | i18n }}"></span>
+        </span>
+    </div>
+</div>
+<div class="form-group" ng-class="{ 'has-error': form.dia_paanumero.$invalid && form.dia_paanumero.$touched || !vm.uniikkiDiaPaanumero}">
+    <label for="dia_paanumero" class="col-sm-3 control-label" i18n="ark.Slide_positives"> </label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" name="dia_paanumero"
+            ng-model="vm.tutkimus.properties.dia_paanumero"
+            ng-change="vm.tarkistaPaanumero(form, 'dia')"
+            ng-model-options='{debounce: 500}'
+            data-i18n-attr="{placeholder: 'ark.Picture_main_number'}">
+        <span class="help-block" ng-show="!vm.uniikkiDiaPaanumero">
+            <span data-i18n="common.already_in_use" data-field="{{ 'common.Main_number' | i18n }}"></span>
+        </span>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
