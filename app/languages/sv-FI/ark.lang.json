@@ -349,5 +349,6 @@
     "Titlepage_may_contain_only_one_image": "Kansilehdelle voi valita ainoastaan yhden kuvan",
     "KM_main_number": "KM päänumero",
     "Findings_diary_date": "Löytöjen diariointipäivämäärä",
-    "KM_main_number_and_diaar_num": "KM päänumerot ja löytöjen diariointipäivämäärät"
+    "KM_main_number_and_diaar_num": "KM päänumerot ja löytöjen diariointipäivämäärät",
+    "Arc_inventory_only_one_area": "Tutkimustyypille Arkeologinen inventointi ei voi lisätä kuin yhden tutkimusalueen."
 }

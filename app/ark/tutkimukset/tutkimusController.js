@@ -656,8 +656,8 @@ angular.module('mip.tutkimus').controller(
        * lisätä manuaalisesti tutkimusalueen.
        */
       vm.lisaaTutkimusalue = function (lueTiedostosta) {
-        if (vm.tutkimus.properties.tutkimuslaji.id == 5 && vm.tutkimus.properties.tutkimusalueet.length > 0) {
-          AlertService.showWarning('Tutkimustyypille "Arkeologinen inventointi" ei voi lisätä kuin yhden tutkimusalueen.');
+        if (vm.tutkimus.properties.tutkimuslaji.id === 5 && vm.tutkimus.properties.tutkimusalueet.length > 0) {
+          AlertService.showWarning(locale.getString('ark.Arc_inventory_only_one_area'));
           return;
         }
         if (lueTiedostosta === true) {
