@@ -131,7 +131,6 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
     };
 
     kohdeStyles.forEach(function(item){
-        console.log(item);
         createImagePattern(item);
     });
 

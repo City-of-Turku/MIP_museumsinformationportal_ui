@@ -52,7 +52,11 @@ angular.module('mip.directives').directive('mipLuetteloidutKuvat', [
                 }
                 // Tutkimusalueen kuvat
                 else if(scope.vm.tutkimusalue != undefined && loytoId == null && nayteId == null && yksikkoId == null){
-                	tutkimusalueId = scope.vm.tutkimusalue.properties.id;
+                    if(scope.vm.tutkimusalue.properties.id == undefined) {
+                        tutkimusalueId = null;
+                    } else {
+                        tutkimusalueId = scope.vm.tutkimusalue.properties.id;
+                    }
                 }
 
                 scope.vm.getImages = function(){

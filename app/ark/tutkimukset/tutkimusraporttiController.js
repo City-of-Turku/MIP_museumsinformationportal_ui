@@ -76,7 +76,7 @@ angular.module('mip.tutkimus').controller(
         // Tontti - vapaateksti
         text += 'Tontti: \n';
         // Kiinteistöt - haetaan kohteen kiinteistotunnukset, jos ei ole jätetään pois
-        if (vm.tutkimus.kohde.kiinteistotrakennukset) {
+        if (vm.tutkimus.kohde && vm.tutkimus.kohde.kiinteistotrakennukset) {
           text += 'Kiinteistöt: ';
           for (var i = 0; i < vm.tutkimus.kohde.kiinteistotrakennukset.length; i++) {
             text += vm.tutkimus.kohde.kiinteistotrakennukset[i].kiinteistotunnus;
