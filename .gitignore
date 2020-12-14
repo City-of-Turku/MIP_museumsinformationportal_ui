@@ -3,7 +3,6 @@
 /.tern-project
 /node_modules/
 /dist/
-/package-lock.json
 /test/e2e/target/
 /jsdoc/
 /Gruntfile.js

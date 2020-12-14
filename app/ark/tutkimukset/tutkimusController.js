@@ -1383,20 +1383,21 @@ angular.module('mip.tutkimus').controller(
 
       // Jos kohde joka inventoitiin kuuluu tähän ja inventoitu tutkimus oli tämä tutkimus, päivitetään tieto näkyviin
       $scope.$on('Kohde_inventointi', function (event, data) {
-        // console.log("Tutkimus: Inventoidun kohteen tiedot päivitetty");
         if (vm.tutkimus.properties.id == data.tutkimusId) {
-          AlertService.showInfo("Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.");
+          AlertService.showInfo('Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.');
         }
       });
 
       vm.tutkimusRaportti = function () {
-        if (!vm.tutkimus.properties.kenttatyojohtaja) {
-          AlertService.showWarning('Kenttätyöjohtaja-tiedon pitää olla täytettynä, jotta raportin voi tehdä.');
-          return;
-        }
-        if (!vm.tutkimus.properties.kenttatyo_alkupvm || !vm.tutkimus.properties.kenttatyo_loppupvm) {
-          AlertService.showWarning('Kenttätyön alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
-          return;
+        if (vm.tutkimus.properties.ark_tutkimuslaji_id === 7 || vm.tutkimus.properties.ark_tutkimuslaji_id === 10 || vm.tutkimus.properties.ark_tutkimuslaji_id === 12) {
+          if (!vm.tutkimus.properties.kenttatyojohtaja) {
+            AlertService.showWarning('Kenttätyöjohtaja-tiedon pitää olla täytettynä, jotta raportin voi tehdä.');
+            return;
+          }
+          if (!vm.tutkimus.properties.kenttatyo_alkupvm || !vm.tutkimus.properties.kenttatyo_loppupvm) {
+            AlertService.showWarning('Kenttätyön alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
+            return;
+          }
         }
 
         TutkimusService.haeTutkimusraportti(vm.tutkimus.properties.id).then(function success(tutkimusraportti) {

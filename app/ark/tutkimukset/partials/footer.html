@@ -17,11 +17,13 @@
                             ng-show="!vm.create && !vm.edit"></a>
                      <!-- Arkeologinen inventointi - id 5 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 5"
-                     ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id == 5}">
-                            <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                     ng-class="{submenuHeightFix1Elements: vm.tutkimus.properties.tutkimuslaji.id == 5}">
+                            <!--<li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
                                           (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
-                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                                          i18n="ark.Removed_discoveries_report"></span> (word)</a></li>-->
+                            <li ng-if="vm.editRelatedPermissions.luonti"><a ng-click="vm.tutkimusRaportti()"><span
+                                   i18n="ark.Inventory_report"></span> (pdf)</a></li>
                      </ul>
                      <!-- Irtolöytö / Vanha tutkimus - id 6 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 6"

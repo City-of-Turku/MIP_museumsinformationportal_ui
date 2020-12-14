@@ -35,6 +35,7 @@ angular.module('mip.tutkimus').controller(
         }
       };
 
+      // TODO: Erota inventointitutkimusraportille
       vm.muodostaArkistoJaRekisteritiedot = function () {
         // Muodostetaan arkisto ja rekisteritiedot, jos ne ovat tyhjät
         if (vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot && vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot.length > 0) {
@@ -223,11 +224,22 @@ angular.module('mip.tutkimus').controller(
         // Raportin nimi + löydön luettelointinumero
         var reportDisplayName = locale.getString('ark.Research_report') + ' ' + vm.tutkimus.nimi;
 
+        var laji = null;
+        if (vm.tutkimus.ark_tutkimuslaji_id === 5) {
+          laji = 'inventointitutkimus';
+        } else if (vm.tutkimus.ark_tutkimuslaji_id === 7 || vm.tutkimus.ark_tutkimuslaji_id === 10 || vm.tutkimus.ark_tutkimuslaji_id === 12) {
+          laji = 'koekaivaus-kaivaus-konekaivuun_valvonta';
+        }
+
+        if (laji === null) {
+          AlertService.showError('Tuntematon raporttityyppi'); // TODO: LOCALIZE
+        }
+
         var report = {
           requestedOutputType: type,
           reportDisplayName: reportDisplayName,
           tutkimusraporttiId: vm.tutkimusraportti.properties.id,
-          laji: 'koekaivaus-kaivaus-konekaivuun_valvonta'
+          laji: laji
         };
 
         RaporttiService.createRaportti('Tutkimusraportti', report).then(function success(data) {

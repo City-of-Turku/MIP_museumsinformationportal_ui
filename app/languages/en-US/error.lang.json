@@ -108,5 +108,6 @@
 	"Link_missing_http": "URL must start with http://",
 	"Getting_routes_failed": "Getting routes failed",
 	"Deleting_route_failed": "Deleting the route failed",
-	"No_required_permissions": "No required permissions"
+	"No_required_permissions": "No required permissions",
+	"Unknown_report_type": "Unknown report type"
 }

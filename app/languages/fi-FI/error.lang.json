@@ -108,5 +108,6 @@
 	"Link_missing_http": "Linkin pitää alkaa http://",
 	"Getting_routes_failed": "Reittien lataaminen epäonnistui",
 	"Deleting_route_failed": "Reitin poisto epäonnistui",
-	"No_required_permissions": "Ei vaadittuja oikeuksia"
+	"No_required_permissions": "Ei vaadittuja oikeuksia",
+	"Unknown_report_type": "Tuntematon raporttityyppi"
 }
