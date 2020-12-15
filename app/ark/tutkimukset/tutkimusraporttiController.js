@@ -41,16 +41,27 @@ angular.module('mip.tutkimus').controller(
         if (vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot && vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot.length > 0) {
           return;
         }
-
+        // Kaivais, Koekaivaus, Konekaivuun valvonta
         TutkimusService.getTutkimuksenLukumaarat(tutkimus.id).then(function success(data) {
-          vm.muodostaTeksti(data.properties.loydotCount, data.properties.naytteetCount, data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+          if (vm.tutkimus.ark_tutkimuslaji_id === 5) {
+            // Inventointiraportti
+            vm.muodostaInventointiraportinTeksti(data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+          } else if (vm.tutkimus.ark_tutkimuslaji_id === 7 || vm.tutkimus.ark_tutkimuslaji_id === 10 || vm.tutkimus.ark_tutkimuslaji_id === 12) {
+            vm.muodostaKKKVraportinTeksti(data.properties.loydotCount, data.properties.naytteetCount, data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+          }
         }, function error(data) {
-          vm.muodostaTeksti();
-          AlertService.showError('Löytöjen, näytteiden ja digikuvien määriä ei saatu noudettua');
+          if (vm.tutkimus.ark_tutkimuslaji_id === 5) {
+            // Inventointiraportti
+            vm.muodostaInventointiraportinTeksti(data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+            AlertService.showError('Digikuvien määriä ei saatu noudettua');
+          } else if (vm.tutkimus.ark_tutkimuslaji_id === 7 || vm.tutkimus.ark_tutkimuslaji_id === 10 || vm.tutkimus.ark_tutkimuslaji_id === 12) {
+            vm.muodostaKKKVraportinTeksti(data.properties.loydotCount, data.properties.naytteetCount, data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+            AlertService.showError('Löytöjen, näytteiden ja digikuvien määriä ei saatu noudettua');
+          }
         });
       };
 
-      vm.muodostaTeksti = function (loytojenLkm, naytteidenLkm, digikuvatAlku, digikuvatLoppu) {
+      vm.muodostaKKKVraportinTeksti = function (loytojenLkm, naytteidenLkm, digikuvatAlku, digikuvatLoppu) {
         if (!loytojenLkm) {
           loytojenLkm = '';
         }
@@ -123,6 +134,94 @@ angular.module('mip.tutkimus').controller(
         // Näytteiden päänumero
         text += 'Näytteiden päänumero: ';
         text += vm.tutkimus.nayte_paanumero != null ? vm.tutkimus.nayte_paanumero + ' ' + naytteidenLkm + ' kpl \n' : '\n';
+        // Digikuvien päänumero
+        text += 'Digikuvien päänumero: ';
+        text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + ' ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
+        // Löytöjen diariointipäivämäärä - vapaateksti
+        text += 'Löytöjen diariointipäivämäärä: \n';
+        // Löytöjen säilytyspaikka
+        text += 'Löytöjen säilytyspaikka: ';
+        text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
+        // Aikaisemmat tutkimukset ja tarkastuskäynnit - vapaateksti
+        text += 'Aikaisemmat tutkimukset ja tarkastuskäynnit: \n';
+        // Aikaisemmat löydöt - vapaateksti
+        text += 'Aikaisemmat löydöt: \n';
+        // Alkuperäisen tutkimuskertomuksen säilytyspaikka - Museoviraston arkisto
+        text += 'Alkuperäisen tutkimuskertomuksen säilytyspaikka: Museoviraston arkisto \n';
+        // Kopioiden säilytyspaikka - vapaateksti
+        text += 'Kopioiden säilytyspaikka: ';
+
+        vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot = text;
+      };
+
+      vm.muodostaInventointiraportinTeksti = function (digikuvatAlku, digikuvatLoppu) {
+        if (!digikuvatAlku) {
+          digikuvatAlku = '';
+        }
+        if (!digikuvatLoppu) {
+          digikuvatLoppu = '';
+        }
+
+        var text = 'Tutkimuskohde: ';
+        // Tutkimuskohde: Kunta kohteen tiedoista Kohde Tutkimuksen nimi
+        if (vm.tutkimus.kunnatkylat != null) {
+          for (var i = 0; i < vm.tutkimus.kunnatkylat.length; i++) {
+            if (vm.tutkimus.kunnatkylat[i].kunta != null) {
+              text += vm.tutkimus.kunnatkylat[i].kunta.nimi + ', ';
+            }
+          }
+          text = text.slice(0, -2);
+          text += ' ';
+        }
+        text += vm.tutkimus.nimi + '\n';
+        // Kylä / Kaupunginosa: Kylä kohteen tiedoista
+        text += 'Kylä / kaupunginosa: ';
+        if (vm.tutkimus.kunnatkylat != null) {
+          for (var i = 0; i < vm.tutkimus.kunnatkylat.length; i++) {
+            if (vm.tutkimus.kunnatkylat[i].kyla != null) {
+              text += vm.tutkimus.kunnatkylat[i].kyla.nimi + ', ';
+            }
+          }
+          text = text.slice(0, -2);
+          text += '\n';
+        }
+        // Tila / kortteli - vapaateksti
+        text += 'Tila / kortteli: \n';
+        // Tontti - vapaateksti
+        text += 'Tontti: \n';
+        // Tutkimuksen laatu - tutkimustyyppi
+        text += 'Tutkimuksen laatu: ';
+        text += vm.tutkimus.tutkimuslaji != null ? vm.tutkimus.tutkimuslaji.nimi_fi + '\n' : '\n';
+        // Koordinaatit GK23 - vapaateksti
+        text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
+        // Koordinaatit TM35FIN - vapaateksti
+        text += 'Koordinaatit ETRS-TM35FIN-järjestelmässä: \n';
+        // Korkeusjarjestelma - vapaateksti
+        text += 'Korkeusjärjestelmä: \n';
+        // Tutkimuslaitos - vapaateksti
+        text += 'Tutkimuslaitos: \n';
+        // Kenttätyöjohtaja
+        text += 'Kenttätyöjohtaja: \n';
+        // text += vm.tutkimus.kenttatyojohtaja != null ? vm.tutkimus.kenttatyojohtaja + '\n' : '\n';
+        // Muut työntekijät - vapaateksti
+        text += 'Muut työntekijät: \n';
+        // Konservointilaitos - vapaateksti
+        text += 'Konservointilaitos: \n';
+        // Kenttätyöaika
+        text += 'Kenttätyöaika: ' + $filter('date')(vm.tutkimus.alkupvm, 'dd.MM.yyyy') + ' - ' + $filter('date')(vm.tutkimus.loppupvm, 'dd.MM.yyyy') + '\n';
+        // Tutkitun alueen pinta-ala - vapaateksti
+        text += 'Tutkitun alueen pinta-ala: \n';
+        // Tutkimuksen tilaaja / rahoittaja - rahoittaja
+        text += 'Tutkimuksen tilaaja / rahoittaja: ';
+        text += vm.tutkimus.toimeksiantaja != null ? vm.tutkimus.toimeksiantaja + '\n' : '\n';
+        // Tutkimusluvan diariointinumero ja päivämäärä - vapaateksti
+        text += 'Tutkimusluvan diariointinumero ja päivämäärä: \n';
+        // Löytöjen päänumero
+        text += 'Löytöjen päänumero: ';
+        text += vm.tutkimus.loyto_paanumero != null ? vm.tutkimus.loyto_paanumero + ' \n' : '\n';
+        // Näytteiden päänumero
+        text += 'Näytteiden päänumero: ';
+        text += vm.tutkimus.nayte_paanumero != null ? vm.tutkimus.nayte_paanumero + ' \n' : '\n';
         // Digikuvien päänumero
         text += 'Digikuvien päänumero: ';
         text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + ' ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';

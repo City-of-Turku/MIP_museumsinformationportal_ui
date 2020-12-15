@@ -1399,6 +1399,16 @@ angular.module('mip.tutkimus').controller(
             return;
           }
         }
+        if (vm.tutkimus.properties.ark_tutkimuslaji_id === 5) {
+          if (!vm.tutkimus.properties.alkupvm || !vm.tutkimus.properties.loppupvm) {
+            AlertService.showWarning('Alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
+            return;
+          }
+          if (!vm.tutkimus.properties.toimeksiantaja) {
+            AlertService.showWarning('Toimeksiantajan pitää olla täytettynä, jotta raportin voi tehdä.');
+            return;
+          }
+        }
 
         TutkimusService.haeTutkimusraportti(vm.tutkimus.properties.id).then(function success(tutkimusraportti) {
           if (tutkimusraportti && tutkimusraportti.properties && tutkimusraportti.properties.id) { // Olemassaoleva tutkimusraportti
