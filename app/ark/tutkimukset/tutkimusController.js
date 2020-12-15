@@ -344,9 +344,9 @@ angular.module('mip.tutkimus').controller(
           });
 
           vm.disableButtonsFunc();
-          AlertService.showInfo(locale.getString('common.Save_ok'), "");
-        }, function error() {
-          AlertService.showError(locale.getString('common.Error'), locale.getString('common.Save_failed'));
+          AlertService.showInfo(locale.getString('common.Save_ok'), '');
+        }, function error(data) {
+          AlertService.showError(locale.getString('common.Save_failed'), AlertService.showMessage(data));
           vm.disableButtonsFunc();
         });
       };

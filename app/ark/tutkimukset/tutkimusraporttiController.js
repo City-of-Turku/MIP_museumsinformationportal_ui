@@ -52,10 +52,10 @@ angular.module('mip.tutkimus').controller(
         }, function error(data) {
           if (vm.tutkimus.ark_tutkimuslaji_id === 5) {
             // Inventointiraportti
-            vm.muodostaInventointiraportinTeksti(data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+            vm.muodostaInventointiraportinTeksti();
             AlertService.showError('Digikuvien määriä ei saatu noudettua');
           } else if (vm.tutkimus.ark_tutkimuslaji_id === 7 || vm.tutkimus.ark_tutkimuslaji_id === 10 || vm.tutkimus.ark_tutkimuslaji_id === 12) {
-            vm.muodostaKKKVraportinTeksti(data.properties.loydotCount, data.properties.naytteetCount, data.properties.digikuvatAlku, data.properties.digikuvatLoppu);
+            vm.muodostaKKKVraportinTeksti();
             AlertService.showError('Löytöjen, näytteiden ja digikuvien määriä ei saatu noudettua');
           }
         });
