@@ -35,7 +35,6 @@ angular.module('mip.tutkimus').controller(
         }
       };
 
-      // TODO: Erota inventointitutkimusraportille
       vm.muodostaArkistoJaRekisteritiedot = function () {
         // Muodostetaan arkisto ja rekisteritiedot, jos ne ovat tyhjät
         if (vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot && vm.tutkimusraportti.properties.arkisto_ja_rekisteritiedot.length > 0) {
@@ -254,7 +253,6 @@ angular.module('mip.tutkimus').controller(
       };
 
       vm._cancelEdit = function () {
-        // TODO: Kuvien asettaminen alkutilaan!
         vm.edit = false;
         if (vm.create) {
           vm.close();
@@ -331,7 +329,8 @@ angular.module('mip.tutkimus').controller(
         }
 
         if (laji === null) {
-          AlertService.showError('Tuntematon raporttityyppi'); // TODO: LOCALIZE
+          AlertService.showError(locale.getString('ark.Unknown_report_type'));
+          return;
         }
 
         var report = {

@@ -1113,25 +1113,43 @@ angular.module('mip.tutkimus').controller(
       vm.createReport = function (type, mode) {
         // Asetetaan raportin "nimi" joka näkyy mm. raportit-välilehdellä
         // Raportin nimi + tutkimuksen nimi
+        var reportMode = null;
+
         var reportDisplayName = locale.getString('ark.Discovery_report');
         if (mode === 'poistetut_loydot') {
           reportDisplayName = locale.getString('ark.Removed_discoveries_report');
-          reportDisplayName += " " + vm.tutkimus.properties.nimi;
+          reportDisplayName += ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Loytoraportti';
         } else if (mode === 'loyto') {
-          reportDisplayName += " " + vm.tutkimus.properties.nimi;
+          reportDisplayName += ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Loytoraportti';
         } else if (mode === 'tarkastusraportti') {
-          reportDisplayName = locale.getString('ark.Inspection_report') + " " + vm.tutkimus.properties.nimi;
+          reportDisplayName = locale.getString('ark.Inspection_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Tarkastusraportti';
+        } else if (mode === 'ajoitusnayteluettelo') {
+          reportDisplayName = locale.getString('ark.Timing_sample_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Nayteluettelo';
+        } else if (mode === 'luuluettelo') {
+          reportDisplayName = locale.getString('ark.Bone_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Nayteluettelo';
+        } else if (mode === 'maanayteluettelo') {
+          reportDisplayName = locale.getString('ark.Soil_sample_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Nayteluettelo';
+        } else if (mode === 'rakennefragmenttiluettelo') {
+          reportDisplayName = locale.getString('ark.RF_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Nayteluettelo';
+        } else if (mode === 'karttaluettelo') {
+          reportDisplayName = locale.getString('ark.Map_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Karttaluettelo';
+        } else if (mode === 'valokuvaluettelo') {
+          reportDisplayName = locale.getString('ark.Image_report') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Valokuvaluettelo';
         } else {
-          throw error("Unsupported report!");
+          AlertService.showError(locale.getString('ark.Unknown_report_type'));
+          return;
         }
 
         var report = { 'tutkimusId': vm.tutkimus.properties.id, 'mode': mode, 'requestedOutputType': type, 'reportDisplayName': reportDisplayName };
-        var reportMode = null;
-        if (mode === 'loyto' || mode === 'poistetut_loydot') {
-          reportMode = 'Loytoraportti';
-        } else if (mode === 'tarkastusraportti') {
-          reportMode = 'Tarkastusraportti';
-        }
 
         RaporttiService.createRaportti(reportMode, report).then(function success(data) {
           AlertService.showInfo(locale.getString('common.Report_request_created'));

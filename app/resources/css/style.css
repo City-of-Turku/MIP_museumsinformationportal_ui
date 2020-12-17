@@ -902,6 +902,25 @@ td.mip-table-header {
     height:9em;
 }
 
+.submenuHeightFix5Elements {
+	height:10.35em;
+}
+
+.submenuHeightFix6Elements {
+	height:12.3em;
+}
+
+.submenuHeightFix7Elements {
+	height:14.25em;
+}
+
+.submenuHeightFix8Elements {
+	height:16.2em;
+}
+
+.submenuHeightFix9Elements {
+	height:18.15em;
+}
 
 /*
  * Readonly kenttä ei ole harmaa vaan normaali valkoinen
