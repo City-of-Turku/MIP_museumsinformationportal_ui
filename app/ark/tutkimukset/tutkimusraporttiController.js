@@ -77,7 +77,7 @@ angular.module('mip.tutkimus').controller(
         var text = 'Tutkimuskohde: ';
         // Tutkimuskohde: Kunta kohteen tiedoista Kohde Tutkimuksen nimi
         text += vm.tutkimus.kohde_kunta != null ? vm.tutkimus.kohde_kunta.nimi + ' ' : '';
-        text += vm.tutkimus.kohde != null ? vm.tutkimus.kohde.nimi + ' ' : '';
+        text += vm.tutkimus.kohde != null ? vm.tutkimus.kohde.nimi + '; ' : '';
         text += vm.tutkimus.nimi + '\n';
         // Kylä / Kaupunginosa: Kylä kohteen tiedoista
         text += 'Kylä / kaupunginosa: ';
@@ -102,7 +102,7 @@ angular.module('mip.tutkimus').controller(
         text += 'Tutkimuksen laatu: ';
         text += vm.tutkimus.tutkimuslaji != null ? vm.tutkimus.tutkimuslaji.nimi_fi + '\n' : '\n';
         // Kohteen ajoitus - vapaateksti
-        text += 'Kohteen ajoitus \n';
+        text += 'Kohteen ajoitus: \n';
         // Koordinaatit GK23 - vapaateksti
         text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
         // Koordinaatit TM35FIN - vapaateksti
@@ -127,6 +127,9 @@ angular.module('mip.tutkimus').controller(
         text += vm.tutkimus.rahoittaja != null ? vm.tutkimus.rahoittaja + '\n' : '\n';
         // Tutkimusluvan diariointinumero ja päivämäärä - vapaateksti
         text += 'Tutkimusluvan diariointinumero ja päivämäärä: \n';
+        // Löytöjen säilytyspaikka
+        text += 'Löytöjen säilytyspaikka: ';
+        text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
         // Löytöjen päänumero
         text += 'Löytöjen päänumero: ';
         text += vm.tutkimus.loyto_paanumero != null ? vm.tutkimus.loyto_paanumero + ' ' + loytojenLkm + ' kpl \n' : '\n';
@@ -135,12 +138,9 @@ angular.module('mip.tutkimus').controller(
         text += vm.tutkimus.nayte_paanumero != null ? vm.tutkimus.nayte_paanumero + ' ' + naytteidenLkm + ' kpl \n' : '\n';
         // Digikuvien päänumero
         text += 'Digikuvien päänumero: ';
-        text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + ' ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
+        text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + '; ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
         // Löytöjen diariointipäivämäärä - vapaateksti
         text += 'Löytöjen diariointipäivämäärä: \n';
-        // Löytöjen säilytyspaikka
-        text += 'Löytöjen säilytyspaikka: ';
-        text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
         // Aikaisemmat tutkimukset ja tarkastuskäynnit - vapaateksti
         text += 'Aikaisemmat tutkimukset ja tarkastuskäynnit: \n';
         // Aikaisemmat löydöt - vapaateksti
@@ -200,8 +200,8 @@ angular.module('mip.tutkimus').controller(
         // Tutkimuslaitos - vapaateksti
         text += 'Tutkimuslaitos: \n';
         // Kenttätyöjohtaja
-        text += 'Kenttätyöjohtaja: \n';
-        // text += vm.tutkimus.kenttatyojohtaja != null ? vm.tutkimus.kenttatyojohtaja + '\n' : '\n';
+        text += 'Kenttätyöjohtaja: ';
+        text += vm.tutkimus.kenttatyojohtaja != null ? vm.tutkimus.kenttatyojohtaja + '\n' : '\n';
         // Muut työntekijät - vapaateksti
         text += 'Muut työntekijät: \n';
         // Konservointilaitos - vapaateksti

@@ -285,10 +285,10 @@ angular.module('mip.tutkimus').controller(
         $scope.$broadcast('focusInput');
       };
 
-      // Kenttätyöjohtaja syötettävissä vain tutkimuksille: kaivaus, koekaivaus ja konekaivuun valvonnalle
+      // Kenttätyöjohtaja syötettävissä vain tutkimuksille: kaivaus, koekaivaus ja konekaivuun valvonnalle ja edit 11262: Myös arkeologiselle inventointutkimukselle (id=5).
       vm.naytaKenttaJohtaja = function () {
         if (vm.tutkimus.properties.tutkimuslaji.id === 7 || vm.tutkimus.properties.tutkimuslaji.id === 10 ||
-          vm.tutkimus.properties.tutkimuslaji.id === 12) {
+          vm.tutkimus.properties.tutkimuslaji.id === 12 || vm.tutkimus.properties.tutkimuslaji.id === 5) {
           return true;
         } else {
           return false;
@@ -1418,6 +1418,10 @@ angular.module('mip.tutkimus').controller(
           }
         }
         if (vm.tutkimus.properties.ark_tutkimuslaji_id === 5) {
+          if (!vm.tutkimus.properties.kenttatyojohtaja) {
+            AlertService.showWarning('Kenttätyöjohtaja-tiedon pitää olla täytettynä, jotta raportin voi tehdä.');
+            return;
+          }
           if (!vm.tutkimus.properties.alkupvm || !vm.tutkimus.properties.loppupvm) {
             AlertService.showWarning('Alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
             return;
