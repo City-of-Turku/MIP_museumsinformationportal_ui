@@ -55,7 +55,7 @@
                         <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus && !vm.create"></li>
                          <li><a href="" ng-click="vm.updateLocationFromFile()"
                                 i18n="ark.Update_location_from_file"
-                                data-ng-if="vm.permissions.luonti && !vm.create && !vm.edit && !vm.disableButtons"></a>
+                                data-ng-if="vm.permissions.luonti && !vm.create && !vm.disableButtons && vm.edit"></a>
                         </li>
                         <li><a href="" ng-click="vm.close()"
                                i18n="common.Close"

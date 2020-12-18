@@ -1112,6 +1112,20 @@ angular.module('mip.tutkimus').controller(
                             if(data.tutkimusalue.geometry != null && data.tutkimusalue.geometry.coordinates) {
                                 vm.tutkimusalue.geometry = data.tutkimusalue.geometry;
 
+                                // Asetetaan tutkimusalueen sijainti
+                                if(vm.tutkimusalue.geometry && vm.tutkimusalue.geometry.type == 'Point') {
+                                    vm.tutkimusalue.properties["sijainti_piste"] = vm.tutkimusalue.geometry.coordinates[0] + " " + vm.tutkimusalue.geometry.coordinates[1] ;
+                                } else if(vm.tutkimusalue.geometry && vm.tutkimusalue.geometry.type == 'Polygon') {
+                                    vm.tutkimusalue.properties.sijainti = "";
+                                    // Käydään geometria läpi ja lisätään sijainti-kenttään pilkulla eroteltuina
+                                    // x1 y1,x2 y2,x3 y3 ...
+                                    for(var i = 0; i< vm.tutkimusalue.geometry.coordinates[0].length; i++) {
+                                        var pair = vm.tutkimusalue.geometry.coordinates[0][i];
+                                        vm.tutkimusalue.properties.sijainti += pair[0] + " " + pair[1] + ",";
+                                    }
+                                    // Poistetaan viimeinen ,
+                                    vm.tutkimusalue.properties.sijainti = vm.tutkimusalue.properties.sijainti.slice(0, -1);
+                                }
                             }
                             vm.updateLayerData('Tutkimusalueet');
                             vm.updateLayerData('Kohteet');
