@@ -215,6 +215,9 @@ angular.module('mip.tutkimus').controller(
         text += vm.tutkimus.toimeksiantaja != null ? vm.tutkimus.toimeksiantaja + '\n' : '\n';
         // Tutkimusluvan diariointinumero ja päivämäärä - vapaateksti
         text += 'Tutkimusluvan diariointinumero ja päivämäärä: \n';
+        // Löytöjen säilytyspaikka
+        text += 'Löytöjen säilytyspaikka: ';
+        text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
         // Löytöjen päänumero
         text += 'Löytöjen päänumero: ';
         text += vm.tutkimus.loyto_paanumero != null ? vm.tutkimus.loyto_paanumero + ' \n' : '\n';
@@ -226,9 +229,6 @@ angular.module('mip.tutkimus').controller(
         text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + '; ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
         // Löytöjen diariointipäivämäärä - vapaateksti
         text += 'Löytöjen diariointipäivämäärä: \n';
-        // Löytöjen säilytyspaikka
-        text += 'Löytöjen säilytyspaikka: ';
-        text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
         // Aikaisemmat tutkimukset ja tarkastuskäynnit - vapaateksti
         text += 'Aikaisemmat tutkimukset ja tarkastuskäynnit: \n';
         // Aikaisemmat löydöt - vapaateksti
