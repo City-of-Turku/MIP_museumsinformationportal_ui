@@ -1402,32 +1402,32 @@ angular.module('mip.tutkimus').controller(
       // Jos kohde joka inventoitiin kuuluu tähän ja inventoitu tutkimus oli tämä tutkimus, päivitetään tieto näkyviin
       $scope.$on('Kohde_inventointi', function (event, data) {
         if (vm.tutkimus.properties.id == data.tutkimusId) {
-          AlertService.showInfo('Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.');
+          AlertService.showInfo(locale.getString('ark.Inventory_information_updated_reopen_view'));
         }
       });
 
       vm.tutkimusRaportti = function () {
         if (vm.tutkimus.properties.ark_tutkimuslaji_id === 7 || vm.tutkimus.properties.ark_tutkimuslaji_id === 10 || vm.tutkimus.properties.ark_tutkimuslaji_id === 12) {
           if (!vm.tutkimus.properties.kenttatyojohtaja) {
-            AlertService.showWarning('Kenttätyöjohtaja-tiedon pitää olla täytettynä, jotta raportin voi tehdä.');
+            AlertService.showWarning(locale.getString('ark.Field_manager_must_be_set'));
             return;
           }
           if (!vm.tutkimus.properties.kenttatyo_alkupvm || !vm.tutkimus.properties.kenttatyo_loppupvm) {
-            AlertService.showWarning('Kenttätyön alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
+            AlertService.showWarning(locale.getString('ark.Field_dates_must_be_set'));
             return;
           }
         }
         if (vm.tutkimus.properties.ark_tutkimuslaji_id === 5) {
           if (!vm.tutkimus.properties.kenttatyojohtaja) {
-            AlertService.showWarning('Kenttätyöjohtaja-tiedon pitää olla täytettynä, jotta raportin voi tehdä.');
+            AlertService.showWarning(locale.getString('ark.Field_manager_must_be_set'));
             return;
           }
           if (!vm.tutkimus.properties.alkupvm || !vm.tutkimus.properties.loppupvm) {
-            AlertService.showWarning('Alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.');
+            AlertService.showWarning(locale.getString('ark.Dates_must_be_set'));
             return;
           }
           if (!vm.tutkimus.properties.toimeksiantaja) {
-            AlertService.showWarning('Toimeksiantajan pitää olla täytettynä, jotta raportin voi tehdä.');
+            AlertService.showWarning(locale.getString('ark.Mandator_must_be_set'));
             return;
           }
         }
