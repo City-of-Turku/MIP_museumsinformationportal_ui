@@ -76,7 +76,7 @@ angular.module('mip.tutkimus').controller(
 
         var text = 'Tutkimuskohde: ';
         // Tutkimuskohde: Kunta kohteen tiedoista Kohde Tutkimuksen nimi
-        text += vm.tutkimus.kohde_kunta != null ? vm.tutkimus.kohde_kunta.nimi + ' ' : '';
+        text += vm.tutkimus.kohde_kunta != null ? vm.tutkimus.kohde_kunta.nimi + '; ' : '';
         text += vm.tutkimus.kohde != null ? vm.tutkimus.kohde.nimi + '; ' : '';
         text += vm.tutkimus.nimi + '\n';
         // Kylä / Kaupunginosa: Kylä kohteen tiedoista
@@ -89,13 +89,17 @@ angular.module('mip.tutkimus').controller(
         // Kiinteistöt - haetaan kohteen kiinteistotunnukset, jos ei ole jätetään pois
         if (vm.tutkimus.kohde && vm.tutkimus.kohde.kiinteistotrakennukset) {
           text += 'Kiinteistöt: ';
-          for (var i = 0; i < vm.tutkimus.kohde.kiinteistotrakennukset.length; i++) {
-            text += vm.tutkimus.kohde.kiinteistotrakennukset[i].kiinteistotunnus;
-            if (i < vm.tutkimus.kohde.kiinteistotrakennukset.length - 1) {
-              text += ', ';
-            } else if (i === vm.tutkimus.kohde.kiinteistotrakennukset.length - 1) {
-              text += '\n';
+          if(vm.tutkimus.kohde.kiinteistotrakennukset && vm.tutkimus.kohde.kiinteistotrakennukset.length > 0) {
+            for (var i = 0; i < vm.tutkimus.kohde.kiinteistotrakennukset.length; i++) {
+              text += vm.tutkimus.kohde.kiinteistotrakennukset[i].kiinteistotunnus;
+              if (i < vm.tutkimus.kohde.kiinteistotrakennukset.length - 1) {
+                text += ', ';
+              } else if (i === vm.tutkimus.kohde.kiinteistotrakennukset.length - 1) {
+                text += '\n';
+              }
             }
+          } else {
+            text += '\n';
           }
         }
         // Tutkimuksen laatu - tutkimustyyppi
@@ -139,8 +143,8 @@ angular.module('mip.tutkimus').controller(
         // Digikuvien päänumero
         text += 'Digikuvien päänumero: ';
         text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + '; ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
-        // Löytöjen diariointipäivämäärä - vapaateksti
-        text += 'Löytöjen diariointipäivämäärä: \n';
+        // KM-päänumero ja löytöjen diariointipäivämäärät
+        text += 'KM päänumerot ja löytöjen diariointipäivämäärät: ' + vm.tutkimus.km_paanumerot_ja_diaarnum + '\n';
         // Aikaisemmat tutkimukset ja tarkastuskäynnit - vapaateksti
         text += 'Aikaisemmat tutkimukset ja tarkastuskäynnit: \n';
         // Aikaisemmat löydöt - vapaateksti
@@ -162,26 +166,31 @@ angular.module('mip.tutkimus').controller(
         }
 
         var text = 'Tutkimuskohde: ';
-        // Tutkimuskohde: Kunta kohteen tiedoista Kohde Tutkimuksen nimi
-        if (vm.tutkimus.kunnatkylat != null) {
+        // Tutkimuskohde: Kunta Tutkimuksen nimi
+        if (vm.tutkimus.kunnatkylat != null && vm.tutkimus.kunnatkylat.length > 0) {
           for (var i = 0; i < vm.tutkimus.kunnatkylat.length; i++) {
             if (vm.tutkimus.kunnatkylat[i].kunta != null) {
-              text += vm.tutkimus.kunnatkylat[i].kunta.nimi + ', ';
+              // 11262 Lisätään kunta ainoastaan jos sitä ei ole jo tekstissä.
+              if (text.indexOf(vm.tutkimus.kunnatkylat[i].kunta) === -1) {
+                text += vm.tutkimus.kunnatkylat[i].kunta.nimi + ', ';
+              }
             }
           }
           text = text.slice(0, -2);
-          text += ' ';
+          text += '; ';
         }
         text += vm.tutkimus.nimi + '\n';
-        // Kylä / Kaupunginosa: Kylä kohteen tiedoista
+        // Kylä / Kaupunginosa: Kylä
         text += 'Kylä / kaupunginosa: ';
-        if (vm.tutkimus.kunnatkylat != null) {
+        if (vm.tutkimus.kunnatkylat != null && vm.tutkimus.kunnatkylat.length > 0) {
           for (var i = 0; i < vm.tutkimus.kunnatkylat.length; i++) {
             if (vm.tutkimus.kunnatkylat[i].kyla != null) {
               text += vm.tutkimus.kunnatkylat[i].kyla.nimi + ', ';
             }
           }
           text = text.slice(0, -2);
+          text += '\n';
+        } else {
           text += '\n';
         }
         // Tila / kortteli - vapaateksti
@@ -208,8 +217,8 @@ angular.module('mip.tutkimus').controller(
         text += 'Konservointilaitos: \n';
         // Kenttätyöaika
         text += 'Kenttätyöaika: ' + $filter('date')(vm.tutkimus.alkupvm, 'dd.MM.yyyy') + ' - ' + $filter('date')(vm.tutkimus.loppupvm, 'dd.MM.yyyy') + '\n';
-        // Tutkitun alueen pinta-ala - vapaateksti
-        text += 'Tutkitun alueen pinta-ala: \n';
+        // Inventointialueen pinta-ala - vapaateksti
+        text += 'Inventointialueen pinta-ala: \n';
         // Tutkimuksen tilaaja / rahoittaja - rahoittaja
         text += 'Tutkimuksen tilaaja / rahoittaja: ';
         text += vm.tutkimus.toimeksiantaja != null ? vm.tutkimus.toimeksiantaja + '\n' : '\n';
@@ -218,17 +227,14 @@ angular.module('mip.tutkimus').controller(
         // Löytöjen säilytyspaikka
         text += 'Löytöjen säilytyspaikka: ';
         text += vm.tutkimus.loyto_kokoelmalaji != null ? vm.tutkimus.loyto_kokoelmalaji.nimi_fi + '\n' : '\n';
-        // Löytöjen päänumero
-        text += 'Löytöjen päänumero: ';
-        text += vm.tutkimus.loyto_paanumero != null ? vm.tutkimus.loyto_paanumero + ' \n' : '\n';
+        // KM päänumerot ja löytöjen diariointipäivämäärät
+        text += 'KM päänumerot ja löytöjen diariointipäivämäärät: ' + vm.tutkimus.km_paanumerot_ja_diaarnum + '\n';
         // Näytteiden päänumero
         text += 'Näytteiden päänumero: ';
         text += vm.tutkimus.nayte_paanumero != null ? vm.tutkimus.nayte_paanumero + ' \n' : '\n';
         // Digikuvien päänumero
         text += 'Digikuvien päänumero: ';
         text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + '; ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
-        // Löytöjen diariointipäivämäärä - vapaateksti
-        text += 'Löytöjen diariointipäivämäärä: \n';
         // Aikaisemmat tutkimukset ja tarkastuskäynnit - vapaateksti
         text += 'Aikaisemmat tutkimukset ja tarkastuskäynnit: \n';
         // Aikaisemmat löydöt - vapaateksti
