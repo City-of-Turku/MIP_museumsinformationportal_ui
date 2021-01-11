@@ -171,7 +171,7 @@ angular.module('mip.tutkimus').controller(
           for (var i = 0; i < vm.tutkimus.kunnatkylat.length; i++) {
             if (vm.tutkimus.kunnatkylat[i].kunta != null) {
               // 11262 Lisätään kunta ainoastaan jos sitä ei ole jo tekstissä.
-              if (text.indexOf(vm.tutkimus.kunnatkylat[i].kunta) === -1) {
+              if (text.indexOf(vm.tutkimus.kunnatkylat[i].kunta.nimi) === -1) {
                 text += vm.tutkimus.kunnatkylat[i].kunta.nimi + ', ';
               }
             }
