@@ -24,19 +24,27 @@
                      </ul>
                      <!-- Irtolöytö / Vanha tutkimus - id 6 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 6"
-                            ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id == 6}">
+                            ng-class="{submenuHeightFix4Elements: vm.tutkimus.properties.tutkimuslaji.id == 6}">
                             <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
-                                          (word)</a></li>
+                                   (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'loyto_alueittain')"><span i18n="ark.Discovery_report_by_area"></span>
+                                   (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
-                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                                   i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot_alueittain')"><span
+                                   i18n="ark.Removed_discoveries_report_by_area"></span> (word)</a></li>
                      </ul>
                      <!-- Kaivaus - id 7 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 7"
-                            ng-class="{submenuHeightFix9Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix8Elements: vm.editRelatedPermissions.luonti == false}">
+                            ng-class="{submenuHeightFix11Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix10Elements: vm.editRelatedPermissions.luonti == false}">
                             <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
                                           (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'loyto_alueittain')"><span i18n="ark.Discovery_report_by_area"></span>
+                                   (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
-                                                 i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                                   i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot_alueittain')"><span
+                                   i18n="ark.Removed_discoveries_report_by_area"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'ajoitusnayteluettelo')"><span
                                                  i18n="ark.Timing_sample_report"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'luuluettelo')"><span
@@ -54,11 +62,15 @@
                      </ul>
                      <!-- Koekaivaus - id 10 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 10"
-                            ng-class="{submenuHeightFix9Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix8Elements: vm.editRelatedPermissions.luonti == false}">
+                            ng-class="{submenuHeightFix11Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix10Elements: vm.editRelatedPermissions.luonti == false}">
                             <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                   (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'loyto_alueittain')"><span i18n="ark.Discovery_report_by_area"></span>
                                    (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
                                                  i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot_alueittain')"><span
+                                   i18n="ark.Removed_discoveries_report_by_area"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'ajoitusnayteluettelo')"><span
                                                  i18n="ark.Timing_sample_report"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'luuluettelo')"><span
@@ -76,11 +88,15 @@
                      </ul>
                      <!-- Konekaivuun valvonta - id 12 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 12"
-                            ng-class="{submenuHeightFix9Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix8Elements: vm.editRelatedPermissions.luonti == false}">
+                            ng-class="{submenuHeightFix11Elements: vm.editRelatedPermissions.luonti == true, submenuHeightFix10Elements: vm.editRelatedPermissions.luonti == false}">
                             <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
+                                   (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'loyto_alueittain')"><span i18n="ark.Discovery_report_by_area"></span>
                                    (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
                                                  i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot_alueittain')"><span
+                                   i18n="ark.Removed_discoveries_report_by_area"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'ajoitusnayteluettelo')"><span
                                                  i18n="ark.Timing_sample_report"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'luuluettelo')"><span
@@ -98,11 +114,15 @@
                      </ul>
                      <!-- Tarkastus - id 11 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 11"
-                            ng-class="{submenuHeightFix3Elements: vm.tutkimus.properties.tutkimuslaji.id == 11}">
+                            ng-class="{submenuHeightFix5Elements: vm.tutkimus.properties.tutkimuslaji.id == 11}">
                             <li><a ng-click="vm.createReport('WORD', 'loyto')"><span i18n="ark.Discovery_report"></span>
                                           (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'loyto_alueittain')"><span i18n="ark.Discovery_report_by_area"></span>
+                                   (word)</a></li>
                             <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot')"><span
                                                  i18n="ark.Removed_discoveries_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'poistetut_loydot_alueittain')"><span
+                                   i18n="ark.Removed_discoveries_report_by_area"></span> (word)</a></li>
                             <li><a ng-click="vm.createReport('PDF', 'tarkastusraportti')"><span
                                                  i18n="ark.Inspection_report"></span> (pdf)</a></li>
                      </ul>

@@ -1107,13 +1107,13 @@ angular.module('mip.tutkimus').controller(
 
       /*
        * Create a report
-       * type: PDF / WORD / EXCEL ...
-       * mode: loyto / poistetut_loydot
+       * type: PDF / WORD / EXCEL ... - used in the backend
+       * mode: loyto / poistetut_loydot... - used in the backend
        */
       vm.createReport = function (type, mode) {
         // Asetetaan raportin "nimi" joka näkyy mm. raportit-välilehdellä
         // Raportin nimi + tutkimuksen nimi
-        var reportMode = null;
+        var reportMode = null; // Used only in the frontend
 
         var reportDisplayName = locale.getString('ark.Discovery_report');
         if (mode === 'poistetut_loydot') {
@@ -1122,6 +1122,12 @@ angular.module('mip.tutkimus').controller(
           reportMode = 'Loytoraportti';
         } else if (mode === 'loyto') {
           reportDisplayName += ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Loytoraportti';
+        } else if (mode === 'loyto_alueittain') {
+          reportDisplayName = locale.getString('ark.Discovery_report_by_area') + ' ' + vm.tutkimus.properties.nimi;
+          reportMode = 'Loytoraportti';
+        } else if (mode === 'poistetut_loydot_alueittain') {
+          reportDisplayName = locale.getString('ark.Removed_discoveries_report_by_area') + ' ' + vm.tutkimus.properties.nimi;
           reportMode = 'Loytoraportti';
         } else if (mode === 'tarkastusraportti') {
           reportDisplayName = locale.getString('ark.Inspection_report') + ' ' + vm.tutkimus.properties.nimi;

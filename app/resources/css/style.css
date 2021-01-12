@@ -922,6 +922,14 @@ td.mip-table-header {
 	height:18.15em;
 }
 
+.submenuHeightFix10Elements {
+	height:20.1em;
+}
+
+.submenuHeightFix11Elements {
+	height:22.05em;
+}
+
 /*
  * Readonly kenttä ei ole harmaa vaan normaali valkoinen
  */

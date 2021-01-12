@@ -364,5 +364,7 @@
     "Field_dates_must_be_set": "Kenttätyön alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.",
     "Mandator_must_be_set": "Toimeksiantajan pitää olla täytettynä, jotta raportin voi tehdä.",
     "Dates_must_be_set": "Alku- ja loppupäivämäärät pitää olla täytettynä, jotta raportin voi tehdä.",
-    "Inventory_information_updated_reopen_view": "Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset."
+    "Inventory_information_updated_reopen_view": "Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.",
+    "Discovery_report_by_area": "Discoveries catalog by area",
+    "Removed_discoveries_report_by_area": "Removed discoveries catalog by area"
 }
