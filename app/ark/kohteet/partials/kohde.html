@@ -55,8 +55,9 @@
                                 ng-include="'ark/kohteet/partials/kiinteistojen_tiedot_view.html'"></div>
                             <div class="col-md-12" ng-if="vm.edit"
                                 ng-include="'ark/kohteet/partials/kiinteistojen_tiedot_edit.html'"></div>
-                            <div class="col-md-12" ng-if="vm.images.length > 0"
-                                ng-include="'ark/kohteet/partials/kuvat.html'"></div>
+                            <mip-luetteloidut-kuvat ng-show="!vm.create && vm.images.length > 0" vm="vm"></mip-luetteloidut-kuvat>
+                            <div class="col-md-12" ng-if="vm.otherImages.length > 0"
+                                ng-include="'ark/kohteet/partials/luetteloimattomat_kuvat.html'"></div>
                             <div class="col-md-12" ng-if="!vm.create && vm.files.length>0"
                                 ng-include="'ark/kohteet/partials/tiedostot_view.html'"></div>
                             <div class="col-md-12" ng-if="!vm.edit"

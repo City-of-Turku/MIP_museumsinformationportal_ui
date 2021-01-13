@@ -81,7 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="objectType === 'kohde' || luetteloi === false">
+                                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="luetteloi === false">
                                     <div class="form-group"
                                         ng-class="{ 'has-error': myForm.otsikko_{{$index}}.$invalid && myForm.otsikko_{{$index}}.$touched }">
                                         <label class="col-md-12 control-label">
@@ -233,6 +233,12 @@
                                 </div>
                                  <div class="col-md-12 col-sm-12 col-xs-12">
                                     <mip-nayte-valitsin valitut-naytteet="file.properties.naytteet" entity-id="file.properties.id" mode="'kuva'" tutkimus-id="tutkimusId" dis="file.status == 'loading'"></mip-nayte-valitsin>
+                                </div>
+                            </div>
+                            <!-- inventointitutkimuksen kautta avattaessa voi linkata kohteita -->
+                            <div class="row" ng-if="objectType === 'tutkimus' && relatedObject.properties.ark_tutkimuslaji_id === 5">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <mip-kohde-valitsin valitut-kohteet="file.properties.kohteet" entity-id="file.properties.id" mode="'kuva'" tutkimus="relatedObject.properties" dis="file.status == 'loading'"></mip-nayte-valitsin>
                                 </div>
                             </div>
                             <div class="row">

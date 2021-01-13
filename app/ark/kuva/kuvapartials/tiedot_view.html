@@ -105,7 +105,15 @@
                 <div class="col-sm-9">
                     <p class="form-control-static mip-multiline"><span ng-repeat="nayte in image.properties.naytteet"><a class="link" ng-click="avaaNayte(nayte)">{{nayte.luettelointinumero}}</a><span ng-show="!$last">, </span></span></p>
                 </div>
-            </div>      
+            </div>
+            <div class="form-group" ng-if="image.properties.kohteet.length > 0">
+                <label class="col-sm-3 control-label">
+                    <span i18n="ark.Targets"></span>
+                </label>
+                <div class="col-sm-9">
+                    <p class="form-control-static mip-multiline"><span ng-repeat="kohde in image.properties.kohteet"><a class="link" ng-click="avaaKohde(kohde)">{{kohde.nimi}}</a><span ng-show="!$last">, </span></span></p>
+                </div>
+            </div>
             <div class="form-group" ng-if="image.properties.lisatiedot.length > 0">
                 <label class="col-sm-3 control-label">
                     <span i18n="common.Additional_information"></span>
@@ -113,7 +121,7 @@
                 <div class="col-sm-9">
                     <p class="form-control-static mip-multiline">{{image.properties.lisatiedot}}</p>
                 </div>
-            </div>      
+            </div>
         </div>
         <div class="col-md-6">
             <div class="form-group" ng-if="image.properties.kuvaus.length > 0">
@@ -143,10 +151,10 @@
             </div>
         </div>
         <div class="col-md-6">
-            
+
         </div>
         <div class="col-md-6">
-            
+
         </div>
     </div>
 </div>

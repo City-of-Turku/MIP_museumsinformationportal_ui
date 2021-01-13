@@ -775,7 +775,7 @@ angular.module('mip.kohde').controller(
             };
 
             /*
-             * Images
+             * Luetteloidut kuvat
              */
             vm.images = [];
             vm.getImages = function () {
@@ -785,11 +785,11 @@ angular.module('mip.kohde').controller(
                         'jarjestys_suunta': 'nouseva',
                         'rivit': 1000,
                         'ark_kohde_id': vm.kohde.properties.id,
-                        'luetteloitu': false
+                        'luetteloitu': true
                     }).then(function success(images) {
                         vm.images = images.features;
-                        // Kuvien määrä (directives.js)
-                        $scope.kuvia_kpl = vm.images.length;
+                        // Kuvien määrä
+                        vm.luetteloituja_kuvia_kpl = vm.images.length;
                     }, function error(data) {
                         locale.ready('error').then(function () {
                             AlertService.showError(locale.getString("error.Getting_images_failed"), AlertService.message(data));
@@ -798,6 +798,31 @@ angular.module('mip.kohde').controller(
                 }
             };
             vm.getImages();
+
+            /*
+             * Luetteloimattomat kuvat
+             */
+            vm.otherImages = [];
+            vm.getOtherImages = function () {
+                if (vm.kohde.properties.id) {
+                    FileService.getArkImages({
+                        'jarjestys': 'ark_kuva.id',
+                        'jarjestys_suunta': 'nouseva',
+                        'rivit': 1000,
+                        'ark_kohde_id': vm.kohde.properties.id,
+                        'luetteloitu': false
+                    }).then(function success(images) {
+                        vm.otherImages = images.features;
+                        // Kuvien määrä
+                        vm.luetteloimattomia_kuvia_kpl = vm.otherImages.length;
+                    }, function error(data) {
+                        locale.ready('error').then(function () {
+                            AlertService.showError(locale.getString("error.Getting_images_failed"), AlertService.message(data));
+                        });
+                    });
+                }
+            };
+            vm.getOtherImages();
 
             /*
              * Open the selected image for viewing
@@ -811,6 +836,7 @@ angular.module('mip.kohde').controller(
              */
             $scope.$on('arkKuva_modified', function (event, data) {
                 vm.getImages();
+                vm.getOtherImages();
             });
 
             /**

@@ -3,11 +3,11 @@
             <div class="modal-header">
                 <div ng-include="'pages/templates/modal/modal_header_painikkeet.html'"></div>
                 <h4 class="modal-title">
-                    <span ng-if="entiteetti_tyyppi !== 'kohde'">{{image.properties.luettelointinumero}}</span>
-                    <span ng-if="entiteetti_tyyppi === 'kohde' || !image.properties.luettelointinumero">{{image.properties.otsikko}}</span>
-                </h4>                
+                    <span ng-if="image.properties.luettelointinumero">{{image.properties.luettelointinumero}}</span>
+                    <span ng-if="!image.properties.luettelointinumero">{{image.properties.otsikko}}</span>
+                </h4>
             </div>
-            <div class="modal-body">            
+            <div class="modal-body">
                 <img ng-src="{{image.properties.url_large}}" class="img-responsive" ng-model="image"
                     id="image" alt="{{image.properties.alkuperainen_nimi}}"
                     style="margin-left: auto; margin-right: auto; margin-bottom: 10px; display: block; max-height: 90%;"
@@ -20,66 +20,66 @@
                         ng-include="'ark/kuva/kuvapartials/tiedot_edit.html'"></div>
                     <div class="col-md-12"
                                 ng-if="!edit && (image.properties.luoja || image.properties.muokkaaja || image.properties.poistaja)"
-                                ng-include="'ark/kuva/kuvapartials/muokkaustiedot_view.html'"></div>                      
-                </form>              
-                
+                                ng-include="'ark/kuva/kuvapartials/muokkaustiedot_view.html'"></div>
+                </form>
+
             </div>
             <div class="modal-footer">
-                <div class="pull-left" mip-kuvaselain ng-show="!edit"></div>  
-                            
+                <div class="pull-left" mip-kuvaselain ng-show="!edit"></div>
+
                 <div class="dropup">
-                    <button 
-                        type="button" 
-                        class="btn btn-small mip-transparent" 
-                        data-placement="top" 
-                        bs-popover 
-                        data-template-url="ark/kuva/kuvapartials/popover-migraatiodata.html" 
+                    <button
+                        type="button"
+                        class="btn btn-small mip-transparent"
+                        data-placement="top"
+                        bs-popover
+                        data-template-url="ark/kuva/kuvapartials/popover-migraatiodata.html"
                         ng-show="image.properties.migraatiodata">
-                        <span 
-                            class="fa fa-archive" 
+                        <span
+                            class="fa fa-archive"
                             aria-hidden="true">
                         </span>
                     </button>
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                      
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span i18n="common.Actions"></span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="" ng-click="deleteImage(modalNameId)" class="bg-danger" 
-                               i18n="common.Delete"                                
+                        <li><a href="" ng-click="deleteImage(modalNameId)" class="bg-danger"
+                               i18n="common.Delete"
                                ng-show="!create" data-ng-if="(showEditAndDeleteButtons()) && relatedObject != null"></a>
                         </li>
-                        
+
                         <li role="separator" class="divider" data-ng-if="permissions.muokkaus"></li>
-                        
+
                         <li><a ng-href="{{image.properties.url}}" target="_blank"
-                               i18n="common.Download_original" download="{{downloadFilename}}"></a>                            
+                               i18n="common.Download_original" download="{{downloadFilename}}"></a>
                         </li>
-                        
+
                         <li role="separator" class="divider" data-ng-if="permissions.muokkaus"></li>
-                                               
+
                         <li><a href="" ng-click="cancelEdit()"
-                               i18n="common.Cancel_edit" 
+                               i18n="common.Cancel_edit"
                                ng-show="edit"></a>
                         </li>
                         <li><a href="" ng-click="close()"
-                               i18n="common.Close" 
+                               i18n="common.Close"
                                ng-show="!edit"></a>
                         </li>
-                        
+
                         <li role="separator" class="divider" data-ng-if="permissions.muokkaus"></li>
-                                                
+
                         <li><a href="" ng-click="editMode()"
-                               i18n="common.Edit" 
+                               i18n="common.Edit"
                                ng-if="!edit && (showEditAndDeleteButtons())"></a>
                         </li>
                         <li ng-class="{ disabled: imageForm.$invalid }"><a href="" ng-click="imageForm.$invalid || save()"
-                               i18n="common.Save" 
+                               i18n="common.Save"
                                ng-if="edit"></a>
                         </li>
-                        
+
                     </ul>
                 </div>
-                    
+
             </div>
         </div>
     </div>

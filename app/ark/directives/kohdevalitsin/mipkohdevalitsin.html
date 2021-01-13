@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <div class="form-group">
+    <label i18n="ark.Targets" class="control-label"></label>
+    <ui-select multiple ng-model="valitutKohteet" on-select="addKohde($item)"
+      on-remove="deleteKohde($item, valitutKohteet); addItemBackToList($item, kohteet);">
+      <ui-select-match data-i18n-attr="{placeholder: 'ark.Targets'}">{{$item.nimi}}</ui-select-match>
+      <ui-select-choices repeat="kohde.id as kohde in kohteet | filter: {'nimi': $select.search}"
+        refresh="kohdeHaku($select.search)">
+        <div ng-bind-html="kohde.nimi | highlight: $select.search"></div>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+</div>

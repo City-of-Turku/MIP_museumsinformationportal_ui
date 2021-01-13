@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12" ng-if="entiteetti_tyyppi !== 'kohde' && luetteloitu === true">
+                    <div class="col-md-6 col-sm-12 col-xs-12" ng-if="luetteloitu === true">
                         <div class="form-group"
                             ng-class="{ 'has-error': imageForm.luettelointinumero.$invalid && imageForm.luettelointinumero.$touched }">
                             <label class="col-md-12 control-label">
@@ -19,7 +19,7 @@
                                 <input type="text" class="form-control"
                                     name="luettelointinumero"
                                     ng-model="image.properties.luettelointinumero"
-                                    ng-required="entiteetti_tyyppi !== 'kohde' && luetteloitu === true"
+                                    ng-required="luetteloitu === true"
                                     ng-change="checkUniqueLuettelointinumero(image.properties.luettelointinumero)"
                                     ng-disabled="file.status == 'loading'"
                                     data-i18n-attr="{placeholder: 'ark.Listing_number'}">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12" ng-if="entiteetti_tyyppi === 'kohde' || luetteloitu === false">
+                    <div class="col-md-6 col-sm-12 col-xs-12" ng-if="luetteloitu === false">
                         <div class="form-group" ng-class="{ 'has-error': imageForm.otsikko.$invalid && imageForm.otsikko.$touched }">
                             <label class="col-md-12 control-label">
                                 <span i18n="common.Caption" class="pull-left"></span><span class="pull-left">*</span>
@@ -45,7 +45,7 @@
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="otsikko"
                                     ng-model="image.properties.otsikko"
-                                    ng-required="entiteetti_tyyppi === 'kohde' || luetteloitu === false"
+                                    ng-required="luetteloitu === false"
                                     data-i18-attr="{placeholder: 'common.Caption'}"
                                     ng-disabled="uploading == true || disableButtons" spellcheck="false" autocomplete="off">
                                 <span class="help-block"
@@ -176,6 +176,12 @@
                 <div class="row" ng-if="entiteetti_tyyppi !== 'kohde' && entiteetti_tyyppi !== 'tutkimus' && entiteetti_tyyppi !== 'tutkimusalue' && luetteloitu === true">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <mip-nayte-valitsin valitut-naytteet="image.properties.naytteet" entity-id="image.properties.id" mode="'kuva'" tutkimus-id="tutkimusId" dis="false"></mip-nayte-valitsin>
+                    </div>
+                </div>
+                <!-- inventointitutkimuksen kautta avattaessa voi linkata kohteita -->
+                <div class="row" ng-if="entiteetti_tyyppi === 'tutkimus' && relatedObject.properties.ark_tutkimuslaji_id === 5">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <mip-kohde-valitsin valitut-kohteet="image.properties.kohteet" entity-id="image.properties.id" mode="'kuva'" tutkimus="relatedObject.properties"></mip-kohde-valitsin>
                     </div>
                 </div>
                 <div class="row">

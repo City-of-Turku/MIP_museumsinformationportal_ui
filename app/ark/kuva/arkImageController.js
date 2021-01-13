@@ -4,11 +4,11 @@ angular.module('mip.file').controller(
                 '$scope', '$rootScope', 'CONFIG', '$http', 'ModalService', 'AlertService',
                 '$timeout', 'FileService', 'image', 'locale', 'entiteetti_tyyppi', 'entiteetti',
                 'permissions', 'UserService', 'kuvalista',  'selectedModalNameId', 'tutkimusId',
-                'LoytoService', 'YksikkoService', 'NayteService', 'EntityBrowserService', 'ListService',
+                'LoytoService', 'YksikkoService', 'NayteService', 'EntityBrowserService', 'ListService', 'KohdeService',
                 function($scope, $rootScope, CONFIG, $http, ModalService, AlertService,
                 		$timeout, FileService, image, locale, entiteetti_tyyppi, entiteetti,
                 		permissions, UserService, kuvalista, selectedModalNameId, tutkimusId,
-                		LoytoService, YksikkoService, NayteService, EntityBrowserService, ListService) {
+                		LoytoService, YksikkoService, NayteService, EntityBrowserService, ListService, KohdeService) {
 
                     // Unique modal id which is used for the collapsible panels
                     $scope.modalId = ModalService.getNextModalId();
@@ -349,7 +349,15 @@ angular.module('mip.file').controller(
 
                     $scope.avaaYksikko = function(yksikko) {
                     	YksikkoService.haeYksikko(yksikko.id).then(function(y) {
+                            EntityBrowserService.setQuery('yksikko', y.properties.id, {'ark_kuva_id': $scope.image.properties.id}, $scope.image.properties.yksikot.length, $scope.image.properties.yksikot);
     						ModalService.yksikkoModal(y, y.properties.tutkimusalue, permissions);
+    					});
+                    };
+
+                    $scope.avaaKohde = function(kohde) {
+                    	KohdeService.fetchKohde(kohde.id).then(function(k) {
+                            EntityBrowserService.setQuery('kohde', k.properties.id, {'ark_kuva_id': $scope.image.properties.id}, $scope.image.properties.kohteet.length, $scope.image.properties.kohteet);
+    						ModalService.kohdeModal(k);
     					});
                     };
                 }
