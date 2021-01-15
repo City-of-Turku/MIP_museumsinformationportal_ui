@@ -18,9 +18,11 @@
                             ng-show="!vm.create && !vm.edit"></a>
                      <!-- Arkeologinen inventointi - id 5 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 5"
-                     ng-class="{submenuHeightFix1Elements: vm.tutkimus.properties.tutkimuslaji.id == 5}">
+                     ng-class="{submenuHeightFix2Elements: vm.tutkimus.properties.tutkimuslaji.id == 5}">
                             <li ng-if="vm.editRelatedPermissions.luonti"><a ng-click="vm.tutkimusRaportti()"><span
                                    i18n="ark.Inventory_report"></span> (word)</a></li>
+                            <li><a ng-click="vm.createReport('WORD', 'valokuvaluettelo')"><span
+                                   i18n="ark.Image_report"></span> (word)</a></li>
                      </ul>
                      <!-- Irtolöytö / Vanha tutkimus - id 6 -->
                      <ul class="dropdown-menu" ng-if="vm.tutkimus.properties.tutkimuslaji.id == 6"
@@ -138,10 +140,10 @@
                             ng-if="vm.editRelatedPermissions.luonti && !vm.create" i18n="ark.Add_research_area"></a>
               </li>
               <li><a href="" ng-click="vm.addCoordinates('loyto')" i18n="ark.Add_discovery_coordinates_from_file"
-                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && vm.tutkimus.properties.tutkimuslaji.id != 5"></a>
               </li>
               <li><a href="" ng-click="vm.addCoordinates('nayte')" i18n="ark.Add_sample_coordinates_for_from_file"
-                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit"></a>
+                            data-ng-if="vm.editRelatedPermissions.luonti && !vm.create && !vm.edit && vm.tutkimus.properties.tutkimuslaji.id != 5"></a>
               </li>
               <li><a href="" ng-click="vm.lisaaTiedosto()" ng-if="vm.editRelatedPermissions.luonti && !vm.create"
                             i18n="common.Add_file"></a>

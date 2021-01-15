@@ -231,9 +231,6 @@ angular.module('mip.tutkimus').controller(
         // KM päänumerot ja löytöjen diariointipäivämäärät
         text += 'KM päänumerot ja löytöjen diariointipäivämäärät: ';
         text += vm.tutkimus.km_paanumerot_ja_diaarnum != null ? vm.tutkimus.km_paanumerot_ja_diaarnum + '\n' : '\n';
-        // Näytteiden päänumero
-        text += 'Näytteiden päänumero: ';
-        text += vm.tutkimus.nayte_paanumero != null ? vm.tutkimus.nayte_paanumero + ' \n' : '\n';
         // Digikuvien päänumero
         text += 'Digikuvien päänumero: ';
         text += vm.tutkimus.digikuva_paanumero != null ? vm.tutkimus.digikuva_paanumero + '; ' + digikuvatAlku + ' - ' + digikuvatLoppu + ' \n' : '\n';
