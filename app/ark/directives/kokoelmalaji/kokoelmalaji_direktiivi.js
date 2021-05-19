@@ -11,7 +11,7 @@ angular.module('mip.directives').directive('mipKokoelmalaji', [
                 attrs.$observe('kokoelmatyyppi', function(value) {
                       scope.kokoelmatyyppi = value;
                   });
-                
+
                 ListService.getOptions('ark_kokoelmalaji').then(function success(options) {
                     scope.kokoelmalajit = options;
                 }, function error(data) {
@@ -20,7 +20,7 @@ angular.module('mip.directives').directive('mipKokoelmalaji', [
                         // AlertService.showError(locale.getString("error.Getting_culturohistorical_values_failed"), AlertService.message(data));
                     });
                 });
-                
+
                 /**
                  * Suodatukset tyypin mukaan:
                  * Löydöt: KM, TMK, TYA = 1,2,4
@@ -28,9 +28,11 @@ angular.module('mip.directives').directive('mipKokoelmalaji', [
                  * Kartat: MV, TMK, TYA = 3,2,4
                  * Valokuvat: MV, TMK, TYA = 3,2,4
                  * Näytteet: TMK, TYA = 2,4
+                 * Toistaiseksi suodatus pois käytöstä. TODO: Tee konfiguroitavaksi.
                  */
                 scope.suodata = function (item){
-
+                    return item;
+                /*
                 	if(scope.kokoelmatyyppi === 'loydot'){
                 		if(item.id !== 3){
                 			return item;
@@ -38,22 +40,23 @@ angular.module('mip.directives').directive('mipKokoelmalaji', [
                 	}else if(scope.kokoelmatyyppi === 'raportit'){
                 		if(item.id !== 1){
                 			return item;
-                		}                		
+                		}
                 	}else if(scope.kokoelmatyyppi === 'kartat'){
                 		if(item.id !== 1){
                 			return item;
-                		}                		
+                		}
                 	}else if(scope.kokoelmatyyppi === 'valokuvat'){
                 		if(item.id !== 1){
                 			return item;
-                		}                		
+                		}
                 	}else if(scope.kokoelmatyyppi === 'naytteet'){
                 		if(item.id === 2 || item.id === 4){
                 			return item;
-                		}                		
+                		}
                 	}
-                	
+*/
                 };
+
             }
             return {
                 restrict : 'E',

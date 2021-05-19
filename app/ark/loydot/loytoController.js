@@ -209,7 +209,7 @@ angular.module('mip.loyto').controller(
 						vm.edit = false;
 						vm.loyto = angular.copy(vm.original);
                     }
-                    
+
                     if(vm.loyto.properties.materiaalikoodi) {
                         vm.haeEnsisijaisetMateriaalit(vm.loyto.properties.materiaalikoodi);
                     }
@@ -286,7 +286,7 @@ angular.module('mip.loyto').controller(
 				 */
                 vm.save = function () {
                     vm.disableButtonsFunc();
-                    
+
                     if(vm.loyto.properties.materiaalikoodi && vm.loyto.properties.materiaalikoodi.id) {
                         vm.loyto.properties.ark_loyto_materiaalikoodi_id = vm.loyto.properties.materiaalikoodi.id;
                     }
@@ -311,7 +311,7 @@ angular.module('mip.loyto').controller(
 
                     	// Katselutila päälle
                         vm.edit = false;
-                        
+
                         // Päivitä asiasanat lista tallennuksen jälkeen
                         vm.loyto.properties.asiasanat = [];
                         if(loyto.properties.loydon_asiasanat){
@@ -346,15 +346,22 @@ angular.module('mip.loyto').controller(
                 				'loydon_tila_id': 1
                 			}
                     };
-
-                    var palat = vm.loyto.properties.luettelointinumero.split(':');
-                	var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TMK13245
-                	var keskiosa = vm.uusiLoyto.properties.materiaalikoodi.koodi+vm.yksikko.yksikon_numero+":";
-                	var luettelointinumero = alkuosa + keskiosa;
+                    // TMK käsittely on erilainen
+                    if(vm.loyto.properties.luettelointinumero.indexOf('TMK') > -1) {
+                        var palat = vm.loyto.properties.luettelointinumero.split(':');
+                        var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TMK13245
+                        var keskiosa = vm.uusiLoyto.properties.materiaalikoodi.koodi+vm.yksikko.yksikon_numero+":";
+                        var luettelointinumero = alkuosa + keskiosa;
+                    } else {
+                        //Normaali muoto - TunnusPaanumero:Juokseva
+                        var palat = vm.loyto.properties.luettelointinumero.split(':');
+                        var alkuosa = palat[0] + ':'; // Tämä on aina esim KM123
+                        var luettelointinumero = alkuosa;
+                    }
 
                 	// Luettelointinumeroon lisätään juokseva alanumero backendissä
                 	vm.uusiLoyto.properties.luettelointinumero = luettelointinumero;
-                    
+
                 	// Tallennetaan uusi
                 	vm.tallennaUusiLoyto();
                 };
@@ -419,11 +426,19 @@ angular.module('mip.loyto').controller(
                 	 *  ESIMERKKI: TMK12345:KI516321
                 	 *  Materiaalikoodin, yksikön numeron ja juoksevan numeron välissä ei ole erotinmerkkejä
                 	 */
+                    // TMK käsittely on erilainen
+                    if(vm.loyto.properties.luettelointinumero.indexOf('TMK') > -1) {
                 	var palat = vm.loyto.properties.luettelointinumero.split(':');
                 	var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TMK13245
                 	var keskiosa = vm.uusiLoyto.properties.materiaalikoodi.koodi+vm.yksikko.yksikon_numero+":";
 
                 	var luettelointinumero = alkuosa + keskiosa;
+                    } else {
+                         //Normaali muoto - TunnusPaanumero:Juokseva
+                         var palat = vm.loyto.properties.luettelointinumero.split(':');
+                         var alkuosa = palat[0] + ':'; // Tämä on aina esim KM123
+                         var luettelointinumero = alkuosa;
+                    }
 
 
                 	// Kopioidaan luettelointinumeron alku ja lisätään siihen valittu materiaalikoodi.

@@ -707,9 +707,6 @@ angular.module('mip.tutkimus').controller(
                     	 * kokoelmatunnus + löytöjen päänumero (tutkimukselta)
                     	 * juokseva alanumero (ilman etunollia)
                     	 */
-                    	var km = 1; // Kansallismuseo
-                    	var tmk = 2; // Turun museokeskus
-                    	var tya = 4 // Turun yliopiston arkisto
                     	var luettelointinumero;
 
                     	if(!tutkimus.properties.loyto_paanumero){
@@ -719,31 +716,24 @@ angular.module('mip.tutkimus').controller(
                             vm.disableButtons = false;
                     		return;
                     	};
+                        var kokoelmaTunnus = tutkimus.properties.loyto_kokoelmalaji.tunnus;
+                        if(!kokoelmaTunnus) {
+                            AlertService.showError(locale.getString('common.Error'), 'Kokoelman tunnusta ei ole syötetty');
+                        }
                     	//Irtolöytö tai tarkastus (esim. TMK555:1)
                     	if(vm.irtoTaiTarkastus()) {
-
-                    		var ltn_alku = 'TMK'.concat(tutkimus.properties.loyto_paanumero).concat(':');
+                    		var ltn_alku = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                 			luettelointinumero = ltn_alku;
-
                     	} else {
                     		if(tutkimus.properties.loyto_kokoelmalaji && tutkimus.properties.loyto_paanumero){
                         		var loydonKokoelmalaji = tutkimus.properties.loyto_kokoelmalaji;
-                        		if(loydonKokoelmalaji.id == tmk){
-                        			var ltn_alku = 'TMK'.concat(tutkimus.properties.loyto_paanumero).concat(':');
+                        		if(loydonKokoelmalaji.tunnus == 'TMK'){
+                        			var ltn_alku = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                         			var ltn_loppu = vm.uusiLoyto.properties.materiaalikoodi.koodi.concat(vm.yksikko.properties.yksikon_numero);
                         			luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
                         		}
-                        		else if(loydonKokoelmalaji.id == km){
-                        			luettelointinumero = 'KM'.concat(tutkimus.properties.loyto_paanumero).concat(':');
-                        		}
-                        		else if(loydonKokoelmalaji.id == tya){
-                        			luettelointinumero = 'TYA'.concat(tutkimus.properties.loyto_paanumero).concat(':');
-                        		}else{
-                        			AlertService.showError(locale.getString('common.Error'), locale.getString('ark.Unknown_collection_type'));
-
-                                    // Aktivoidaan painikkeet
-                                    vm.disableButtons = false;
-                        			return;
+                        		else {
+                        			luettelointinumero = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                         		}
                         	}
                     	}

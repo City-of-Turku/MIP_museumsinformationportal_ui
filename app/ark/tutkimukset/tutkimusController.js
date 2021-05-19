@@ -1262,18 +1262,16 @@ angular.module('mip.tutkimus').controller(
       });
 
       /*
-       * Tutkimustyypillä irtolöytö on aina valittuna TMK kokoelmalajiksi
+       * Tyhjennetään valinnat tutkimuslajin vaihtuessa.
+       * Lisäksi tehdään tarkastustutkimuksen nimi automaattiseti
+       * jos kohde on liitetty.
        */
       $scope.$watch('vm.tutkimus.properties.tutkimuslaji', function (newV, oldV) {
         if (vm.create) {
-          if (oldV === undefined && newV === undefined || oldV === newV) {
+          if ((oldV === undefined && newV === undefined) || oldV === newV) {
             return;
           }
           if (newV && newV.id) {
-            if (newV.id === 6) { // Irtolöytö
-              vm.tutkimus.properties.loyto_kokoelmalaji = { id: 2 }; // TMK
-            }
-            if (newV.id === 7) { // Kaivaus
               vm.tutkimus.properties.loyto_kokoelmalaji = null;
               vm.tutkimus.properties.nayte_kokoelmalaji = null;
               vm.tutkimus.properties.valokuva_kokoelmalaji = null;
@@ -1285,7 +1283,6 @@ angular.module('mip.tutkimus').controller(
               vm.tutkimus.properties.digikuva_paanumero = null;
               vm.tutkimus.properties.mustavalko_paanumero = null;
               vm.tutkimus.properties.dia_paanumero = null;
-            }
 
             // Jos kohde on liitetty, tehdään nimi automaattisesti Tarkastustutkimukselle
             if (newV.id === 11) {
@@ -1296,6 +1293,7 @@ angular.module('mip.tutkimus').controller(
           }
         }
       });
+
 
       /*
        * Jos kokoelmalaji muuttuu, asetetaan irtolöydön tilanteessa kaikille sama kokoelmalaji

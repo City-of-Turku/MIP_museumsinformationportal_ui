@@ -295,10 +295,12 @@ angular.module('mip.nayte').controller(
                 	 * 3. juokseva alanumero (per näytekoodi, ilman etunollia)
                 	 * Paitsi irtolöytötutkimuksen ja tarkastustutkimuksen näytteellä, sillä ei ole yksikköä ollenkaan.
                 	 */
-                	var km = 1; // Kansallismuseo (EI käytössä vielä)
-                	var tmk = 2; // Turun museokeskus
-                	var tya = 4 // Turun yliopiston arkisto
                 	vm.luettelointinumero = '';
+
+									var kokoelmaTunnus = vm.tutkimus.nayte_kokoelmalaji.tunnus;
+									if(!kokoelmaTunnus) {
+											AlertService.showError(locale.getString('common.Error'), 'Kokoelman tunnusta ei ole syötetty');
+									}
 
                 	if(!vm.tutkimus.loyto_paanumero){
                 		AlertService.showError(locale.getString('common.Error'), locale.getString('ark.Discovery_main_number_missing'));
@@ -319,30 +321,20 @@ angular.module('mip.nayte').controller(
 
                 	if(tlaji_id != 6 && tlaji_id != 11 && vm.yksikkoLoytyy){
                     	if(vm.tutkimus.nayte_kokoelmalaji && vm.tutkimus.nayte_paanumero){
-                    		var nayteKokoelmalaji = vm.tutkimus.nayte_kokoelmalaji;
-                    		if(nayteKokoelmalaji.id == tmk){
-                    			var ltn_alku = 'TMK'.concat(vm.tutkimus.nayte_paanumero).concat(':');
-                    			var ltn_loppu = vm.nayte.properties.naytekoodi.koodi.concat(vm.yksikko.yksikon_numero);
-                    			vm.luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
-                    		}
-                    		else if(nayteKokoelmalaji.id == tya){
-                    			var ltn_alku = 'TYA'.concat(vm.tutkimus.nayte_paanumero).concat(':');
-                    			var ltn_loppu = vm.nayte.properties.naytekoodi.koodi.concat(vm.yksikko.yksikon_numero);
-                    			vm.luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
-                    		}else{
-                    			AlertService.showError(locale.getString('common.Error'), locale.getString('ark.Unknown_collection_type'));
-                    			return;
-                    		}
+												var ltn_alku = kokoelmaTunnus.concat(vm.tutkimus.nayte_paanumero).concat(':');
+												var ltn_loppu = vm.nayte.properties.naytekoodi.koodi.concat(vm.yksikko.yksikon_numero);
+												vm.luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
                     	}
                 	}
                 	// Irtolöytö tai tarkastus
                 	else if(tlaji_id == 6 || tlaji_id == 11) {
-                		var nayteKokoelmalaji = vm.tutkimus.nayte_kokoelmalaji;
-                		if(nayteKokoelmalaji.id == tmk){
-                			var ltn_alku = 'TMK'.concat(vm.tutkimus.nayte_paanumero).concat(':') + vm.nayte.properties.naytekoodi.koodi + ":";
-                			vm.luettelointinumero = ltn_alku;
-                		}
+										var ltn_alku = kokoelmaTunnus.concat(vm.tutkimus.nayte_paanumero).concat(':') + vm.nayte.properties.naytekoodi.koodi + ":";
+										vm.luettelointinumero = ltn_alku;
                 	}
+									else {
+										AlertService.showError(locale.getString('common.Error'), 'Luettelointinumeron luonti näytteelle ei onnistu. Päänumero tai kokoelmalajin tunnus puuttuu. Muussa tapauksessa ota yhteys ylläpitoon.');
+                		return;
+									}
                 };
 
                 // Olemassa olevan luettelointinumeron pilkonta display only osaan ja alanumeroon

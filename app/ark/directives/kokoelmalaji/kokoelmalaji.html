@@ -8,47 +8,47 @@
         <span i18n="ark.Samples" ng-show="kokoelmatyyppi === 'naytteet'"></span>
     </label>
     <div class="col-sm-9">
-        <select class="form-control" 
-        	name="laji" 
+        <select class="form-control"
+        	name="laji"
         	ng-model="laji"
         	ng-show="kokoelmatyyppi === 'loydot'"
-            ng-disabled="vm.tutkimus.properties.tutkimuslaji.id === 6"
-			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'loyto')" 
-            ng-model-options='{debounce: 500}'        	
+			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'loyto')"
+            ng-model-options='{debounce: 500}'
             ng-options="laji.nimi_fi for laji in kokoelmalajit | filter: suodata track by laji.id">
             <option value=""> - Valitse kokoelma- ja arkistotiedot -</option>
         </select>
-        <select class="form-control" 
-        	name="laji" 
+        <!-- ng-disabled="vm.tutkimus.properties.tutkimuslaji.id === 6" poistettu yläpuolisesta selectistä -->
+        <select class="form-control"
+        	name="laji"
         	ng-model="laji"
         	ng-show="kokoelmatyyppi === 'naytteet'"
-			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'nayte')" 
-            ng-model-options='{debounce: 500}'        	
+			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'nayte')"
+            ng-model-options='{debounce: 500}'
             ng-options="laji.nimi_fi for laji in kokoelmalajit | filter: suodata track by laji.id">
             <option value=""> - Valitse kokoelma- ja arkistotiedot -</option>
         </select>
-        <select class="form-control" 
-        	name="laji" 
+        <select class="form-control"
+        	name="laji"
         	ng-model="laji"
         	ng-show="kokoelmatyyppi === 'valokuvat'"
-			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'valokuva')" 
-            ng-model-options='{debounce: 500}'        	
+			ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'valokuva')"
+            ng-model-options='{debounce: 500}'
             ng-options="laji.nimi_fi for laji in kokoelmalajit | filter: suodata track by laji.id">
             <option value=""> - Valitse kokoelma- ja arkistotiedot -</option>
         </select>
-        <select class="form-control" 
-        	name="laji" 
+        <select class="form-control"
+        	name="laji"
         	ng-model="laji"
-        	ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'valokuva')" 
+        	ng-change="vm.tarkistaKokoelmatunnus(laji.id, lomake, 'valokuva')"
         	ng-show="kokoelmatyyppi !== 'loydot' && kokoelmatyyppi !== 'naytteet' && kokoelmatyyppi !== 'valokuvat'"
             ng-options="laji.nimi_fi for laji in kokoelmalajit | filter: suodata track by laji.id">
             <option value=""> - Valitse kokoelma- ja arkistotiedot -</option>
-        </select>               
+        </select>
     </div>
 </div>
 <!-- Hakusivu -->
 <select class="form-control" ng-show="haku"
-	name="laji" 
+	name="laji"
     ng-options="laji.id as laji.nimi_fi for laji in kokoelmalajit | filter: suodata track by laji.id"
     ng-model="laji">
 </select>
