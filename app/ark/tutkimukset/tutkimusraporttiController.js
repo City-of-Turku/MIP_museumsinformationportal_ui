@@ -6,9 +6,9 @@ angular.module('mip.tutkimus').controller(
   'ArkTutkimusraporttiController',
   [
     '$scope', '$rootScope', 'AlertService', 'locale', 'LoytoService', 'FileService', 'permissions', 'UserService', 'TutkimusService',
-    'selectedModalNameId', 'ModalControllerService', 'tutkimusraportti', 'RaporttiService', 'tutkimus', 'ModalService', '$filter',
+    'selectedModalNameId', 'ModalControllerService', 'tutkimusraportti', 'RaporttiService', 'tutkimus', 'ModalService', '$filter','CONFIG',
     function ($scope, $rootScope, AlertService, locale, LoytoService, FileService, permissions, UserService, TutkimusService,
-      selectedModalNameId, ModalControllerService, tutkimusraportti, RaporttiService, tutkimus, ModalService, $filter) {
+      selectedModalNameId, ModalControllerService, tutkimusraportti, RaporttiService, tutkimus, ModalService, $filter, CONFIG) {
       var vm = this;
 
       /**
@@ -107,8 +107,10 @@ angular.module('mip.tutkimus').controller(
         text += vm.tutkimus.tutkimuslaji != null ? vm.tutkimus.tutkimuslaji.nimi_fi + '\n' : '\n';
         // Kohteen ajoitus - vapaateksti
         text += 'Kohteen ajoitus: \n';
-        // Koordinaatit GK23 - vapaateksti
-        text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
+        if (CONFIG.ORGANISATION === 'Turun museokeskus') {
+          // Koordinaatit GK23 - vapaateksti
+          text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
+        }
         // Koordinaatit TM35FIN - vapaateksti
         text += 'Koordinaatit ETRS-TM35FIN-järjestelmässä: \n';
         // Korkeusjarjestelma - vapaateksti
@@ -201,8 +203,10 @@ angular.module('mip.tutkimus').controller(
         // Tutkimuksen laatu - tutkimustyyppi
         text += 'Tutkimuksen laatu: ';
         text += vm.tutkimus.tutkimuslaji != null ? vm.tutkimus.tutkimuslaji.nimi_fi + '\n' : '\n';
-        // Koordinaatit GK23 - vapaateksti
-        text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
+        if (CONFIG.ORGANISATION === 'Turun museokeskus') {
+          // Koordinaatit GK23 - vapaateksti
+          text += 'Koordinaatit Turun kaupungin ETRS-GK23-järjestelmässä: \n';
+        }
         // Koordinaatit TM35FIN - vapaateksti
         text += 'Koordinaatit ETRS-TM35FIN-järjestelmässä: \n';
         // Korkeusjarjestelma - vapaateksti

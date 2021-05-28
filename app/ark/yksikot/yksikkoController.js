@@ -230,6 +230,7 @@ angular.module('mip.yksikko').controller(
 						if (vm.yksikko.properties.suhteet.length == 0 && vm.yksikko.properties.kaivaus_valmis){
 							var conf = confirm(locale.getString('ark.Confirm_closing_without_joined_unit'));
 							if (conf == false){
+								vm.disableButtonsFunc();
 								return;
 							}
 						}
