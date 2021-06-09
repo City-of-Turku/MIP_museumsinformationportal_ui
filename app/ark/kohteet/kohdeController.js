@@ -669,8 +669,44 @@ angular.module('mip.kohde').controller(
             vm._editMode = function () {
                 $scope.focusInput = true;
                 vm.getUsers();
+
+                vm.addExistingActiveInvproject();
                 //vm.originalFeatures = angular.copy(vm.features);
             };
+
+            vm.addExistingActiveInvproject = function() {
+                //console.log("TUTKIMUKSET:");
+                //console.log(vm.tutkimukset);
+
+                //console.log("AKTIIVISET INVENTOINTIPROJEKTIT;");
+                //console.log(vm.aktiivisetInventointitutkimukset);
+
+                for(var i = 0; i < vm.tutkimukset.length; i++) {
+                    for(var j = 0 ; j < vm.aktiivisetInventointitutkimukset.length; j++) {
+                        if(vm.aktiivisetInventointitutkimukset[j].properties.id == vm.tutkimukset[i].id) {
+                            // Oikea tutkimus löytyi, täytetään automaattisesti tämän tiedot muokkausnäkymän inventointipaneeliin
+                            vm.inventointitiedot.inventointitutkimus_id = vm.tutkimukset[i].id;
+                            // Jos on katselija joka toimii inventoijana, niin lisätään hänet JOS
+                            // tutkimuksen inventoija on ollut sama
+                            if(vm.rooli == 'katselija') {
+                                if(vm.users[0].properties.id == vm.tutkimukset[i].pivot.inventoija_id) {
+                                    vm.inventointitiedot.inventoija_id = vm.tutkimukset[i].pivot.inventoija_id;
+                                    vm.inventointitiedot.inventointipaiva = vm.tutkimukset[i].pivot.inventointipaiva;
+                                }
+                            } else {
+                                // Pääkäyttäjä, tutkija - asetetaan ko. käyttäjä suoraan inventoijaksi
+                                vm.inventointitiedot.inventoija_id = vm.tutkimukset[i].pivot.inventoija_id;
+                                vm.inventointitiedot.inventointipaiva = vm.tutkimukset[i].pivot.inventointipaiva;
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                // if vm.tutkimukset sisältää saman tutkimuksen kuin aktiiviset inventointiprojektit + saman käyttäjän
+                // -> merkaa sen tiedot
+                //TODO: CancelEdit -> clear this
+            }
 
             /**
              * Liitä kohde tutkimukseen. Avataan tutkimuksen lisäämisen näyttö
@@ -722,7 +758,11 @@ angular.module('mip.kohde').controller(
                         for(var i = 0; i<vm.tutkimukset.length; i++) {
                             if(vm.tutkimukset[i].id == vm.inventointitiedot.inventointitutkimus_id) {
                                 existingTutkimus = true;
-                                vm.tutkimukset[i].pivot = {'inventoija': inventoijaNimi, 'inventointipaiva': vm.inventointitiedot.inventointipaiva };
+                                vm.tutkimukset[i].pivot = {
+                                    'inventoija': inventoijaNimi,
+                                    'inventointipaiva': vm.inventointitiedot.inventointipaiva,
+                                    'inventoija_id': vm.inventointitiedot.inventoija_id
+                            };
                                 break;
                             }
                         }
