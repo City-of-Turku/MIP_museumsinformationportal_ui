@@ -148,9 +148,6 @@ angular.module('mip.file').controller(
 
                     $scope.updateOtsikko = function() {
                     	var loytonumero = $scope.relatedObject.properties.luettelointinumero;
-                    	loytonumero = loytonumero.split(':');
-                    	//Otetaan viimeinen osio numeroksi
-                    	loytonumero = loytonumero[loytonumero.length - 1];
                     	$scope.image.properties.otsikko = loytonumero;
                     	if($scope.image.properties.konservointivaihe_id) {
                     		for(var i = 0; i<$scope.konservointivaiheet.length; i++) {
