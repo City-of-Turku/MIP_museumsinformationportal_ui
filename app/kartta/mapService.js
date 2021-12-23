@@ -1763,6 +1763,13 @@ angular.module('mip.map').factory('MapService', [
 
 				// Put the parameters to the url
 				if (katunimi && katunimi.length > 0) {
+					//Katunimi with spaces needs quotation marks around it
+					var lastSpace = katunimi.lastIndexOf(" ");
+					if (lastSpace > 0 && katunimi.substring(lastSpace).trim().match(/^\d+$/)){
+						nimi = katunimi.slice(0, lastSpace);
+						numero = katunimi.substring(lastSpace).trim();
+						katunimi = '\"' +nimi +'\" ' +numero;
+					}
 					params = '?katunimi=' + katunimi;
 				}
 
