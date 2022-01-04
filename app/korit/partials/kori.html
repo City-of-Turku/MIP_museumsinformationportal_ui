@@ -7,7 +7,7 @@
                     <span i18n="common.Cart" ng-show="vm.koriValittu && !vm.uusiKori"></span>
                     <span i18n="common.New_cart" ng-show="vm.uusiKori"></span>
                     <span i18n="common.Add_to_cart" ng-show="!vm.koriValittu && !vm.uusiKori"></span>
-                </h4>                
+                </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" name="form"
@@ -30,73 +30,76 @@
             </div>
             <div class="modal-footer">
                  <div class="dropup pull-right">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                      
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span i18n="common.Actions"></span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="" ng-click="vm.poistaKori()" class="bg-danger" 
+                        <li><a href="" ng-click="vm.poistaKori()" class="bg-danger"
                                i18n="common.Delete" data-ng-if="!vm.uusiKori && vm.koriValittu"></a>
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                        	<a href="" ng-click="vm.muutaLoydonTila()" 
-                               i18n="ark.Edit_discovery_status" data-ng-if="vm.tilamuutosPermission === true 
+                        	<a href="" ng-click="vm.muutaLoydonTila()"
+                               i18n="ark.Edit_discovery_status" data-ng-if="vm.tilamuutosPermission === true
                                && !vm.edit && vm.kori.properties.kori_id_lista.length > 0
                                && vm.korityyppi.taulu === 'ark_loyto'"></a>
                         </li>
                         <li>
-                        	<a href="" ng-click="vm.muutaNaytteenTila()" 
-                               i18n="sample.Change_sample_status" data-ng-if="vm.tilamuutosPermission === true 
+                        	<a href="" ng-click="vm.muutaNaytteenTila()"
+                               i18n="sample.Change_sample_status" data-ng-if="vm.tilamuutosPermission === true
                                && !vm.edit && vm.kori.properties.kori_id_lista.length > 0
                                && vm.korityyppi.taulu === 'ark_nayte'"></a>
-                        </li>                                                
+                        </li>
                         <li class="dropdown-submenu pull-left" ng-if="vm.mip === 'ARK' && !vm.create && !vm.edit && vm.koriValittu">
                             <a href="" style="padding-right:65px;" i18n="common.Create_report"></a>
-                            <ul ng-if="vm.korityyppi.taulu === 'ark_loyto'" class="dropdown-menu submenuHeightFix2Elements">
+                            <ul ng-if="vm.korityyppi.taulu === 'ark_loyto'" class="dropdown-menu submenuHeightFix3Elements">
                                 <li style="cursor: pointer">
                                 	<a ng-click="vm.createReport('WORD', 'loyto_luettelointikortit')"><span i18n="ark.Indexing_cards"></span> (word)</a>
                                 </li>
                                 <li style="cursor: pointer">
                                 	<a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
-                                </li>                                
+                                </li>
+                                <li style="cursor: pointer">
+                                	<a ng-click="vm.createQRCodeReport()"><span i18n="common.Report"></span> (QR Codes)</a>
+                                </li>
                             </ul>
                             <ul ng-if="vm.korityyppi.taulu !== 'ark_loyto'" class="dropdown-menu submenuHeightFix1Elements">
                                 <li style="cursor: pointer">
                                 	<a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
-                                </li>                                
-                            </ul>                                                    
-                        </li>         
+                                </li>
+                            </ul>
+                        </li>
                         <li class="dropdown-submenu pull-left" ng-if="vm.mip === 'RAK'">
-                            <a href="" style="padding-right:65px;" i18n="common.Create_report" 
+                            <a href="" style="padding-right:65px;" i18n="common.Create_report"
                             ng-show="!vm.create && !vm.edit && vm.koriValittu && vm.korityyppi.taulu !== 'ark_loyto' && vm.korityyppi.taulu !== 'ark_nayte'"></a>
                             <ul class="dropdown-menu submenuHeightFix1Elements">
                                 <li style="cursor: pointer">
                                 	<a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
                                 </li>
-                            </ul>                        
-                        </li> 
+                            </ul>
+                        </li>
                         <li><a href="" ng-click="vm.close()"
-                               i18n="common.Close" 
+                               i18n="common.Close"
                                ng-show="!vm.edit"></a>
                         </li>
 				        <li><a href="" ng-click="vm.close()"
-				               i18n="common.Cancel" 
+				               i18n="common.Cancel"
 				               ng-show="vm.uusiKori"></a>
-				        </li>                        
+				        </li>
                         <li ng-class="{ 'disabled' : vm.disableButtons }"><a href="" ng-click="vm.disableButtons || vm.cancelEdit()"
-                               i18n="common.Cancel_edit" 
+                               i18n="common.Cancel_edit"
                                ng-show="vm.edit && !vm.uusiKori"></a>
                         </li>
                         <li role="separator" class="divider" data-ng-if="vm.permissions.muokkaus"></li>
                         <li><a href="" ng-click="vm.editMode()"
-                               i18n="common.Edit" 
+                               i18n="common.Edit"
                                ng-show="vm.koriValittu && !vm.edit && !vm.uusiKori"></a>
                         </li>
 				        <li ng-class="{ disabled: form.$invalid || vm.disableButtons }"><a href="" ng-click="(form.$invalid || vm.disableButtons) || vm.save()" class="bg-success"
-				               i18n="common.Save" 
+				               i18n="common.Save"
 				               ng-show="vm.edit"></a>
-				        </li>                        
-                    </ul>                                       
+				        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -1,0 +1,47 @@
+
+<script src="../../lib/other/angular/angular.js"></script>
+<script src="../../lib/bower_components/angular-qr/qrcode.js"></script>
+<script src="../../lib/bower_components/angular-qr/angular-qr.js"></script>
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<table>
+    <tr>
+        <td>Korin tunnus:</td>
+        <td>{{nimi}}</td>
+        <!--<td><img id = "koriqrkoodi" src =""></td>-->
+        <td><qr text="nimi"></qr></td>
+    </tr>
+    <tr>
+        <th>Luettelointinumero</th>
+        <th>Kuvaus</th>
+        <th>Kpl</th>
+        <th>QR-koodi</th>
+    </tr>
+    <tr ng-repeat="loyto in koridata">
+        <td>{{loyto.properties.luettelointinumero}}</td>
+        <td>{{loyto.properties.kuvaus}}</td>
+        <td>{{loyto.properties.kappalemaara}}</td>
+        <td><qr text="loyto.properties.luettelointinumero"></td>
+    </tr>
+</table>
+<!-- <canvas id ="qrcanvas" style ="display: none;"></canvas> -->
+</div>
+<script>
+    var app = angular.module('myApp', ['ja.qr']);
+    app.controller('myCtrl',
+        function($scope) {
+        var vm = this;
+
+        vm.startup = function() {
+            $scope.nimi = sessionStorage.getItem('korinimi');
+            $scope.koridata = JSON.parse(sessionStorage.getItem('koridata'));
+            console.log($scope.koridata);
+            //console.log($scope.koridata[0].properties.luettelointinumero);
+          //  document.getElementById("koriqrkoodi").src = vm.createQRCode($scope.nimi);
+        };
+
+        vm.startup();
+    }
+);
+
+</script>
