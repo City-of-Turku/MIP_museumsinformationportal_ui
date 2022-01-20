@@ -2,46 +2,139 @@
 <script src="../../lib/other/angular/angular.js"></script>
 <script src="../../lib/bower_components/angular-qr/qrcode.js"></script>
 <script src="../../lib/bower_components/angular-qr/angular-qr.js"></script>
+<link rel="shortcut icon" href="#" />
+<style>
+
+    table{
+        border-collapse: collapse;
+        table-layout:fixed;
+    }
+    .coderow > td{
+        border: 1px solid;
+        height: 110px;
+    }
+    th{
+        border: 1px solid;
+        background-color: #BFE1FF;
+        border-collapse: collapse;
+        color-adjust: exact;
+    }
+    td{
+        text-align: center;
+    }
+    qr {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    @media print {
+        body {
+            color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+        table {
+            page-break-inside: avoid;
+        }
+        .pagebreak{
+            page-break-after: always;
+        }
+
+    }
+    @page
+    {
+        size: auto;   /* auto is the initial value */
+        margin-top: 0mm;
+        margin-bottom: 0mm;
+        margin-left: 30mm;
+        margin-right: 20mm;
+    }
+</style>
 <div ng-app="myApp" ng-controller="myCtrl">
 
-<table>
+<table class ="pagebreak">
+    <colgroup>
+        <col style ="width:10%;" />
+        <col style="width:40%;" />
+        <col style="width:3%;" />
+        <col style="width:20%;" />
+      </colgroup>
+    <tr>
+        <td style="height: 18mm;"></td>
+        <td></td>
+        <td></td>
+        <td>1/{{sivumaara}}</td>
+    </tr>
     <tr>
         <td>Korin tunnus:</td>
         <td>{{nimi}}</td>
-        <!--<td><img id = "koriqrkoodi" src =""></td>-->
-        <td><qr text="nimi"></qr></td>
+        <td></td>
+        <td id="koriqr"><qr type-number="8" correction-level="'M'" size="120" text="nimi"></qr></td>
     </tr>
-    <tr>
+    <tr style="height: 20px;"></tr>
+    <tr style="height: 50px;" class="coderow">
         <th>Luettelointinumero</th>
         <th>Kuvaus</th>
         <th>Kpl</th>
         <th>QR-koodi</th>
     </tr>
-    <tr ng-repeat="loyto in koridata">
+    <tr class="coderow" ng-repeat="loyto in koridata | limitTo:etusivumaara:0">
         <td>{{loyto.properties.luettelointinumero}}</td>
         <td>{{loyto.properties.kuvaus}}</td>
         <td>{{loyto.properties.kappalemaara}}</td>
-        <td><qr text="loyto.properties.luettelointinumero"></td>
+        <td><qr type-number="8" correction-level="'M'" size="75" text="loyto.properties.luettelointinumero"></td>
     </tr>
 </table>
-<!-- <canvas id ="qrcanvas" style ="display: none;"></canvas> -->
+
+<table class ="pagebreak" ng-repeat="sivu in extrasivut">
+    <colgroup>
+        <col style ="width:10%;" />
+        <col style="width:40%;" />
+        <col style="width:3%;" />
+        <col style="width:20%;" />
+      </colgroup>
+    <tr>
+        <td style="height: 80px;">Korin tunnus:</td>
+        <td>{{nimi}}</td>
+        <td></td>
+        <td>{{(sivu + 2)}}/{{sivumaara}}</td>
+    </tr>
+    <tr style="height: 50px;" class="coderow">
+        <th>Luettelointinumero</th>
+        <th>Kuvaus</th>
+        <th>Kpl</th>
+        <th>QR-koodi</th>
+    </tr>
+    <tr class="coderow" ng-repeat="loyto in koridata | limitTo:muusivumaara:(etusivumaara+sivu*muusivumaara)">
+        <td>{{loyto.properties.luettelointinumero}}</td>
+        <td>{{loyto.properties.kuvaus}}</td>
+        <td>{{loyto.properties.kappalemaara}}</td>
+        <td><qr type-number="8" correction-level="'M'" size="75" text="loyto.properties.luettelointinumero"></td>
+    </tr>
+</table>
+
 </div>
 <script>
     var app = angular.module('myApp', ['ja.qr']);
-    app.controller('myCtrl',
-        function($scope) {
+    app.controller('myCtrl', function($scope) {
         var vm = this;
 
         vm.startup = function() {
+            $scope.etusivumaara = 5;
+            $scope.muusivumaara = 6;
             $scope.nimi = sessionStorage.getItem('korinimi');
             $scope.koridata = JSON.parse(sessionStorage.getItem('koridata'));
-            console.log($scope.koridata);
-            //console.log($scope.koridata[0].properties.luettelointinumero);
-          //  document.getElementById("koriqrkoodi").src = vm.createQRCode($scope.nimi);
+            $scope.sivumaara = 1;
+            $scope.extrasivut = 0;
+            if ($scope.koridata.length > $scope.etusivumaara){
+                vm.extrasivumaara = Math.ceil(($scope.koridata.length - $scope.etusivumaara) / $scope.muusivumaara);
+                $scope.sivumaara += vm.extrasivumaara;
+                $scope.extrasivut = [];
+                for(var i = 0; i < vm.extrasivumaara; i++){
+                    $scope.extrasivut.push(i);
+                }
+            }
         };
 
         vm.startup();
-    }
-);
+    });
 
 </script>

@@ -711,14 +711,9 @@ angular.module('mip.kori').controller(
                  * Create a QR Code report
                  */
 				vm.createQRCodeReport = function() {
-					//sessionStorage.test = "Loyto 1234"
-					//
-					console.log("Kori", vm.kori);
-					console.log("Koridata:", vm.loytoKoriTable.data);
 					sessionStorage.setItem("korinimi", vm.kori.properties.nimi);
 					sessionStorage.setItem("koridata", JSON.stringify(vm.loytoKoriTable.data));
-					//window.open("korit/partials/qrcode_window.html", "_blank");
-					window.open("korit/partials/qrcode2.html", "_blank");
+					window.open("korit/partials/qrcode_report.html", "_blank");
 				};
 
                 /*
