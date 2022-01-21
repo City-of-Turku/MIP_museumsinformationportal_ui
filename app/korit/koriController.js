@@ -716,6 +716,15 @@ angular.module('mip.kori').controller(
                     return locale.getString(str);
                 }
 
+/*
+                 * Create a QR Code report
+                 */
+				vm.createQRCodeReport = function() {
+					sessionStorage.setItem("korinimi", vm.kori.properties.nimi);
+					sessionStorage.setItem("koridata", JSON.stringify(vm.loytoKoriTable.data));
+					window.open("korit/partials/qrcode_report.html", "_blank");
+				};
+
                 /*
                  * Create a report
                  * type: PDF / WORD / EXCEL ...
