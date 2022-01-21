@@ -19,7 +19,8 @@ angular.module('mip.kori').controller('RakKoriListController', [
             	
 	             // Tabin asetus
 	             vm.updateTabs('common.Building_inventory', 'common.Carts');
-
+							 
+							 vm.showQRCodeButton = false;
             };  
             vm.setUp();
 

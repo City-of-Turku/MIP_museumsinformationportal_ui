@@ -60,6 +60,23 @@ angular.module('mip.kori').factory('KoriService', [
 
 					return deferred.promise;
 				},
+				haeKoriNimella : function (koriNimi) {
+					var deferred = $q.defer();
+					var url = CONFIG.API_URL + 'kori/nimi/' + koriNimi;
+					$http({
+						method : 'GET',
+						url : url
+					}).then(function successCallback (response) {
+						deferred.resolve(response.data.data);
+					}, function errorCallback (response) {
+						if (CONFIG.DEBUG) {
+							console.log("koriService - haeKori virhe : " + response);
+						}
+						deferred.reject(response);
+					});
+
+					return deferred.promise;
+				},
 				/*
 				 * Hakee korityypin taulun nimen mukaan
 				 */

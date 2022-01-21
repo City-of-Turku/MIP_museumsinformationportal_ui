@@ -1,3 +1,12 @@
+/* eslint-disable quote-props */
+/* eslint-disable indent */
+/* eslint-disable angular/function-type */
+/* eslint-disable space-before-blocks */
+/* eslint-disable angular/controller-as */
+/* eslint-disable padded-blocks */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable dot-notation */
+
 /*
  * Kori UI controller
  */
@@ -736,9 +745,10 @@ angular.module('mip.kori').controller(
                 	vm.haeKori(vm.kori.properties.id);
 
                 	// Luodaan objekti tietojen välitystä varten
+									// Default arvo: Kokoelmassa 
                 	vm.loyto = {
                 			'properties' : {
-                				'loydon_tila': '',
+                				'loydon_tila': {id: 6, nimi_fi: 'Kokoelmassa'},
                 				'tapahtumapaiva': null,
                 				'tilan_kuvaus': ''
                 			}
@@ -747,7 +757,7 @@ angular.module('mip.kori').controller(
                 		vm.loyto.properties.tapahtumapaiva = new Date();
                 	}
                 	vm.disableButtons = true;
-					vm.tilanmuutos = true;
+									vm.tilanmuutos = true;
                 };
 
                 $scope.$watch('vm.loyto.properties.loydon_tila', function(newV, oldV) {
@@ -863,6 +873,85 @@ angular.module('mip.kori').controller(
 						console.log(angular.copy(vm.loyto.properties));
 					}
 				});
+
+
+				// Event for successful QR code reading
+				$scope.onSuccess = function (data) {
+					//console.log(data);
+					$scope.scannerText = data;
+					this.$hide();
+					
+					$scope.asetaTila(data);
+				}
+
+				$scope.asetaTila = function(data) {
+					// Parsitaan data
+					try {
+						var splittedText = data.split('&');
+
+						var sailytyspaikka = splittedText[0].split('=')[1];
+						var sailytystila = splittedText[1].split('=')[1];
+						var hyllypaikka = splittedText[2].split('=')[1];
+					} catch (err) {
+						AlertService.showError(locale.getString('common.Error'), 'Sijaintikoodi on virheellinen: ' + data);
+						return;
+					}
+
+					var tilaAsetettu = false;					
+					var sailytysTilaHakusana = sailytyspaikka + ' ' + sailytystila
+
+					// Hae sailytystilat
+					ListService.getOptions('ark_sailytystila').then(function success(options) {
+						for (var i = 0; i < options.length; i++) {
+							if (options[i].nimi_fi == sailytysTilaHakusana) { 
+								// Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon					
+								vm.loyto.properties.sailytystila = options[i];
+								tilaAsetettu = true;
+							}
+							if(tilaAsetettu) {
+								break;
+							}
+						}
+
+						if(!tilaAsetettu) {
+							AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytystila + ' ' + sailytyspaikka);
+						}
+
+					}, function error(data) {
+							locale.ready('error').then(function() {
+									// TODO
+									// AlertService.showError(locale.getString("error.Getting_culturohistorical_values_failed"), AlertService.message(data));
+									console.log(data);
+							});
+					});
+
+					// Asetetaan hyllypaikaksi hyllypaikka
+					vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
+				}
+		
+				// Event for error QR code reading
+				$scope.onError = function (error) {
+					console.log(error);
+					// TODO: Käännökset virheilmoituksille?
+					if(error === "Couldn't find enough finder patterns") {
+						vm.showStatus('Scanning...');
+					} else if (error === "URIError: URI malformed") {
+						vm.showStatus("Couldn't read code properly.");
+					} else {
+						vm.showStatus(error);
+					}      
+				};
+		
+				// Event for video error (no permission for camera etc.)
+				$scope.onVideoError = function (error) {
+					console.log(error);
+					vm.showStatus(error);
+				};
+		
+				vm.showStatus = function (text) {
+					$scope.scannerErrorText = text;
+				}
+
 
 				}
 		]);

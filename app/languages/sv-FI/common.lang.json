@@ -563,5 +563,8 @@
 	"Start_tracking": "Aloita reitin tallennus",
 	"Stop_tracking": "Lopeta reitin tallennus",
 	"Delete_marker": "Poista merkki",
-	"Internal_additional_info": "Sisäiset lisätiedot"
+	"Internal_additional_info": "Sisäiset lisätiedot",
+	"Scan_qrcode": "Skannaa QR koodi",
+	"Basket_name": "Korin nimi",
+	"Storage_code": "Säilytystilan koodi"
 }
