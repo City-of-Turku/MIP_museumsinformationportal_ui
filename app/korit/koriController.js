@@ -907,7 +907,7 @@ angular.module('mip.kori').controller(
 					}
 
 					var tilaAsetettu = false;					
-					var sailytysTilaHakusana = sailytyspaikka + ' ' + sailytystila
+					var sailytysTilaHakusana = sailytyspaikka + ', ' + sailytystila
 
 					// Hae sailytystilat
 					ListService.getOptions('ark_sailytystila').then(function success(options) {
