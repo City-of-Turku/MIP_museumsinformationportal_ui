@@ -923,7 +923,7 @@ angular.module('mip.kori').controller(
 						}
 
 						if(!tilaAsetettu) {
-							AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytystila + ' ' + sailytyspaikka);
+							AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytyspaikka + ' ' + sailytystila);
 						}
 
 					}, function error(data) {
