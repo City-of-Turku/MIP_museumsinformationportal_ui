@@ -11,7 +11,7 @@
     }
     .coderow > td{
         border: 1px solid;
-        height: 110px;
+        height: 80px;
     }
     th{
         border: 1px solid;
@@ -67,20 +67,22 @@
         <td>Korin tunnus:</td>
         <td>{{nimi}}</td>
         <td></td>
-        <td id="koriqr"><qr type-number="0" correction-level="'M'" size="120" text="nimi"></qr></td>
+        <td id="koriqr"><qr type-number="0" correction-level="'M'" size="80" text="nimi"></qr></td>
     </tr>
     <tr style="height: 20px;"></tr>
     <tr style="height: 50px;" class="coderow">
-        <th>Luettelointinumero</th>
+        <th>QR-koodi<br>Luettelointinumero</th>
         <th>Kuvaus</th>
         <th>Kpl</th>
-        <th>QR-koodi</th>
+        <th>Luettelointinumero<br>QR-koodi</th>
     </tr>
     <tr class="coderow" ng-repeat="loyto in koridata | limitTo:etusivumaara:0">
-        <td>{{loyto.properties.luettelointinumero}}</td>
-        <td>{{loyto.properties.kuvaus}}</td>
+        <td ng-if="$odd">{{loyto.properties.luettelointinumero}}</td>
+        <td ng-if="$even"><qr type-number="0" correction-level="'M'" size="qrkoodikoko" text="loyto.properties.luettelointinumero"></td>
+        <td>{{(loyto.properties.kuvaus.length > kuvausmerkkimaara)? (loyto.properties.kuvaus | limitTo:kuvausmerkkimaara)+'..':(loyto.properties.kuvaus)}}</td>
         <td>{{loyto.properties.kappalemaara}}</td>
-        <td><qr type-number="0" correction-level="'M'" size="75" text="loyto.properties.luettelointinumero"></td>
+        <td ng-if="$odd"><qr type-number="0" correction-level="'M'" size="qrkoodikoko" text="loyto.properties.luettelointinumero"></td>
+        <td ng-if="$even">{{loyto.properties.luettelointinumero}}</td>
     </tr>
 </table>
 
@@ -97,17 +99,13 @@
         <td></td>
         <td>{{(sivu + 2)}}/{{sivumaara}}</td>
     </tr>
-    <tr style="height: 50px;" class="coderow">
-        <th>Luettelointinumero</th>
-        <th>Kuvaus</th>
-        <th>Kpl</th>
-        <th>QR-koodi</th>
-    </tr>
     <tr class="coderow" ng-repeat="loyto in koridata | limitTo:muusivumaara:(etusivumaara+sivu*muusivumaara)">
-        <td>{{loyto.properties.luettelointinumero}}</td>
-        <td>{{loyto.properties.kuvaus}}</td>
+        <td ng-if="$even">{{loyto.properties.luettelointinumero}}</td>
+        <td ng-if="$odd"><qr type-number="0" correction-level="'M'" size="qrkoodikoko" text="loyto.properties.luettelointinumero"></td>
+        <td>{{(loyto.properties.kuvaus.length > kuvausmerkkimaara)? (loyto.properties.kuvaus | limitTo:kuvausmerkkimaara)+'..':(loyto.properties.kuvaus)}}</td>
         <td>{{loyto.properties.kappalemaara}}</td>
-        <td><qr type-number="0" correction-level="'M'" size="75" text="loyto.properties.luettelointinumero"></td>
+        <td ng-if="$even"><qr type-number="0" correction-level="'M'" size="qrkoodikoko" text="loyto.properties.luettelointinumero"></td>
+        <td ng-if="$odd">{{loyto.properties.luettelointinumero}}</td>
     </tr>
 </table>
 
@@ -118,12 +116,15 @@
         var vm = this;
 
         vm.startup = function() {
-            $scope.etusivumaara = 5;
-            $scope.muusivumaara = 6;
+            $scope.etusivumaara = 8;
+            $scope.muusivumaara = 10;
             $scope.nimi = sessionStorage.getItem('korinimi');
+            document.title = $scope.nimi;
             $scope.koridata = JSON.parse(sessionStorage.getItem('koridata'));
             $scope.sivumaara = 1;
             $scope.extrasivut = 0;
+            $scope.kuvausmerkkimaara = 130;
+            $scope.qrkoodikoko = 50;
             if ($scope.koridata.length > $scope.etusivumaara){
                 vm.extrasivumaara = Math.ceil(($scope.koridata.length - $scope.etusivumaara) / $scope.muusivumaara);
                 $scope.sivumaara += vm.extrasivumaara;
