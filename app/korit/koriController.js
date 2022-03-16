@@ -600,7 +600,7 @@ angular.module('mip.kori').controller(
 
                     vm.kori.properties.kori_id_lista = vm.koriIdLista;
 
-                    KoriService.luoTallennaKori(vm.kori).then(function (kori) {
+                    KoriService.luoTallennaKori(vm.kori).then(function success(kori) {
 
                         AlertService.showInfo(locale.getString('common.Save_ok'), "");
 
@@ -615,8 +615,8 @@ angular.module('mip.kori').controller(
                     	vm.uusia = null;
                     	vm.vanha_id_lista = []; // vanhan listan resetointi
 
-                    }, function error () {
-                        AlertService.showError(locale.getString('common.Error'), locale.getString('common.Save_failed'));
+                    }, function error (kori) {
+                        AlertService.showError(locale.getString('common.Error'), AlertService.message(kori));
                         vm.disableButtons = false;
                     });
                 };
