@@ -67,6 +67,8 @@ body {
 	background-size: cover;
 	background-repeat: no-repeat;
 	z-index: 1;
+	overflow-y:auto;
+
 }
 
 @media screen and (max-width: 768px) {
