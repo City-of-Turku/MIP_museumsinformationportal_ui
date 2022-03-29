@@ -1,5 +1,5 @@
 
-<div class="form-group">
+<div class="form-group" ng-if="!haku">
     <label for="sailytystila" class="col-md-4 col-sm-4 col-xs-4 control-label">
         <span i18n="ark.Archive_location"></span><span ng-show="req">*</span>
     </label>
@@ -10,3 +10,11 @@
         </select>
     </div>
 </div>
+<ui-select class="ng-animate-disabled" ng-if="haku" ng-model="sailytystila.sailytystila" theme="bootstrap" name="tilat" ng-required="req" ng-disabled="dis">
+    <ui-select-match allow-clear="true" data-i18n-attr="{placeholder: 'ark.Permanent_location'}">{{$select.selected.nimi_fi}}</ui-select-match>
+    <span ng-bind-html=""></span>
+    <ui-select-choices
+        repeat="tila.id as tila in sailytystilat | filter: $select.search">
+        <span ng-bind-html="tila.nimi_fi | highlight: $select.search"></span>
+    </ui-select-choices>
+</ui-select>

@@ -10,26 +10,26 @@
                             <span i18n="common.Results"></span>
                             : {{vm.loydotTable.total()}}
                             <span i18n="common.Shown"></span>
-                            : {{vm.searchResults}} 
+                            : {{vm.searchResults}}
                             <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-                        </h4>					
+                        </h4>
 					</div>
-                    <div class="panel-body form-horizontal panel-collapse collapse in" id="hakukentat" 
-                    	ng-include="'ark/loydot/loyto_hakukentat.html'" 
+                    <div class="panel-body form-horizontal panel-collapse collapse in" id="hakukentat"
+                    	ng-include="'ark/loydot/loyto_hakukentat.html'"
                     	style="margin-bottom: 1em;">
                    </div>
 					<div class="panel-heading" role="tab" data-toggle="collapse" data-target="#tarkennettu_haku">
                         <h4 class="panel-title">
                             <span i18n="common.Advanced_search"></span>
                             <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-                        </h4>					
-					</div>                   
-                    <div class="panel-body form-horizontal panel-collapse collapse" id="tarkennettu_haku" 
-                    	ng-include="'ark/loydot/loyto_tarkennettu_haku.html'" 
+                        </h4>
+					</div>
+                    <div class="panel-body form-horizontal panel-collapse collapse" id="tarkennettu_haku"
+                    	ng-include="'ark/loydot/loyto_tarkennettu_haku.html'"
                     	style="margin-bottom: 1em;">
-                   </div>                   
+                   </div>
                    <!-- Taulukko -->
-					<table ng-table="vm.loydotTable" 
+					<table ng-table="vm.loydotTable"
                         template-pagination="pages/templates/table-pagination.html"
 						class="table table-striped table-bordered" show-filter="false">
 						<tr ng-repeat="loyto in $data" style="cursor: pointer" ng-click="vm.selectLoyto(loyto)">
@@ -39,21 +39,21 @@
                             </td>
                             <td data-title="vm.getColumnName('Research_abbreviation', 'ark')" sortable="'properties.tutkimusLyhenne'" ng-if="vm.colVisibilities.showTutkimusLyhenneCol">
                                 <div ng-if="loyto.properties.yksikko">{{loyto.properties.yksikko.tutkimusalue.tutkimus.tutkimuksen_lyhenne}}</div>
-                                <div ng-if="loyto.properties.tutkimusalue">{{loyto.properties.tutkimusalue.tutkimus.tutkimuksen_lyhenne}}</div><!-- IRTOLÖYTÖ -->                                
+                                <div ng-if="loyto.properties.tutkimusalue">{{loyto.properties.tutkimusalue.tutkimus.tutkimuksen_lyhenne}}</div><!-- IRTOLÖYTÖ -->
                             </td>
                             <td data-title="vm.getColumnName('Research_name', 'ark')" ng-if="vm.colVisibilities.showTutkimuksenNimiCol">
                                 <div ng-if="loyto.properties.yksikko">{{loyto.properties.yksikko.tutkimusalue.tutkimus.nimi}}</div>
                                 <div ng-if="loyto.properties.tutkimusalue">{{loyto.properties.tutkimusalue.tutkimus.nimi}}</div><!-- IRTOLÖYTÖ -->
-                            </td>   					
+                            </td>
                             <td data-title="vm.getColumnName('Listing_number', 'ark')" sortable="'properties.luettelointinumero'" ng-if="vm.colVisibilities.showLuettelointinumeroCol">
                                 {{loyto.properties.luettelointinumero}}
-                            </td>                                   
+                            </td>
                             <td data-title="vm.getColumnName('Unit_identifier', 'unit')" ng-if="vm.colVisibilities.showYksikkotunnusCol">
                                 {{loyto.properties.yksikko.yksikkotunnus}}
-                            </td>         
+                            </td>
                             <td data-title="vm.getColumnName('Area')" ng-if="vm.colVisibilities.showAlueCol">
                                 {{loyto.properties.yksikko.tutkimusalue.nimi}}
-                            </td>                														
+                            </td>
                             <td data-title="vm.getColumnName('Material_code', 'ark')" ng-if="vm.colVisibilities.showMateriaalikoodiCol">
                                 {{loyto.properties.materiaalikoodi | namei18n}}
                             </td>
@@ -71,12 +71,12 @@
                             <td data-title="vm.getColumnName('Other_material', 'ark')" ng-if="vm.colVisibilities.showMuutMateriaalitCol">
 				               	<span ng-repeat="materiaali in loyto.properties.materiaalit">
 				               		{{materiaali | namei18n}} <font ng-show="!$last">,</font>
-				               	</span>	
+				               	</span>
                             </td>
                             <td data-title="vm.getColumnName('Timing', 'ark')" sortable="'properties.alkuvuosi'" ng-if="vm.colVisibilities.showAjoitusCol">
                                 {{loyto.properties.alkuvuosi}} {{loyto.properties.alkuvuosi_ajanlasku}} <font ng-if="loyto.properties.paatosvuosi"> -</font>
-                                {{loyto.properties.paatosvuosi}} {{loyto.properties.paatosvuosi_ajanlasku}} 
-                            </td>                              
+                                {{loyto.properties.paatosvuosi}} {{loyto.properties.paatosvuosi_ajanlasku}}
+                            </td>
                             <td data-title="vm.getColumnName('Mark', 'common')" ng-if="vm.colVisibilities.showMerkintaCol">
 				               	<span ng-repeat="merkinta in loyto.properties.merkinnat">
 				               		{{merkinta | namei18n}} <font ng-show="!$last">,</font>
@@ -92,14 +92,14 @@
                             </td>
                             <td data-title="vm.getColumnName('Discovery_status', 'ark')" ng-if="vm.colVisibilities.showLoydonTilaCol">
                                 {{loyto.properties.loydon_tila | namei18n}}
-                            </td>                      
+                            </td>
                             <td data-title="vm.getColumnName('Collection_identifier', 'ark')" ng-if="vm.colVisibilities.showKokoelmatunnusCol">
                                 {{loyto.properties.yksikko.tutkimusalue.tutkimus.loyto_kokoelmalaji | namei18n}}
-                            </td> 
+                            </td>
                             <td data-title="vm.getColumnName('Conservation_required', 'ark')" ng-if="vm.colVisibilities.showVaatiiKonservointiaCol">
 				               	<span ng-repeat="konservointi in vm.konservointiLista">
 				               		<span ng-show="konservointi.id == loyto.properties.konservointi">{{konservointi.nimi_fi}}</span>
-				               	</span>                                
+				               	</span>
                             </td>
                             <td data-title="vm.getColumnName('Description', 'common')" ng-if="vm.colVisibilities.showKuvausCol">
                                 {{loyto.properties.kuvaus}}
@@ -115,7 +115,17 @@
                             </td>
                             <td data-title="vm.getColumnName('Permanent_location', 'ark')" ng-if="vm.colVisibilities.showVakituinenSijaintiCol">
                                 <div>
-                                    {{loyto.properties.sailytystila | namei18n}}<span ng-if="loyto.properties.sailytystila && loyto.properties.vakituinen_hyllypaikka">.</span>{{loyto.properties.vakituinen_hyllypaikka}}
+                                    {{loyto.properties.sailytystila | namei18n}}
+                                </div>
+                            </td>
+                            <td data-title="vm.getColumnName('Shelf_spot', 'ark')" ng-if="vm.colVisibilities.showHyllypaikkaCol">
+                                <div>
+                                    {{loyto.properties.vakituinen_hyllypaikka}}
+                                </div>
+                            </td>
+                            <td data-title="vm.getColumnName('Temporary_location', 'ark')" ng-if="vm.colVisibilities.showTilapainenSijaintiCol">
+                                <div>
+                                    {{loyto.properties.tilapainen_sijainti}}
                                 </div>
                             </td>
                             <td data-title="vm.getColumnName('Discovery_location_extension', 'ark')" ng-if="vm.colVisibilities.showLoytopaikanTarkenneCol">
@@ -125,7 +135,7 @@
                                 {{loyto.properties.kenttanumero_vanha_tyonumero}}
                             </td>
 						</tr>
-					</table>                   					
+					</table>
 				</div>
 			</div>
 		</div>

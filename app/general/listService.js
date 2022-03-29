@@ -171,6 +171,8 @@ angular.module('mip.general').factory('ListService', [
                     	'showKuvausCol': false,
                     	'showKokoelmatunnusCol': false,
                     	'showVakituinenSijaintiCol': false,
+                        'showHyllypaikkaCol': false,
+                        'showTilapainenSijaintiCol': false,
                         'showAlueCol': true,
                         'showLoytopaikanTarkenneCol': false,
                         'showKenttanumeroVanhaTyonumeroCol': false
@@ -182,7 +184,10 @@ angular.module('mip.general').factory('ListService', [
                     	'showYksikkotunnusCol': true,
                     	'showNaytekoodiCol': true,
                     	'showNaytetyyppiCol': true,
-                    	'showNaytettaJaljellaCol': true
+                    	'showNaytettaJaljellaCol': true,
+                    	'showVakituinenSijaintiCol': false,
+                        'showHyllypaikkaCol': false,
+                        'showTilapainenSijaintiCol': false
                     }, 'nayte': {
                     	'showLuettelointinumeroCol' : true,
                     	'showKuvausCol': true,
@@ -1479,6 +1484,11 @@ angular.module('mip.general').factory('ListService', [
                     } else {
                         listServiceFunctions.setProp('kenttanumero_vanha_tyonumero', "");
                     }
+                    if (filterParameters.sailytystila) {
+                        listServiceFunctions.setProp('sailytystila', filterParameters.sailytystila);
+                    } else {
+                        listServiceFunctions.setProp('sailytystila', "");
+                    }
                 },
                 // ARK näyte tab TODO vaihda päällekkäiset propparinimet!!!
                 saveNayteSearchParameters : function(filterParameters) {
@@ -1556,6 +1566,11 @@ angular.module('mip.general').factory('ListService', [
                         listServiceFunctions.setProp('luokka', filterParameters.luokka);
                     } else {
                         listServiceFunctions.setProp('luokka', "");
+                    }
+                    if (filterParameters.sailytystila) {
+                        listServiceFunctions.setProp('sailytystila', filterParameters.sailytystila);
+                    } else {
+                        listServiceFunctions.setProp('sailytystila', "");
                     }
                 },
                 saveKasittelytSearchParameters : function(filterParameters) {

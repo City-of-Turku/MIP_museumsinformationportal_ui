@@ -22,7 +22,7 @@
 			<div ng-if="vm.loyto.properties.loydon_tila.id == 6" ng-include="'ark/loydot/partials/tila_kokoelmassa.html'"></div>
 			<div>&nbsp;</div>
 			<!-- Lisäksi näytetään vielä vakituinen sijainti (säilytystila + hyllypaikka) ja tilapainen sijainti -->
-			<mip-sailytystila ng-show="!vm.tilanmuutos" sailytystila="vm.loyto.properties.sailytystila" req="false" dis="false"></mip-sailytystila>
+			<mip-sailytystila ng-show="!vm.tilanmuutos" sailytystila="vm.loyto.properties.sailytystila" req="false" dis="false" haku="false"></mip-sailytystila>
 			<div class="form-group" ng-show="!vm.tilanmuutos" ng-class="{ 'has-error': form.hyllypaikka.$invalid && form.hyllypaikka.$touched }">
 				<label for="hyllypaikka" class="col-sm-4 control-label">
 					<span i18n="ark.Shelf_spot"></span>

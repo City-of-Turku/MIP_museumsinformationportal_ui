@@ -5,24 +5,24 @@
 			<div class="col-md-2 col-md-offset-1">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 							<input type="checkbox" ng-model="vm.colVisibilities.showMerkintaCol"
 							ng-change="vm.saveColVisibility('showMerkintaCol', vm.colVisibilities.showMerkintaCol)"
 							data-i18n-attr="{title: 'common.Show_field'}">
-						</span> 
+						</span>
 						<mip-merkinta-multi merkinta="vm.loydotTable.filter().properties" haku="true"></mip-merkinta-multi>
 					</div>
 				</div>
-			</div>		
+			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showTulkintaCol"
 							ng-change="vm.saveColVisibility('showTulkintaCol', vm.colVisibilities.showTulkintaCol)"
 							data-i18n-attr="{title: 'common.Show_field'}">
-						</span> 
+						</span>
 						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
 							name="tulkinta" ng-model="vm.loydotTable.filter().properties.tulkinta"
 							data-i18n-attr="{placeholder: 'common.Construe'}" spellcheck="false" autocomplete="off">
@@ -32,7 +32,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showAsiasanaCol"
 							ng-change="vm.saveColVisibility('showAsiasanaCol', vm.colVisibilities.showAsiasanaCol)"
@@ -47,7 +47,7 @@
 			<div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox" ng-model="vm.colVisibilities.showLoydonTilaCol"
                             ng-change="vm.saveColVisibility('showLoydonTilaCol', vm.colVisibilities.showLoydonTilaCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
@@ -59,7 +59,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showVaatiiKonservointiaCol"
                             ng-change="vm.saveColVisibility('showVaatiiKonservointiaCol', vm.colVisibilities.showVaatiiKonservointiaCol)"
@@ -72,14 +72,14 @@
                         </select>
                     </div>
                 </div>
-            </div>			
+            </div>
 		</div>
 		<!-- Rivi 2 -->
 		<div class="col-md-12">
 <!-- 			<div class="col-md-2 col-md-offset-1">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showKokoelmatunnusCol"
 							ng-change="vm.saveColVisibility('showKokoelmatunnusCol', vm.colVisibilities.showKokoelmatunnusCol)"
@@ -88,12 +88,12 @@
 						<mip-kokoelmalaji kokoelmatyyppi="loydot" laji="vm.loydotTable.filter().properties.loyto_kokoelmalaji" haku="true"></mip-kokoelmalaji>
 					</div>
 				</div>
-			</div> -->		
-			
+			</div> -->
+
 			<div class="col-md-2 col-md-offset-1">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showKuvausCol"
 							ng-change="vm.saveColVisibility('showKuvausCol', vm.colVisibilities.showKuvausCol)"
@@ -104,11 +104,11 @@
 							data-i18n-attr="{placeholder: 'common.Description'}" spellcheck="false" autocomplete="off">
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showLisatiedotCol"
 							ng-change="vm.saveColVisibility('showLisatiedotCol', vm.colVisibilities.showLisatiedotCol)"
@@ -123,7 +123,7 @@
 			<div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox" ng-model="vm.colVisibilities.showAjoitusCol"
                             ng-change="vm.saveColVisibility('showAjoitusCol', vm.colVisibilities.showAjoitusCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
@@ -131,7 +131,7 @@
                         <div class="col-sm-8" style="padding-left: 0px; padding-right: 0px;">
                             <input type="number" min="0" class="form-control" name="alkuvuosi"
                                 ng-model="vm.loydotTable.filter().properties.alkuvuosi"
-                                ng-change="vm.loydotTable.filter().properties.alkuvuosi_ajanlasku = vm.alkuvuosi_ajanlasku" 
+                                ng-change="vm.loydotTable.filter().properties.alkuvuosi_ajanlasku = vm.alkuvuosi_ajanlasku"
                                 data-i18n-attr="{placeholder: 'ark.Timing_begin_year'}"
                                 ng-disabled="vm.alkuvuosi_ajanlasku == null"
                                 spellcheck="false" autocomplete="off">
@@ -143,21 +143,21 @@
                                 name="alkuvuosi_ajanlasku"
                                 ng-change="vm.loydotTable.filter().properties.alkuvuosi = null">
                             </select>
-                        </div>                      
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox" ng-model="vm.colVisibilities.showAjoitusCol"
                             ng-change="vm.saveColVisibility('showAjoitusCol', vm.colVisibilities.showAjoitusCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
                         </span>
                         <div class="col-sm-8" style="padding-left: 0px; padding-right: 0px;">
                             <input type="number" min="0" class="form-control" name="paatosvuosi"
-                                ng-model="vm.loydotTable.filter().properties.paatosvuosi" 
+                                ng-model="vm.loydotTable.filter().properties.paatosvuosi"
                                 ng-change="vm.loydotTable.filter().properties.paatosvuosi_ajanlasku = vm.paatosvuosi_ajanlasku"
                                 data-i18n-attr="{placeholder: 'ark.Timing_end_year'}"
                                 ng-disabled="vm.paatosvuosi_ajanlasku == null"
@@ -170,14 +170,14 @@
                                 name="paatosvuosi_ajanlasku"
                                 ng-change="vm.loydotTable.filter().properties.paatosvuosi = null">
                             </select>
-                        </div>                      
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showKappalemaaraCol"
                             ng-change="vm.saveColVisibility('showKappalemaaraCol', vm.colVisibilities.showKappalemaaraCol)"
@@ -190,7 +190,7 @@
             <div class="col-md-1">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showPainoCol"
                             ng-change="vm.saveColVisibility('showPainoCol', vm.colVisibilities.showPainoCol)"
@@ -206,35 +206,50 @@
 			<div class="col-md-2 col-md-offset-1">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showVakituinenSijaintiCol"
                             ng-change="vm.saveColVisibility('showVakituinenSijaintiCol', vm.colVisibilities.showVakituinenSijaintiCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
                         </span>
-                        <span i18n="ark.Permanent_location" class="form-control" disabled></span>
+						<mip-sailytystila sailytystila="vm.loydotTable.filter().properties" req="false" dis="false" haku="true"></mip-sailytystila>
                     </div>
-                </div>			
+                </div>
 			</div>
-<!-- 			<div class="col-md-2">
-				<div class="form-group">
-					<div class="input-group">
-						<span class="input-group-addon"> 
-						<input type="checkbox" disabled="disabled"
-							ng-model="vm.colVisibilities.showLisatiedotCol"
-							ng-change="vm.saveColVisibility('showLisatiedotCol', vm.colVisibilities.showLisatiedotCol)"
-							data-i18n-attr="{title: 'common.Show_field'}">
-						</span>
-						<input type="text" class="form-control" disabled="disabled" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
-							name="kuvaus" ng-model="vm.loydotTable.filter().properties.TODO"
-							placeholder="Hyllypaikka (ei toteutettu)" spellcheck="false" autocomplete="off">
-					</div>
-				</div>
-			</div>			
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
+						<input type="checkbox"
+							ng-model="vm.colVisibilities.showHyllypaikkaCol"
+							ng-change="vm.saveColVisibility('showHyllypaikkaCol', vm.colVisibilities.showHyllypaikkaCol)"
+							data-i18n-attr="{title: 'common.Show_field'}">
+						</span>
+						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+							name="kuvaus" ng-model="vm.loydotTable.filter().properties.hyllypaikka"
+							data-i18n-attr="{placeholder: 'ark.Shelf_spot'}"spellcheck="false" autocomplete="off">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
+						<input type="checkbox"
+							ng-model="vm.colVisibilities.showTilapainenSijaintiCol"
+							ng-change="vm.saveColVisibility('showTilapainenSijaintiCol', vm.colVisibilities.showTilapainenSijaintiCol)"
+							data-i18n-attr="{title: 'common.Show_field'}">
+						</span>
+						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+							name="kuvaus" ng-model="vm.loydotTable.filter().properties.tilapainen_sijainti"
+							data-i18n-attr="{placeholder: 'ark.Temporary_location'}"spellcheck="false" autocomplete="off">
+					</div>
+				</div>
+			</div>
+	<!-- 		<div class="col-md-2">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
 						<input type="checkbox" disabled="disabled"
 							ng-model="vm.colVisibilities.showToimenpideCol"
 							ng-change="vm.saveColVisibility('showToimenpideCol', vm.colVisibilities.showToimenpideCol)"
@@ -249,7 +264,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showLoytopaikanTarkenneCol"
 							ng-change="vm.saveColVisibility('showLoytopaikanTarkenneCol', vm.colVisibilities.showLoytopaikanTarkenneCol)"
@@ -264,7 +279,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showKenttanumeroVanhaTyonumeroCol"
 							ng-change="vm.saveColVisibility('showKenttanumeroVanhaTyonumeroCol', vm.colVisibilities.showKenttanumeroVanhaTyonumeroCol)"
@@ -276,7 +291,7 @@
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 
