@@ -97,7 +97,7 @@
                             ng-change="vm.saveColVisibility('showVakituinenSijaintiCol', vm.colVisibilities.showVakituinenSijaintiCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
                         </span>
-						<mip-sailytystila sailytystila="vm.naytteetTable.filter().properties" req="false" dis="false" haku="true"></mip-sailytystila>
+                        <mip-sailytystila-haku sailytystila="vm.naytteetTable.filter().properties"></mip-sailytystila-haku>
                     </div>
                 </div>
 			</div>
@@ -112,7 +112,7 @@
 						</span>
 						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
 							name="kuvaus" ng-model="vm.naytteetTable.filter().properties.hyllypaikka"
-							data-i18n-attr="{placeholder: 'ark.Shelf_spot'}"spellcheck="false" autocomplete="off">
+							placeholder = "{{ 'ark.Shelf_spot' | i18n }}%" spellcheck="false" autocomplete="off">
 					</div>
 				</div>
 			</div>

@@ -22,8 +22,7 @@ angular.module('mip.directives').directive('mipSailytystila', [
                 scope : {
                     sailytystila : '=',
                     req : '=',
-                    dis : '=',
-                    haku : '='
+                    dis : '='
                 },
                 transclude: true,
                 templateUrl : 'ark/directives/sailytystilavalitsin/sailytystila.html'
