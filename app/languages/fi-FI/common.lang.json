@@ -566,5 +566,6 @@
 	"Internal_additional_info": "Sisäiset lisätiedot",
 	"Scan_qrcode": "Skannaa QR koodi",
 	"Basket_name": "Korin nimi",
-	"Storage_code": "Säilytystilan koodi"
+	"Storage_code": "Säilytystilan koodi",
+	"Shared": "Jaettu"
 }

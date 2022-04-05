@@ -725,6 +725,24 @@ angular.module('mip.kori').controller(
 					window.open("korit/partials/qrcode_report.html", "_blank");
 				};
 
+
+				vm.jaetut_kayttajat = {};
+				// Inventoijat valintalista
+				vm.kayttajat = [];
+				vm.getUsers = function () {
+					UserService.getUsers({
+						'rivit': 10000,
+						'aktiivinen': 'true'
+					}).then(function success(data) {
+						vm.kayttajat = data.features;
+					}, function error(data) {
+						locale.ready('error').then(function () {
+							AlertService.showError(locale.getString("error.Getting_users_failed"), AlertService.message(data));
+						});
+					});
+				};
+				vm.getUsers();
+
                 /*
                  * Create a report
                  * type: PDF / WORD / EXCEL ...
