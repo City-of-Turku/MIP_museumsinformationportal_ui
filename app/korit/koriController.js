@@ -161,6 +161,8 @@ angular.module('mip.kori').controller(
 
 					// Näytetään valittavat korit
 					vm.koriValittu = false;
+					vm.showQRCodeButton = true;
+					vm.korihaku = true;
 
 		            vm.koriTable = new NgTableParams({
 		                page : 1,
@@ -754,7 +756,7 @@ angular.module('mip.kori').controller(
                 	vm.haeKori(vm.kori.properties.id);
 
                 	// Luodaan objekti tietojen välitystä varten
-									// Default arvo: Kokoelmassa 
+									// Default arvo: Kokoelmassa
                 	vm.loyto = {
                 			'properties' : {
                 				'loydon_tila': {id: 6, nimi_fi: 'Kokoelmassa'},
@@ -889,8 +891,14 @@ angular.module('mip.kori').controller(
 					//console.log(data);
 					$scope.scannerText = data;
 					this.$hide();
-					
-					$scope.asetaTila(data);
+
+					if (vm.korihaku){
+						vm.koriTable.filter().properties = {nimi: data};
+					}
+					else
+					{
+						$scope.asetaTila(data);
+					}
 				}
 
 				$scope.asetaTila = function(data) {
@@ -906,14 +914,14 @@ angular.module('mip.kori').controller(
 						return;
 					}
 
-					var tilaAsetettu = false;					
+					var tilaAsetettu = false;
 					var sailytysTilaHakusana = sailytyspaikka + ', ' + sailytystila
 
 					// Hae sailytystilat
 					ListService.getOptions('ark_sailytystila').then(function success(options) {
 						for (var i = 0; i < options.length; i++) {
-							if (options[i].nimi_fi == sailytysTilaHakusana) { 
-								// Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon					
+							if (options[i].nimi_fi == sailytysTilaHakusana) {
+								// Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon
 								vm.loyto.properties.sailytystila = options[i];
 								tilaAsetettu = true;
 							}
@@ -937,7 +945,7 @@ angular.module('mip.kori').controller(
 					// Asetetaan hyllypaikaksi hyllypaikka
 					vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
 				}
-		
+
 				// Event for error QR code reading
 				$scope.onError = function (error) {
 					console.log(error);
@@ -948,15 +956,15 @@ angular.module('mip.kori').controller(
 						vm.showStatus("Couldn't read code properly.");
 					} else {
 						vm.showStatus(error);
-					}      
+					}
 				};
-		
+
 				// Event for video error (no permission for camera etc.)
 				$scope.onVideoError = function (error) {
 					console.log(error);
 					vm.showStatus(error);
 				};
-		
+
 				vm.showStatus = function (text) {
 					$scope.scannerErrorText = text;
 				}

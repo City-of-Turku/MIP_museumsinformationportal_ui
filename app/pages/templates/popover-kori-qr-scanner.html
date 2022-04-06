@@ -2,9 +2,12 @@
     <div class="arrow"></div>
     <h3 class="popover-title" i18n="common.Scan_qrcode"></h3>
     <div class="col-md-12" style="margin: 5px;">
-        <input type="text" class="form-control" data-i18n-attr="{placeholder: 'common.Basket_name'}"
+        <input type="text" class="form-control" ng-if="!vm.korihaku" placeholder = "{{ 'common.Basket_name' | i18n }}"
             ng-model="korinimi" ng-change="$hide(); haeKoriNimella(korinimi);"
-            ng-model-options='{debounce: 1000}' min-length="3">   
+            ng-model-options='{debounce: 1000}' min-length="3">
+        <input type="text" class="form-control" ng-if="vm.korihaku" placeholder = "{{ 'common.Basket_name' | i18n }}"
+            ng-model="korinimi" ng-change="$hide(); vm.koriTable.filter().properties = {nimi: korinimi};"
+            ng-model-options='{debounce: 1000}' min-length="3">
         <br />
         <qr-scanner width="300" height="400" ng-success="onSuccess(data)" ng-error="onError(error)" ng-video-error="onVideoError(error)" />
         <br />
