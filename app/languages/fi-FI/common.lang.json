@@ -567,5 +567,6 @@
 	"Scan_qrcode": "Skannaa QR koodi",
 	"Basket_name": "Korin nimi",
 	"Storage_code": "Säilytystilan koodi",
-	"Shared": "Jaettu"
+	"Share": "Jaa",
+	"Shared_to_users": "Jaettu käyttäjille"
 }

@@ -18,15 +18,15 @@
 					    <div class="col-sm-8">
 					        <p class="form-control-static">{{vm.kori.properties.korityyppi | namei18n}}</p>
 					    </div>
-					</div>	    			
+					</div>
 			        <div class="form-group" ng-class="{ 'has-error': form.nimi.$invalid && form.nimi.$touched}">
 			            <label class="col-sm-4 control-label">
 			            	<span i18n="common.Name"></span> *
 			            </label>
 			            <div class="col-sm-8">
-			                <input type="text" class="form-control" 
-			                	name="nimi" 
-			                    ng-model="vm.kori.properties.nimi" 
+			                <input type="text" class="form-control"
+			                	name="nimi"
+			                    ng-model="vm.kori.properties.nimi"
 			                    ng-required="true"
 			                    focus-me="focusInput">
 			                <span class="help-block" ng-show="form.nimi.$invalid && form.nimi.$touched">
@@ -39,14 +39,14 @@
 			            	<span i18n="common.Updated"></span>
 			            </label>
 			            <div class="col-sm-8">
-			            	<p class="form-control-static">			        
+			            	<p class="form-control-static">
 								{{vm.kori.properties.muokattu | pvm:'dd.MM.yyyy HH:mm:ss'}}
 							</p>
-						</div>			        
-			        </div>			        
+						</div>
+			        </div>
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
-			            	<span i18n="common.User"></span> 
+			            	<span i18n="common.User"></span>
 			            </label>
 			            <div class="col-sm-8">
 			                <p class="form-control-static">{{vm.kori.properties.luoja.etunimi}} {{vm.kori.properties.luoja.sukunimi}} {{vm.kori.properties.luoja.sahkoposti}}</p>
@@ -64,7 +64,7 @@
 			                    ng-model="vm.kori.properties.kuvaus"
 			                    rows="3"
 			                    ng-required="true">
-			                </textarea> 
+			                </textarea>
 			                <span class="help-block" ng-show="form.kuvaus.$invalid && form.kuvaus.$touched">
 			                    <span data-i18n="common.mandatory_value" data-field="{{ 'common.Description' | i18n }}"></span>
 			                </span>
@@ -72,22 +72,39 @@
 			        </div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label">
-			            	<span i18n="common.Shared"></span>
+			            	<span i18n="common.Share"></span>
 			            </label>
-						<div class="col-sm-8">
-							<ui-select multiple="true" ng-model="vm.jaetut_kayttajat" name="kayttaja" theme="bootstrap">
-								<ui-select-match allow-clear="true" data-i18n-attr="{placeholder: 'common.Users'}">
+						<div class="col-sm-8 form-group">
+							<ui-select class="ng-animate-disabled" ng-model="vm.valittu_kayttaja" name="kayttaja" theme="bootstrap" on-select="vm.addUser($select.selected)">
+								<ui-select-match data-i18n-attr="{placeholder: 'common.Users'}">
 									{{$select.selected.properties.etunimi}}
 									{{$select.selected.properties.sukunimi}}
 								</ui-select-match>
-								<ui-select-choices repeat="k.properties.id as k in vm.kayttajat | filter: $select.search track by k.properties.id">
+								<ui-select-choices repeat="k.properties.id as k in vm.kayttajat | filter: $select.search track by k.properties.id" ng-disabled="disabled">
 									<span ng-bind-html="k.properties.etunimi | highlight: $select.search"></span>
 									<span ng-bind-html="k.properties.sukunimi | highlight: $select.search"></span>
 									<span ng-bind-html="k.properties.sahkoposti | highlight: $select.search"></span>
 								</ui-select-choices>
 							</ui-select>
-						</div>	        
-					</div>	
+						</div>
+						<label class="col-sm-4 control-label">
+			            	<span i18n="common.Shared_to_users"></span>
+			            </label>
+						<div class="col-sm-8 form-group">
+							<ui-select multiple ng-model="vm.jaetut_kayttajat" onkeypress="return false;" theme="bootstrap" name="kayttajat">
+								<ui-select-match>
+									{{$item.etunimi}}
+									{{$item.sukunimi}}
+								</ui-select-match>
+								<ui-select-choices repeat="k.id as k in vm.jaetut_kayttajat track by k.id">
+								  <div>
+									<span ng-bind-html="k.etunimi | highlight: $select.search"></span>
+									<span ng-bind-html="k.sukunimi | highlight: $select.search"></span>
+								  </div>
+								</ui-select-choices>
+							</ui-select>
+						</div>
+					</div>
 				</div>
 	        </div>
 	    </div>
@@ -102,54 +119,58 @@
 					    <div class="col-sm-8">
 					        <p class="form-control-static">{{vm.kori.properties.korityyppi | namei18n}}</p>
 					    </div>
-					</div>		    	
+					</div>
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
-			            	<span i18n="common.Name"></span> 
+			            	<span i18n="common.Name"></span>
 			            </label>
 			            <div class="col-sm-8">
 			                <p class="form-control-static">{{vm.kori.properties.nimi}}</p>
 			            </div>
-			        </div>		    		
+			        </div>
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
 			            	<span i18n="common.Updated"></span>
 			            </label>
 			            <div class="col-sm-8">
-			            	<p class="form-control-static">			        
+			            	<p class="form-control-static">
 								{{vm.kori.properties.muokattu | pvm:'dd.MM.yyyy HH:mm:ss'}}
 							</p>
-						</div>			        
+						</div>
 			        </div>
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
-			            	<span i18n="common.User"></span> 
+			            	<span i18n="common.User"></span>
 			            </label>
 			            <div class="col-sm-8">
 			                <p class="form-control-static">{{vm.kori.properties.luoja.etunimi}} {{vm.kori.properties.luoja.sukunimi}} {{vm.kori.properties.luoja.sahkoposti}}</p>
 			            </div>
 			        </div>
-		        </div>	    	
-		    	<div class="col-sm-8">	
+		        </div>
+		    	<div class="col-sm-8">
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
-			            	<span i18n="common.Description"></span> 
+			            	<span i18n="common.Description"></span>
 			            </label>
 			            <div class="col-sm-8">
 			                <p class="form-control-static">{{vm.kori.properties.kuvaus}}</p>
 			            </div>
 			        </div>
 		        </div>
-				<div class="col-sm-8">	
+				<div class="col-sm-8" ng-if="vm.jaetut_kayttajat.length > 0">
 			        <div class="form-group">
 			            <label class="col-sm-4 control-label">
-			            	<span i18n="common.Shared"></span> 
+			            	<span i18n="common.Shared_to_users"></span>
 			            </label>
 			            <div class="col-sm-8">
+							<span class="form-control-static" ng-repeat="k in vm.jaetut_kayttajat">
+								{{k.etunimi}}
+								{{k.sukunimi}}<font ng-show="!$last">,</font>
+							</span>
 			            </div>
 			        </div>
 		        </div>
 	        </div>
 	    </div>
-    </div>    
+    </div>
 </div>

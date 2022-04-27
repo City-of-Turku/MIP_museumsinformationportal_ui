@@ -599,8 +599,16 @@ angular.module('mip.kori').controller(
 					}
 
                     vm.kori.properties.kori_id_lista = vm.koriIdLista;
-
-                    KoriService.luoTallennaKori(vm.kori).then(function success(kori) {
+					console.log("Jaetut käyttäjät", vm.jaetut_kayttajat);
+					vm.jaettu = vm.jaetut_kayttajat.map(function(u) {
+						return u.id;
+					})
+					/*vm.shareids = vm.jaetut_kayttajat.filter(function (i) {
+						console.log(i.id, i);
+						return i.id;
+					});*/
+					console.log(vm.jaettu);
+                    KoriService.luoTallennaKori(vm.kori, vm.jaettu).then(function success(kori) {
 
                         AlertService.showInfo(locale.getString('common.Save_ok'), "");
 
@@ -726,15 +734,21 @@ angular.module('mip.kori').controller(
 				};
 
 
-				vm.jaetut_kayttajat = {};
+				vm.jaetut_kayttajat = [];
 				// Inventoijat valintalista
 				vm.kayttajat = [];
+				vm.valittu_kayttaja = {};
 				vm.getUsers = function () {
 					UserService.getUsers({
 						'rivit': 10000,
 						'aktiivinen': 'true'
 					}).then(function success(data) {
+						//for (var i = 0; i < data.features.length; i++) {
+							//var user = data.features[i].properties;
+							//vm.kayttajat.push(user);
+						//}
 						vm.kayttajat = data.features;
+						console.log(vm.kayttajat);
 					}, function error(data) {
 						locale.ready('error').then(function () {
 							AlertService.showError(locale.getString("error.Getting_users_failed"), AlertService.message(data));
@@ -743,6 +757,13 @@ angular.module('mip.kori').controller(
 				};
 				vm.getUsers();
 
+
+				vm.addUser = function(selected) {
+					console.log("Aduuser", selected);
+					vm.jaetut_kayttajat.push(selected.properties);
+					console.log(vm.jaetut_kayttajat);
+					//console.log(vm.jaetut_kayttajat);
+				};
                 /*
                  * Create a report
                  * type: PDF / WORD / EXCEL ...
@@ -772,7 +793,7 @@ angular.module('mip.kori').controller(
                 	vm.haeKori(vm.kori.properties.id);
 
                 	// Luodaan objekti tietojen välitystä varten
-									// Default arvo: Kokoelmassa 
+									// Default arvo: Kokoelmassa
                 	vm.loyto = {
                 			'properties' : {
                 				'loydon_tila': {id: 6, nimi_fi: 'Kokoelmassa'},
@@ -907,7 +928,7 @@ angular.module('mip.kori').controller(
 					//console.log(data);
 					$scope.scannerText = data;
 					this.$hide();
-					
+
 					$scope.asetaTila(data);
 				}
 
@@ -924,14 +945,14 @@ angular.module('mip.kori').controller(
 						return;
 					}
 
-					var tilaAsetettu = false;					
+					var tilaAsetettu = false;
 					var sailytysTilaHakusana = sailytyspaikka + ', ' + sailytystila
 
 					// Hae sailytystilat
 					ListService.getOptions('ark_sailytystila').then(function success(options) {
 						for (var i = 0; i < options.length; i++) {
-							if (options[i].nimi_fi == sailytysTilaHakusana) { 
-								// Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon					
+							if (options[i].nimi_fi == sailytysTilaHakusana) {
+								// Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon
 								vm.loyto.properties.sailytystila = options[i];
 								tilaAsetettu = true;
 							}
@@ -955,7 +976,7 @@ angular.module('mip.kori').controller(
 					// Asetetaan hyllypaikaksi hyllypaikka
 					vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
 				}
-		
+
 				// Event for error QR code reading
 				$scope.onError = function (error) {
 					console.log(error);
@@ -966,15 +987,15 @@ angular.module('mip.kori').controller(
 						vm.showStatus("Couldn't read code properly.");
 					} else {
 						vm.showStatus(error);
-					}      
+					}
 				};
-		
+
 				// Event for video error (no permission for camera etc.)
 				$scope.onVideoError = function (error) {
 					console.log(error);
 					vm.showStatus(error);
 				};
-		
+
 				vm.showStatus = function (text) {
 					$scope.scannerErrorText = text;
 				}
