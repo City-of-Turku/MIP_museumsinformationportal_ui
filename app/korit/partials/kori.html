@@ -41,7 +41,11 @@
                         i18n="common.Save"
                         ng-show="vm.edit">
                     </button>
-                    <button type="button" ng-click="vm.disableButtons || vm.cancelEdit()" data-ng-if="vm.edit"
+                    <button type="button" ng-click="vm.disableButtons || vm.cancelEdit()" data-ng-if="vm.edit && !vm.uusiKori"
+                        class="btn btn-default" style="margin-left : 5px">
+                        <span i18n="common.Cancel_edit"></span>
+                    </button>
+                    <button type="button" ng-click="vm.close()" ng-show="vm.uusiKori===true"
                         class="btn btn-default" style="margin-left : 5px">
                         <span i18n="common.Cancel_edit"></span>
                     </button>

@@ -21,6 +21,7 @@ angular.module('mip.kori').controller('ArkKoriListController', [
 
       vm.asetaMip('ARK');
       vm.showQRCodeButton = true;
+      vm.korihaku = false;
 
       // Tabin asetus
       vm.updateTabs('common.Archeology', 'common.Carts');

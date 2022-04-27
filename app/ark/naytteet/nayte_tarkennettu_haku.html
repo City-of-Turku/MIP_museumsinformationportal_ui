@@ -5,7 +5,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showKuvausCol"
 							ng-change="vm.saveColVisibility('showKuvausCol', vm.colVisibilities.showKuvausCol)"
@@ -16,11 +16,11 @@
 							data-i18n-attr="{placeholder: 'common.Description'}" spellcheck="false" autocomplete="off">
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 						<input type="checkbox"
 							ng-model="vm.colVisibilities.showLisatiedotCol"
 							ng-change="vm.saveColVisibility('showLisatiedotCol', vm.colVisibilities.showLisatiedotCol)"
@@ -35,7 +35,7 @@
 			<div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox" ng-model="vm.colVisibilities.showNaytteenTilaCol"
                             ng-change="vm.saveColVisibility('showNaytteenTilaCol', vm.colVisibilities.showNaytteenTilaCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
@@ -47,7 +47,7 @@
 			<div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox" ng-model="vm.colVisibilities.showAjoitusnaytteenLuokkaCol"
                             ng-change="vm.saveColVisibility('showAjoitusnaytteenLuokkaCol', vm.colVisibilities.showAjoitusnaytteenLuokkaCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
@@ -62,7 +62,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showLuunayteMaaraCol"
                             ng-change="vm.saveColVisibility('showLuunayteMaaraCol', vm.colVisibilities.showLuunayteMaaraCol)"
@@ -75,7 +75,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showMaanayteMaaraCol"
                             ng-change="vm.saveColVisibility('showMaanayteMaaraCol', vm.colVisibilities.showMaanayteMaaraCol)"
@@ -84,8 +84,54 @@
                         <span i18n="sample.Amount_l" class="form-control" disabled data-i18n-attr="{title: 'sample.Soil_sample_amount'}"></span>
                     </div>
                 </div>
-            </div>                        			
-		</div>		
+            </div>
+		</div>
+        <!-- Rivi 2 -->
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <input type="checkbox"
+                            ng-model="vm.colVisibilities.showVakituinenSijaintiCol"
+                            ng-change="vm.saveColVisibility('showVakituinenSijaintiCol', vm.colVisibilities.showVakituinenSijaintiCol)"
+                            data-i18n-attr="{title: 'common.Show_field'}">
+                        </span>
+                        <mip-sailytystila-haku sailytystila="vm.naytteetTable.filter().properties"></mip-sailytystila-haku>
+                    </div>
+                </div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
+						<input type="checkbox"
+							ng-model="vm.colVisibilities.showHyllypaikkaCol"
+							ng-change="vm.saveColVisibility('showHyllypaikkaCol', vm.colVisibilities.showHyllypaikkaCol)"
+							data-i18n-attr="{title: 'common.Show_field'}">
+						</span>
+						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+							name="kuvaus" ng-model="vm.naytteetTable.filter().properties.hyllypaikka"
+							placeholder = "{{ 'ark.Shelf_spot' | i18n }}%" spellcheck="false" autocomplete="off">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
+						<input type="checkbox"
+							ng-model="vm.colVisibilities.showTilapainenSijaintiCol"
+							ng-change="vm.saveColVisibility('showTilapainenSijaintiCol', vm.colVisibilities.showTilapainenSijaintiCol)"
+							data-i18n-attr="{title: 'common.Show_field'}">
+						</span>
+						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+							name="kuvaus" ng-model="vm.naytteetTable.filter().properties.tilapainen_sijainti"
+							data-i18n-attr="{placeholder: 'ark.Temporary_location'}"spellcheck="false" autocomplete="off">
+					</div>
+				</div>
+			</div>
+        </div>
 	</div>
 </div>
 

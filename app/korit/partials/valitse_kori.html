@@ -7,25 +7,43 @@
 	</div>
 	<div id="koritPanel{{vm.modalId}}" class="panel-body panel-collapse collapse in">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="col-md-2">
-					<strong><span i18n="common.Select_cart"></span></strong>
-				</div>
-				<div class="col-md-8">
-					<!-- Korien taulukko -->
-					<table ng-table="vm.koriTable" class="table table-striped table-bordered"
-						show-filter="false">
-						<tr ng-repeat="kori in $data" style="cursor: pointer" ng-click="vm.lisaaKoriin(kori)">
-							<td data-title="vm.getColumnName('Cart_type', 'common')">
-                                {{kori.properties.korityyppi | namei18n}}
-                            </td>						
-							<td data-title="vm.getColumnName('Name', 'common')" sortable="'properties.nimi'">{{kori.properties.nimi}}</td>
-							<td data-title="vm.getColumnName('Description', 'common')" sortable="'properties.kuvaus'">
-								{{kori.properties.kuvaus}}</td>
-						</tr>
-					</table>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<button type="button" class="btn btn-default" style="width: 37.16px"
+					data-template-url="pages/templates/popover-kori-qr-scanner.html"
+					data-auto-close="true" bs-popover data-container="body"
+					data-i18n-attr="{title: 'common.Scan_qrcode'}" ng-show="vm.showQRCodeButton">
+					<span class="fa fa-qrcode" aria-hidden="true"></span>
+				</button>
+			</div>
+			<!-- Suodattimet -->
+			<div class="col-md-10 col-sm-10 col-xs-10">
+				<div class="form-group col-md-3">
+					<div class="col-md-12">
+						<input type="text" class="form-control" name="nimi"
+						ng-model="vm.koriTable.filter().properties.nimi"
+						data-i18n-attr="{placeholder: 'common.Name'}"
+						spellcheck="false" autocomplete="off">
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="col-md-2">
+			<strong><span i18n="common.Select_cart"></span></strong>
+		</div>
+		<div class="col-md-8">
+			<!-- Korien taulukko -->
+			<table ng-table="vm.koriTable" class="table table-striped table-bordered"
+				show-filter="false">
+				<tr ng-repeat="kori in $data" style="cursor: pointer" ng-click="vm.lisaaKoriin(kori)">
+					<td data-title="vm.getColumnName('Cart_type', 'common')">
+						{{kori.properties.korityyppi | namei18n}}
+					</td>
+					<td data-title="vm.getColumnName('Name', 'common')" sortable="'properties.nimi'">{{kori.properties.nimi}}</td>
+					<td data-title="vm.getColumnName('Description', 'common')" sortable="'properties.kuvaus'">
+						{{kori.properties.kuvaus}}</td>
+				</tr>
+			</table>
+		</div>
+
 	</div>
 </div>

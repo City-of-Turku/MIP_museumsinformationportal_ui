@@ -9,17 +9,17 @@
 	    <div class="panel-body" ng-if="vm.edit">
 	        <div class="form-group" ng-if="vm.create">
 	            <label class="col-sm-4 control-label">
-	                <span i18n="sample.Sample_status"></span> 
+	                <span i18n="sample.Sample_status"></span>
 	            </label>
 	            <div class="col-sm-8">
 	                <p class="form-control-static">
 	                	{{vm.nayte.properties.tila | namei18n}}
 	                </p>
-	            </div>    
-	        </div>	    
+	            </div>
+	        </div>
 	    	<mip-nayte-tila ng-if="!vm.create" tila="vm.nayte.properties" vm="vm"></mip-nayte-tila>
 	        <!-- Luetteloitu, Poistettu kokoelmasta, Puuttuu  -->
-            <div ng-if="vm.nayte.properties.tila.id == 4 || vm.nayte.properties.tila.id == 7 || 
+            <div ng-if="vm.nayte.properties.tila.id == 4 || vm.nayte.properties.tila.id == 7 ||
                         vm.nayte.properties.tila.id == 9"
              ng-include="'ark/naytteet/partials/tila_luetteloitu.html'"></div>
             <!-- Lainassa, Näyttelyssä -->
@@ -54,7 +54,7 @@
             </div>
 	        <div class="form-group">
 	            <label for="naytetta_jaljella" class="col-sm-4 control-label">
-	                <span i18n="sample.Sample_remaining"></span> 
+	                <span i18n="sample.Sample_remaining"></span>
 	            </label>
 	            <div class="col-sm-8" ng-if="!vm.create">
 					<select class="form-control"
@@ -63,27 +63,27 @@
 						ng-init="vm.nayte.properties.naytetta_jaljella = vm.nayte.properties.naytetta_jaljella"
 						ng-options="option.value as option.label for option in vm.noYes"
 						ng-required="true">
-					</select>	                
+					</select>
 	            </div>
 	            <div class="col-sm-8" ng-if="vm.create">
 	                <p class="form-control-static">
 	                	{{vm.nayte.properties.naytetta_jaljella | trueFalseToText}}
-	                </p>	                
-	            </div> 	                
+	                </p>
+	            </div>
 	        </div>
-	    </div>  	
+	    </div>
     	<!-- Katselutila -->
 	    <div class="panel-body" ng-if="!vm.edit">
 	        <div class="form-group">
 	            <label class="col-sm-4 control-label">
-	                <span i18n="sample.Sample_status"></span> 
+	                <span i18n="sample.Sample_status"></span>
 	            </label>
 	            <div class="col-sm-8">
 	                <p class="form-control-static">
 	                	{{vm.nayte.properties.tila | namei18n}}
 	                </p>
-	            </div>    
-	        </div>     
+	            </div>
+	        </div>
 	        <div class="form-group">
                 <label class="col-sm-4 control-label">
                     <span i18n="ark.Permanent_location"></span>
@@ -103,13 +103,13 @@
             </div>
 	        <div class="form-group">
 	            <label class="col-sm-4 control-label">
-	                <span i18n="sample.Sample_remaining"></span> 
+	                <span i18n="sample.Sample_remaining"></span>
 	            </label>
 	            <div class="col-sm-8">
 	                <p class="form-control-static">
 	                	{{vm.nayte.properties.naytetta_jaljella | trueFalseToText}}
-	                </p>	                
-	            </div>    
+	                </p>
+	            </div>
 	        </div>
 	    </div>
     </div>

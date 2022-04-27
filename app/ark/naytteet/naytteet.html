@@ -10,32 +10,32 @@
                             <span i18n="common.Results"></span>
                             : {{vm.naytteetTable.total()}}
                             <span i18n="common.Shown"></span>
-                            : {{vm.searchResults}} 
+                            : {{vm.searchResults}}
                             <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-                        </h4>					
+                        </h4>
 					</div>
-                    <div class="panel-body form-horizontal panel-collapse collapse in" id="hakukentat" 
-                    	ng-include="'ark/naytteet/nayte_hakukentat.html'" 
+                    <div class="panel-body form-horizontal panel-collapse collapse in" id="hakukentat"
+                    	ng-include="'ark/naytteet/nayte_hakukentat.html'"
                     	style="margin-bottom: 1em;">
                    </div>
 					<div class="panel-heading" role="tab" data-toggle="collapse" data-target="#tarkennettu_haku">
                         <h4 class="panel-title">
                             <span i18n="common.Advanced_search"></span>
                             <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-                        </h4>					
-					</div>                   
-                    <div class="panel-body form-horizontal panel-collapse collapse" id="tarkennettu_haku" 
-                    	ng-include="'ark/naytteet/nayte_tarkennettu_haku.html'" 
+                        </h4>
+					</div>
+                    <div class="panel-body form-horizontal panel-collapse collapse" id="tarkennettu_haku"
+                    	ng-include="'ark/naytteet/nayte_tarkennettu_haku.html'"
                     	style="margin-bottom: 1em;">
-                   </div>                   
+                   </div>
                    <!-- Taulukko -->
-					<table ng-table="vm.naytteetTable" 
+					<table ng-table="vm.naytteetTable"
                         template-pagination="pages/templates/table-pagination.html"
 						class="table table-striped table-bordered" show-filter="false">
 						<tr ng-repeat="nayte in $data" style="cursor: pointer" ng-click="vm.avaaNayte(nayte)">
                             <td data-title="vm.getColumnName('Main_number', 'ark')" sortable="'properties.nayte_paanumero'" ng-if="vm.colVisibilities.showPaanumeroCol">
                                 <div ng-if="nayte.properties.yksikko">{{nayte.properties.yksikko.tutkimusalue.tutkimus.nayte_paanumero}}</div>
-                                <div ng-if="nayte.properties.tutkimusalue">{{nayte.properties.tutkimusalue.tutkimus.nayte_paanumero}}</div><!-- IRTOLÖYTÖ -->                                 
+                                <div ng-if="nayte.properties.tutkimusalue">{{nayte.properties.tutkimusalue.tutkimus.nayte_paanumero}}</div><!-- IRTOLÖYTÖ -->
                             </td>
                             <td data-title="vm.getColumnName('Research_abbreviation', 'ark')" sortable="'properties.tutkimusLyhenne'" ng-if="vm.colVisibilities.showTutkimusLyhenneCol">
                                 <div ng-if="nayte.properties.yksikko">{{nayte.properties.yksikko.tutkimusalue.tutkimus.tutkimuksen_lyhenne}}</div>
@@ -43,12 +43,12 @@
                             </td>
                             <td data-title="vm.getColumnName('Research_name', 'ark')" ng-if="vm.colVisibilities.showTutkimuksenNimiCol">
                                 <div ng-if="nayte.properties.yksikko">{{nayte.properties.yksikko.tutkimusalue.tutkimus.nimi}}</div>
-                                <div ng-if="nayte.properties.tutkimusalue">{{nayte.properties.tutkimusalue.tutkimus.nimi}}</div><!-- IRTOLÖYTÖ -->                                
-                            </td>   					
+                                <div ng-if="nayte.properties.tutkimusalue">{{nayte.properties.tutkimusalue.tutkimus.nimi}}</div><!-- IRTOLÖYTÖ -->
+                            </td>
                             <td data-title="vm.getColumnName('Listing_number', 'ark')" sortable="'properties.luettelointinumero'" ng-if="vm.colVisibilities.showLuettelointinumeroCol">
-                                {{nayte.properties.luettelointinumero}} 
+                                {{nayte.properties.luettelointinumero}}
                                 <span ng-if="nayte.properties.alkup_luetnro">({{nayte.properties.alkup_luetnro}})</span>
-                            </td>                                   
+                            </td>
                             <td data-title="vm.getColumnName('Unit_identifier', 'unit')" ng-if="vm.colVisibilities.showYksikkotunnusCol">
                                 {{nayte.properties.yksikko.yksikkotunnus}}
                             </td>
@@ -80,9 +80,24 @@
                             </td>
                             <td data-title="vm.getColumnName('Amount_l', 'sample')" ng-if="vm.colVisibilities.showMaanayteMaaraCol">
                                 {{nayte.properties.maanayte_maara}}
-                            </td>                                                                                                                                                                                                                                                                                  														
+                            </td>
+                            <td data-title="vm.getColumnName('Permanent_location', 'ark')" ng-if="vm.colVisibilities.showVakituinenSijaintiCol">
+                                <div>
+                                    {{nayte.properties.sailytystila | namei18n}}
+                                </div>
+                            </td>
+                            <td data-title="vm.getColumnName('Shelf_spot', 'ark')" ng-if="vm.colVisibilities.showHyllypaikkaCol">
+                                <div>
+                                    {{nayte.properties.vakituinen_hyllypaikka}}
+                                </div>
+                            </td>
+                            <td data-title="vm.getColumnName('Temporary_location', 'ark')" ng-if="vm.colVisibilities.showTilapainenSijaintiCol">
+                                <div>
+                                    {{nayte.properties.tilapainen_sijainti}}
+                                </div>
+                            </td>
 						</tr>
-					</table>                   					
+					</table>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,8 @@
+<ui-select class="ng-animate-disabled"  ng-model="sailytystila.sailytystila" theme="bootstrap" name="tilat">
+    <ui-select-match allow-clear="true" data-i18n-attr="{placeholder: 'ark.Permanent_location'}">{{$select.selected.nimi_fi}}</ui-select-match>
+    <span ng-bind-html=""></span>
+    <ui-select-choices
+        repeat="tila.id as tila in sailytystilat | filter: $select.search">
+        <span ng-bind-html="tila.nimi_fi | highlight: $select.search"></span>
+    </ui-select-choices>
+</ui-select>

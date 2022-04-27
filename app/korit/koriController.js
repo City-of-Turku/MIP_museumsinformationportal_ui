@@ -161,6 +161,8 @@ angular.module('mip.kori').controller(
 
 					// Näytetään valittavat korit
 					vm.koriValittu = false;
+					vm.showQRCodeButton = true;
+					vm.korihaku = true;
 
 		            vm.koriTable = new NgTableParams({
 		                page : 1,
@@ -929,7 +931,13 @@ angular.module('mip.kori').controller(
 					$scope.scannerText = data;
 					this.$hide();
 
-					$scope.asetaTila(data);
+					if (vm.korihaku){
+						vm.koriTable.filter().properties = {nimi: data};
+					}
+					else
+					{
+						$scope.asetaTila(data);
+					}
 				}
 
 				$scope.asetaTila = function(data) {
