@@ -6,7 +6,7 @@
             ng-model="korinimi" ng-change="$hide(); haeKoriNimella(korinimi);"
             ng-model-options='{debounce: 1000}' min-length="3">
         <input type="text" focus-me="!focusInput" class="form-control"  ng-if="vm.korihaku" placeholder = "{{ 'common.Basket_name' | i18n }}"
-            ng-model="korinimi" ng-change="$hide(); vm.koriTable.filter().properties = {nimi: korinimi};"
+            ng-model="korinimi" ng-change="$hide(); haeKoriNimella(korinimi);"
             ng-model-options='{debounce: 1000}' min-length="3">
         <br />
         <qr-scanner width="300" height="400" ng-success="onSuccess(data)" ng-error="onError(error)" ng-video-error="onVideoError(error)" />

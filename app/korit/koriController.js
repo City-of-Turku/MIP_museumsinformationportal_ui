@@ -885,15 +885,39 @@ angular.module('mip.kori').controller(
 					}
 				});
 
+				$scope.haeKoriNimella = function(nimi) {
+					if (nimi.length > 0) {
+					  if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1) {
+						KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
+						  if (data.count > 1) {
+							AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
+							$scope.scannerText = '';
+						  }
+						  else if(data.count === 0){
+							AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
+							$scope.scannerText = '';
+						  }
+						  else{
+							vm.lisaaKoriin(data['features'][0]);
+							$scope.scannerText = '';
+						  }
+						},function error(error) {
+						  console.log(error);
+						  AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
+						  $scope.scannerText = '';
+						});
+					  }
+					}
+				  };
 
 				// Event for successful QR code reading
 				$scope.onSuccess = function (data) {
 					//console.log(data);
 					$scope.scannerText = data;
 					this.$hide();
-
+					
 					if (vm.korihaku){
-						vm.koriTable.filter().properties = {nimi: data};
+						$scope.haeKoriNimella(data);
 					}
 					else
 					{
