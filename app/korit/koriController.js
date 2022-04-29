@@ -887,28 +887,71 @@ angular.module('mip.kori').controller(
 
 				$scope.haeKoriNimella = function(nimi) {
 					if (nimi.length > 0) {
-					  if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1) {
-						KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
-						  if (data.count > 1) {
-							AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
+						if(vm.korityyppi.properties.id == '1'){
+					  		if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1){
+								KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
+								if(data['features'][0].properties.korityyppi_id==vm.korityyppi.properties.id){
+									if (data.count > 1) {
+										AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
+										$scope.scannerText = '';
+						  			}
+						  			else if(data.count === 0){
+										AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
+										$scope.scannerText = '';
+						  			}
+						  			else{
+										vm.lisaaKoriin(data['features'][0]);
+										$scope.scannerText = '';
+						  			}
+								}	  
+								else{
+									AlertService.showError(locale.getString('common.Error'), locale.getString('error.Wrong_cart_type',{
+										korityyppi_fi : vm.korityyppi.properties.nimi_fi,
+										korityyppi_se : vm.korityyppi.properties.nimi_se,
+										korityyppi_eng : vm.korityyppi.properties.nimi_en
+									}));
+									$scope.scannerText = '';
+								}
+								},function error(error) {
+						  			console.log(error);
+						  			AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
+								});
+					  		}	
+						}
+						if(vm.korityyppi.properties.id == '2'){
+							if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1){
+							  KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
+							  if(data['features'][0].properties.korityyppi_id==vm.korityyppi.properties.id){
+								  if (data.count > 1) {
+									  AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
+									  $scope.scannerText = '';
+									}
+									else if(data.count === 0){
+									  AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
+									  $scope.scannerText = '';
+									}
+									else{
+									  vm.lisaaKoriin(data['features'][0]);
+									  $scope.scannerText = '';
+									}
+							  }	  
+							  else{
+								  AlertService.showError(locale.getString('common.Error'), locale.getString('error.Wrong_cart_type',{
+									korityyppi_fi : vm.korityyppi.properties.nimi_fi,
+									korityyppi_se : vm.korityyppi.properties.nimi_se,
+									korityyppi_eng : vm.korityyppi.properties.nimi_en
+								}));
+								  $scope.scannerText = '';
+							  }
+						  },function error(error) {
+							console.log(error);
+							AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
 							$scope.scannerText = '';
-						  }
-						  else if(data.count === 0){
-							AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
-							$scope.scannerText = '';
-						  }
-						  else{
-							vm.lisaaKoriin(data['features'][0]);
-							$scope.scannerText = '';
-						  }
-						},function error(error) {
-						  console.log(error);
-						  AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
-						  $scope.scannerText = '';
-						});
+						  });
+						}	
 					  }
 					}
-				  };
+				};
 
 				// Event for successful QR code reading
 				$scope.onSuccess = function (data) {
