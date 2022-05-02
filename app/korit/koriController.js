@@ -897,20 +897,18 @@ angular.module('mip.kori').controller(
 									AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
 									$scope.scannerText = '';
 								}
-								else{
-									if(data['features'][0].properties.korityyppi_id==vm.korityyppi.properties.id){
-										vm.lisaaKoriin(data['features'][0]);
-										$scope.scannerText = '';
-									}
-									else{
-										AlertService.showError(locale.getString('common.Error'), locale.getString('error.Wrong_cart_type',{
-											korityyppi_fi : vm.korityyppi.properties.nimi_fi,
-											korityyppi_se : vm.korityyppi.properties.nimi_se,
-											korityyppi_eng : vm.korityyppi.properties.nimi_en
-										}));
-										$scope.scannerText = '';
-									}
+								else if(data['features'][0].properties.korityyppi_id!=vm.korityyppi.properties.id){
+									AlertService.showError(locale.getString('common.Error'), locale.getString('error.Wrong_cart_type',{
+										korityyppi_fi : vm.korityyppi.properties.nimi_fi,
+										korityyppi_se : vm.korityyppi.properties.nimi_se,
+										korityyppi_eng : vm.korityyppi.properties.nimi_en
+									}));
+									$scope.scannerText = '';
 								}
+								else{
+									vm.lisaaKoriin(data['features'][0]);
+									$scope.scannerText = '';
+									}
 							},function error(error) {
 								console.log(error);
 								AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
