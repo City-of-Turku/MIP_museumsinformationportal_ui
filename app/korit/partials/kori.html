@@ -76,10 +76,18 @@
                             </li>
                             <li class="dropdown-submenu pull-left" ng-if="vm.mip === 'ARK' && !vm.create && !vm.edit && vm.koriValittu">
                                 <a href="" style="padding-right:65px;" i18n="common.Create_report"></a>
-                                <ul class="dropdown-menu submenuHeightFix3Elements">
+                                <ul ng-if="vm.korityyppi.taulu === 'ark_loyto'" class="dropdown-menu submenuHeightFix3Elements">
                                     <li style="cursor: pointer">
                                         <a ng-click="vm.createReport('WORD', 'loyto_luettelointikortit')"><span i18n="ark.Indexing_cards"></span> (word)</a>
                                     </li>
+                                    <li style="cursor: pointer">
+                                        <a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
+                                    </li>
+                                    <li style="cursor: pointer">
+                                        <a ng-click="vm.createQRCodeReport()"><span i18n="common.Report"></span> (QR Codes)</a>
+                                    </li>
+                                </ul>
+                                <ul ng-if="vm.korityyppi.taulu !== 'ark_loyto'" class="dropdown-menu submenuHeightFix2Elements">
                                     <li style="cursor: pointer">
                                         <a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
                                     </li>

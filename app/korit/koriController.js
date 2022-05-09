@@ -723,10 +723,10 @@ angular.module('mip.kori').controller(
                  */
 				vm.createQRCodeReport = function() {
 					sessionStorage.setItem("korinimi", vm.kori.properties.nimi);
-					if(vm.kori.properties.korityyppi.nimi_fi == 'Löytö'){
+					if(vm.kori.properties.korityyppi.taulu == 'ark_loyto'){
 						sessionStorage.setItem("koridata", JSON.stringify(vm.loytoKoriTable.data));
 					}
-					if(vm.kori.properties.korityyppi.nimi_fi == 'Näyte'){
+					if(vm.kori.properties.korityyppi.taulu == 'ark_nayte'){
 						sessionStorage.setItem("koridata", JSON.stringify(vm.nayteKoriTable.data));
 					}
 					window.open("korit/partials/qrcode_report.html", "_blank");
