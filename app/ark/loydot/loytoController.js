@@ -1012,5 +1012,65 @@ angular.module('mip.loyto').controller(
                         vm.loyto = data.loyto;
                     }
                 });
+
+                // Event for successful QR code reading
+                $scope.onSuccess = function (data) {
+                  $scope.scannerText = data;
+                  this.$hide();
+                  $scope.asetaTilaSijainti(data);
+                };
+
+                // Event for video error (no permission for camera etc.)
+                $scope.onVideoError = function (error) {
+                  console.log(error);
+                  vm.showStatus(error);
+                };
+
+                vm.showStatus = function (text) {
+                  $scope.scannerErrorText = text;
+                };
+
+                $scope.asetaTilaSijainti = function(data) {
+                  // Parsitaan data
+                  try {
+                    var splittedText = data.split('&');
+
+                    var sailytystila = splittedText[0].split('=')[1];
+                    var hyllypaikka = splittedText[1].split('=')[1];
+                    var tilapainenSijainti = splittedText[2].split('=')[1];
+                  } catch (err) {
+                    AlertService.showError(locale.getString('common.Error'), 'Sijaintikoodi on virheellinen: ' + data);
+                    return;
+                  }
+                  var tilaAsetettu = false;
+
+                  // Hae sailytystilat
+                  ListService.getOptions('ark_sailytystila').then(function success(options) {
+                    for (var i = 0; i < options.length; i++) {
+                      if (options[i].nimi_fi == sailytystila) {
+                        // Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon
+                        vm.loyto.properties.sailytystila = options[i];
+                        tilaAsetettu = true;
+                      }
+                      if(tilaAsetettu) {
+                        break;
+                      }
+                    }
+
+                    if(!tilaAsetettu) {
+                      AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytyspaikka + ' ' + sailytystila);
+                    }
+
+                  }, function error(data) {
+                      locale.ready('error').then(function() {
+                          // TODO
+                          // AlertService.showError(locale.getString("error.Getting_culturohistorical_values_failed"), AlertService.message(data));
+                          console.log(data);
+                      });
+                  });
+                  // Asetetaan hyllypaikka ja tilapainen sijainti
+                  vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
+                  vm.loyto.properties.tilapainen_sijainti = tilapainenSijainti;
+                };
 		}
 ]);

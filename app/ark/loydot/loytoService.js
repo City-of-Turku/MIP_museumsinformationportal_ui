@@ -85,6 +85,22 @@ angular.module('mip.loyto').factory('LoytoService', [
 
 				return deferred.promise;
 			},
+      /**
+			 * Hakee valitun löydön luettelointinumerolla QR koodista
+			 */
+       haeLoytoLuettelointinumerollaQR: function (luettelointinumero) {
+				var deferred = $q.defer();
+				var url = CONFIG.API_URL + "loyto/luettelointinumerohaku/" + luettelointinumero;
+				$http({
+					method: 'GET',
+					url: url
+				}).then(function successCallback(response) {
+					deferred.resolve(response.data.data);
+				}, function errorCallback(response) {
+					deferred.reject(response);
+				});
+				return deferred.promise;
+			},
 			/**
 			 * Tallentaa löydön - luodaan uusi tai päivitetään olemassaolevaa jos id on tiedossa.
 			 */
