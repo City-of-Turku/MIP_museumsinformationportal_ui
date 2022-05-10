@@ -140,11 +140,12 @@ angular.module('mip.kori').controller(
 				 * Hakee korin id:n mukaan
 				 */
 				vm.haeKori = function (id){
-
+					console.log("JAetaan kori");
 					vm.koriPromise = KoriService.haeKori(id);
 					vm.koriPromise.then(function (haettuKori){
 						if(haettuKori){
 							vm.kori = haettuKori;
+							console.log("Korii", vm.kori);
 							vm.valitseKori(vm.kori);
 						}
 					}, function(data) {
@@ -313,6 +314,8 @@ angular.module('mip.kori').controller(
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
 
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
+											console.log("Jaetut käytäjjät ", vm.jaetut_kayttajat);
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
@@ -339,6 +342,8 @@ angular.module('mip.kori').controller(
 				                defaultSort : "asc",
 				                getData : function($defer, params) {
 			                        var filterParameters = ListService.parseParameters(params);
+									vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
+									console.log("Jaetut käytäjjät ", vm.jaetut_kayttajat);
 
 			                        if(id_lista.length > 0){
 
@@ -351,7 +356,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
@@ -389,6 +393,7 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -427,6 +432,7 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -465,6 +471,7 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -503,8 +510,9 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
-				                            // tarkista oikeudet
+											// tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
 
@@ -604,7 +612,7 @@ angular.module('mip.kori').controller(
 					console.log("Jaetut käyttäjät", vm.jaetut_kayttajat);
 					vm.jaettu = vm.jaetut_kayttajat.map(function(u) {
 						return u.id;
-					})
+					});
 					/*vm.shareids = vm.jaetut_kayttajat.filter(function (i) {
 						console.log(i.id, i);
 						return i.id;
@@ -750,7 +758,6 @@ angular.module('mip.kori').controller(
 							//vm.kayttajat.push(user);
 						//}
 						vm.kayttajat = data.features;
-						console.log(vm.kayttajat);
 					}, function error(data) {
 						locale.ready('error').then(function () {
 							AlertService.showError(locale.getString("error.Getting_users_failed"), AlertService.message(data));
