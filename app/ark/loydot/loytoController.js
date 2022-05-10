@@ -1017,7 +1017,7 @@ angular.module('mip.loyto').controller(
                 $scope.onSuccess = function (data) {
                   $scope.scannerText = data;
                   this.$hide();
-                  $scope.asetaTilaSijainti(data);
+                  $scope.asetaSijainti(data);
                 };
 
                 // Event for video error (no permission for camera etc.)
@@ -1030,7 +1030,7 @@ angular.module('mip.loyto').controller(
                   $scope.scannerErrorText = text;
                 };
 
-                $scope.asetaTilaSijainti = function(data) {
+                $scope.asetaSijainti = function(data) {
                   // Parsitaan data
                   try {
                     var splittedText = data.split('&');
