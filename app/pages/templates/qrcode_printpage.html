@@ -1,0 +1,65 @@
+<script src="../../lib/other/angular/angular.js"></script>
+<script src="../../lib/bower_components/angular-qr/qrcode.js"></script>
+<script src="../../lib/bower_components/angular-qr/angular-qr.js"></script>
+<link rel="shortcut icon" href="#" />
+<style>
+
+    table{
+        border-collapse: collapse;
+        table-layout:fixed;
+    }
+    qr{
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    @media print {
+        body {
+            color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+        table {
+            page-break-inside: avoid;
+        }
+        .pagebreak{
+            page-break-after: always;
+        }
+
+    }
+    @page
+    {
+        size: auto;   /* auto is the initial value */
+        margin-top: 0mm;
+        margin-bottom: 0mm;
+        margin-left: 30mm;
+        margin-right: 20mm;
+    }
+</style>
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<table class ="pagebreak">
+    <colgroup>
+        <col style ="width:60%;" />
+        <col style="width:40%;" />
+      </colgroup>
+    <tr style ='height:15px;'></tr>
+    <tr>
+        <td>{{tunniste}}</td>
+        <td id="qrkoodi"><qr type-number="0" correction-level="'M'" size= 'qrkoodikoko' text="tunniste"></qr></td>
+    </tr>
+</table>
+</div>
+<script>
+    var app = angular.module('myApp', ['ja.qr']);
+    app.controller('myCtrl', function($scope) {
+        var vm = this;
+
+        vm.startup = function() {
+            $scope.tunniste = sessionStorage.getItem('tunniste');
+            document.title = $scope.tunniste;
+            $scope.qrkoodikoko = 100;
+            }
+
+        vm.startup();
+    });
+
+</script>

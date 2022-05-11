@@ -566,5 +566,6 @@
 	"Internal_additional_info": "Internal additional information",
 	"Scan_qrcode": "Scan QR code",
 	"Basket_name": "Basket name",
-	"Storage_code": "Storage code"
+	"Storage_code": "Storage code",
+	"Print_qr_code": "Print QR code"
 }

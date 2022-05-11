@@ -595,6 +595,11 @@ angular.module('mip.nayte').controller(
                     return locale.getString(str);
                 }
 
+				vm.printQRCode= function() {
+					sessionStorage.setItem("tunniste", vm.nayte.properties.luettelointinumero);
+					window.open("pages/templates/qrcode_printpage.html", "_blank");
+				};
+
                 /*
                  * Avaa konservointitiedot
                  */

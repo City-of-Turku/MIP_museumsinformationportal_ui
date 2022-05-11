@@ -87,9 +87,12 @@
                                         <a ng-click="vm.createQRCodeReport()"><span i18n="common.Report"></span> (QR Codes)</a>
                                     </li>
                                 </ul>
-                                <ul ng-if="vm.korityyppi.taulu !== 'ark_loyto'" class="dropdown-menu submenuHeightFix1Elements">
+                                <ul ng-if="vm.korityyppi.taulu !== 'ark_loyto'" class="dropdown-menu submenuHeightFix2Elements">
                                     <li style="cursor: pointer">
                                         <a ng-click="vm.createReport('EXCEL', vm.korityyppi.taulu)"><span i18n="common.Report"></span> (excel)</a>
+                                    </li>
+                                    <li style="cursor: pointer">
+                                        <a ng-click="vm.createQRCodeReport()"><span i18n="common.Report"></span> (QR Codes)</a>
                                     </li>
                                 </ul>
                             </li>
@@ -102,6 +105,8 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a href="" ng-click="vm.printQRCode()"
+								i18n="common.Print_qr_code"></a></li>
                             <li><a href="" ng-click="vm.close()"
                                 i18n="common.Close"
                                 ng-show="!vm.edit"></a>

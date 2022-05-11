@@ -812,6 +812,11 @@ angular.module('mip.loyto').controller(
                     return locale.getString(str);
                 }
 
+                vm.printQRCode= function() {
+					sessionStorage.setItem("tunniste", vm.loyto.properties.luettelointinumero);
+					window.open("pages/templates/qrcode_printpage.html", "_blank");
+				};
+
 
                 /*
                  * Add image to the alue
