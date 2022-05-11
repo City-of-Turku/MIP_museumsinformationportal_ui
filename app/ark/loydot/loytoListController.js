@@ -293,7 +293,7 @@ angular.module('mip.loyto').controller('LoytoListController', [
             $scope.onSuccess = function (data) {
               $scope.scannerText = data;
               this.$hide();
-              $scope.getLoytoByLuettelointinumero(data);
+              $scope.getByLuettelointinumero(data);
             };
 
             // Event for error QR code reading
@@ -320,7 +320,7 @@ angular.module('mip.loyto').controller('LoytoListController', [
             };
 
             // Löydön hakeminen QR koodista luetun luettelointinumeron avulla
-            $scope.getLoytoByLuettelointinumero = function(luettelointinumero) {
+            $scope.getByLuettelointinumero = function(luettelointinumero) {
               LoytoService.haeLoytoLuettelointinumerollaQR(luettelointinumero).then(function(loyto) {
                   EntityBrowserService.setQuery('loyto', loyto.properties.id, filterParameters, vm.loydotTable.total());
                   ModalService.loytoModal(loyto, false);

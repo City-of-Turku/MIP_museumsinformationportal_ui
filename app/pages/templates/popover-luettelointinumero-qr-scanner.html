@@ -3,7 +3,7 @@
   <h3 class="popover-title" i18n="common.Scan_qrcode"></h3>
   <div class="col-md-12" style="margin: 5px;">
       <input type="text" focus-me="!focusInput" class="form-control" placeholder = "{{ 'ark.Listing_number' | i18n }}"
-          ng-model="luettelointinumero" ng-change="$hide();"
+          ng-model="luettelointinumero" ng-change="$hide(); getByLuettelointinumero(luettelointinumero);"
           ng-model-options='{debounce: 1000}' min-length="3">
       <br />
       <qr-scanner width="300" height="400" ng-success="onSuccess(data)" ng-error="onError(error)" ng-video-error="onVideoError(error)" />

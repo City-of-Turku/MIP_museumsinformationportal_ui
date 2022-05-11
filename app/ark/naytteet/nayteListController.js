@@ -230,7 +230,7 @@ angular.module('mip.nayte').controller('NayteListController', [
             $scope.onSuccess = function (data) {
               $scope.scannerText = data;
               this.$hide();
-              $scope.getNayteByLuettelointinumero(data);
+              $scope.getByLuettelointinumero(data);
             };
 
             // Event for error QR code reading
@@ -257,7 +257,7 @@ angular.module('mip.nayte').controller('NayteListController', [
             };
 
             // Näytteen hakeminen QR koodista luetun luettelointinumeron avulla
-            $scope.getNayteByLuettelointinumero = function(luettelointinumero) {
+            $scope.getByLuettelointinumero = function(luettelointinumero) {
               NayteService.haeNayteLuettelointinumerollaQR(luettelointinumero).then(function(nayte) {
                 EntityBrowserService.setQuery('nayte', nayte.properties.id, filterParameters, vm.naytteetTable.total());
                 ModalService.nayteModal(nayte, false);
