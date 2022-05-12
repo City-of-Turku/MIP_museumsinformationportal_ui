@@ -1035,19 +1035,20 @@ angular.module('mip.loyto').controller(
                   try {
                     var splittedText = data.split('&');
 
-                    var sailytystila = splittedText[0].split('=')[1];
-                    var hyllypaikka = splittedText[1].split('=')[1];
-                    var tilapainenSijainti = splittedText[2].split('=')[1];
+                    var sailytyspaikka = splittedText[0].split('=')[1];
+                    var sailytystila = splittedText[1].split('=')[1];
+                    var hyllypaikka = splittedText[2].split('=')[1];
                   } catch (err) {
                     AlertService.showError(locale.getString('common.Error'), 'Sijaintikoodi on virheellinen: ' + data);
                     return;
                   }
                   var tilaAsetettu = false;
+                  var sailytysTilaHakusana = sailytyspaikka + ', ' + sailytystila;
 
                   // Hae sailytystilat
                   ListService.getOptions('ark_sailytystila').then(function success(options) {
                     for (var i = 0; i < options.length; i++) {
-                      if (options[i].nimi_fi == sailytystila) {
+                      if (options[i].nimi_fi == sailytysTilaHakusana) {
                         // Asetetaan tilaksi se jonka nimi mätsää sailytyspaikka+sailytystila arvoon
                         vm.loyto.properties.sailytystila = options[i];
                         tilaAsetettu = true;
@@ -1068,9 +1069,8 @@ angular.module('mip.loyto').controller(
                           console.log(data);
                       });
                   });
-                  // Asetetaan hyllypaikka ja tilapainen sijainti
+                  // Asetetaan hyllypaikka
                   vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
-                  vm.loyto.properties.tilapainen_sijainti = tilapainenSijainti;
                 };
 		}
 ]);
