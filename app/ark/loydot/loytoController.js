@@ -373,7 +373,7 @@ angular.module('mip.loyto').controller(
                 	vm.disableButtons = true;
                 	vm.loydonLisays = true;
                 	$scope.focusInput3 = true;
-
+                    $scope.focusInput4 = true;
                     // Uudelle löydölle laitetaan yksikön id viittaus
                 	vm.uusiLoyto = {
                 			'properties' : {

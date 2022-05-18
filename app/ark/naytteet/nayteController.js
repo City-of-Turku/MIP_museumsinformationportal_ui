@@ -421,7 +421,7 @@ angular.module('mip.nayte').controller(
                     		'id': 4,
                     		'nimi_fi': 'Luetteloitu'
                     	};
-
+                        $scope.focusInput4 = true;
                         // Uudelle näytteelle laitetaan yksikön id viittaus ja muut oletusarvot
                     	vm.uusiNayte = {
                     			'properties' : {
