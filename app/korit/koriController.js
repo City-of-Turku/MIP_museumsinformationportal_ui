@@ -17,12 +17,12 @@ angular.module('mip.kori').controller(
 			'hotkeys', 'UserService', 'NgTableParams', 'LoytoService',
 			 'selectedModalNameId', 'ModalControllerService', 'KoriService', 'koriIdLista', 'korityyppi', 'kori', 'uusiKori',
 			 'RaporttiService', 'EntityBrowserService', 'NayteService', 'mip_alue', 'KiinteistoService', 'RakennusService',
-			 'ArvoalueService', 'AlueService',
+			 'ArvoalueService', 'AlueService', 'kayttajat',
 			function ($scope, AlertService, ModalService, ListService, locale,
 			        hotkeys, UserService, NgTableParams, LoytoService,
 			        selectedModalNameId, ModalControllerService, KoriService, koriIdLista, korityyppi, kori, uusiKori,
 			        RaporttiService, EntityBrowserService, NayteService, mip_alue, KiinteistoService, RakennusService,
-			        ArvoalueService, AlueService) {
+			        ArvoalueService, AlueService, kayttajat) {
 
 			    var vm = this;
 
@@ -73,6 +73,7 @@ angular.module('mip.kori').controller(
 			        if(kori){
 			        	vm.kori = kori;
 						vm.koriValittu = true;
+						vm.jaetut_kayttajat = kayttajat;
 			        }
 
 			        // Hakutuloksella löydetyt id:t.
@@ -140,12 +141,10 @@ angular.module('mip.kori').controller(
 				 * Hakee korin id:n mukaan
 				 */
 				vm.haeKori = function (id){
-					console.log("JAetaan kori");
 					vm.koriPromise = KoriService.haeKori(id);
 					vm.koriPromise.then(function (haettuKori){
 						if(haettuKori){
 							vm.kori = haettuKori;
-							console.log("Korii", vm.kori);
 							vm.valitseKori(vm.kori);
 						}
 					}, function(data) {
@@ -211,6 +210,11 @@ angular.module('mip.kori').controller(
 				vm.lisaaKoriin = function (kori){
 
 					vm.kori = kori;
+
+					vm.koriPromise = KoriService.haeKorinKayttajat(vm.kori.properties.id);
+					vm.koriPromise.then(function (kayttajat){
+						vm.kori.properties.kayttajat = kayttajat.properties;
+					});
 
 					// Lisäyksessä avataan muokkaustilaan
 					vm.edit = true;
@@ -302,7 +306,7 @@ angular.module('mip.kori').controller(
 				                getData : function($defer, params) {
 			                        var filterParameters = ListService.parseParameters(params);
 
-			                        if(id_lista.length > 0){
+				                        if(id_lista.length > 0){
 
 				                        // Parametreihin lisätään id lista
 				                        filterParameters['kori_id_lista'] = id_lista;
@@ -315,7 +319,6 @@ angular.module('mip.kori').controller(
 				                            params.total(data.total_count);
 
 											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
-											console.log("Jaetut käytäjjät ", vm.jaetut_kayttajat);
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
@@ -342,8 +345,6 @@ angular.module('mip.kori').controller(
 				                defaultSort : "asc",
 				                getData : function($defer, params) {
 			                        var filterParameters = ListService.parseParameters(params);
-									vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
-									console.log("Jaetut käytäjjät ", vm.jaetut_kayttajat);
 
 			                        if(id_lista.length > 0){
 
@@ -356,7 +357,9 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-				                            // tarkista oikeudet
+											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
+
+											// tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
 
@@ -609,15 +612,12 @@ angular.module('mip.kori').controller(
 					}
 
                     vm.kori.properties.kori_id_lista = vm.koriIdLista;
-					console.log("Jaetut käyttäjät", vm.jaetut_kayttajat);
-					vm.jaettu = vm.jaetut_kayttajat.map(function(u) {
-						return u.id;
-					});
-					/*vm.shareids = vm.jaetut_kayttajat.filter(function (i) {
-						console.log(i.id, i);
-						return i.id;
-					});*/
-					console.log(vm.jaettu);
+					if (vm.jaetut_kayttajat){
+						vm.jaettu = vm.jaetut_kayttajat.map(function(u) {
+							return u.id;
+						});
+					}
+
                     KoriService.luoTallennaKori(vm.kori, vm.jaettu).then(function success(kori) {
 
                         AlertService.showInfo(locale.getString('common.Save_ok'), "");
@@ -632,6 +632,14 @@ angular.module('mip.kori').controller(
                     	vm.uusiKori = false;
                     	vm.uusia = null;
                     	vm.vanha_id_lista = []; // vanhan listan resetointi
+						nykyinen = UserService.getProperties().user.id;
+
+						permission = kori.properties.kayttajat.filter(function(u) {
+							return u.id==nykyinen;
+						});
+						if (permission.length == 0 || kori.properties.luoja.id != nykyinen){
+							vm.close();
+						}
 
                     }, function error (kori) {
                         AlertService.showError(locale.getString('common.Error'), AlertService.message(kori));
@@ -743,20 +751,15 @@ angular.module('mip.kori').controller(
 					window.open("korit/partials/qrcode_report.html", "_blank");
 				};
 
-
-				vm.jaetut_kayttajat = [];
-				// Inventoijat valintalista
+				// Tutkijat ja pääkäyttäjät valintalista
 				vm.kayttajat = [];
 				vm.valittu_kayttaja = {};
 				vm.getUsers = function () {
 					UserService.getUsers({
 						'rivit': 10000,
-						'aktiivinen': 'true'
+						'aktiivinen': true,
+						'inventoijat' : true
 					}).then(function success(data) {
-						//for (var i = 0; i < data.features.length; i++) {
-							//var user = data.features[i].properties;
-							//vm.kayttajat.push(user);
-						//}
 						vm.kayttajat = data.features;
 					}, function error(data) {
 						locale.ready('error').then(function () {
@@ -768,10 +771,12 @@ angular.module('mip.kori').controller(
 
 
 				vm.addUser = function(selected) {
-					console.log("Aduuser", selected);
-					vm.jaetut_kayttajat.push(selected.properties);
-					console.log(vm.jaetut_kayttajat);
-					//console.log(vm.jaetut_kayttajat);
+					if (vm.jaetut_kayttajat != null){
+						vm.jaetut_kayttajat.push(selected.properties);
+					}
+					else{
+						vm.jaetut_kayttajat = [selected.properties];
+					}
 				};
                 /*
                  * Create a report

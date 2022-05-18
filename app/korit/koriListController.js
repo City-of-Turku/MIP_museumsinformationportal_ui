@@ -99,8 +99,6 @@ angular.module('mip.kori').controller('KoriListController', [
              */
             vm.avaaKori = function(kori){
             	KoriService.haeKori(kori.properties.id).then(function(haettuKori) {
-            		console.log("Haettu ",haettuKori);
-                    vm.jaetut_kayttajat = haettuKori.properties.kayttajat;
                     ModalService.koriModal(haettuKori, vm.mip);
 				});
             };

@@ -96,10 +96,10 @@
 									{{$item.etunimi}}
 									{{$item.sukunimi}}
 								</ui-select-match>
-								<ui-select-choices repeat="k.id as k in vm.jaetut_kayttajat track by k.id">
+								<ui-select-choices repeat="k as k in vm.jaetut_kayttajat track by k.id">
 								  <div>
-									<span ng-bind-html="k.etunimi | highlight: $select.search"></span>
-									<span ng-bind-html="k.sukunimi | highlight: $select.search"></span>
+									<span ng-bind-html="k.etunimi "></span>
+									<span ng-bind-html="k.sukunimi "></span>
 								  </div>
 								</ui-select-choices>
 							</ui-select>

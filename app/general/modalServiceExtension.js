@@ -1322,6 +1322,9 @@ angular.module('mip.general').factory(
                                         },
                                         selectedModalNameId : function() {
                                             return modalNameId;
+                                        },
+                                        kayttajat : function() {
+                                            return null;
                                         }
                                     }
                                 });
@@ -1359,6 +1362,9 @@ angular.module('mip.general').factory(
                                         },
                                         selectedModalNameId : function() {
                                             return modalNameId;
+                                        },
+                                        kayttajat : function() {
+                                            return null;
                                         }
                                     }
                                 });
@@ -1370,8 +1376,8 @@ angular.module('mip.general').factory(
                         	if(kori){
                         		var korityyppi = kori.properties.korityyppi;
                         		var nimi = kori.properties.nimi;
+                                var kayttajat = kori.properties.kayttajat;
                         	}
-
                             // Modaalin tunniste
                             var modalNameId = locale.getString('common.Cart') + ': ' + nimi + nextModalNameIdIndex();
                             $timeout(function() {
@@ -1402,6 +1408,9 @@ angular.module('mip.general').factory(
                                         },
                                         selectedModalNameId : function() {
                                             return modalNameId;
+                                        },
+                                        kayttajat : function() {
+                                            return kayttajat;
                                         }
                                     }
                                 });

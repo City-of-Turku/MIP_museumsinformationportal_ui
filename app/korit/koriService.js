@@ -211,7 +211,28 @@ angular.module('mip.kori').factory('KoriService', [
                         deferred.reject(response);
                     });
                     return deferred.promise;
-                }
+                },
+
+				/*
+				* Hakee korin käyttäjät
+				*/
+				haeKorinKayttajat : function (id) {
+					var deferred = $q.defer();
+					var url = CONFIG.API_URL + 'korikayttaja/' + id;
+					$http({
+						method : 'GET',
+						url : url
+					}).then(function successCallback (response) {
+						deferred.resolve(response.data.data);
+					}, function errorCallback (response) {
+						if (CONFIG.DEBUG) {
+							console.log("koriService - haeKorityyppi virhe : " + response);
+						}
+						deferred.reject(response);
+					});
+
+					return deferred.promise;
+				}
 			}
 		}
 ]);
