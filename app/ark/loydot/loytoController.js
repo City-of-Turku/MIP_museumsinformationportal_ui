@@ -1048,7 +1048,7 @@ angular.module('mip.loyto').controller(
                     return;
                   }
                   var tilaAsetettu = false;
-                  var sailytysTilaHakusana = sailytyspaikka + ', ' + sailytystila;
+                  var sailytysTilaHakusana = (sailytyspaikka + ' ' + sailytystila).trim();
 
                   // Hae sailytystilat
                   ListService.getOptions('ark_sailytystila').then(function success(options) {
