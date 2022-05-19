@@ -366,5 +366,6 @@
     "Inventory_information_updated_reopen_view": "Inventointikohteen tiedot päivittyivät, avaa näkymä uudelleen nähdäksesi muutokset.",
     "Discovery_report_by_area": "Löytöluettelo alueittain",
     "Removed_discoveries_report_by_area": "Poistetut löydöt luettelo alueittain",
-    "Type_value_missing": "Täytä kenttä 'Laji' ensin"
+    "Type_value_missing": "Täytä kenttä 'Laji' ensin",
+    "Location_data": "Sijaintitiedot"
 }

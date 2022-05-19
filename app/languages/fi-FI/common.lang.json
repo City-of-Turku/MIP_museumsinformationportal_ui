@@ -568,5 +568,6 @@
 	"Basket_name": "Korin nimi",
 	"Storage_code": "Säilytystilan koodi",
 	"Share": "Jaa",
-	"Shared_to_users": "Jaettu käyttäjille"
+	"Shared_to_users": "Jaettu käyttäjille",
+	"Print_qr_code": "Tulosta QR-koodi"
 }

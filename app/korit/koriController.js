@@ -747,7 +747,12 @@ angular.module('mip.kori').controller(
                  */
 				vm.createQRCodeReport = function() {
 					sessionStorage.setItem("korinimi", vm.kori.properties.nimi);
-					sessionStorage.setItem("koridata", JSON.stringify(vm.loytoKoriTable.data));
+					if(vm.kori.properties.korityyppi.taulu == 'ark_loyto'){
+						sessionStorage.setItem("koridata", JSON.stringify(vm.loytoKoriTable.data));
+					}
+					if(vm.kori.properties.korityyppi.taulu == 'ark_nayte'){
+						sessionStorage.setItem("koridata", JSON.stringify(vm.nayteKoriTable.data));
+					}
 					window.open("korit/partials/qrcode_report.html", "_blank");
 				};
 
@@ -778,6 +783,11 @@ angular.module('mip.kori').controller(
 						vm.jaetut_kayttajat = [selected.properties];
 					}
 				};
+				vm.printQRCode= function() {
+					sessionStorage.setItem("tunniste", vm.kori.properties.nimi);
+					window.open("pages/templates/qrcode_printpage.html", "_blank");
+				};
+
                 /*
                  * Create a report
                  * type: PDF / WORD / EXCEL ...
@@ -936,6 +946,37 @@ angular.module('mip.kori').controller(
 					}
 				});
 
+				$scope.haeKoriNimella = function(nimi) {
+					if (nimi.length > 0) {
+						if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1){
+							KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
+								if (data.count > 1) {
+									AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
+									$scope.scannerText = '';
+								}
+								else if(data.count === 0){
+									AlertService.showError(locale.getString('common.Error'), 'Virheellinen korin nimi: ' + nimi);
+									$scope.scannerText = '';
+								}
+								else if(data['features'][0].properties.korityyppi_id!=vm.korityyppi.properties.id){
+									AlertService.showError(locale.getString('common.Error'), locale.getString('error.Wrong_cart_type',{
+										korityyppi_fi : vm.korityyppi.properties.nimi_fi,
+										korityyppi_se : vm.korityyppi.properties.nimi_se,
+										korityyppi_eng : vm.korityyppi.properties.nimi_en
+									}));
+									$scope.scannerText = '';
+								}
+								else{
+									vm.lisaaKoriin(data['features'][0]);
+									$scope.scannerText = '';
+									}
+							},function error(error) {
+								console.log(error);
+								AlertService.showError(locale.getString('common.Error'), AlertService.message(error) + ' ' + nimi);
+							});
+						}
+					}
+				};
 
 				// Event for successful QR code reading
 				$scope.onSuccess = function (data) {
@@ -944,7 +985,7 @@ angular.module('mip.kori').controller(
 					this.$hide();
 
 					if (vm.korihaku){
-						vm.koriTable.filter().properties = {nimi: data};
+						$scope.haeKoriNimella(data);
 					}
 					else
 					{

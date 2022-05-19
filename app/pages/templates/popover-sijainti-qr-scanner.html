@@ -1,0 +1,13 @@
+<div class="popover" style="width: 25em; max-width: 40em; height:50em;" tabindex="-1" id="qrScannerPopover">
+  <div class="arrow"></div>
+  <h3 class="popover-title" i18n="common.Scan_qrcode"></h3>
+  <div class="col-md-12" style="margin: 5px;">
+      <input type="text" focus-me="!focusInput4" class="form-control" placeholder = "{{ 'ark.Location_data' | i18n }}"
+          ng-model="sijainti" ng-change="$hide(); asetaSijainti(sijainti);"
+          ng-model-options='{debounce: 1000}' min-length="3">
+      <br />
+      <qr-scanner width="300" height="400" ng-success="onSuccess(data)" ng-error="onError(error)" ng-video-error="onVideoError(error)" />
+      <br />
+      <p>{{scannerErrorText}}</p>
+  </div>
+</div>

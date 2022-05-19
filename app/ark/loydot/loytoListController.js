@@ -22,6 +22,7 @@ angular.module('mip.loyto').controller('LoytoListController', [
 	             vm.updateTabs('common.Archeology', 'ark.Discoveries');
 
 			     vm.getColVisibilities('loyto_tab');
+           vm.showQRCodeButton = true;
             };
             vm.setUp();
 
@@ -288,5 +289,42 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 vm.paatosvuosi_ajanlasku = null;
             };
 
+            // Event for successful QR code reading
+            $scope.onSuccess = function (data) {
+              $scope.scannerText = data;
+              this.$hide();
+              $scope.getByLuettelointinumero(data);
+            };
+
+            // Event for error QR code reading
+            $scope.onError = function (error) {
+              console.log(error);
+              // TODO: Käännökset virheilmoituksille?
+              if(error === "Couldn't find enough finder patterns") {
+                vm.showStatus('Scanning...');
+              } else if (error === "URIError: URI malformed") {
+                vm.showStatus("Couldn't read code properly.");
+              } else {
+                vm.showStatus(error);
+              }
+            };
+
+            // Event for video error (no permission for camera etc.)
+            $scope.onVideoError = function (error) {
+              console.log(error);
+              vm.showStatus(error);
+            };
+
+            vm.showStatus = function (text) {
+              $scope.scannerErrorText = text;
+            };
+
+            // Löydön hakeminen QR koodista luetun luettelointinumeron avulla
+            $scope.getByLuettelointinumero = function(luettelointinumero) {
+              LoytoService.haeLoytoLuettelointinumerollaQR(luettelointinumero).then(function(loyto) {
+                  EntityBrowserService.setQuery('loyto', loyto.properties.id, filterParameters, vm.loydotTable.total());
+                  ModalService.loytoModal(loyto, false);
+              });
+            };
 		}
 ]);

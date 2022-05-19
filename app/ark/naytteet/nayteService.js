@@ -82,6 +82,22 @@ angular.module('mip.nayte').factory('NayteService', [
 
 					return deferred.promise;
 				},
+        /**
+         * Hakee valitun näytteen luettelointinumerolla QR koodista
+         */
+        haeNayteLuettelointinumerollaQR: function (luettelointinumero) {
+          var deferred = $q.defer();
+          var url = CONFIG.API_URL + "nayte/luettelointinumerohaku/" + luettelointinumero;
+          $http({
+            method: 'GET',
+            url: url
+          }).then(function successCallback(response) {
+            deferred.resolve(response.data.data);
+          }, function errorCallback(response) {
+            deferred.reject(response);
+          });
+          return deferred.promise;
+        },
                 /**
                  * Tallentaa näytteen - luodaan uusi tai päivitetään olemassaolevaa jos id on tiedossa.
                  */

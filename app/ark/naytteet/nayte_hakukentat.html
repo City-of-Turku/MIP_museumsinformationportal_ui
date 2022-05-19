@@ -3,7 +3,7 @@
         <button type="button" class="btn btn-default" ng-click="vm.clearSearchFilter()"
             data-i18n-attr="{title: 'common.Clear_filter'}">
             <span class="fa fa-ban"></span>
-        </button>	
+        </button>
 		<button type="button" class="btn btn-default" ng-click="vm.refreshTable('nayteCache', 'naytteetTable')"
 			data-i18n-attr="{title: 'common.Refresh_search_results'}">
 			<span class="fa fa-refresh"></span>
@@ -12,6 +12,12 @@
 			data-i18n-attr="{title: 'common.Add_to_cart'}">
 			<i class="fa fa-cart-plus"></i>
 		</button>
+    <button type="button" class="btn btn-default" style="width: 37.16px"
+      data-template-url="pages/templates/popover-luettelointinumero-qr-scanner.html"
+      data-auto-close="true" bs-popover data-container="body"
+      data-i18n-attr="{title: 'common.Scan_qrcode'}">
+      <span class="fa fa-qrcode" aria-hidden="true"></span>
+    </button>
 	</div>
 	<!-- Suodattimet -->
 	<div class="col-md-10 col-sm-10 col-xs-10">
@@ -19,11 +25,11 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon"> 
+						<span class="input-group-addon">
 							<input type="checkbox" ng-model="vm.colVisibilities.showPaanumeroCol"
 							ng-change="vm.saveColVisibility('showPaanumeroCol', vm.colVisibilities.showPaanumeroCol)"
 							data-i18n-attr="{title: 'common.Show_field'}">
-						</span> 
+						</span>
 						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
 							name="luettelointinumero" ng-model="vm.naytteetTable.filter().properties.nayte_paanumero"
 							data-i18n-attr="{placeholder: 'ark.Main_number'}" spellcheck="false" autocomplete="off">
@@ -33,11 +39,11 @@
 			<div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                             <input type="checkbox" ng-model="vm.colVisibilities.showTutkimusLyhenneCol"
                             ng-change="vm.saveColVisibility('showTutkimusLyhenneCol', vm.colVisibilities.showTutkimusLyhenneCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
-                        </span> 
+                        </span>
                         <input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
                             name="TutkimusLyhenne" ng-model="vm.naytteetTable.filter().properties.tutkimusLyhenne"
                             data-i18n-attr="{placeholder: 'ark.Research_abbreviation'}" spellcheck="false" autocomplete="off">
@@ -47,7 +53,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showTutkimuksenNimiCol"
                             ng-change="vm.saveColVisibility('showTutkimuksenNimiCol', vm.colVisibilities.showTutkimuksenNimiCol)"
@@ -58,29 +64,29 @@
                             data-i18n-attr="{placeholder: 'ark.Research_name'}" spellcheck="false" autocomplete="off">
                     </div>
                 </div>
-            </div>   
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showLuettelointinumeroCol"
                             ng-change="vm.saveColVisibility('showLuettelointinumeroCol', vm.colVisibilities.showLuettelointinumeroCol)"
                             data-i18n-attr="{title: 'common.Show_field'}">
-                        </span> 
+                        </span>
                         <input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
                             name="luettelointinumero" ng-model="vm.naytteetTable.filter().properties.luettelointinumero"
                             data-i18n-attr="{placeholder: 'ark.Listing_number'}" spellcheck="false" autocomplete="off">
                     </div>
                 </div>
-            </div> 						
+            </div>
 		</div>
 		<!-- Rivi 2 -->
-		<div class="col-md-12">	
+		<div class="col-md-12">
 			<div class="col-md-3">
 	            <div class="form-group">
 	                <div class="input-group">
-	                    <span class="input-group-addon"> 
+	                    <span class="input-group-addon">
 	                    <input type="checkbox"
 	                        ng-model="vm.colVisibilities.showYksikkotunnusCol"
 	                        ng-change="vm.saveColVisibility('showYksikkotunnusCol', vm.colVisibilities.showYksikkotunnusCol)"
@@ -95,7 +101,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showNaytekoodiCol"
                             ng-change="vm.saveColVisibility('showNaytekoodiCol', vm.colVisibilities.showNaytekoodiCol)"
@@ -108,7 +114,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showNaytetyyppiCol"
                             ng-change="vm.saveColVisibility('showNaytetyyppiCol', vm.colVisibilities.showNaytetyyppiCol)"
@@ -121,7 +127,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"> 
+                        <span class="input-group-addon">
                         <input type="checkbox"
                             ng-model="vm.colVisibilities.showNaytettaJaljellaCol"
                             ng-change="vm.saveColVisibility('showNaytettaJaljellaCol', vm.colVisibilities.showNaytettaJaljellaCol)"
@@ -134,7 +140,7 @@
 						</select>
                     </div>
                 </div>
-            </div>                         				
+            </div>
         </div>
 	</div>
 </div>

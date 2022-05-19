@@ -226,5 +226,43 @@ angular.module('mip.nayte').controller('NayteListController', [
 
             };
 
+            // Event for successful QR code reading
+            $scope.onSuccess = function (data) {
+              $scope.scannerText = data;
+              this.$hide();
+              $scope.getByLuettelointinumero(data);
+            };
+
+            // Event for error QR code reading
+            $scope.onError = function (error) {
+              console.log(error);
+              // TODO: Käännökset virheilmoituksille?
+              if(error === "Couldn't find enough finder patterns") {
+                vm.showStatus('Scanning...');
+              } else if (error === "URIError: URI malformed") {
+                vm.showStatus("Couldn't read code properly.");
+              } else {
+                vm.showStatus(error);
+              }
+            };
+
+            // Event for video error (no permission for camera etc.)
+            $scope.onVideoError = function (error) {
+              console.log(error);
+              vm.showStatus(error);
+            };
+
+            vm.showStatus = function (text) {
+              $scope.scannerErrorText = text;
+            };
+
+            // Näytteen hakeminen QR koodista luetun luettelointinumeron avulla
+            $scope.getByLuettelointinumero = function(luettelointinumero) {
+              NayteService.haeNayteLuettelointinumerollaQR(luettelointinumero).then(function(nayte) {
+                EntityBrowserService.setQuery('nayte', nayte.properties.id, filterParameters, vm.naytteetTable.total());
+                ModalService.nayteModal(nayte, false);
+              });
+            };
+
 		}
 ]);

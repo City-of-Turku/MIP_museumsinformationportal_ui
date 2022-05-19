@@ -567,5 +567,7 @@
 	"Scan_qrcode": "Scan QR code",
 	"Basket_name": "Basket name",
 	"Storage_code": "Storage code",
-	"Shared": "Shared"
+	"Shared": "Shared",
+	"Shared_to_users": "Shared to users",
+	"Print_qr_code": "Print QR code"
 }

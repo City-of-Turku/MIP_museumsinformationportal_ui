@@ -110,5 +110,6 @@
 	"Deleting_route_failed": "Reitin poisto epäonnistui",
 	"No_required_permissions": "Ei vaadittuja oikeuksia",
 	"Unknown_report_type": "Tuntematon raporttityyppi",
-	"Too_many_baskets": "Löytyi enemmän kuin yksi kori"
+	"Too_many_baskets": "Löytyi enemmän kuin yksi kori",
+	"Wrong_cart_type":"Kori ei ole %korityyppi_fi-kori"
 }

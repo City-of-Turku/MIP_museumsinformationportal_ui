@@ -110,5 +110,6 @@
 	"Deleting_route_failed": "Deleting the route failed",
 	"No_required_permissions": "No required permissions",
 	"Unknown_report_type": "Unknown report type",
-	"Too_many_baskets": "Found more than one baskets"
+	"Too_many_baskets": "Found more than one baskets",
+	"Wrong_cart_type":"The cart is not %korityyppi_en cart"
 }

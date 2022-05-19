@@ -110,5 +110,6 @@
     "Deleting_route_failed": "Deleting the route failed",
 	"No_required_permissions": "No required permissions",
 	"Unknown_report_type": "Unknown report type",
-    "Too_many_baskets": "Found too many baskets"
+    "Too_many_baskets": "Found too many baskets",
+    "Wrong_cart_type":"Den korg är inte %korityyppi_se korg"
 }
