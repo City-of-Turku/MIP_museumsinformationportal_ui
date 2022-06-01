@@ -30,13 +30,15 @@
             </div>
             <div class="modal-footer">
                 <div class="mip-footer-btn-group">
+                    <mip-loyto-valitsin-kori func="vm.addEntityToBasket(id)" ng-show="vm.koriValittu && vm.korityyppi.taulu === 'ark_loyto'"></mip-loyto-valitsin-kori>
+                    <mip-nayte-valitsin-kori func="vm.addEntityToBasket(id)" ng-show="vm.koriValittu && vm.korityyppi.taulu === 'ark_nayte'"></mip-nayte-valitsin-kori>
                     <button ng-click="vm.muutaLoydonTila()" class="btn btn-default"
                         i18n="ark.Edit_discovery_status" data-ng-if="vm.tilamuutosPermission === true
                         && !vm.edit && vm.kori.properties.kori_id_lista.length > 0
                         && vm.korityyppi.taulu === 'ark_loyto'
                         && vm.tilanmuutos === false">
                     </button>
-                    <button ng-click="(form.$invalid || vm.disableButtons) || vm.save()" 
+                    <button ng-click="(form.$invalid || vm.disableButtons) || vm.save()"
                         class="btn btn-success"
                         i18n="common.Save"
                         ng-show="vm.edit">
@@ -52,7 +54,7 @@
                     <button ng-click="vm.editMode()" class="btn btn-default"
                         i18n="common.Edit"
                         ng-show="vm.koriValittu && !vm.edit && !vm.uusiKori && !vm.tilanmuutos">
-                    </button>                    
+                    </button>
                     <div class="dropup pull-right">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span i18n="common.Actions"></span> <span class="caret"></span>

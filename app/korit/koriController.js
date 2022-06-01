@@ -1060,6 +1060,9 @@ angular.module('mip.kori').controller(
 					$scope.scannerErrorText = text;
 				}
 
-
-				}
+				vm.addEntityToBasket = function(id){
+					vm.koriIdLista = [id];
+					vm.lisaaKoriin(vm.kori);
+				};
+			}
 		]);
