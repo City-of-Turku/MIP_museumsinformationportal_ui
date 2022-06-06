@@ -27,4 +27,12 @@
             <span data-i18n="common.mandatory_value" data-field="{{ 'ark.Borrower' | i18n }}"></span>
         </span>
     </div>
+    <label for="laatikko" class="col-sm-4 control-label">
+        <span i18n="ark.Box"></span>
+    </label>
+    <div class="col-sm-8">
+        <input type="text" class="form-control" name="laatikko"
+            ng-required="false"
+            ng-model="vm.nayte.properties.laatikko" />
+    </div>
 </div>

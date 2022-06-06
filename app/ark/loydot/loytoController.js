@@ -297,6 +297,10 @@ angular.module('mip.loyto').controller(
                     // Valintalistojen tarkistus
                     vm.valintalista_reset();
 
+                    if (vm.loyto.properties.laatikko && vm.loyto.properties.laatikko.length > 0){
+                        vm.loyto.properties.vakituinen_hyllypaikka += "." + vm.loyto.properties.laatikko;
+                    }
+
                     LoytoService.luoTallennaLoyto(vm.loyto).then(function (loyto) {
 
                         // "update" the original after successful save

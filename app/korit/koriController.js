@@ -899,6 +899,10 @@ angular.module('mip.kori').controller(
                  */
                 vm.teeTilanMuutos = function (){
                 	if(vm.korityyppi.taulu === 'ark_loyto'){
+						if (vm.loyto.properties.laatikko && vm.loyto.properties.laatikko.length > 0){
+							vm.loyto.properties.vakituinen_hyllypaikka += "." + vm.loyto.properties.laatikko;
+						}
+
                     	LoytoService.teeKorinTilamuutosTapahtumat(vm.kori.properties.kori_id_lista, vm.loyto).then(function(data) {
 
                     		AlertService.showInfo(locale.getString('ark.Discoveries_status_changed'), vm.loyto.properties.loydon_tila.nimi_fi);
@@ -915,6 +919,10 @@ angular.module('mip.kori').controller(
         				});
                 	}
                 	else if(vm.korityyppi.taulu === 'ark_nayte'){
+						if (vm.nayte.properties.laatikko && vm.nayte.properties.laatikko.length > 0){
+							vm.nayte.properties.vakituinen_hyllypaikka += "." + vm.nayte.properties.laatikko;
+						}
+
                     	NayteService.teeKorinTilamuutosTapahtumat(vm.kori.properties.kori_id_lista, vm.nayte).then(function(data) {
 
                     		AlertService.showInfo(locale.getString('sample.Sample_status_changed'), vm.nayte.properties.tila.nimi_fi);

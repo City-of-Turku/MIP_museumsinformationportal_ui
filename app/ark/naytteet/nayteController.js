@@ -176,6 +176,9 @@ angular.module('mip.nayte').controller(
                    		vm.nayte.properties.luettelointinumero = vm.luettelointinumero.concat(vm.nayte.properties.alanumero);
                 	}
 
+                    if (vm.nayte.properties.laatikko && vm.nayte.properties.laatikko.length > 0){
+                        vm.nayte.properties.vakituinen_hyllypaikka += "." + vm.nayte.properties.laatikko;
+                    }
 
                     NayteService.luoTallennaNayte(vm.nayte).then(function (nayte) {
 
