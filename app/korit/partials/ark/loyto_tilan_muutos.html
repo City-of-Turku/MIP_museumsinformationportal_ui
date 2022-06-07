@@ -10,7 +10,7 @@
 			<div class="col-sm-6">
 				<!-- Kokoelmassa - show qr code reader -->
 				<div class="row" ng-if="vm.loyto.properties.loydon_tila.id == 6">
-					<button type="button" class="btn btn-default" style="width: 37.16px"
+					<button id ="popover_tila" type="button" class="btn btn-default" style="width: 37.16px"
 						data-template-url="pages/templates/popover-tila-qr-scanner.html"
 						data-auto-close="true" bs-popover data-container="body"
 						data-i18n-attr="{title: 'common.Search_on_map'}">
@@ -19,13 +19,13 @@
 					<br />
 				</div>
 				<mip-loyto-tila tila="vm.loyto.properties" vm="vm"></mip-loyto-tila>
-				<!-- Luetteloitu, Konservoinnissa, 
-			Röntgenkuvauksessa, Poistettu löytöluettelosta, 
-			Palautettu, Poistettu kokoelmasta, 
+				<!-- Luetteloitu, Konservoinnissa,
+			Röntgenkuvauksessa, Poistettu löytöluettelosta,
+			Palautettu, Poistettu kokoelmasta,
 			Puuttuu  -->
 				<div ng-if="vm.loyto.properties.loydon_tila.id == 1 || vm.loyto.properties.loydon_tila.id == 2 ||
 					vm.loyto.properties.loydon_tila.id == 4 || vm.loyto.properties.loydon_tila.id == 5 ||
-					vm.loyto.properties.loydon_tila.id == 11 || vm.loyto.properties.loydon_tila.id == 9 || 
+					vm.loyto.properties.loydon_tila.id == 11 || vm.loyto.properties.loydon_tila.id == 9 ||
 					vm.loyto.properties.loydon_tila.id == 10"
 				 ng-include="'korit/partials/ark/loyto_tila_luetteloitu.html'"></div>
 				<!-- Lainassa, Näyttelyssä -->

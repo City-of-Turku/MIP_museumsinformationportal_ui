@@ -17,12 +17,12 @@ angular.module('mip.kori').controller(
 			'hotkeys', 'UserService', 'NgTableParams', 'LoytoService',
 			 'selectedModalNameId', 'ModalControllerService', 'KoriService', 'koriIdLista', 'korityyppi', 'kori', 'uusiKori',
 			 'RaporttiService', 'EntityBrowserService', 'NayteService', 'mip_alue', 'KiinteistoService', 'RakennusService',
-			 'ArvoalueService', 'AlueService', 'kayttajat',
+			 'ArvoalueService', 'AlueService', 'kayttajat', '$timeout',
 			function ($scope, AlertService, ModalService, ListService, locale,
 			        hotkeys, UserService, NgTableParams, LoytoService,
 			        selectedModalNameId, ModalControllerService, KoriService, koriIdLista, korityyppi, kori, uusiKori,
 			        RaporttiService, EntityBrowserService, NayteService, mip_alue, KiinteistoService, RakennusService,
-			        ArvoalueService, AlueService, kayttajat) {
+			        ArvoalueService, AlueService, kayttajat, $timeout) {
 
 			    var vm = this;
 
@@ -829,11 +829,15 @@ angular.module('mip.kori').controller(
                 		vm.loyto.properties.tapahtumapaiva = new Date();
                 	}
                 	vm.disableButtons = true;
-									vm.tilanmuutos = true;
+					vm.tilanmuutos = true;
+
+					$timeout(function() {
+						document.getElementById("popover_tila").click();
+					}, 250);
                 };
 
                 $scope.$watch('vm.loyto.properties.loydon_tila', function(newV, oldV) {
-                	if(newV != oldV) {
+					if(newV != oldV) {
                 		//Tehdään ensin kentistä tyhjät, ettei päivitetä arvoja joita ei uissa näy, mutta joissa kuitenkin on arvot
     					vm.loyto.properties.sailytystila = null;
     					vm.loyto.properties.vakituinen_hyllypaikka = null;

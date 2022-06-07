@@ -171,6 +171,19 @@
 			            </div>
 			        </div>
 		        </div>
+				<div class="col-sm-8">
+			        <div class="form-group">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-8">
+						<button ng-click="vm.muutaLoydonTila()" class="btn btn-default"
+								i18n="ark.Read_location" data-ng-if="vm.tilamuutosPermission === true
+								&& !vm.edit && vm.kori.properties.kori_id_lista.length > 0
+								&& vm.korityyppi.taulu === 'ark_loyto'
+								&& vm.tilanmuutos === false">
+							</button>
+						</div>
+					</div>
+				</div>
 	        </div>
 	    </div>
     </div>
