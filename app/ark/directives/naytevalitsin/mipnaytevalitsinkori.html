@@ -1,0 +1,20 @@
+<div class="col-md-4">
+	<div class="form-group">
+	    <label i18n="ark.Search_samples" class="control-label korivalitsin"></label>
+	    <ui-select
+	        ng-model="valittuNayte"
+	        theme="bootstrap"
+	        name="naytteet"
+	        on-select="addNayte($item)">
+	        <ui-select-match data-i18n-attr="{placeholder: 'ark.Search_samples'}">{{$item.luettelointinumero}}</ui-select-match>
+	        <ui-select-choices
+		        repeat="nayte in lhakutulos track by $index"
+		        refresh="nayteHaku($select.search)"
+		        refresh-delay="0">
+	          <div>
+	              <span ng-bind-html="nayte.luettelointinumero | highlight: $select.search"></span>
+	          </div>
+	        </ui-select-choices>
+	    </ui-select>
+	</div>
+</div>

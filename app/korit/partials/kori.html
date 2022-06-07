@@ -30,6 +30,8 @@
             </div>
             <div class="modal-footer">
                 <div class="mip-footer-btn-group">
+                    <mip-loyto-valitsin-kori func="vm.addEntityToBasket(id)" ng-show="vm.koriValittu && vm.korityyppi.taulu === 'ark_loyto'"></mip-loyto-valitsin-kori>
+                    <mip-nayte-valitsin-kori func="vm.addEntityToBasket(id)" ng-show="vm.koriValittu && vm.korityyppi.taulu === 'ark_nayte'"></mip-nayte-valitsin-kori>
                     <button ng-click="(form.$invalid || vm.disableButtons) || vm.save()"
                         class="btn btn-success"
                         i18n="common.Save"

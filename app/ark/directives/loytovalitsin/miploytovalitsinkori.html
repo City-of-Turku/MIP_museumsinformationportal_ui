@@ -1,0 +1,20 @@
+<div class="col-md-4">
+	<div class="form-group">
+	    <label i18n="ark.Search_discoveries" class="control-label korivalitsin"></label>
+	    <ui-select
+	        ng-model="valittuNayte"
+	        theme="bootstrap"
+	        name="loydot"
+	        on-select="addLoyto($item)">
+	        <ui-select-match data-i18n-attr="{placeholder: 'ark.Search_discoveries'}">{{$item.luettelointinumero}}</ui-select-match>
+	        <ui-select-choices
+		        repeat="loyto in lhakutulos track by $index"
+		        refresh="loytoHaku($select.search)"
+		        refresh-delay="0">
+	          <div>
+	              <span ng-bind-html="loyto.luettelointinumero | highlight: $select.search"></span>
+	          </div>
+	        </ui-select-choices>
+	    </ui-select>
+	</div>
+</div>
