@@ -818,7 +818,7 @@ angular.module('mip.loyto').controller(
 
                 vm.printQRCode= function() {
 					sessionStorage.setItem("tunniste", vm.loyto.properties.luettelointinumero);
-					window.open("pages/templates/qrcode_printpage.html", "_blank");
+					window.open("general/qrcode_printpage.html", "_blank");
 				};
 
 

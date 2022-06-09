@@ -785,7 +785,7 @@ angular.module('mip.kori').controller(
 				};
 				vm.printQRCode= function() {
 					sessionStorage.setItem("tunniste", vm.kori.properties.nimi);
-					window.open("pages/templates/qrcode_printpage.html", "_blank");
+					window.open("general/qrcode_printpage.html", "_blank");
 				};
 
                 /*
