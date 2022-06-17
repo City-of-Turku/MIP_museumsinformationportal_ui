@@ -182,7 +182,7 @@ angular.module('mip.kori').controller(
 
                             // Suodatus MIP alueen mukaan RAK tai ARK
                             filterParameters['mip_alue'] = vm.mip;
-
+							filterParameters['korijako'] = 3; //3 = Koriin lisätessä näytetään kaikki korit
                             vm.koritPromise = KoriService.haeKorit(filterParameters);
                             vm.koritPromise.then(function(data) {
 
@@ -293,6 +293,10 @@ angular.module('mip.kori').controller(
 						// Näytetään korin sisältörivit
 						vm.koriValittu = true;
 
+						if (vm.kori.properties.museon_kori == null){
+							vm.kori.properties.museon_kori = false;
+						}
+
 						/*
 						 *  Luodaan korin tyypin mukainen taulukko. Lisätään uusia tarpeen mukaan.
 						 */
@@ -396,7 +400,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -435,7 +438,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -474,7 +476,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 				                            // tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -513,7 +514,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 											// tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
@@ -634,13 +634,15 @@ angular.module('mip.kori').controller(
                     	vm.vanha_id_lista = []; // vanhan listan resetointi
 						nykyinen = UserService.getProperties().user.id;
 
-						permission = kori.properties.kayttajat.filter(function(u) {
-							return u.id==nykyinen;
-						});
-						if (permission.length == 0 || kori.properties.luoja.id != nykyinen){
-							vm.close();
-						}
+						if (kori.properties.luoja.id != nykyinen){
+							permission = kori.properties.kayttajat.filter(function(u) {
+								return u.id==nykyinen;
+							});
+							if (permission.length == 0 || kori.properties.museon_kori == false){
+								vm.close();
+							}
 
+						}
                     }, function error (kori) {
                         AlertService.showError(locale.getString('common.Error'), AlertService.message(kori));
                         vm.disableButtons = false;
@@ -762,8 +764,7 @@ angular.module('mip.kori').controller(
 				vm.getUsers = function () {
 					UserService.getUsers({
 						'rivit': 10000,
-						'aktiivinen': true,
-						'inventoijat' : true
+						'aktiivinen': true
 					}).then(function success(data) {
 						vm.kayttajat = data.features;
 					}, function error(data) {

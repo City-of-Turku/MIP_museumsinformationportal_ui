@@ -10,11 +10,11 @@
                             <span i18n="common.Results"></span>
                             : {{vm.koriTable.total()}}
                             <span class="pull-right glyphicon clickable_space collapsed-indicator"></span>
-                        </h4>					
+                        </h4>
 					</div>
                     <div class="panel-body form-horizontal panel-collapse collapse in" id="tiedotPanel" style="margin-bottom: 1em;">
                         <div class="row">
-							<div class="col-md-2 col-sm-2 col-xs-2"> 
+							<div class="col-md-2 col-sm-2 col-xs-2">
                                <button type="button"
                                    class="btn btn-default"
                                    ng-click="vm.refreshTable('koriCache', 'koriTable')"
@@ -26,7 +26,7 @@
                                    ng-click="vm.uusiKori()"
                                    data-i18n-attr="{title: 'common.New_cart'}">
                                    <i class="fa fa-cart-plus"></i>
-                               </button>                    
+                               </button>
                                <button type="button" class="btn btn-default" style="width: 37.16px"
                                     data-template-url="pages/templates/popover-kori-qr-scanner.html"
                                     data-auto-close="true" bs-popover data-container="body"
@@ -44,17 +44,26 @@
                                         spellcheck="false" autocomplete="off">
                                     </div>
                                 </div>
-                           </div>                                                  
+                                <div class="form-group col-md-3" ng-show="vm.showQRCodeButton">
+                                    <div class="input-group">
+                                        <select class="form-control" name="kori_jako"
+                                            style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+                                            ng-model="vm.koriTable.filter().properties.korijako"
+                                            ng-options="korijako.id as korijako.nimi_fi for korijako in vm.korijakotyypit">
+                                        </select>
+                                    </div>
+                                </div>
+                           </div>
                         </div>
                    </div>
                    <!-- Taulukko -->
-					<table ng-table="vm.koriTable" 
+					<table ng-table="vm.koriTable"
                         template-pagination="pages/templates/table-pagination.html"
 						class="table table-striped table-bordered" show-filter="false">
 						<tr ng-repeat="kori in $data" style="cursor: pointer" ng-click="vm.avaaKori(kori)">
 							<td data-title="vm.getColumnName('Cart_type', 'common')" style="width: 15%">
                                 {{kori.properties.korityyppi | namei18n}}
-                            </td>                            
+                            </td>
                             <td data-title="vm.getColumnName('Name', 'common')" style="width: 30%">
                                 {{kori.properties.nimi}}
                             </td>
@@ -63,16 +72,16 @@
                             </td>
                             <td data-title="vm.getColumnName('Updated', 'common')" style="width: 15%">
                                 {{kori.properties.muokattu | pvm:'dd.MM.yyyy HH:mm:ss'}}
-                            </td>                            
-<!--                             
+                            </td>
+<!--
                             <td data-title="vm.getColumnName('Public', 'common')" sortable="'properties.julkinen'">
                                 {{kori.properties.julkinen | trueFalseToText}}
                             </td>
                             <td data-title="vm.getColumnName('User', 'common')" sortable="'properties.kayttaja'">
                                 {{kori.properties.luoja.etunimi}} {{kori.properties.luoja.sukunimi}} {{kori.properties.luoja.sahkoposti}}
-                            </td> -->                                                                                                                                                                         														
+                            </td> -->
 						</tr>
-					</table>                   					
+					</table>
 				</div>
 			</div>
 		</div>

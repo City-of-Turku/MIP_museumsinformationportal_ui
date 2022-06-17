@@ -111,5 +111,25 @@ angular.module('mip.kori').controller('KoriListController', [
                     vm.koriTable.reload();
                 }
             });
+
+            vm.korijakotyypit = [
+        		{id : 1, nimi_fi : "Omat korit"},
+        		{id : 2, nimi_fi : "Jaetut korit"},
+        		{id : 3, nimi_fi : "Kaikki korit"}
+    		];
+
+            vm.hakuOletukset = function() {
+                // Luodaan properties
+                var filter = {
+                    'properties' : {}
+                };
+                // Ajoitusvalintalista
+		        filter['properties']['korijako'] = 3;
+
+		        // Lisätään taulukon filttereihin
+                angular.extend(vm.koriTable.filter(), filter);
+            };
+            vm.hakuOletukset();
+
 		}
 ]);

@@ -569,5 +569,6 @@
 	"Storage_code": "Säilytystilan koodi",
     "Shared": "Delad",
 	"Shared_to_users": "Jaettu käyttäjille",
-    "Print_qr_code": "Skriv ut QR kod"
+    "Print_qr_code": "Skriv ut QR kod",
+	"Museums_cart": "Museon kori"
 }
