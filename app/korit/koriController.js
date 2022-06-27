@@ -176,7 +176,7 @@ angular.module('mip.kori').controller(
                                 vm.cancelRequest();
                             }
 
-                            var filterParameters = ListService.parseParameters(params);
+							var filterParameters = ListService.parseParameters(params);
                             // Suodatus korityypin id:n mukaan
                             filterParameters['korityyppi'] = korityyppi.properties.id;
 
@@ -186,7 +186,7 @@ angular.module('mip.kori').controller(
                             vm.koritPromise = KoriService.haeKorit(filterParameters);
                             vm.koritPromise.then(function(data) {
 
-                                params.total(data.total_count);
+								params.total(data.total_count);
                                 $defer.resolve(data.features);
 
                             }, function(data) {
@@ -210,11 +210,6 @@ angular.module('mip.kori').controller(
 				vm.lisaaKoriin = function (kori){
 
 					vm.kori = kori;
-
-					vm.koriPromise = KoriService.haeKorinKayttajat(vm.kori.properties.id);
-					vm.koriPromise.then(function (kayttajat){
-						vm.kori.properties.kayttajat = kayttajat.properties;
-					});
 
 					// Lisäyksessä avataan muokkaustilaan
 					vm.edit = true;
@@ -296,6 +291,7 @@ angular.module('mip.kori').controller(
 						if (vm.kori.properties.museon_kori == null){
 							vm.kori.properties.museon_kori = false;
 						}
+						vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
 
 						/*
 						 *  Luodaan korin tyypin mukainen taulukko. Lisätään uusia tarpeen mukaan.
@@ -361,8 +357,6 @@ angular.module('mip.kori').controller(
 				                            // id:t kerätään talteen
 				                            vm.koriIdLista = data.idlist;
 				                            params.total(data.total_count);
-											vm.jaetut_kayttajat = vm.kori.properties.kayttajat;
-
 											// tarkista oikeudet
 				                            vm.updateTilamuutosPermission(data.features);
 				                            $defer.resolve(data.features);
@@ -617,6 +611,9 @@ angular.module('mip.kori').controller(
 							return u.id;
 						});
 					}
+					if (!vm.kori.properties.museon_kori){
+						vm.kori.properties.museon_kori = false;
+					}
 
                     KoriService.luoTallennaKori(vm.kori, vm.jaettu).then(function success(kori) {
 
@@ -638,7 +635,7 @@ angular.module('mip.kori').controller(
 							permission = kori.properties.kayttajat.filter(function(u) {
 								return u.id==nykyinen;
 							});
-							if (permission.length == 0 || kori.properties.museon_kori == false){
+							if (permission.length == 0 && kori.properties.museon_kori == false){
 								vm.close();
 							}
 
