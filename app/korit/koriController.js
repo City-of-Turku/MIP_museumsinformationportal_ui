@@ -569,7 +569,14 @@ angular.module('mip.kori').controller(
 				 * Tallenna
 				 */
                 vm.save = function () {
-                	vm.disableButtons = true;
+                	if (vm.museon_kori_change && vm.kori.properties.museon_kori == false){
+						var conf = confirm(locale.getString('common.Confirm_museum_cart_change'));
+						if (!conf) {
+							return;
+						}
+					}
+
+					vm.disableButtons = true;
 
 					// Poistettavien listan läpikäynti.
 					if(vm.poistettavat.length > 0) {
@@ -645,6 +652,10 @@ angular.module('mip.kori').controller(
                         vm.disableButtons = false;
                     });
                 };
+
+				vm.museon_kori_changed = function(){
+					vm.museon_kori_change = true;
+				};
 
                 /**
                  * Korin poisto.

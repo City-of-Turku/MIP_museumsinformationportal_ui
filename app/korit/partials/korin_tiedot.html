@@ -83,7 +83,7 @@
 								<ui-select-choices repeat="k.properties.id as k in vm.kayttajat | filter: $select.search track by k.properties.id" ng-disabled="disabled">
 									<span ng-bind-html="k.properties.etunimi | highlight: $select.search"></span>
 									<span ng-bind-html="k.properties.sukunimi | highlight: $select.search"></span>
-									<span ng-bind-html="k.properties.sahkoposti | highlight: $select.search"></span>
+									<span ng-bind-html="k.properties.organisaatio | highlight: $select.search"></span>
 								</ui-select-choices>
 							</ui-select>
 						</div>
@@ -110,7 +110,7 @@
 						<div class="col-sm-8 form-group">
 							<select ng-model="vm.kori.properties.museon_kori"
 								ng-options="option.value as option.label for option in vm.noYes"
-								name="museon_kori" class="form-control">
+								ng-change="vm.museon_kori_changed();" name="museon_kori" class="form-control">
 							</select>
 						</div>
 					</div>
