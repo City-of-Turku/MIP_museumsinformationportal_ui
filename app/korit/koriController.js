@@ -970,7 +970,7 @@ angular.module('mip.kori').controller(
 				$scope.haeKoriNimella = function(nimi) {
 					if (nimi.length > 0) {
 						if (nimi.indexOf('http') === -1 && nimi.indexOf('www.') === -1){
-							KoriService.haeKorit({'nimi':nimi,'mip_alue':'ARK'}).then(function(data){
+							KoriService.haeKorit({'nimi':nimi, 'mip_alue':'ARK', 'tarkka': true}).then(function(data){
 								if (data.count > 1) {
 									AlertService.showError(locale.getString('common.Error'), locale.getString('error.Too_many_baskets'));
 									$scope.scannerText = '';
