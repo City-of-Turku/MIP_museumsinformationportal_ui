@@ -26,13 +26,13 @@ angular.module('mip.directives').directive('mipLoytoValitsin', [
             	});
 
                 scope.loytoHaku = function(lhaku){
-                	
+
                 	scope.lhakutulos = [];
                 	var tmp = [];
-                	
+
                 	// Röntgenkuville voidaan hakea löytöjä myös eri tutkimuksilta eli haetaan ilman tutkimusId:tä.
                 	if(scope.mode === 'xray'){
-                        LoytoService.haeLoydot({'luettelointinumero': lhaku}).then(function (result) {
+                        LoytoService.haeLoydot({'luettelointinumero': lhaku, 'loydon_tilat_kaikki': true}).then(function (result) {
 
                        	 tmp = result.features.filter(function(i) {
                        		 return scope.valitutLoydot.map(function(e) {
