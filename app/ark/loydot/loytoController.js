@@ -1063,12 +1063,13 @@ angular.module('mip.loyto').controller(
                         tilaAsetettu = true;
                       }
                       if(tilaAsetettu) {
+                        vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
                         break;
                       }
                     }
 
                     if(!tilaAsetettu) {
-                      AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytyspaikka + ' ' + sailytystila);
+                        AlertService.showError(locale.getString('common.Error'), 'Sijaintia ei löydy: ' + sailytyspaikka + ' ' + sailytystila);
                     }
 
                   }, function error(data) {
@@ -1078,8 +1079,7 @@ angular.module('mip.loyto').controller(
                           console.log(data);
                       });
                   });
-                  // Asetetaan hyllypaikka
-                  vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
+
                 };
 		}
 ]);

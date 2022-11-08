@@ -1038,6 +1038,7 @@ angular.module('mip.kori').controller(
 								tilaAsetettu = true;
 							}
 							if(tilaAsetettu) {
+								vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
 								break;
 							}
 						}
@@ -1053,9 +1054,6 @@ angular.module('mip.kori').controller(
 									console.log(data);
 							});
 					});
-
-					// Asetetaan hyllypaikaksi hyllypaikka
-					vm.loyto.properties.vakituinen_hyllypaikka = hyllypaikka;
 				}
 
 				// Event for error QR code reading
