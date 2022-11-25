@@ -272,6 +272,9 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 if (searchProps['kenttanumero_vanha_tyonumero']) {
                     filter['properties']['kenttanumero_vanha_tyonumero'] = searchProps['kenttanumero_vanha_tyonumero'];
                 }
+                if (searchProps['rontgenkuvat']) {
+                    filter['properties']['rontgenkuvat'] = searchProps['rontgenkuvat'];
+                }
 
                 angular.extend(vm.loydotTable.filter(), filter);
             }

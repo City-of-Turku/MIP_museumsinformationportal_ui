@@ -175,7 +175,8 @@ angular.module('mip.general').factory('ListService', [
                         'showTilapainenSijaintiCol': false,
                         'showAlueCol': true,
                         'showLoytopaikanTarkenneCol': false,
-                        'showKenttanumeroVanhaTyonumeroCol': false
+                        'showKenttanumeroVanhaTyonumeroCol': false,
+                        'showRontgenkuvanumeroCol': false
                     }, 'nayte_tab': {
                     	'showPaanumeroCol' : true,
                     	'showLuettelointinumeroCol' : true,
