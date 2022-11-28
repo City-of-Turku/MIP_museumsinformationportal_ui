@@ -246,7 +246,7 @@
 					</div>
 				</div>
 			</div>
-	<!-- 		<div class="col-md-2">
+	            <!-- <div class="col-md-2">
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon">
@@ -292,6 +292,26 @@
 				</div>
 			</div>
 		</div>
+        <!--Rivi 4-->
+        <div class="col-md-12">
+            <div class="col-md-2 col-md-offset-1">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <input type="checkbox"
+                            ng-model="vm.colVisibilities.showKMTiedotCol"
+                            ng-change="vm.saveColVisibility('showKMTiedotCol', vm.colVisibilities.showKMTiedotCol)"
+                            data-i18n-attr="{title: 'common.Show_field'}">
+                        </span>
+                        <select class="form-control" name="km_laina"
+                            style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+                            ng-model="vm.loydotTable.filter().properties.km_laina"
+                            ng-options="km_laina.id as km_laina.nimi_fi for km_laina in vm.kmhakuarvot">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>
 
