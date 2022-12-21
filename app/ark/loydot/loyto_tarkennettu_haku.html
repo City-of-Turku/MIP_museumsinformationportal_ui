@@ -292,9 +292,24 @@
 				</div>
 			</div>
 		</div>
-        <!--Rivi 4-->
-        <div class="col-md-12">
-            <div class="col-md-2 col-md-offset-1">
+		<!-- Rivi 4 -->
+		<div class="col-md-12">
+			<div class="col-md-2 col-md-offset-1">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input type="checkbox"
+								ng-model="vm.colVisibilities.showRontgenkuvanumeroCol"
+								ng-change="vm.saveColVisibility('showRontgenkuvanumeroCol', vm.colVisibilities.showRontgenkuvanumeroCol)"
+								data-i18n-attr="{title: 'common.Show_field'}">
+						</span>
+						<input type="text" class="form-control" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px"
+							name="kuvaus" ng-model="vm.loydotTable.filter().properties.rontgenkuvat"
+							placeholder = "{{ 'ark.XRay_images' | i18n }}%"  spellcheck="false" autocomplete="off">
+					</div>
+				</div>
+			</div>
+		    <div class="col-md-2">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">

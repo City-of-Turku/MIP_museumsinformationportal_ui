@@ -137,6 +137,11 @@
                             <td data-title="vm.getColumnName('Field_number_former_work_number', 'ark')" ng-if="vm.colVisibilities.showKenttanumeroVanhaTyonumeroCol">
                                 {{loyto.properties.kenttanumero_vanha_tyonumero}}
                             </td>
+                            <td data-title="vm.getColumnName('XRay_images', 'ark')" ng-if="vm.colVisibilities.showRontgenkuvanumeroCol">
+                                <span ng-repeat="rk in loyto.properties.rontgenkuvat">
+                                    {{rk.numero}}
+                                </span>
+                            </td>
 						</tr>
 					</table>
 				</div>
