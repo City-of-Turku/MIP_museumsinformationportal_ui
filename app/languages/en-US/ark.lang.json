@@ -370,5 +370,6 @@
     "Discovery_report_by_area": "Discoveries catalog by area",
     "Removed_discoveries_report_by_area": "Removed discoveries catalog by area",
     "Type_value_missing": "Fill in field 'Kind' first",
-    "Location_data": "Location data"
+    "Location_data": "Location data",
+    "Conservation_Image": "Conservation image"
 }

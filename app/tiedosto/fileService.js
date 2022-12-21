@@ -161,12 +161,11 @@ angular.module('mip.file').factory('FileService', [
                     }
                     return deferred.promise;
                 },
-                saveArkImage : function(tiedosto, tiedot, entiteettiTyyppi, entiteettiId, luetteloi, tutkimusId) { //Käytössä
+                saveArkImage : function(tiedosto, tiedot, entiteettiTyyppi, entiteettiId, luetteloi, tutkimusId, kuvaTyyppi = 'muu') { //Käytössä
                     /*
                      * When a new image is uploaded, we have the tiedot. When an existing image is modified, we do not have tiedot.
                      */
                     var deferred = $q.defer();
-
                     if (!tiedot) {
                         // Existing image--> update properties
                         $http({
@@ -190,7 +189,8 @@ angular.module('mip.file').factory('FileService', [
                                 tiedosto : tiedosto,
                                 luetteloi : luetteloi,
                                 ark_tutkimus_id : tutkimusId,
-                                otsikko : tiedot.otsikko
+                                otsikko : tiedot.otsikko,
+                                kuva_tyyppi : CONFIG.LOYTO_KUVA_TYYPIT[kuvaTyyppi]
                             }
                         });
 

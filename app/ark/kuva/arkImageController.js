@@ -256,7 +256,7 @@ angular.module('mip.file').controller(
                             var dateString = datetime.getFullYear() + "-" + (datetime.getMonth()+1) + "-" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
                             $scope.image.properties.kuvauspvm = dateString;
                         }
-
+                        $scope.image.properties.kuvaTyyppi = $scope.image.properties.konservointikuva == true ? CONFIG.LOYTO_KUVA_TYYPIT['konservointi'] : CONFIG.LOYTO_KUVA_TYYPIT['loyto'];
                         FileService.saveArkImage($scope.image).then(function(id) {
                             $scope.edit = false;
 

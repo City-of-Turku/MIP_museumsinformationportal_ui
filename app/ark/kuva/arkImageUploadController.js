@@ -4,10 +4,10 @@ angular.module('mip.file').controller(
         [
                 '$scope', '$rootScope', 'CONFIG', '$http', 'ModalService', 'AlertService',
                 '$timeout', 'FileService', 'Upload', 'objectType', 'relatedObject', 'UserService',
-                'locale', '$window', 'selectedModalNameId', 'luetteloi', 'tutkimusId', 'ListService',
+                'locale', '$window', 'selectedModalNameId', 'luetteloi', 'tutkimusId', 'ListService', 'kuvaTyyppi',
                 function($scope, $rootScope, CONFIG, $http, ModalService, AlertService,
                 		$timeout, FileService, Upload, objectType, relatedObject, UserService,
-                		locale, $window, selectedModalNameId, luetteloi, tutkimusId, ListService) {
+                		locale, $window, selectedModalNameId, luetteloi, tutkimusId, ListService, kuvaTyyppi) {
 
                     // Unique modal id which is used for the collapsible panels
                     $scope.modalId = ModalService.getNextModalId();
@@ -19,7 +19,7 @@ angular.module('mip.file').controller(
                     // relatedObject: What is the object we're modifying ? (löytö, yksikkö, etc)
                     $scope.objectType = objectType;
                     $scope.relatedObject = relatedObject;
-
+                    $scope.kuvaTyyppi = kuvaTyyppi;
                     // The images that will be uploaded
                     $scope.files = [];
 
@@ -263,7 +263,7 @@ angular.module('mip.file').controller(
                                 delete $scope.files[i].properties.kuvauspvm;
                             }
 
-                            FileService.saveArkImage($scope.files[i], null, null, null, null, $scope.tutkimusId).then(function success(response) {
+                            FileService.saveArkImage($scope.files[i], null, null, null, null, $scope.tutkimusId, $scope.kuvaTyyppi).then(function success(response) {
                                 $scope.recSave(i + 1);
                             }, function error(data) {
                                 locale.ready('common').then(function() {
@@ -318,7 +318,7 @@ angular.module('mip.file').controller(
                                  //Do not try to save images that are already uploaded
                                 $scope.recUpload(i + 1);
                             }
-                            FileService.saveArkImage($scope.files[i], $scope.files[i].properties, CONFIG.ENTITY_TYPE_IDS[$scope.objectType], $scope.relatedObject.properties.id, $scope.luetteloi, $scope.tutkimusId).then(function success(response) {
+                            FileService.saveArkImage($scope.files[i], $scope.files[i].properties, CONFIG.ENTITY_TYPE_IDS[$scope.objectType], $scope.relatedObject.properties.id, $scope.luetteloi, $scope.tutkimusId, $scope.kuvaTyyppi).then(function success(response) {
                                 // Update the image id.
                                 $scope.files[i].properties.id = response.data.properties.id;
 

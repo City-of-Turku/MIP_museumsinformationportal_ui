@@ -371,5 +371,6 @@
     "Type_value_missing": "Täytä kenttä 'Laji' ensin",
     "Location_data": "Sijaintitiedot",
     "Box": "Laatikko",
-    "Read_location": "Lue sijainti"
+    "Read_location": "Lue sijainti",
+    "Conservation_Image": "Konservoinnin kuva"
 }
