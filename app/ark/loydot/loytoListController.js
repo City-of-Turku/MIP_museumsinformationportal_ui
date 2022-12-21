@@ -98,6 +98,11 @@ angular.module('mip.loyto').controller('LoytoListController', [
         		{id : 3, nimi_fi : "Ehkä vaatii konservointia"},
         		{id : 4, nimi_fi : "Konservoinnin tarve (kaikki)"}
     		];
+            vm.kmhakuarvot = [
+        		{id : 1, nimi_fi : "KM laina: Kyllä"},
+                {id : 2, nimi_fi : "KM laina: Ei"},
+        		{id : 3, nimi_fi : "KM laina (kaikki)"}
+    		];
 
             /*
              * Ajanlasku
@@ -124,6 +129,9 @@ angular.module('mip.loyto').controller('LoytoListController', [
 
                 // Vaatii konservointia: kaikki
 		        filter['properties']['vaatii_konservointia'] = 4;
+
+                // KM laina kaikki
+                filter['properties']['km_laina'] = 3;
 
 		        // Kokoelmatunnus
 		        // TODO filter['properties']['loyto_kokoelmalaji'] = {id: 2, nimi_fi: 'Turun museokeskus (TMK)'};
@@ -275,6 +283,11 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 if (searchProps['rontgenkuvat']) {
                     filter['properties']['rontgenkuvat'] = searchProps['rontgenkuvat'];
                 }
+                if (searchProps['km_laina']) {
+                    filter['properties']['km_laina'] = searchProps['km_laina'];
+                } else {
+                	filter['properties']['km_laina'] = 3;
+                }
 
                 angular.extend(vm.loydotTable.filter(), filter);
             }
@@ -288,6 +301,7 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 vm.getSearchValues();
                 vm.loydotTable.filter().properties.valittu_ajoitus = 3;
                 vm.loydotTable.filter().properties.vaatii_konservointia = 4;
+                vm.loydotTable.filter().properties.km_laina = 3;
                 vm.alkuvuosi_ajanlasku = null;
                 vm.paatosvuosi_ajanlasku = null;
             };

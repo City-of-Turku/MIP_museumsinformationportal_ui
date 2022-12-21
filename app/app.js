@@ -72,6 +72,12 @@ var mip = angular.module(
         'kasittely': 21,
         'kuntoraportti': 22
     },
+    'LOYTO_KUVA_TYYPIT' : {
+        'muu' : 0,
+        'loyto' : 1,
+        'konservointi' : 2
+    },
+
     /** Ladattavan kuvan maksimikoko */
     'MAX_IMAGE_SIZE' : '120MB',
     /** Ladattavan tiedoston maksimikoko */

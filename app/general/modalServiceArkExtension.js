@@ -963,7 +963,7 @@ angular.module('mip.general').factory(
                         /*
                          * ark, kuvan lisäys
                          */
-                        arkImageUploadModal : function(objectType, relatedObject, luetteloi, tutkimusId) {
+                        arkImageUploadModal : function(objectType, relatedObject, luetteloi, tutkimusId, kuvaTyyppi = 'muu') {
                             // Modaalin tunniste
                             var modalNameId = locale.getString('common.Select_images') + ': ' + nextModalNameIdIndex();
                             $timeout(function() {
@@ -991,6 +991,9 @@ angular.module('mip.general').factory(
                                         },
                                         tutkimusId : function() {
                                         	return tutkimusId;
+                                        },
+                                        kuvaTyyppi: function() {
+                                            return kuvaTyyppi;
                                         }
                                     }
                                 });

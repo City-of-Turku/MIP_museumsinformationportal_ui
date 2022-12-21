@@ -826,7 +826,7 @@ angular.module('mip.loyto').controller(
                  * Add image to the alue
                  */
                 vm.addImage = function(luetteloi) {
-                    ModalService.arkImageUploadModal('loyto', vm.loyto, luetteloi, vm.tutkimus.id);
+                    ModalService.arkImageUploadModal('loyto', vm.loyto, luetteloi, vm.tutkimus.id, 'loyto');
                 };
 
                 //Luetteloimattomat kuvat
@@ -840,7 +840,8 @@ angular.module('mip.loyto').controller(
                             'ark_tutkimus_id' : vm.tutkimus.id,
                             'ark_tutkimusalue_id' : null,
                             'luetteloitu': false,
-                            'loyto': true
+                            'loyto': true,
+                            'kuvatyyppi': CONFIG.LOYTO_KUVA_TYYPIT['loyto']
                         }).then(function success(images) {
                             vm.otherImages = images.features;
                             // Muiden kuvien määrä

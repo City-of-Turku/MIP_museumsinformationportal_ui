@@ -175,6 +175,7 @@
 	"Discovery_statuses_events": "Löydön tilat ja tapahtumat",
     "Conservation": "Konservointi",
     "Conservation_required": "Vaatii konservointia",
+    "KM_details":"KM laina tiedot",
     "Artifact_name": "Esineen nimi",
     "Discovery_date": "Löytöpäivämäärä",
     "Collection_identifier": "Kokoelmatunnus",
@@ -322,6 +323,7 @@
     "Targets_selected_for_inventory": "%count Kohdetta valittu inventaarioon",
     "Targets_not_found_with_area": "Kohteita ei löytynyt valitulla alueella",
     "Transfer_to_Finna": "Siirtyy Finnaan",
+    "KM_Loan":"KM laina",
     "Confirm_closing_without_joined_unit": "Yksikköä ei ole liitetty mihinkään toiseen yksikköön. Haluatko jatkaa?",
     "Inventory": "Inventointi",
     "Inventory_research": "Inventointi-tutkimus",
@@ -348,7 +350,7 @@
     "Titlepage_may_contain_only_one_image": "Kansilehdelle voi valita ainoastaan yhden kuvan",
     "KM_main_number": "KM päänumero",
     "Findings_diary_date": "Löytöjen diariointipäivämäärä",
-    "KM_main_number_and_diaar_num": "KM päänumerot ja löytöjen diariointipäivämäärät",
+    "KM_main_number_and_diaar_num": "KM päänumerot ja löytöjen diariointipäivämäärät (vain sopimus 17.6.2021)",
     "Arc_inventory_only_one_area": "Tutkimustyypille Arkeologinen inventointi ei voi lisätä kuin yhden tutkimusalueen.",
     "Arc_inventory_only_admin_can_create_areas": "Vain pääkäyttäjä voi lisätä Arkeologinen inventointi -tutkimukseen tutkimusalueen.",
     "Inventory_report": "Inventointitutkimusraportti",
@@ -369,5 +371,6 @@
     "Type_value_missing": "Täytä kenttä 'Laji' ensin",
     "Location_data": "Sijaintitiedot",
     "Box": "Laatikko",
-    "Read_location": "Lue sijainti"
+    "Read_location": "Lue sijainti",
+    "Conservation_Image": "Konservoinnin kuva"
 }

@@ -168,6 +168,7 @@ angular.module('mip.general').factory('ListService', [
                     	'showTutkimusLyhenneCol': true,
                     	'showYksikkotunnusCol': true,
                     	'showVaatiiKonservointiaCol': false,
+                        'showKMTiedotCol': false,
                     	'showKuvausCol': false,
                     	'showKokoelmatunnusCol': false,
                     	'showVakituinenSijaintiCol': false,
@@ -1489,6 +1490,11 @@ angular.module('mip.general').factory('ListService', [
                         listServiceFunctions.setProp('sailytystila', filterParameters.sailytystila);
                     } else {
                         listServiceFunctions.setProp('sailytystila', "");
+                    }
+                    if (filterParameters.km_laina) {
+                        listServiceFunctions.setProp('km_laina', filterParameters.km_laina);
+                    } else {
+                        listServiceFunctions.setProp('km_laina', "3");
                     }
                 },
                 // ARK näyte tab TODO vaihda päällekkäiset propparinimet!!!
