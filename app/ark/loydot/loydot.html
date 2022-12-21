@@ -101,6 +101,9 @@
 				               		<span ng-show="konservointi.id == loyto.properties.konservointi">{{konservointi.nimi_fi}}</span>
 				               	</span>
                             </td>
+                            <td data-title="vm.getColumnName('KM_details', 'ark')" ng-if="vm.colVisibilities.showKMTiedotCol">
+                                    <span>{{loyto.properties.yksikko.tutkimusalue.tutkimus.km_paanumerot_ja_diaarnum}}</span>
+                            </td>
                             <td data-title="vm.getColumnName('Description', 'common')" ng-if="vm.colVisibilities.showKuvausCol">
                                 {{loyto.properties.kuvaus}}
                             </td>
