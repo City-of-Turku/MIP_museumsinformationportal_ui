@@ -79,6 +79,9 @@ angular.module('mip.tutkimus').factory('TutkimusService', [
             $rootScope.$broadcast('Update_data', {
               type: 'tutkimus'
             });
+            $rootScope.$broadcast('Update_loyto', {
+              type: 'loyto'
+            });
             deferred.resolve(response);
           }, function error(response) {
             if (CONFIG.DEBUG) {
