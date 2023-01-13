@@ -22,7 +22,7 @@ var mip = angular.module(
     'API_URL' : 'http://localhost:8000/api/', // The value will be replaced in the build process
     /** API version asetus */
     'API_VERSION' : 'v1', // API version
-    'APP_VERSION': 'v1.4.1 20221006',
+    'APP_VERSION': 'v1.4.3 20221221',
     /** Onko debug päällä, httpRequestInterceptor käyttää */
     'DEBUG' : true, // Is debug on?
     /** Accept languages */
@@ -72,6 +72,12 @@ var mip = angular.module(
         'kasittely': 21,
         'kuntoraportti': 22
     },
+    'LOYTO_KUVA_TYYPIT' : {
+        'muu' : 0,
+        'loyto' : 1,
+        'konservointi' : 2
+    },
+
     /** Ladattavan kuvan maksimikoko */
     'MAX_IMAGE_SIZE' : '120MB',
     /** Ladattavan tiedoston maksimikoko */

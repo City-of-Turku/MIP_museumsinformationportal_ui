@@ -570,7 +570,33 @@ angular.module('mip.map').factory('MapService', [
 									zoomOffset: 0
 								}
 							});
-						} else if (selectedLayer.tyyppi == 'WMS') {
+						} else if (selectedLayer.url.indexOf('paikkatieto.ymparisto.fi') > -1) {
+                            mapLayers.push({
+								name: 'POHJAKARTTA_' + selectedLayer.nimi,
+								active: true,
+								opacity: 1,
+								zIndex: mapLayers.length,
+								active: true,
+								source: {
+									type: 'TileWMS',
+									url: url,
+									params: {
+										'REQUEST': 'GetMap',
+										'FORMAT': 'image/png',
+										'VERSION': '1.1.1',
+										'LAYERS': selectedLayer.taso,
+										'TRANSPARENT': true,
+                                        'STYLES': 'default'
+									},
+									serverType: ('geoserver'),
+									ratio: 1,
+									crossOrigin: null,
+									isBaseLayer: true,
+									transitionEffect: 'resize',
+									zoomOffset: 0
+								}
+							});
+                        } else if (selectedLayer.tyyppi == 'WMS') {
 							mapLayers.push({
 								name: 'POHJAKARTTA_' + selectedLayer.nimi,
 								active: true,

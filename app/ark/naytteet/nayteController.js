@@ -877,6 +877,7 @@ angular.module('mip.nayte').controller(
                 tilaAsetettu = true;
               }
               if(tilaAsetettu) {
+                vm.nayte.properties.vakituinen_hyllypaikka = hyllypaikka;
                 break;
               }
             }
@@ -892,8 +893,6 @@ angular.module('mip.nayte').controller(
                   console.log(data);
               });
           });
-          // Asetetaan hyllypaikka
-          vm.nayte.properties.vakituinen_hyllypaikka = hyllypaikka;
         };
 		}
 ]);

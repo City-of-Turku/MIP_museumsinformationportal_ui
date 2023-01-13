@@ -222,6 +222,16 @@
 		            <div class="col-md-12">
                         <mip-tekijanoikeuslausekevalitsin valittulauseketeksti="image.properties.tekijanoikeuslauseke" dis="false" osio="'arkeologia'"></mip-tekijanoikeuslausekevalitsin>
                     </div>
+                    <div class="col-md-12" ng-if="entiteetti_tyyppi === 'loyto'">
+                        <label class="col-md-12 control-label">
+                            <span i18n="ark.Conservation_Image" class="pull-left"></span>
+                        </label>
+                        <select name="konservointikuva"
+                            ng-model="image.properties.konservointikuva"
+                            class="form-control"
+                            ng-options="option.value as option.label for option in noYes">
+                        </select>
+                    </div>
 		        </div>
             </div>
         </div>

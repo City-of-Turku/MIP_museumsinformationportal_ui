@@ -345,7 +345,8 @@ angular.module('mip.konservointi').controller(
 						'ark_tutkimus_id': vm.tutkimus.id,
 						'ark_tutkimusalue_id': null,
 						'luetteloitu': false,
-						'loyto': false
+						'loyto': false,
+						'kuvatyyppi': CONFIG.LOYTO_KUVA_TYYPIT['konservointi']
 					}).then(function success(images) {
 						vm.otherImages = images.features;
 						// Muiden kuvien määrä
@@ -363,7 +364,7 @@ angular.module('mip.konservointi').controller(
 			 * Add image
 			 */
 			vm.addImage = function () {
-				ModalService.arkImageUploadModal('loyto', vm.loyto, false, vm.tutkimus.id);
+				ModalService.arkImageUploadModal('loyto', vm.loyto, false, vm.tutkimus.id, 'konservointi');
 			};
 
 			/*

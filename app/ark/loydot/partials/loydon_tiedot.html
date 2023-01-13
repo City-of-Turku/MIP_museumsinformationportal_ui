@@ -200,7 +200,30 @@
 					</select>
 				</div>
 			</div>
-
+            <div class="form-group" ng-if="vm.loyto.properties.yksikko.tutkimusalue.tutkimus.km_paanumerot_ja_diaarnum">
+				<label for="km_laina" class="col-sm-4 control-label">
+					<span i18n="ark.KM_Loan"></span>
+				</label>
+				<div class="col-sm-8">
+						<p class="form-control-static"
+							data-trigger="hover"
+							data-placement="auto"
+							bs-tooltip data-title="KM päänumerot ja löytöjen diarointipäivämäärät: {{vm.loyto.properties.yksikko.tutkimusalue.tutkimus.km_paanumerot_ja_diaarnum}}">Kyllä
+						</p>
+				</div>
+			</div>
+            <div class="form-group" ng-if="!vm.loyto.properties.yksikko.tutkimusalue.tutkimus.km_paanumerot_ja_diaarnum">
+				<label for="km_laina" class="col-sm-4 control-label">
+					<span i18n="ark.KM_Loan"></span>
+				</label>
+				<div class="col-sm-8">
+						<p class="form-control-static"
+							data-trigger="hover"
+							data-placement="auto"
+							bs-tooltip data-title="">Ei
+						</p>
+				</div>
+			</div>
 			<div class="form-group" ng-if="vm.rontgenkuvat.length > 0">
 				<label class="col-sm-4 control-label">
 					<span i18n="ark.XRay_images"></span>
