@@ -95,6 +95,9 @@ angular.module('mip.file').factory('RontgenkuvaService', [
                             $rootScope.$broadcast('arkXray_modified', {
                                 'type' : 'rontgenkuva'
                             });
+                            $rootScope.$broadcast('Update_loyto', {
+                                type: 'loyto'
+                              });
 
                             deferred.resolve(response.data.data);
                         }, function error(response) {
@@ -120,6 +123,9 @@ angular.module('mip.file').factory('RontgenkuvaService', [
                         $rootScope.$broadcast('arkXray_modified', {
                             'type' : 'rontgenkuva'
                         });
+                        $rootScope.$broadcast('Update_loyto', {
+                            type: 'loyto'
+                          });
                         deferred.resolve();
                     }, function error(response) {
                         deferred.reject(response);
