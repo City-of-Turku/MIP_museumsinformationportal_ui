@@ -164,7 +164,6 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 }
             });
             $scope.$on('Update_loyto', function(event, data) {
-                console.log("Update loyto ")
                 if (data.type == 'loyto') {
                     vm.refreshTable('loytoCache', 'loydotTable')
                 }
