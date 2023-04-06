@@ -60,6 +60,7 @@ angular.module('mip.file').controller(
                             $scope.files.push(files[i]);
                         }
                         // $scope.files += files;
+                        $scope.errFiles = [];
                         for (var i = 0; i < errFiles.length; i++) {
                             $scope.errFiles.push(errFiles[i]);
                         }
@@ -239,7 +240,7 @@ angular.module('mip.file').controller(
                                     	nayteCount : $scope.files[i].properties.naytteet.length,
                                     	loytoCount : $scope.files[i].properties.loydot.length,
                                     	yksikkoCount : $scope.files[i].properties.yksikot.length
-                                    });                                	
+                                    });
                                 }
 
                                 $scope.uploadedFiles = i + 1;
