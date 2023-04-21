@@ -1953,10 +1953,12 @@ angular.module('mip.map').controller(
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullScreen
             $scope.exitFullScreen = function() {
                 // Jos ei olla full screen modessa, antaa selain virheen.
-                document.exitFullscreen().then(/* ollaan valmiita */).catch(function e(error) {
-                    //console.log(error);
-                    // Ei oltu full screenissä. TODO: Tee toggle ja ota arvo talteen ollaanko fullscreeniin menty.
-                });
+                if (!navigator.platform.match(/iPad/i)){
+                    document.exitFullscreen().then(/* ollaan valmiita */).catch(function e(error) {
+                        //console.log(error);
+                        // Ei oltu full screenissä. TODO: Tee toggle ja ota arvo talteen ollaanko fullscreeniin menty.
+                    });
+                }
             }
 
             $scope.$on('openlayers.map.singleclick', function (event, data) {
