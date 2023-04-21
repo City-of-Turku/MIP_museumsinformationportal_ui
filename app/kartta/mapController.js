@@ -1951,15 +1951,15 @@ angular.module('mip.map').controller(
             // Muutoin avattavat näkymät jäävät kokonäytön tilan "alle"
             // Onko myöskään tarvetta omalle funkkarille vai kutsuakko suoraan document.exitFullscreen()..
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullScreen
-            $scope.exitFullScreen = function() {
-                // Jos ei olla full screen modessa, antaa selain virheen.
-                if (!navigator.platform.match(/iPad/i)){
-                    document.exitFullscreen().then(/* ollaan valmiita */).catch(function e(error) {
-                        //console.log(error);
-                        // Ei oltu full screenissä. TODO: Tee toggle ja ota arvo talteen ollaanko fullscreeniin menty.
-                    });
-                }
-            }
+            // $scope.exitFullScreen = function() {
+            //     // Jos ei olla full screen modessa, antaa selain virheen.
+            //     if (!navigator.platform.match(/iPad/i)){
+            //         document.exitFullscreen().then(/* ollaan valmiita */).catch(function e(error) {
+            //             //console.log(error);
+            //             // Ei oltu full screenissä. TODO: Tee toggle ja ota arvo talteen ollaanko fullscreeniin menty.
+            //         });
+            //     }
+            // }
 
             $scope.$on('openlayers.map.singleclick', function (event, data) {
                 $scope.$apply(function () {
@@ -1983,7 +1983,7 @@ angular.module('mip.map').controller(
                             });
 
                             if (typeof featureHit !== 'undefined') {
-                                $scope.exitFullScreen();
+                                //$scope.exitFullScreen();
                                 //Prepare the found items for the EntityBrowserService
                                 var features = layerHit.getSource().getFeatures();//Get the features on the current layer
 
