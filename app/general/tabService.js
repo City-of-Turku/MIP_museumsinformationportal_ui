@@ -184,6 +184,7 @@ angular.module('mip.menu').factory('TabService', [
 					var arkselectionlists = locale.getString('common.Ark_selection_lists');
 					var publications = locale.getString('common.Inventory_publications');
 					var copyrightClauses = locale.getString('common.Copyright_clauses');
+					var adminTools = locale.getString("common.Admin_tools");
 
 					var adminSubTabList = [
 						{
@@ -197,6 +198,10 @@ angular.module('mip.menu').factory('TabService', [
 						{
 							"title": copyrightClauses,
 							"href": "/tekijanoikeuslausekkeet"
+						},
+						{
+							"title": adminTools,
+							"href": "/tyokalut"
 						}
 						//{
 						//	"title" : selectionlists,

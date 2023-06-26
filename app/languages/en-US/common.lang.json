@@ -571,5 +571,6 @@
 	"Shared_to_users": "Shared to users",
 	"Print_qr_code": "Print QR code",
 	"Museums_cart": "Museums cart",
-	"Confirm_museum_cart_change": "Do you really want to delete museum cart share?"
+	"Confirm_museum_cart_change": "Do you really want to delete museum cart share?",
+	"Admin_tools": "Admin tools"
 }

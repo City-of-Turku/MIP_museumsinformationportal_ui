@@ -1,0 +1,27 @@
+<div class="panel">
+    <div class="panel-body">
+        <div ng-include="'pages/tabs.html'"></div>
+        <div ng-include="'pages/subtabs.html'"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-collapsible table-responsive">
+                    <h4 i18n="common.Admin_tools"></h4>
+                    <div class="panel-body panel-collapse form-horizontal collapse in"
+                        id="tiedotPanel" style="margin-bottom: 1em;">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                <button type="button"
+                                    class="btn btn-default"
+                                    ng-click="vm.updateMuinaisjaannokset();">
+                                    <span i18n="ark.Update_relic_register"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

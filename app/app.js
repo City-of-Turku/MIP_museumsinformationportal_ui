@@ -421,6 +421,10 @@ mip.config([
                 templateUrl : 'img_file_search/ark_map_search.html',
                 controller : 'arkMapSearchListController',
                 controllerAs : 'vm'
+            }).when('/tyokalut', {
+                templateUrl : 'tyokalut/tyokalut.html',
+                controller : 'TyokaluController',
+                controllerAs : 'vm'
             }).otherwise('/kirjaudu');
 
             /*
