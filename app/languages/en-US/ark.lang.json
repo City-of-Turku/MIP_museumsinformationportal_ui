@@ -166,6 +166,7 @@
     "Search_discoveries": "Search discoveries",
 	"Research_users": "Research users",
     "Discovery_main_number_missing": "Discovery main number missing",
+    "Discovery_collection_type_missing": "Discovery collection type missing",
     "Search_glossary": "Search glossary (min 3 chars)",
     "Mandatory_data_missing_confirmation": "Mandatory data missing! Are you sure you want to leave?",
     "Unknown_collection_type": "Unknown collection type",

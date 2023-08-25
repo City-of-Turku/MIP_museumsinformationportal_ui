@@ -716,6 +716,14 @@ angular.module('mip.tutkimus').controller(
                             vm.disableButtons = false;
                     		return;
                     	};
+
+                        if (!tutkimus.properties.loyto_kokoelmalaji){
+                            AlertService.showError(locale.getString('common.Error'), locale.getString('ark.Discovery_collection_type_missing'));
+
+                            // Aktivoidaan painikkeet
+                            vm.disableButtons = false;
+                    		return;
+                        }
                         var kokoelmaTunnus = tutkimus.properties.loyto_kokoelmalaji.tunnus;
                         if(!kokoelmaTunnus) {
                             AlertService.showError(locale.getString('common.Error'), 'Kokoelman tunnusta ei ole syötetty');

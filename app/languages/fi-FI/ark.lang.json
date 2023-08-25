@@ -166,6 +166,7 @@
     "Search_discoveries": "Löytöjen haku",
 	"Research_users": "Tutkimuksen käyttäjät",
     "Discovery_main_number_missing": "Löydön päänumero puuttuu",
+    "Discovery_collection_type_missing": "Löydön kokoelmalaji puuttuu",
     "Search_glossary": "Hae asiasanastosta (min 3 mrk)",
     "Mandatory_data_missing_confirmation": "Pakollinen tieto puuttuu! Haluatko varmasti poistua?",
     "Unknown_collection_type": "Tuntematon kokoelmalaji",
