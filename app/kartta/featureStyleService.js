@@ -116,6 +116,10 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
             colors:{alueStroke: 'rgba(252, 86, 153, 1)', pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 153, 1)'}},
         {id: 9, source: 'resources/images/map/poistettu_kiinteamj50x50.png',
             colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(130, 130, 130, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 10, source: 'resources/images/map/muu_kpkohde50x50.png',
+            colors:{alueStroke: 'rgba(182, 127, 74, 1)', pisteFill: 'rgba(182, 127, 74, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
+        {id: 11, source: 'resources/images/map/muu_kohde50x50.png',
+            colors:{alueStroke: 'rgba(0, 0, 0, 1)', pisteFill: 'rgba(255, 255, 255, 1)', pisteStroke: 'rgba(0, 0, 0, 1)'}},
     ];
 
     var alakohdeStyles = {
@@ -127,7 +131,9 @@ angular.module('mip.map').factory('FeatureStyleService', [ 'UserService', functi
         "6": {pisteFill: 'rgba(255, 255, 255, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
         "7": {pisteFill: 'rgba(182, 127, 74, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
         "8": {pisteFill: 'rgba(252, 255, 255, 0.6)', pisteStroke: 'rgba(252, 86, 200, 1)'},
-        "9": {pisteFill: 'rgba(130, 130, 130, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'}
+        "9": {pisteFill: 'rgba(130, 130, 130, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "10": {pisteFill: 'rgba(182, 127, 74, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
+        "11": {pisteFill: 'rgba(255, 255, 255, 0.6)', pisteStroke: 'rgba(0, 0, 0, 1)'},
     };
 
     kohdeStyles.forEach(function(item){
