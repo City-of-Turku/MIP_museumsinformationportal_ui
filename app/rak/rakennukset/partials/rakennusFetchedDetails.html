@@ -43,7 +43,7 @@
 										style="margin-bottom: 10px">
 										<tr
 											ng-repeat="(key, value) in result.properties"
-											ng-show="value && key != 'showLabel' && key != 'MMLFeatureIndex'">
+											ng-show="value && key != 'showLabel' && key != 'MMLFeatureIndex' && key != 'rakennusavain'">
 											<td ng-class="{'mip-table-header': key == 'rakennustunnus'}">
 												<span ng-show="key != 'osoitteet' && key != 'omistajat'">{{key | capitalize}}</span> 
 												<span ng-show="key == 'osoitteet'">{{key | capitalize}}</span> 
