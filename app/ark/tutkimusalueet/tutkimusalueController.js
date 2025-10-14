@@ -695,7 +695,7 @@ angular.module('mip.tutkimus').controller(
                     	vm.loydonLisays = false;
 
                     	/*
-                    	 * Mikäli tutkimuksen löytöjen kokoelmatunnus on TMK, luettelointinumero muodostetaan kolmesta kentästä:
+                    	 * Mikäli tutkimuksen löytöjen kokoelmatunnus on TKM, luettelointinumero muodostetaan kolmesta kentästä:
                     	 * 1.kokoelmatunnus + näytteiden päänumero (tutkimukselta)
 						 * 2.näytekoodi + yksikkötunnus ilman yksikkötyypin kirjainta
 						 * 3.juokseva alanumero (per näytekoodi, ilman etunollia)
@@ -728,14 +728,14 @@ angular.module('mip.tutkimus').controller(
                         if(!kokoelmaTunnus) {
                             AlertService.showError(locale.getString('common.Error'), 'Kokoelman tunnusta ei ole syötetty');
                         }
-                    	//Irtolöytö tai tarkastus (esim. TMK555:1)
+                    	//Irtolöytö tai tarkastus (esim. TKM555:1)
                     	if(vm.irtoTaiTarkastus()) {
                     		var ltn_alku = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                 			luettelointinumero = ltn_alku;
                     	} else {
                     		if(tutkimus.properties.loyto_kokoelmalaji && tutkimus.properties.loyto_paanumero){
                         		var loydonKokoelmalaji = tutkimus.properties.loyto_kokoelmalaji;
-                        		if(loydonKokoelmalaji.tunnus == 'TMK'){
+                        		if(loydonKokoelmalaji.tunnus == 'T'){
                         			var ltn_alku = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                         			var ltn_loppu = vm.uusiLoyto.properties.materiaalikoodi.koodi.concat(vm.yksikko.properties.yksikon_numero);
                         			luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
