@@ -735,7 +735,7 @@ angular.module('mip.tutkimus').controller(
                     	} else {
                     		if(tutkimus.properties.loyto_kokoelmalaji && tutkimus.properties.loyto_paanumero){
                         		var loydonKokoelmalaji = tutkimus.properties.loyto_kokoelmalaji;
-                        		if(loydonKokoelmalaji.tunnus == 'T'){
+                        		if(loydonKokoelmalaji.tunnus == 'TKM'){
                         			var ltn_alku = kokoelmaTunnus.concat(tutkimus.properties.loyto_paanumero).concat(':');
                         			var ltn_loppu = vm.uusiLoyto.properties.materiaalikoodi.koodi.concat(vm.yksikko.properties.yksikon_numero);
                         			luettelointinumero = ltn_alku.concat(ltn_loppu).concat(':');
