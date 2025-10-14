@@ -23,11 +23,11 @@ angular.module('mip.directives').directive('mipKokoelmalaji', [
 
                 /**
                  * Suodatukset tyypin mukaan:
-                 * Löydöt: KM, TMK, TYA = 1,2,4
-                 * Raportit: MV, TMK, TYA = 3,2,4
-                 * Kartat: MV, TMK, TYA = 3,2,4
-                 * Valokuvat: MV, TMK, TYA = 3,2,4
-                 * Näytteet: TMK, TYA = 2,4
+                 * Löydöt: KM, TKM, TYA = 1,2,4
+                 * Raportit: MV, TKM, TYA = 3,2,4
+                 * Kartat: MV, TKM, TYA = 3,2,4
+                 * Valokuvat: MV, TKM, TYA = 3,2,4
+                 * Näytteet: TKM, TYA = 2,4
                  * Toistaiseksi suodatus pois käytöstä. TODO: Tee konfiguroitavaksi.
                  */
                 scope.suodata = function (item){

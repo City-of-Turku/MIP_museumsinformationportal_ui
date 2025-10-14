@@ -293,7 +293,7 @@ angular.module('mip.nayte').controller(
                 vm.muodostaLuettelointinumero = function(){
 
                 	/* Luettelointinumero muodostuu kolmesta kentästä:
-                	 * 1. kokoelmatunnus (TMK tai TYA) + näytteiden päänumero (tutkimukselta)
+                	 * 1. kokoelmatunnus (TKM tai TYA) + näytteiden päänumero (tutkimukselta)
                 	 * 2. näytekoodi + yksikkötunnus ilman yksikkötyypin kirjainta
                 	 * 3. juokseva alanumero (per näytekoodi, ilman etunollia)
                 	 * Paitsi irtolöytötutkimuksen ja tarkastustutkimuksen näytteellä, sillä ei ole yksikköä ollenkaan.

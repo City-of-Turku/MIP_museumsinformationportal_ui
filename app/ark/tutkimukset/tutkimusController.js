@@ -401,7 +401,7 @@ angular.module('mip.tutkimus').controller(
         // Timeout lisätty $watchin takia
         // Ilman pientä timeouttia tarkastus suoritetaan ennen kuin löydön päänumeron muuttuminen on huomattu
         // ja näytteen päänumeroa ei olla irtolöydön tapauksessa vielä asetettu samaksi. Tästä johtuen formi
-        // oli aina invalid koska päänumeroiden pitää olla samat kun kokoelmana on TMK.
+        // oli aina invalid koska päänumeroiden pitää olla samat kun kokoelmana on TKM.
         $timeout(function () {
           var paanumero = null;
           var kokoelmalaji = null;
