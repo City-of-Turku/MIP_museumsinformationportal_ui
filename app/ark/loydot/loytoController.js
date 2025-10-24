@@ -350,10 +350,10 @@ angular.module('mip.loyto').controller(
                 				'loydon_tila_id': 1
                 			}
                     };
-                    // TMK käsittely on erilainen
-                    if(vm.loyto.properties.luettelointinumero.indexOf('TMK') > -1) {
+                    // TKM käsittely on erilainen
+                    if(vm.loyto.properties.luettelointinumero.indexOf('TKM') > -1) {
                         var palat = vm.loyto.properties.luettelointinumero.split(':');
-                        var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TMK13245
+                        var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TKM13245
                         var keskiosa = vm.uusiLoyto.properties.materiaalikoodi.koodi+vm.yksikko.yksikon_numero+":";
                         var luettelointinumero = alkuosa + keskiosa;
                     } else {
@@ -411,29 +411,29 @@ angular.module('mip.loyto').controller(
                 	/*
                 	 *  Luettelointinumero voi koostua
                 	 *  CASE 1:
-                	 *  1. Tutkimuksen tunnuksesta = TMK12345:
+                	 *  1. Tutkimuksen tunnuksesta = TKM12345:
                 	 *  2. Materiaalikoodi + yksikön numero = KI516:
                 	 *  --> Tähän lisätään bäkkärissä juokseva alanumero
                 	 *  TAI
                 	 *  CASE 2:
-                	 *  1. Tutkimuksen tunnuksesta = TMK12345:
+                	 *  1. Tutkimuksen tunnuksesta = TKM12345:
                 	 *  2. Materiaalikoodi = KI
                 	 *  3. Juokseva numero
                 	 *  Materiaalikoodin ja juoksevan numeron välissä ei ole erotinmerkkiä
-                	 *  ESIMERKKI: TMK12345:KI321
+                	 *  ESIMERKKI: TKM12345:KI321
                 	 *  TAI
                 	 *  CASE 3:
-                	 *  1. Tutkimuksen tunnuksesta = TMK12345:
+                	 *  1. Tutkimuksen tunnuksesta = TKM12345:
                 	 *  2. Materiaalikoodi = KI
                 	 *  3. Yksikön numero = 516
                 	 *  4. Juokseva numero 1
-                	 *  ESIMERKKI: TMK12345:KI516321
+                	 *  ESIMERKKI: TKM12345:KI516321
                 	 *  Materiaalikoodin, yksikön numeron ja juoksevan numeron välissä ei ole erotinmerkkejä
                 	 */
-                    // TMK käsittely on erilainen
-                    if(vm.loyto.properties.luettelointinumero.indexOf('TMK') > -1) {
+                    // TKM käsittely on erilainen
+                    if(vm.loyto.properties.luettelointinumero.indexOf('TKM') > -1) {
                 	var palat = vm.loyto.properties.luettelointinumero.split(':');
-                	var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TMK13245
+                	var alkuosa = palat[0] + ":"; // Tämä on aina sama, ESIM: TKM13245
                 	var keskiosa = vm.uusiLoyto.properties.materiaalikoodi.koodi+vm.yksikko.yksikon_numero+":";
 
                 	var luettelointinumero = alkuosa + keskiosa;

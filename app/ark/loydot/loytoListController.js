@@ -134,7 +134,7 @@ angular.module('mip.loyto').controller('LoytoListController', [
                 filter['properties']['km_laina'] = 3;
 
 		        // Kokoelmatunnus
-		        // TODO filter['properties']['loyto_kokoelmalaji'] = {id: 2, nimi_fi: 'Turun museokeskus (TMK)'};
+		        // TODO filter['properties']['loyto_kokoelmalaji'] = {id: 2, nimi_fi: 'Turun museokeskus (TKM)'};
 
 		        // Lisätään taulukon filttereihin
                 angular.extend(vm.loydotTable.filter(), filter);
